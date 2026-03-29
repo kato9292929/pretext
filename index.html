@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="x402 Japan — HTTP 402 Payment Requiredを活用したウェブネイティブ支払いプロトコル。AIエージェント、マイクロペイメント、コンテンツ収益化を実現。">
+  <title>X402 Japan — ウェブネイティブ支払いプロトコル</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <a class="nav-logo" href="/">X402<span>JP</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">プロトコル</a></li>
+      <li><a href="#how">仕組み</a></li>
+      <li><a href="#features">ユースケース</a></li>
+      <li><a href="#company">会社概要</a></li>
+      <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
+    </ul>
+    <button class="nav-menu-btn" id="nav-menu-btn" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── Hero (pretext stage) ───────────────────────────────────── -->
+  <section id="hero" class="hero">
+    <div class="hero-header">
+      <p class="hero-eyebrow">HTTP 402 PAYMENT PROTOCOL</p>
+      <h1 class="hero-title">X402</h1>
+      <p class="hero-tagline">ウェブネイティブ支払いの新標準</p>
+    </div>
+    <div class="hero-scroll-hint">scroll ↓</div>
+  </section>
+
+  <!-- ── About / Protocol ──────────────────────────────────────── -->
+  <section id="about" class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">PROTOCOL</p>
+      <h2 class="section-title">x402とは</h2>
+      <div class="about-grid">
+        <div class="about-lead">
+          <p>HTTP 402 "Payment Required" ステータスコードは、インターネットの黎明期から存在していましたが、長らく未使用のままでした。<strong>x402はそのポテンシャルを解放します。</strong></p>
+          <p>Coinbaseが主導するこのオープンスタンダードは、ウェブリクエストに支払いを組み込む新しい方法を定義します。サーバーが402を返したとき、クライアントは自動的に支払いを完了し、リクエストを再試行できます。</p>
+          <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener">仕様を読む →</a>
+        </div>
+        <div class="about-code">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-title">HTTP Flow</span>
+            </div>
+            <pre><code><span class="c-dim">→</span> GET /api/data HTTP/1.1
+  Host: api.example.com
+
+<span class="c-gold">←</span> <span class="c-gold">HTTP/1.1 402 Payment Required</span>
+  X-Payment-Required: version=1
+  X-Payment-Amount: 0.001
+  X-Payment-Token: USDC
+
+<span class="c-dim">→</span> GET /api/data HTTP/1.1
+  X-Payment: &lt;signed_payload&gt;
+
+<span class="c-green">←</span> <span class="c-green">HTTP/1.1 200 OK</span>
+  Content-Type: application/json</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it works ──────────────────────────────────────────── -->
+  <section id="how" class="section">
+    <div class="container">
+      <p class="eyebrow">HOW IT WORKS</p>
+      <h2 class="section-title">仕組み</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3>リクエスト</h3>
+          <p>クライアント（人間またはAIエージェント）がHTTPリクエストを送信します。</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3>402レスポンス</h3>
+          <p>サーバーが支払い条件（金額・通貨・アドレス）を含む402を返します。</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3>支払い実行</h3>
+          <p>ブロックチェーン上でオンチェーン決済が自動的に完了します。</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-number">04</div>
+          <h3>アクセス付与</h3>
+          <p>サーバーが支払いを確認し、200 OKでリソースを返します。</p>
+        </div>
+      </div>
+      <div class="how-note">
+        <p>すべてのやり取りはHTTPの標準的な仕組みの上に構築されています。<br>既存のインフラを変更することなく、支払い機能を追加できます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features / Use cases ──────────────────────────────────── -->
+  <section id="features" class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">USE CASES</p>
+      <h2 class="section-title">ユースケース</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>AIエージェント間決済</h3>
+          <p>自律型AIエージェントが人間の介在なしにリアルタイムで決済。API呼び出しごとに自動的に課金・支払いが完結します。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✦</div>
+          <h3>マイクロペイメント</h3>
+          <p>0.001円単位の超小額決済が可能。記事1本、楽曲1曲、データ1件ごとの柔軟な課金モデルを実現します。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">◎</div>
+          <h3>コンテンツ収益化</h3>
+          <p>サブスクリプション不要。読んだ記事、視聴したコンテンツに対してのみ支払う、公正な収益化モデル。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>API マネタイズ</h3>
+          <p>APIアクセスに対してリクエスト単位で課金。従量制の柔軟なビジネスモデルを簡単に構築できます。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">↗</div>
+          <h3>クロスボーダー決済</h3>
+          <p>国境を越えた即時送金。従来の国際送金の複雑さと高コストを排除し、シームレスなグローバル取引を実現。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⊕</div>
+          <h3>IoT・機械間取引</h3>
+          <p>スマートデバイスが自律的に電力・データ・サービスを売買。M2M経済の新しい基盤を提供します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tech specs ────────────────────────────────────────────── -->
+  <section class="section section-specs">
+    <div class="container">
+      <div class="specs-row">
+        <div class="spec">
+          <div class="spec-value">402</div>
+          <div class="spec-label">HTTP Status Code</div>
+        </div>
+        <div class="spec">
+          <div class="spec-value">&lt; 1s</div>
+          <div class="spec-label">決済完了時間</div>
+        </div>
+        <div class="spec">
+          <div class="spec-value">$0.001</div>
+          <div class="spec-label">最小取引単位</div>
+        </div>
+        <div class="spec">
+          <div class="spec-value">Open</div>
+          <div class="spec-label">オープンスタンダード</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Company ───────────────────────────────────────────────── -->
+  <section id="company" class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">COMPANY</p>
+      <h2 class="section-title">会社概要</h2>
+      <div class="company-grid">
+        <div class="company-info">
+          <table class="company-table">
+            <tbody>
+              <tr>
+                <th>社名</th>
+                <td>X402 Japan株式会社</td>
+              </tr>
+              <tr>
+                <th>代表取締役</th>
+                <td>加藤 雅人（Masato Kato）</td>
+              </tr>
+              <tr>
+                <th>所在地</th>
+                <td>〒108-0071<br>東京都港区白金台5丁目10番16号</td>
+              </tr>
+              <tr>
+                <th>設立</th>
+                <td>2024年</td>
+              </tr>
+              <tr>
+                <th>事業内容</th>
+                <td>x402プロトコル実装・普及<br>Web3決済インフラ構築<br>企業向けブロックチェーン決済ソリューション</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="company-mission">
+          <blockquote>
+            <p>「インターネットに支払いを組み込む」——それがx402の根本的なビジョンです。私たちは日本市場においてこのビジョンを実現し、次世代の決済インフラを構築することに全力を注いでいます。</p>
+            <cite>— 加藤 雅人 / CEO</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ───────────────────────────────────────────────── -->
+  <section id="contact" class="section">
+    <div class="container container-narrow">
+      <p class="eyebrow">CONTACT</p>
+      <h2 class="section-title">お問い合わせ</h2>
+      <p class="contact-lead">x402プロトコルの導入、技術サポート、パートナーシップについてお気軽にご連絡ください。</p>
+      <div class="contact-links">
+        <a href="mailto:info@x402jp.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <span>info@x402jp.com</span>
+        </a>
+        <a href="https://x.com/x402jp" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-link-icon">𝕏</span>
+          <span>@x402jp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">X402<span>JP</span></span>
+        <p>HTTP 402 Payment Protocol<br>for Japan</p>
+      </div>
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="#about">プロトコル</a></li>
+          <li><a href="#how">仕組み</a></li>
+          <li><a href="#features">ユースケース</a></li>
+          <li><a href="#company">会社概要</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+        <ul>
+          <li><a href="https://www.x402.org/" target="_blank" rel="noopener">x402.org ↗</a></li>
+          <li><a href="https://github.com/coinbase/x402" target="_blank" rel="noopener">GitHub ↗</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2024 X402 Japan株式会社. All rights reserved.</p>
+        <p>5-10-16 Shirokanedai, Minato-ku, Tokyo</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
