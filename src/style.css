@@ -486,6 +486,204 @@ strong {
   text-transform: uppercase;
 }
 
+/* ── Foundation ─────────────────────────────────────────────────── */
+.foundation-intro {
+  max-width: 760px;
+  margin-bottom: 48px;
+}
+
+.foundation-intro p {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.foundation-intro p strong {
+  color: var(--text);
+}
+
+.foundation-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.foundation-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.pillar {
+  padding: 28px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.pillar-icon {
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
+.pillar h3 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.pillar p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.members-section {
+  border-top: 1px solid var(--border);
+  padding-top: 40px;
+}
+
+.members-title {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.members-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.member {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--surface2);
+  transition: all var(--transition);
+}
+
+.member:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+/* ── Quotes ──────────────────────────────────────────────────────── */
+.section-quotes {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.quote-card {
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.quote-featured {
+  border-color: var(--gold-dim);
+  background: linear-gradient(135deg, rgba(196,163,90,0.06), transparent);
+}
+
+.quote-text {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text);
+  font-style: italic;
+}
+
+.quote-featured .quote-text {
+  font-size: 20px;
+  color: #fff;
+}
+
+.quote-author {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.quote-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.quote-role {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.why-open {
+  padding: 48px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface2);
+}
+
+.why-open h3 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+
+.why-item strong {
+  display: block;
+  font-size: 15px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.why-item p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+.why-conclusion {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+
 /* ── Company ────────────────────────────────────────────────────── */
 .company-grid {
   display: grid;
@@ -673,6 +871,10 @@ blockquote cite {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .foundation-pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .steps {
     flex-wrap: wrap;
     gap: 16px;
@@ -680,6 +882,15 @@ blockquote cite {
 
   .step-arrow {
     display: none;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .why-open {
+    padding: 32px;
   }
 }
 
@@ -713,6 +924,14 @@ blockquote cite {
   }
 
   .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .foundation-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .quotes-grid {
     grid-template-columns: 1fr;
   }
 
