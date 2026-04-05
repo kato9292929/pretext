@@ -16,7 +16,7 @@ import {
 
 const FONT_SIZE = 15
 const LINE_HEIGHT = Math.round(FONT_SIZE * 1.78) // ≈ 27px
-const FONT = `${FONT_SIZE}px/${LINE_HEIGHT}px "Noto Serif JP", Georgia, serif`
+const FONT = `${FONT_SIZE}px/${LINE_HEIGHT}px "Noto Sans JP", sans-serif`
 const COL_PAD_H = 48   // horizontal outer padding
 const COL_GAP   = 44   // gap between columns
 const ORB_PAD   = 18   // clearance around orb radius

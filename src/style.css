@@ -15,8 +15,8 @@
   --gold-glow:  rgba(196, 163, 90, 0.15);
   --blue:       #4a8fff;
   --green:      #4adf8a;
-  --font-serif: "Noto Serif JP", Georgia, "Times New Roman", serif;
-  --font-sans:  "Noto Sans JP", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Outfit", "Noto Sans JP", sans-serif;
+  --font-sans:  "Outfit", "Noto Sans JP", sans-serif;
   --radius:     16px;
   --transition: 200ms ease;
 }
