@@ -201,8 +201,8 @@ strong {
 .hero-title {
   font-family: var(--font-serif);
   font-size: clamp(80px, 14vw, 160px);
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  font-weight: 300;
+  letter-spacing: -0.02em;
   line-height: 1;
   color: #fff;
   text-shadow:
@@ -841,6 +841,42 @@ blockquote cite {
 
 .footer-nav a:hover {
   color: var(--text);
+}
+
+.footer-company {
+  min-width: 220px;
+}
+
+.footer-company-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.footer-company-dl {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-company-dl > div {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.footer-company-dl dt {
+  flex-shrink: 0;
+  width: 80px;
+  color: var(--muted);
+}
+
+.footer-company-dl dd {
+  color: var(--text-dim);
 }
 
 .footer-bottom {
