@@ -202,17 +202,38 @@ export function initHero(container: HTMLElement): () => void {
       return
     }
 
-    // On mobile: hide text, show only subtle orbs
+    // On mobile: single column, orbs at reduced speed
     if (isMobile) {
-      for (let i = 0; i < usedLines; i++) pool[i]!.style.visibility = 'hidden'
-      usedLines = 0
       for (const orb of orbs) {
-        orb.x += orb.vx * 0.5
-        orb.y += orb.vy * 0.5
+        orb.x += orb.vx * 0.4
+        orb.y += orb.vy * 0.4
         orb.x = Math.max(orb.r, Math.min(W - orb.r, orb.x))
         orb.y = Math.max(orb.r, Math.min(H - orb.r, orb.y))
         orb.el.style.transform = `translate(${orb.x - orb.r}px,${orb.y - orb.r}px)`
       }
+
+      for (let i = 0; i < usedLines; i++) pool[i]!.style.visibility = 'hidden'
+      usedLines = 0
+
+      const colX = 20
+      const colW = W - 40
+      const endY = H - 60
+      let cursor: LayoutCursor = { segmentIndex: 0, graphemeIndex: 0 }
+      let y = textStartY
+
+      while (y + LINE_HEIGHT <= endY && usedLines < MAX_POOL) {
+        const line = layoutNextLine(prepared, cursor, colW)
+        if (!line) break
+
+        const el = pool[usedLines++]!
+        el.style.left       = `${colX}px`
+        el.style.top        = `${y}px`
+        el.style.visibility = 'visible'
+        el.textContent      = line.text
+        cursor = line.end
+        y += LINE_HEIGHT
+      }
+
       rafId = requestAnimationFrame(render)
       return
     }
