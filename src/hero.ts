@@ -206,20 +206,26 @@ export function initHero(container: HTMLElement): () => void {
       return
     }
 
-    // On mobile: single column, small font, orbs at reduced speed
+    // On mobile: single column with orb avoidance, small font
     if (isMobile) {
       if (!preparedMobile) { rafId = requestAnimationFrame(render); return }
 
+      // Physics — slow drift, stay in bounds
       for (const orb of orbs) {
-        orb.x += orb.vx * 0.4
-        orb.y += orb.vy * 0.4
-        orb.x = Math.max(orb.r, Math.min(W - orb.r, orb.x))
-        orb.y = Math.max(orb.r, Math.min(H - orb.r, orb.y))
+        orb.x += orb.vx * 0.45
+        orb.y += orb.vy * 0.45
+        if (orb.x < orb.r)     { orb.vx =  Math.abs(orb.vx); orb.x = orb.r }
+        if (orb.x > W - orb.r) { orb.vx = -Math.abs(orb.vx); orb.x = W - orb.r }
+        if (orb.y < textStartY){ orb.vy =  Math.abs(orb.vy); orb.y = textStartY }
+        if (orb.y > H - orb.r) { orb.vy = -Math.abs(orb.vy); orb.y = H - orb.r }
         orb.el.style.transform = `translate(${orb.x - orb.r}px,${orb.y - orb.r}px)`
       }
 
       for (let i = 0; i < usedLines; i++) pool[i]!.style.visibility = 'hidden'
       usedLines = 0
+
+      // Scale orb radii down so they fit the narrow mobile column
+      const mobileOrbs = orbs.map(o => ({ ...o, r: Math.round(o.r * 0.5) }))
 
       const colX = 16
       const colW = W - 32
@@ -228,12 +234,15 @@ export function initHero(container: HTMLElement): () => void {
       let y = textStartY
 
       while (y + MOBILE_LINE_HEIGHT <= endY && usedLines < MAX_POOL) {
-        const line = layoutNextLine(preparedMobile, cursor, colW)
+        const [lineX, lineW] = availableInterval(colX, colW, mobileOrbs, y, MOBILE_LINE_HEIGHT)
+        if (lineW < 48) { y += MOBILE_LINE_HEIGHT; continue }
+
+        const line = layoutNextLine(preparedMobile, cursor, lineW)
         if (!line) break
 
         const el = pool[usedLines++]!
         el.style.font       = MOBILE_FONT
-        el.style.left       = `${colX}px`
+        el.style.left       = `${lineX}px`
         el.style.top        = `${y}px`
         el.style.visibility = 'visible'
         el.textContent      = line.text
