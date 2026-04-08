@@ -1,8 +1,6 @@
 /**
- * generate-og.mjs
- * Generates public/og-image.png from an SVG that replicates
- * the "x402とは / Protocol" section of the site.
- * Run: node scripts/generate-og.mjs
+ * generate-og.mjs — builds public/og-image.png
+ * Matches the "x402とは / Protocol" section screenshot.
  */
 import sharp from 'sharp'
 import { writeFileSync } from 'fs'
@@ -15,104 +13,98 @@ const OUT = join(__dirname, '../public/og-image.png')
 const W = 1200
 const H = 630
 
-// ── SVG replicating the Protocol / x402とは section ──────────────────────────
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+const svg = /* xml */`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
 <defs>
-  <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+  <linearGradient id="bggrad" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%" stop-color="#0d0d13"/>
     <stop offset="100%" stop-color="#070709"/>
   </linearGradient>
-  <linearGradient id="codebg" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%" stop-color="#0a0a14"/>
+  <linearGradient id="codebg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#0c0c16"/>
     <stop offset="100%" stop-color="#080810"/>
   </linearGradient>
-  <radialGradient id="orb" cx="50%" cy="50%" r="50%">
-    <stop offset="0%" stop-color="rgba(196,163,90,0.14)"/>
-    <stop offset="100%" stop-color="rgba(196,163,90,0)"/>
-  </radialGradient>
+  <clipPath id="clip"><rect width="${W}" height="${H}"/></clipPath>
 </defs>
+<g clip-path="url(#clip)">
 
 <!-- Background -->
-<rect width="${W}" height="${H}" fill="url(#bg)"/>
+<rect width="${W}" height="${H}" fill="url(#bggrad)"/>
 
-<!-- Subtle orb glow -->
-<ellipse cx="200" cy="400" rx="280" ry="280" fill="url(#orb)" opacity="0.7"/>
+<!-- ── LEFT COLUMN (0–620) ── -->
 
-<!-- Top nav bar (branding) -->
-<rect width="${W}" height="56" fill="#070709" opacity="0.9"/>
-<text x="48" y="35" font-family="Georgia, serif" font-size="20" font-weight="300" fill="#e4e0d8">x402 </text>
-<text x="99" y="35" font-family="Georgia, serif" font-size="20" font-weight="300" fill="#c4a35a">Inc.</text>
+<!-- PROTOCOL eyebrow -->
+<text x="64" y="72"
+  font-family="Arial, Helvetica, sans-serif"
+  font-size="12" font-weight="500" letter-spacing="5"
+  fill="#c4a35a">PROTOCOL</text>
 
-<!-- Section separator -->
-<rect x="0" y="56" width="${W}" height="1" fill="#1c1c26"/>
+<!-- x402とは title -->
+<text x="60" y="158"
+  font-family="Arial Black, Arial, sans-serif"
+  font-size="64" font-weight="900"
+  fill="#e8e4dc">x402とは</text>
 
-<!-- ── Left column ── -->
+<!-- Body paragraph 1 -->
+<text x="64" y="218" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">HTTP 402 "Payment Required" ステータスコードは、1997年から</text>
+<text x="64" y="242" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">予約されていましたが、30年近く未使用のままでした。</text>
 
-<!-- Eyebrow -->
-<text x="48" y="116" font-family="Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="5" fill="#c4a35a">PROTOCOL</text>
+<!-- Body paragraph 2 -->
+<text x="64" y="282" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">Coinbase、Cloudflare、Stripeが主導し、Linux Foundation傘下の</text>
+<text x="64" y="306" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">x402 Foundationとして設立されたこのオープンスタンダード</text>
+<text x="64" y="330" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">は、ウェブリクエストに支払いを直接組み込む普遍的な方法を定</text>
+<text x="64" y="354" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">義します。製品ではなく、プラットフォームでもなく—</text>
+<text x="64" y="378" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">  </text>
+<text x="64" y="378" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">                           </text>
+<text x="64" y="378" font-family="Arial, sans-serif" font-size="15.5" fill="#e8e4dc" font-weight="500">公共財</text>
+<text x="116" y="378" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">です。</text>
 
-<!-- Section title -->
-<text x="48" y="178" font-family="Georgia, serif" font-size="52" font-weight="400" fill="#e4e0d8">x402とは</text>
+<!-- Body paragraph 3 -->
+<text x="64" y="418" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">サーバーが402を返したとき、クライアント（人間でもAIエージェ</text>
+<text x="64" y="442" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">ントでも）は自動的に支払いを完了し、リクエストを再試行し</text>
+<text x="64" y="466" font-family="Arial, sans-serif" font-size="15.5" fill="#7a7570">ます。人間が毎回フォームを入力する必要はありません。</text>
 
-<!-- Divider under title -->
-<rect x="48" y="196" width="60" height="2" fill="#c4a35a" opacity="0.5"/>
+<!-- 仕様を読む button -->
+<rect x="64" y="500" width="148" height="44" rx="10" fill="none" stroke="#2a2a36" stroke-width="1.5"/>
+<text x="138" y="527" font-family="Arial, sans-serif" font-size="14.5" fill="#7a7570" text-anchor="middle">仕様を読む →</text>
 
-<!-- Body text line 1 -->
-<text x="48" y="238" font-family="Arial, sans-serif" font-size="15.5" fill="#9a968e" xml:space="preserve">HTTP 402 "Payment Required" ステータスコードは、</text>
-<text x="48" y="262" font-family="Arial, sans-serif" font-size="15.5" fill="#9a968e">1997年から予約されていましたが、30年近く未使用でした。</text>
+<!-- ── RIGHT COLUMN: Code block (640–1136) ── -->
+<rect x="640" y="40" width="496" height="550" rx="16" fill="url(#codebg)" stroke="#1e1e2a" stroke-width="1.2"/>
 
-<!-- Body text line 2 -->
-<text x="48" y="302" font-family="Arial, sans-serif" font-size="15.5" fill="#9a968e">Coinbase・Cloudflare・Stripeが主導し、</text>
-<text x="48" y="326" font-family="Arial, sans-serif" font-size="15.5" fill="#9a968e">Linux Foundation傘下のオープンスタンダードとして設立。</text>
+<!-- Code header bar -->
+<rect x="640" y="40" width="496" height="50" rx="16" fill="#0d0d18"/>
+<rect x="640" y="70" width="496" height="20" fill="#0d0d18"/>
+<rect x="640" y="90" width="496" height="1" fill="#1e1e2a"/>
 
-<!-- Body text line 3 - highlighted -->
-<text x="48" y="366" font-family="Arial, sans-serif" font-size="15.5" fill="#9a968e">製品ではなく、プラットフォームでもなく—</text>
-<text x="48" y="390" font-family="Georgia, serif" font-size="17" font-weight="400" fill="#e4e0d8">公共財</text>
-<text x="99" y="390" font-family="Arial, sans-serif" font-size="15.5" fill="#9a968e">です。</text>
+<!-- Traffic light dots -->
+<circle cx="668" cy="65" r="5.5" fill="#2a2a36"/>
+<circle cx="686" cy="65" r="5.5" fill="#2a2a36"/>
+<circle cx="704" cy="65" r="5.5" fill="#2a2a36"/>
 
-<!-- ── Right column: Code block ── -->
-<rect x="560" y="72" width="592" height="530" rx="14" fill="url(#codebg)" stroke="#1c1c26" stroke-width="1"/>
+<!-- HTTP Flow label -->
+<text x="724" y="70" font-family="Arial, sans-serif" font-size="12.5" fill="#5a5650" letter-spacing="0.5">HTTP Flow</text>
 
-<!-- Code block header -->
-<rect x="560" y="72" width="592" height="44" rx="14" fill="#0a0a14"/>
-<rect x="560" y="102" width="592" height="14" fill="#0a0a14"/>
-<circle cx="586" cy="94" r="5" fill="#1c1c26"/>
-<circle cx="606" cy="94" r="5" fill="#1c1c26"/>
-<circle cx="626" cy="94" r="5" fill="#1c1c26"/>
-<text x="660" y="98" font-family="Arial, sans-serif" font-size="12" fill="#5a5650" letter-spacing="1">HTTP Flow</text>
-<rect x="560" y="116" width="592" height="1" fill="#1c1c26"/>
+<!-- Code lines -->
+<!-- Request 1 -->
+<text x="668" y="128" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#5a5650">→  GET /api/data HTTP/1.1</text>
+<text x="676" y="150" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#5a5650">   Host: api.example.com</text>
 
-<!-- Code content -->
-<text x="590" y="158" font-family="'Courier New', monospace" font-size="14" fill="#5a5650">→ GET /api/data HTTP/1.1</text>
-<text x="598" y="180" font-family="'Courier New', monospace" font-size="14" fill="#5a5650">  Host: api.example.com</text>
+<!-- 402 Response -->
+<text x="668" y="192" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#c4a35a">←  HTTP/1.1 402 Payment Required</text>
+<text x="676" y="214" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#5a5650">   X-Payment-Required: version=1</text>
+<text x="676" y="236" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#5a5650">   X-Payment-Amount: 0.001</text>
+<text x="676" y="258" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#5a5650">   X-Payment-Token: USDC</text>
 
-<text x="590" y="220" font-family="'Courier New', monospace" font-size="14" fill="#c4a35a">← HTTP/1.1 402 Payment Required</text>
-<text x="598" y="242" font-family="'Courier New', monospace" font-size="14" fill="#5a5650">  X-Payment-Required: version=1</text>
-<text x="598" y="264" font-family="'Courier New', monospace" font-size="14" fill="#5a5650">  X-Payment-Amount: 0.001</text>
-<text x="598" y="286" font-family="'Courier New', monospace" font-size="14" fill="#5a5650">  X-Payment-Token: USDC</text>
+<!-- Request 2 with payment -->
+<text x="668" y="300" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#5a5650">→  GET /api/data HTTP/1.1</text>
+<text x="676" y="322" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#5a5650">   X-Payment: &lt;signed_payload&gt;</text>
 
-<text x="590" y="326" font-family="'Courier New', monospace" font-size="14" fill="#5a5650">→ GET /api/data HTTP/1.1</text>
-<text x="598" y="348" font-family="'Courier New', monospace" font-size="14" fill="#5a5650">  X-Payment: &lt;signed_payload&gt;</text>
+<!-- 200 OK -->
+<text x="668" y="364" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#4adf8a">←  HTTP/1.1 200 OK</text>
+<text x="676" y="386" font-family="'Courier New', Courier, monospace" font-size="13.5" fill="#5a5650">   Content-Type: application/json</text>
 
-<text x="590" y="388" font-family="'Courier New', monospace" font-size="14" fill="#4adf8a">← HTTP/1.1 200 OK</text>
-<text x="598" y="410" font-family="'Courier New', monospace" font-size="14" fill="#5a5650">  Content-Type: application/json</text>
-
-<!-- Bottom info row -->
-<rect x="0" y="510" width="${W}" height="1" fill="#1c1c26"/>
-<rect x="0" y="511" width="${W}" height="${H - 511}" fill="#070709"/>
-
-<text x="48" y="548" font-family="Georgia, serif" font-size="26" font-weight="300" fill="#c4a35a">165M+</text>
-<text x="48" y="568" font-family="Arial, sans-serif" font-size="10" fill="#5a5650" letter-spacing="1.5">TRANSACTIONS</text>
-
-<text x="220" y="548" font-family="Georgia, serif" font-size="26" font-weight="300" fill="#c4a35a">500K+</text>
-<text x="220" y="568" font-family="Arial, sans-serif" font-size="10" fill="#5a5650" letter-spacing="1.5">ENTITIES</text>
-
-<text x="390" y="548" font-family="Georgia, serif" font-size="26" font-weight="300" fill="#c4a35a">25+</text>
-<text x="390" y="568" font-family="Arial, sans-serif" font-size="10" fill="#5a5650" letter-spacing="1.5">FOUNDING MEMBERS</text>
-
-<text x="1152" y="560" font-family="Arial, sans-serif" font-size="14" fill="#7a6435" text-anchor="end">x402jp.com</text>
+</g>
 </svg>`
 
 const png = await sharp(Buffer.from(svg)).png().toBuffer()
 writeFileSync(OUT, png)
-console.log('✓ Generated public/og-image.png (' + png.length + ' bytes)')
+console.log(`✓ og-image.png (${(png.length / 1024).toFixed(0)}KB)`)

@@ -17,6 +17,10 @@ import {
 const FONT_SIZE = 15
 const LINE_HEIGHT = Math.round(FONT_SIZE * 1.78) // ≈ 27px
 const FONT = `${FONT_SIZE}px/${LINE_HEIGHT}px "Noto Sans JP", sans-serif`
+
+const MOBILE_FONT_SIZE = 12
+const MOBILE_LINE_HEIGHT = Math.round(MOBILE_FONT_SIZE * 1.75) // ≈ 21px
+const MOBILE_FONT = `${MOBILE_FONT_SIZE}px/${MOBILE_LINE_HEIGHT}px "Noto Sans JP", sans-serif`
 const COL_PAD_H = 48   // horizontal outer padding
 const COL_GAP   = 44   // gap between columns
 const ORB_PAD   = 18   // clearance around orb radius
@@ -160,7 +164,8 @@ export function initHero(container: HTMLElement): () => void {
   let H = 0
   let textStartY = 0
   let isMobile   = false
-  let prepared: PreparedTextWithSegments | null = null
+  let prepared:       PreparedTextWithSegments | null = null
+  let preparedMobile: PreparedTextWithSegments | null = null
   let usedLines = 0
   let rafId     = 0
 
@@ -175,10 +180,9 @@ export function initHero(container: HTMLElement): () => void {
       ? headerEl.offsetTop + headerEl.offsetHeight + 16
       : Math.round(H * 0.38)
 
-    // Prepare text once (font must be loaded for accuracy)
-    if (!prepared) {
-      prepared = prepareWithSegments(BODY_TEXT, FONT)
-    }
+    // Prepare text once per font (font must be loaded for accuracy)
+    if (!prepared)       prepared       = prepareWithSegments(BODY_TEXT, FONT)
+    if (!preparedMobile) preparedMobile = prepareWithSegments(BODY_TEXT, MOBILE_FONT)
 
     // Spread orbs across the lower 2/3 of the hero
     const spread: [number, number, number, number][] = [
@@ -202,8 +206,10 @@ export function initHero(container: HTMLElement): () => void {
       return
     }
 
-    // On mobile: single column, orbs at reduced speed
+    // On mobile: single column, small font, orbs at reduced speed
     if (isMobile) {
+      if (!preparedMobile) { rafId = requestAnimationFrame(render); return }
+
       for (const orb of orbs) {
         orb.x += orb.vx * 0.4
         orb.y += orb.vy * 0.4
@@ -215,23 +221,24 @@ export function initHero(container: HTMLElement): () => void {
       for (let i = 0; i < usedLines; i++) pool[i]!.style.visibility = 'hidden'
       usedLines = 0
 
-      const colX = 20
-      const colW = W - 40
+      const colX = 16
+      const colW = W - 32
       const endY = H - 60
       let cursor: LayoutCursor = { segmentIndex: 0, graphemeIndex: 0 }
       let y = textStartY
 
-      while (y + LINE_HEIGHT <= endY && usedLines < MAX_POOL) {
-        const line = layoutNextLine(prepared, cursor, colW)
+      while (y + MOBILE_LINE_HEIGHT <= endY && usedLines < MAX_POOL) {
+        const line = layoutNextLine(preparedMobile, cursor, colW)
         if (!line) break
 
         const el = pool[usedLines++]!
+        el.style.font       = MOBILE_FONT
         el.style.left       = `${colX}px`
         el.style.top        = `${y}px`
         el.style.visibility = 'visible'
         el.textContent      = line.text
         cursor = line.end
-        y += LINE_HEIGHT
+        y += MOBILE_LINE_HEIGHT
       }
 
       rafId = requestAnimationFrame(render)
