@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#0f0f18"/>
+      <stop offset="100%" stop-color="#070709"/>
+    </radialGradient>
+    <radialGradient id="orb1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(196,163,90,0.18)"/>
+      <stop offset="100%" stop-color="rgba(196,163,90,0)"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(74,143,255,0.12)"/>
+      <stop offset="100%" stop-color="rgba(74,143,255,0)"/>
+    </radialGradient>
+    <filter id="blur1"><feGaussianBlur stdDeviation="40"/></filter>
+    <filter id="blur2"><feGaussianBlur stdDeviation="30"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative orbs -->
+  <ellipse cx="300" cy="420" rx="200" ry="200" fill="url(#orb1)" filter="url(#blur1)"/>
+  <ellipse cx="900" cy="300" rx="150" ry="150" fill="url(#orb2)" filter="url(#blur2)"/>
+
+  <!-- Top border accent -->
+  <rect x="80" y="56" width="60" height="2" fill="#c4a35a" opacity="0.6"/>
+
+  <!-- Logo -->
+  <text x="80" y="92" font-family="Georgia, serif" font-size="22" font-weight="300" letter-spacing="0" fill="#e4e0d8">x402 </text>
+  <text x="134" y="92" font-family="Georgia, serif" font-size="22" font-weight="300" fill="#c4a35a">Inc.</text>
+
+  <!-- Main title -->
+  <text x="76" y="300" font-family="Georgia, serif" font-size="148" font-weight="300" fill="white" letter-spacing="-4" opacity="0.95">x402</text>
+
+  <!-- Eyebrow -->
+  <text x="80" y="348" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="400" letter-spacing="3" fill="#c4a35a" opacity="0.8">HTTP 402 PAYMENT PROTOCOL</text>
+
+  <!-- Divider -->
+  <rect x="80" y="375" width="1040" height="1" fill="#1c1c26"/>
+
+  <!-- Description -->
+  <text x="80" y="416" font-family="Georgia, serif" font-size="26" font-weight="400" fill="#e4e0d8" opacity="0.85">ウェブネイティブ支払いの新標準</text>
+  <text x="80" y="454" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#7a7570">Linux Foundation傘下のオープンスタンダード</text>
+
+  <!-- Members -->
+  <text x="80" y="510" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#5a5650">Coinbase · Cloudflare · Stripe · Google · Microsoft · Visa · Mastercard · Shopify ほか</text>
+
+  <!-- Bottom stats row -->
+  <rect x="80" y="545" width="1040" height="1" fill="#1c1c26"/>
+
+  <text x="80" y="590" font-family="Georgia, serif" font-size="28" font-weight="300" fill="#c4a35a">165M+</text>
+  <text x="80" y="612" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#5a5650" letter-spacing="1">TRANSACTIONS</text>
+
+  <text x="280" y="590" font-family="Georgia, serif" font-size="28" font-weight="300" fill="#c4a35a">500K+</text>
+  <text x="280" y="612" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#5a5650" letter-spacing="1">ENTITIES</text>
+
+  <text x="480" y="590" font-family="Georgia, serif" font-size="28" font-weight="300" fill="#c4a35a">25+</text>
+  <text x="480" y="612" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#5a5650" letter-spacing="1">FOUNDING MEMBERS</text>
+
+  <!-- URL -->
+  <text x="1120" y="600" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#7a6435" text-anchor="end">x402jp.com</text>
+</svg>

@@ -159,6 +159,7 @@ export function initHero(container: HTMLElement): () => void {
   let W = 0
   let H = 0
   let textStartY = 0
+  let isMobile   = false
   let prepared: PreparedTextWithSegments | null = null
   let usedLines = 0
   let rafId     = 0
@@ -167,6 +168,7 @@ export function initHero(container: HTMLElement): () => void {
   function onResize(): void {
     W = container.offsetWidth
     H = container.offsetHeight
+    isMobile = W < 768
 
     const headerEl = container.querySelector<HTMLElement>('.hero-header')
     textStartY = headerEl
@@ -196,6 +198,21 @@ export function initHero(container: HTMLElement): () => void {
   // ── Render loop ────────────────────────────────────────────────────────────
   function render(): void {
     if (!prepared || W === 0) {
+      rafId = requestAnimationFrame(render)
+      return
+    }
+
+    // On mobile: hide text, show only subtle orbs
+    if (isMobile) {
+      for (let i = 0; i < usedLines; i++) pool[i]!.style.visibility = 'hidden'
+      usedLines = 0
+      for (const orb of orbs) {
+        orb.x += orb.vx * 0.5
+        orb.y += orb.vy * 0.5
+        orb.x = Math.max(orb.r, Math.min(W - orb.r, orb.x))
+        orb.y = Math.max(orb.r, Math.min(H - orb.r, orb.y))
+        orb.el.style.transform = `translate(${orb.x - orb.r}px,${orb.y - orb.r}px)`
+      }
       rafId = requestAnimationFrame(render)
       return
     }

@@ -940,6 +940,10 @@ blockquote cite {
     display: none;
   }
 
+  .step {
+    flex: 0 0 100%;
+  }
+
   .nav-links.open {
     display: flex;
     flex-direction: column;
