@@ -6,7 +6,8 @@
     "dev": "NODE_OPTIONS=--experimental-global-webcrypto vite",
     "build": "NODE_OPTIONS=--experimental-global-webcrypto vite build",
     "preview": "NODE_OPTIONS=--experimental-global-webcrypto vite preview",
-    "generate-og": "node scripts/generate-og.mjs"
+    "generate-og": "node scripts/generate-og.mjs",
+    "worker": "cd worker && npm run dev"
   },
   "dependencies": {
     "@chenglou/pretext": "latest"

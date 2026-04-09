@@ -1,0 +1,17 @@
+name = "x402jp-worker"
+main = "src/index.ts"
+compatibility_date = "2025-04-09"
+
+# ── Routes ────────────────────────────────────────────────────────────────────
+# x402jp.com must be added to Cloudflare (change nameservers or partial setup).
+# Uncomment when the zone is active.
+#
+# routes = [
+#   { pattern = "x402jp.com/*", zone_name = "x402jp.com" }
+# ]
+
+# ── Environment variables ─────────────────────────────────────────────────────
+# Set ORIGIN_URL to the Vercel deployment URL so the worker can proxy traffic.
+# Find it at: Vercel dashboard → Project → Deployments → latest URL
+[vars]
+ORIGIN_URL = "https://YOUR_PROJECT.vercel.app"
