@@ -34,10 +34,15 @@
     <a class="nav-logo" href="/">x402 <span>Inc.</span></a>
     <ul class="nav-links">
       <li><a href="#foundation">Foundation</a></li>
-      <li><a href="#about">プロトコル</a></li>
-      <li><a href="#how">仕組み</a></li>
-      <li><a href="#features">ユースケース</a></li>
+      <li><a href="#about" data-i18n="nav.protocol">プロトコル</a></li>
+      <li><a href="#how" data-i18n="nav.how">仕組み</a></li>
+      <li><a href="#features" data-i18n="nav.usecases">ユースケース</a></li>
     </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="ja" aria-pressed="true">JP</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
     <button class="nav-menu-btn" id="nav-menu-btn" aria-label="メニュー">
       <span></span><span></span><span></span>
     </button>
@@ -58,8 +63,8 @@
       <p class="eyebrow">FOUNDATION</p>
       <h2 class="section-title">x402 Foundation</h2>
       <div class="foundation-intro">
-        <p>2025年4月2日、x402 Foundationが<strong>Linux Foundation</strong>傘下のオープンガバナンス組織として正式に発足しました。単一の企業がx402標準を所有・支配することはありません。すべての人が読み、構築し、貢献できます。</p>
-        <p>インターネットのインフラ層（HTTP・SMTP・TCP/IP）がオープン標準として世界を変えたように、AIエージェント時代の決済レイヤーもオープンであることが期待されます。</p>
+        <p data-i18n-html="foundation.p1">2025年4月2日、x402 Foundationが<strong>Linux Foundation</strong>傘下のオープンガバナンス組織として正式に発足しました。単一の企業がx402標準を所有・支配することはありません。すべての人が読み、構築し、貢献できます。</p>
+        <p data-i18n="foundation.p2">インターネットのインフラ層（HTTP・SMTP・TCP/IP）がオープン標準として世界を変えたように、AIエージェント時代の決済レイヤーもオープンであることが期待されます。</p>
         <div class="foundation-links">
           <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener">x402.org →</a>
           <a href="https://github.com/x402-foundation/x402" class="btn-outline" target="_blank" rel="noopener">GitHub (Apache 2.0) →</a>
@@ -68,41 +73,41 @@
       <div class="foundation-pillars">
         <div class="pillar">
           <div class="pillar-icon">⚖</div>
-          <h3>中立ガバナンス</h3>
-          <p>Linux Foundationが中立・非営利のホームを提供。単一企業がx402標準を所有しません。</p>
+          <h3 data-i18n="pillar.1.title">中立ガバナンス</h3>
+          <p data-i18n="pillar.1.body">Linux Foundationが中立・非営利のホームを提供。単一企業がx402標準を所有しません。</p>
         </div>
         <div class="pillar">
           <div class="pillar-icon">◈</div>
-          <h3>オープンソース</h3>
-          <p>Apache 2.0ライセンス。フォーク、貢献、構築—許可不要。</p>
+          <h3 data-i18n="pillar.2.title">オープンソース</h3>
+          <p data-i18n="pillar.2.body">Apache 2.0ライセンス。フォーク、貢献、構築—許可不要。</p>
         </div>
         <div class="pillar">
           <div class="pillar-icon">∞</div>
-          <h3>マルチレール対応</h3>
-          <p>法定通貨・暗号通貨両対応。複数のブロックチェーンと決済ネットワークで動作。</p>
+          <h3 data-i18n="pillar.3.title">マルチレール対応</h3>
+          <p data-i18n="pillar.3.body">法定通貨・暗号通貨両対応。複数のブロックチェーンと決済ネットワークで動作。</p>
         </div>
         <div class="pillar">
           <div class="pillar-icon">⊘</div>
-          <h3>パーミッションレス</h3>
-          <p>サインアップ不要。ミドルウェアをインポートして決済メソッドを紐付けるだけで利用開始。</p>
+          <h3 data-i18n="pillar.4.title">パーミッションレス</h3>
+          <p data-i18n="pillar.4.body">サインアップ不要。ミドルウェアをインポートして決済メソッドを紐付けるだけで利用開始。</p>
         </div>
       </div>
       <div class="why-open">
-        <h3>なぜオープン標準が勝つのか</h3>
+        <h3 data-i18n="why.title">なぜオープン標準が勝つのか</h3>
         <div class="why-grid">
           <div class="why-item">
             <strong>HTTP vs. AOL</strong>
-            <p>AOLは3000万人のインターネットでしたが、クローズドなガーデンでした。HTTPはオープンなプロトコルで、誰でも構築できました。AOLは今や歴史の注釈に過ぎませんが、HTTPはウェブそのものです。</p>
+            <p data-i18n="why.http.body">AOLは3000万人のインターネットでしたが、クローズドなガーデンでした。HTTPはオープンなプロトコルで、誰でも構築できました。AOLは今や歴史の注釈に過ぎませんが、HTTPはウェブそのものです。</p>
           </div>
           <div class="why-item">
             <strong>TCP/IP vs. OSI</strong>
-            <p>「公式」ネットワーク標準（OSI）は、完璧さよりも広く採用されたオープン版に敗れました。標準への合意は完璧な標準よりも多くの価値を生みます。</p>
+            <p data-i18n="why.tcpip.body">「公式」ネットワーク標準（OSI）は、完璧さよりも広く採用されたオープン版に敗れました。標準への合意は完璧な標準よりも多くの価値を生みます。</p>
           </div>
         </div>
-        <p class="why-conclusion">1つの企業がエージェントのトランザクション層を支配する代わりに—x402はその代替を提供します。誰でも参加でき、誰も締め出されない。</p>
+        <p class="why-conclusion" data-i18n="why.conclusion">1つの企業がエージェントのトランザクション層を支配する代わりに—x402はその代替を提供します。誰でも参加でき、誰も締め出されない。</p>
       </div>
       <div class="members-section">
-        <p class="members-title">創設メンバー</p>
+        <p class="members-title" data-i18n="members.title">創設メンバー</p>
         <div class="members-grid">
           <span class="member">Adyen</span>
           <span class="member">Amazon Web Services</span>
@@ -136,13 +141,13 @@
   <section id="about" class="section">
     <div class="container">
       <p class="eyebrow">PROTOCOL</p>
-      <h2 class="section-title">x402とは</h2>
+      <h2 class="section-title" data-i18n="protocol.title">x402とは</h2>
       <div class="about-grid">
         <div class="about-lead">
-          <p>HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。</p>
-          <p>Coinbase、Cloudflare、Stripeが主導し、Linux Foundation傘下のx402 Foundationとして設立されたこのオープンスタンダードは、ウェブリクエストに支払いを直接組み込む普遍的な方法を定義します。製品ではなく、プラットフォームでもなく—<strong>公共財</strong>です。</p>
-          <p>サーバーが402を返したとき、クライアント（人間でもAIエージェントでも）は自動的に支払いを完了し、リクエストを再試行します。人間が毎回フォームを入力する必要はありません。</p>
-          <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener">仕様を読む →</a>
+          <p data-i18n="protocol.p1">HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。</p>
+          <p data-i18n-html="protocol.p2">Coinbase、Cloudflare、Stripeが主導し、Linux Foundation傘下のx402 Foundationとして設立されたこのオープンスタンダードは、ウェブリクエストに支払いを直接組み込む普遍的な方法を定義します。製品ではなく、プラットフォームでもなく—<strong>公共財</strong>です。</p>
+          <p data-i18n="protocol.p3">サーバーが402を返したとき、クライアント（人間でもAIエージェントでも）は自動的に支払いを完了し、リクエストを再試行します。人間が毎回フォームを入力する必要はありません。</p>
+          <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener" data-i18n="protocol.cta">仕様を読む →</a>
         </div>
         <div class="about-code">
           <div class="code-block">
@@ -175,34 +180,34 @@
   <section id="how" class="section section-dark">
     <div class="container">
       <p class="eyebrow">HOW IT WORKS</p>
-      <h2 class="section-title">仕組み</h2>
+      <h2 class="section-title" data-i18n="how.title">仕組み</h2>
       <div class="steps">
         <div class="step">
           <div class="step-number">01</div>
-          <h3>リクエスト</h3>
-          <p>クライアント（人間またはAIエージェント）がHTTPリクエストを送信します。</p>
+          <h3 data-i18n="step.1.title">リクエスト</h3>
+          <p data-i18n="step.1.body">クライアント（人間またはAIエージェント）がHTTPリクエストを送信します。</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
           <div class="step-number">02</div>
-          <h3>402レスポンス</h3>
-          <p>サーバーが支払い条件（金額・通貨・アドレス）を含む402を返します。</p>
+          <h3 data-i18n="step.2.title">402レスポンス</h3>
+          <p data-i18n="step.2.body">サーバーが支払い条件（金額・通貨・アドレス）を含む402を返します。</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
           <div class="step-number">03</div>
-          <h3>支払い実行</h3>
-          <p>ブロックチェーン上でオンチェーン決済が自動的に完了します。</p>
+          <h3 data-i18n="step.3.title">支払い実行</h3>
+          <p data-i18n="step.3.body">ブロックチェーン上でオンチェーン決済が自動的に完了します。</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
           <div class="step-number">04</div>
-          <h3>アクセス付与</h3>
-          <p>サーバーが支払いを確認し、200 OKでリソースを返します。</p>
+          <h3 data-i18n="step.4.title">アクセス付与</h3>
+          <p data-i18n="step.4.body">サーバーが支払いを確認し、200 OKでリソースを返します。</p>
         </div>
       </div>
       <div class="how-note">
-        <p>すべてのやり取りはHTTPの標準的な仕組みの上に構築されています。<br>既存のインフラを変更することなく、支払い機能を追加できます。</p>
+        <p data-i18n-html="how.note">すべてのやり取りはHTTPの標準的な仕組みの上に構築されています。<br>既存のインフラを変更することなく、支払い機能を追加できます。</p>
       </div>
     </div>
   </section>
@@ -211,37 +216,37 @@
   <section id="features" class="section">
     <div class="container">
       <p class="eyebrow">USE CASES</p>
-      <h2 class="section-title">ユースケース</h2>
+      <h2 class="section-title" data-i18n="features.title">ユースケース</h2>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h3>AIエージェント間決済</h3>
-          <p>自律型AIエージェントが人間の介在なしにリアルタイムで決済。API呼び出しごとに自動的に課金・支払いが完結します。</p>
+          <h3 data-i18n="feature.1.title">AIエージェント間決済</h3>
+          <p data-i18n="feature.1.body">自律型AIエージェントが人間の介在なしにリアルタイムで決済。API呼び出しごとに自動的に課金・支払いが完結します。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">✦</div>
-          <h3>マイクロペイメント</h3>
-          <p>0.001円単位の超小額決済が可能。記事1本、楽曲1曲、データ1件ごとの柔軟な課金モデルを実現します。</p>
+          <h3 data-i18n="feature.2.title">マイクロペイメント</h3>
+          <p data-i18n="feature.2.body">0.001円単位の超小額決済が可能。記事1本、楽曲1曲、データ1件ごとの柔軟な課金モデルを実現します。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">◎</div>
-          <h3>コンテンツ収益化</h3>
-          <p>サブスクリプション不要。読んだ記事、視聴したコンテンツに対してのみ支払う、公正な収益化モデル。</p>
+          <h3 data-i18n="feature.3.title">コンテンツ収益化</h3>
+          <p data-i18n="feature.3.body">サブスクリプション不要。読んだ記事、視聴したコンテンツに対してのみ支払う、公正な収益化モデル。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⬡</div>
-          <h3>API マネタイズ</h3>
-          <p>APIアクセスに対してリクエスト単位で課金。従量制の柔軟なビジネスモデルを簡単に構築できます。</p>
+          <h3 data-i18n="feature.4.title">API マネタイズ</h3>
+          <p data-i18n="feature.4.body">APIアクセスに対してリクエスト単位で課金。従量制の柔軟なビジネスモデルを簡単に構築できます。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">↗</div>
-          <h3>クロスボーダー決済</h3>
-          <p>国境を越えた即時送金。従来の国際送金の複雑さと高コストを排除し、シームレスなグローバル取引を実現。</p>
+          <h3 data-i18n="feature.5.title">クロスボーダー決済</h3>
+          <p data-i18n="feature.5.body">国境を越えた即時送金。従来の国際送金の複雑さと高コストを排除し、シームレスなグローバル取引を実現。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⊕</div>
-          <h3>IoT・機械間取引</h3>
-          <p>スマートデバイスが自律的に電力・データ・サービスを売買。M2M経済の新しい基盤を提供します。</p>
+          <h3 data-i18n="feature.6.title">IoT・機械間取引</h3>
+          <p data-i18n="feature.6.body">スマートデバイスが自律的に電力・データ・サービスを売買。M2M経済の新しい基盤を提供します。</p>
         </div>
       </div>
     </div>
@@ -253,19 +258,19 @@
       <div class="specs-row">
         <div class="spec">
           <div class="spec-value">165M+</div>
-          <div class="spec-label">累計トランザクション数</div>
+          <div class="spec-label" data-i18n="spec.1.label">累計トランザクション数</div>
         </div>
         <div class="spec">
           <div class="spec-value">500K+</div>
-          <div class="spec-label">利用エンティティ数</div>
+          <div class="spec-label" data-i18n="spec.2.label">利用エンティティ数</div>
         </div>
         <div class="spec">
           <div class="spec-value">25+</div>
-          <div class="spec-label">創設メンバー企業</div>
+          <div class="spec-label" data-i18n="spec.3.label">創設メンバー企業</div>
         </div>
         <div class="spec">
           <div class="spec-value">&lt; 1s</div>
-          <div class="spec-label">決済完了時間</div>
+          <div class="spec-label" data-i18n="spec.4.label">決済完了時間</div>
         </div>
       </div>
     </div>
@@ -276,14 +281,14 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <span class="footer-logo">x402 <span>Inc.</span></span>
-        <p>HTTP 402 Payment Protocol<br>for Japan</p>
+        <p data-i18n-html="footer.tagline">HTTP 402 Payment Protocol<br>for Japan</p>
       </div>
       <nav class="footer-nav">
         <ul>
           <li><a href="#foundation">Foundation</a></li>
-          <li><a href="#about">プロトコル</a></li>
-          <li><a href="#how">仕組み</a></li>
-          <li><a href="#features">ユースケース</a></li>
+          <li><a href="#about" data-i18n="footer.nav.protocol">プロトコル</a></li>
+          <li><a href="#how" data-i18n="footer.nav.how">仕組み</a></li>
+          <li><a href="#features" data-i18n="footer.nav.usecases">ユースケース</a></li>
         </ul>
         <ul>
           <li><a href="https://www.x402.org/" target="_blank" rel="noopener">x402.org ↗</a></li>
@@ -291,18 +296,18 @@
         </ul>
       </nav>
       <div class="footer-company">
-        <p class="footer-company-label">COMPANY</p>
+        <p class="footer-company-label" data-i18n="footer.company.label">COMPANY</p>
         <dl class="footer-company-dl">
-          <div><dt>社名</dt><dd>x402株式会社（x402 Inc.）</dd></div>
-          <div><dt>代表取締役</dt><dd>加藤 雅人（Masato Kato）</dd></div>
-          <div><dt>所在地</dt><dd>〒108-0071 東京都港区白金台5-10-16</dd></div>
-          <div><dt>設立</dt><dd>2025年</dd></div>
+          <div><dt data-i18n="footer.company.name.dt">社名</dt><dd data-i18n="footer.company.name.dd">x402株式会社（x402 Inc.）</dd></div>
+          <div><dt data-i18n="footer.company.ceo.dt">代表取締役</dt><dd data-i18n="footer.company.ceo.dd">加藤 雅人（Masato Kato）</dd></div>
+          <div><dt data-i18n="footer.company.address.dt">所在地</dt><dd data-i18n="footer.company.address.dd">〒108-0071 東京都港区白金台5-10-16</dd></div>
+          <div><dt data-i18n="footer.company.founded.dt">設立</dt><dd data-i18n="footer.company.founded.dd">2025年</dd></div>
         </dl>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p>© 2025 x402株式会社 (x402 Inc.). All rights reserved.</p>
+        <p data-i18n="footer.copyright">© 2025 x402株式会社 (x402 Inc.). All rights reserved.</p>
       </div>
     </div>
   </footer>

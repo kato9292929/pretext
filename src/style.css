@@ -141,6 +141,41 @@ strong {
   border-color: var(--gold);
 }
 
+/* ── Lang toggle ────────────────────────────────────────────────── */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 8px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: 500 11px/1 var(--font-sans);
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding: 5px 7px;
+  border-radius: 6px;
+  transition: color var(--transition), background var(--transition);
+}
+
+.lang-btn:hover {
+  color: var(--text-dim);
+  background: rgba(255,255,255,0.05);
+}
+
+.lang-btn.active {
+  color: var(--gold);
+}
+
+.lang-sep {
+  color: var(--border2);
+  font-size: 11px;
+  user-select: none;
+}
+
 .nav-menu-btn {
   display: none;
   flex-direction: column;

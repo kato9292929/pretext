@@ -27,8 +27,8 @@ const ORB_PAD   = 18   // clearance around orb radius
 const MAX_POOL  = 300  // pre-allocated line element pool
 
 // ── Body text ─────────────────────────────────────────────────────────────────
-// Repeats to fill the hero if the viewport is very tall
-const BODY_TEXT =
+
+const BODY_TEXT_JA =
   'x402は、HTTPの402ステータスコードを活用した、インターネットネイティブな' +
   '支払いプロトコルです。Coinbaseが開発したこのオープンスタンダードは、ウェブ' +
   '上での価値交換を根本から変革します。AIエージェント同士がリアルタイムで決済' +
@@ -45,6 +45,21 @@ const BODY_TEXT =
   '日本の優れた技術力と、グローバルなオープンスタンダードの融合により、' +
   '新たな経済圏の創出を目指します。企業から個人まで、すべての人がシームレスな' +
   '支払いの恩恵を受けられる、オープンでフラットな金融の未来を共に作りましょう。'
+
+const BODY_TEXT_EN =
+  'x402 is the native payment layer for the internet. Built on HTTP\'s reserved ' +
+  '402 status code, this open standard—backed by Coinbase, Cloudflare, and ' +
+  'Stripe—brings programmable money into the web stack. AI agents settle payments ' +
+  'in real time, no human in the loop. Creators earn per read, not per subscription. ' +
+  'Developers meter API access per request without middleware overhead. ' +
+  'The protocol is permissionless, multi-rail, and composable by design. ' +
+  'It runs across blockchains, stablecoins, and fiat rails. x402 Inc. is bringing ' +
+  'this infrastructure to Japan—merging world-class engineering with global open ' +
+  'standards to build the settlement layer for the next economy. No gatekeepers, ' +
+  'no walled gardens. Trustless, transparent, and onchain. The machine economy ' +
+  'needs a payment primitive. x402 is that primitive.'
+
+let currentBodyText = BODY_TEXT_JA
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -181,8 +196,8 @@ export function initHero(container: HTMLElement): () => void {
       : Math.round(H * 0.38)
 
     // Prepare text once per font (font must be loaded for accuracy)
-    if (!prepared)       prepared       = prepareWithSegments(BODY_TEXT, FONT)
-    if (!preparedMobile) preparedMobile = prepareWithSegments(BODY_TEXT, MOBILE_FONT)
+    if (!prepared)       prepared       = prepareWithSegments(currentBodyText, FONT)
+    if (!preparedMobile) preparedMobile = prepareWithSegments(currentBodyText, MOBILE_FONT)
 
     // Spread orbs across the lower 2/3 of the hero
     const spread: [number, number, number, number][] = [
@@ -320,6 +335,15 @@ export function initHero(container: HTMLElement): () => void {
     rafId = requestAnimationFrame(render)
   }
 
+  // ── Language switching ─────────────────────────────────────────────────────
+  function onLangChange(e: Event): void {
+    const lang = (e as CustomEvent<{ lang: string }>).detail.lang
+    currentBodyText = lang === 'en' ? BODY_TEXT_EN : BODY_TEXT_JA
+    prepared       = prepareWithSegments(currentBodyText, FONT)
+    preparedMobile = prepareWithSegments(currentBodyText, MOBILE_FONT)
+  }
+  window.addEventListener('langchange', onLangChange)
+
   // ── Boot ───────────────────────────────────────────────────────────────────
   window.addEventListener('resize', onResize)
   onResize()
@@ -329,5 +353,6 @@ export function initHero(container: HTMLElement): () => void {
   return () => {
     cancelAnimationFrame(rafId)
     window.removeEventListener('resize', onResize)
+    window.removeEventListener('langchange', onLangChange)
   }
 }

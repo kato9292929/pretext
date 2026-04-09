@@ -1,5 +1,6 @@
 import './style.css'
 import { initHero } from './hero'
+import { initI18n } from './i18n'
 
 // ── Hero (pretext-powered) ──────────────────────────────────────────────────
 const heroEl = document.getElementById('hero')
@@ -7,6 +8,9 @@ if (heroEl) {
   // Wait for fonts before initialising so pretext measurements are accurate
   document.fonts.ready.then(() => { initHero(heroEl) })
 }
+
+// ── Language toggle ─────────────────────────────────────────────────────────
+initI18n()
 
 // ── Nav: scroll state ───────────────────────────────────────────────────────
 const nav = document.getElementById('nav')
