@@ -1,0 +1,50 @@
+{
+  "name": "x402 Inc. - Japan/APAC x402 Payment Gateway",
+  "description": "x402 Inc. is the Japan and APAC gateway for the x402 HTTP payment protocol. We provide consulting, market data endpoints, and a facilitator marketplace enabling permissionless onchain micropayments for AI agents, API companies, and developers across Japan and the Asia-Pacific region.",
+  "url": "https://x402jp.com",
+  "llms_txt": "https://x402jp.com/llms.txt",
+
+  "organization": {
+    "name": "x402 Inc. (x402株式会社)",
+    "founder": "Masato Kato",
+    "founded": "2025",
+    "address": {
+      "street": "5-10-16 Shirokanedai",
+      "city": "Minato-ku, Tokyo",
+      "postalCode": "108-0071",
+      "country": "JP"
+    }
+  },
+
+  "capabilities": {
+    "consulting": true,
+    "payment_protocol": "x402",
+    "regions": ["Japan", "APAC"],
+    "services": [
+      "x402 connection consulting for Japanese API companies",
+      "market data reselling via x402 endpoints",
+      "Japan x402 Bazaar facilitator marketplace"
+    ]
+  },
+
+  "protocols": {
+    "x402": {
+      "manifest": "https://x402jp.com/.well-known/x402",
+      "network": "base",
+      "currency": "USDC",
+      "spec": "https://x402.org",
+      "github": "https://github.com/x402-foundation/x402"
+    }
+  },
+
+  "discovery": {
+    "llms_txt": "https://x402jp.com/llms.txt",
+    "sitemap": "https://x402jp.com/sitemap.xml",
+    "robots": "https://x402jp.com/robots.txt",
+    "openapi": "https://x402jp.com/.well-known/openapi.json"
+  },
+
+  "contact": {
+    "web": "https://x402jp.com/#company"
+  }
+}

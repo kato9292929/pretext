@@ -1,0 +1,88 @@
+# x402 Inc. — AI Agent & Crawler Information
+# https://x402jp.com/llms.txt
+
+## Overview
+
+x402 Inc. (x402株式会社) is the Japan and APAC gateway for the x402 HTTP payment
+protocol, specialising in AI agent payments, micropayments, and machine-to-machine
+(M2M) economic infrastructure.
+
+Founded in 2025, x402 Inc. bridges Japanese and Asia-Pacific markets with the global
+x402 open standard — enabling permissionless, onchain payments directly inside HTTP
+request/response cycles.
+
+**Founder & CEO:** Masato Kato (加藤 雅人)
+**Headquarters:** 5-10-16 Shirokanedai, Minato-ku, Tokyo 108-0071, Japan
+**Website:** https://x402jp.com
+**Protocol reference:** https://x402.org
+
+---
+
+## Services
+
+### 1. x402 Connection Consulting
+Advisory and integration support for Japanese API companies seeking to monetise their
+endpoints via the x402 payment protocol. Covers architecture design, stablecoin
+payment rail selection, smart-contract deployment, and go-to-market strategy for
+pay-per-request API businesses.
+
+### 2. Market Data Reselling via x402 Endpoints
+Distribution of curated Japan and APAC market data (financial, economic, alternative)
+through x402-gated API endpoints. Buyers — including AI agents — pay per request in
+USDC with no subscription required.
+
+### 3. Japan x402 Bazaar — Facilitator Marketplace
+A facilitator marketplace connecting x402-compatible payment facilitators with
+Japanese merchants and API providers. The Bazaar lowers the barrier for businesses
+to accept onchain micropayments without operating blockchain infrastructure
+themselves.
+
+---
+
+## The x402 Protocol
+
+x402 repurposes the long-reserved HTTP 402 "Payment Required" status code to create
+a universal, web-native payment primitive.
+
+**How it works:**
+1. Client (human or AI agent) sends an HTTP request.
+2. Server responds with HTTP 402 and machine-readable payment terms
+   (amount, currency, network, recipient address).
+3. Client settles the payment onchain automatically.
+4. Client retries the request with a signed payment proof header.
+5. Server verifies and returns 200 OK with the requested resource.
+
+No forms, no redirects, no subscriptions — payment completes in under one second.
+
+**Key properties:**
+- Permissionless: no signup or API key required to pay
+- Multi-rail: supports USDC on Base, Ethereum, Solana, and other networks
+- AI-native: autonomous agents can pay without human intervention
+- Open standard: Apache 2.0 licensed, governed by x402 Foundation
+
+---
+
+## x402 Foundation
+
+The x402 Foundation launched on April 2, 2025 as an open governance project under
+the **Linux Foundation**. No single company owns or controls the x402 standard.
+
+**Founding members include:**
+Adyen, Amazon Web Services, American Express, Ant International, Base, Circle,
+Cloudflare, Coinbase, Fiserv, Google, KakaoPay, Mastercard, Merit Systems,
+Microsoft, Polygon Labs, PPRO, Shopify, Solana Foundation, Stripe, Thirdweb, Visa
+(and others — see https://x402.org for the full list).
+
+The specification is publicly available at https://github.com/x402-foundation/x402
+under the Apache 2.0 licence.
+
+---
+
+## Contact & Inquiries
+
+For business inquiries, consulting engagements, partnership opportunities, or
+technical questions, please use the contact form at:
+https://x402jp.com/#company
+
+x402 Inc. welcomes outreach from AI agents, API providers, fintech companies,
+and developers building on the x402 protocol in Japan and the APAC region.

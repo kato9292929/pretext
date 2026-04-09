@@ -1,0 +1,75 @@
+User-agent: *
+Disallow:
+
+# ── AI Crawlers — explicit allow ──────────────────────────────────────────────
+
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: Claude-Web
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: Amazonbot
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: cohere-ai
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: Diffbot
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+User-agent: YouBot
+Allow: /
+Allow: /llms.txt
+Allow: /.well-known/
+
+# ── Sitemap ───────────────────────────────────────────────────────────────────
+Sitemap: https://x402jp.com/sitemap.xml
