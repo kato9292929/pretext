@@ -522,6 +522,153 @@ strong {
   text-transform: uppercase;
 }
 
+/* ── Ticker ─────────────────────────────────────────────────────── */
+.ticker-wrap {
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding: 11px 0;
+  white-space: nowrap;
+}
+
+.ticker-track {
+  display: inline-flex;
+  animation: ticker-scroll 35s linear infinite;
+}
+
+.ticker-item {
+  font: 500 11px/1 "SF Mono", "Fira Code", ui-monospace, monospace;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  padding: 0 28px;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Hero subtitle ──────────────────────────────────────────────── */
+.hero-subtitle {
+  font-size: clamp(13px, 1.6vw, 16px);
+  color: var(--text-dim);
+  max-width: 540px;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* ── Ecosystem bar ──────────────────────────────────────────────── */
+.ecosystem-bar {
+  padding: 48px 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.ecosystem-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.ecosystem-link {
+  font: 500 12px/1 "SF Mono", "Fira Code", ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 10px 18px;
+  border-radius: 8px;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.ecosystem-link:hover {
+  color: var(--text);
+  border-color: var(--border2);
+  background: rgba(255,255,255,0.03);
+}
+
+/* ── x402 vs MPP ────────────────────────────────────────────────── */
+.x402-mpp {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.x402-mpp > h3 {
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+.x402-mpp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.x402-mpp-col {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+}
+
+.x402-mpp-label {
+  font: 700 12px/1 "SF Mono", ui-monospace, monospace;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.x402-mpp-conclusion {
+  color: var(--text-dim);
+  font-size: 15px;
+  padding: 16px 20px;
+  border-left: 2px solid var(--gold-dim);
+  background: var(--gold-glow);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── How extra (upto + MPP session) ────────────────────────────── */
+.how-extra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.how-extra-block h3 {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.how-extra-block p {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  line-height: 1.75;
+}
+
+.how-extra-example {
+  font: 500 13px/1.5 "SF Mono", ui-monospace, monospace !important;
+  color: var(--gold) !important;
+  background: var(--gold-glow);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 16px 0 !important;
+}
+
+.how-extra-block .btn-outline {
+  margin-top: 8px;
+  font-size: 13px;
+  padding: 9px 16px;
+}
+
 /* ── Foundation ─────────────────────────────────────────────────── */
 .foundation-intro {
   max-width: 760px;
@@ -1051,5 +1198,26 @@ blockquote cite {
 
   .spec {
     flex: 0 0 100%;
+  }
+
+  .x402-mpp-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .how-extra {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .ecosystem-links {
+    flex-direction: column;
+  }
+
+  .ecosystem-link {
+    text-align: center;
+  }
+
+  .hero-subtitle {
+    font-size: 13px;
   }
 }

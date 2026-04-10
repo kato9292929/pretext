@@ -48,14 +48,49 @@
     </button>
   </nav>
 
+  <!-- ── Ticker ────────────────────────────────────────────────────── -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item">◈ HTTP 402 PAYMENT PROTOCOL</span>
+      <span class="ticker-item">◈ MPP (MACHINE PAYMENTS PROTOCOL)</span>
+      <span class="ticker-item">◈ STRIPE × TEMPO</span>
+      <span class="ticker-item">◈ IETF DRAFT SUBMITTED</span>
+      <span class="ticker-item">◈ upto SCHEME</span>
+      <span class="ticker-item">◈ PERMIT2 / EIP-712</span>
+      <span class="ticker-item">◈ LINUX FOUNDATION</span>
+      <span class="ticker-item">◈ USDC · BASE · MAINNET</span>
+      <span class="ticker-item">◈ HTTP 402 PAYMENT PROTOCOL</span>
+      <span class="ticker-item">◈ MPP (MACHINE PAYMENTS PROTOCOL)</span>
+      <span class="ticker-item">◈ STRIPE × TEMPO</span>
+      <span class="ticker-item">◈ IETF DRAFT SUBMITTED</span>
+      <span class="ticker-item">◈ upto SCHEME</span>
+      <span class="ticker-item">◈ PERMIT2 / EIP-712</span>
+      <span class="ticker-item">◈ LINUX FOUNDATION</span>
+      <span class="ticker-item">◈ USDC · BASE · MAINNET</span>
+    </div>
+  </div>
+
   <!-- ── Hero (pretext stage) ───────────────────────────────────── -->
   <section id="hero" class="hero">
     <div class="hero-header">
       <p class="hero-eyebrow">HTTP 402 PAYMENT PROTOCOL</p>
       <h1 class="hero-title">x402</h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">AIエージェント決済のバックエンド。x402とMPPが、インターネットに支払いを組み込む。</p>
     </div>
     <div class="hero-scroll-hint">scroll ↓</div>
   </section>
+
+  <!-- ── Ecosystem link bar ───────────────────────────────────────── -->
+  <div class="ecosystem-bar">
+    <div class="container">
+      <p class="eyebrow">ECOSYSTEM</p>
+      <div class="ecosystem-links">
+        <a href="https://www.x402.org/" class="ecosystem-link" target="_blank" rel="noopener">x402 Protocol →</a>
+        <a href="https://mpp.dev/sdk" class="ecosystem-link" target="_blank" rel="noopener">MPP SDK →</a>
+        <a href="https://pay.nevermined.app/enroll-credit-card" class="ecosystem-link" target="_blank" rel="noopener">Visa × x402 Demo →</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ── Foundation ────────────────────────────────────────────── -->
   <section id="foundation" class="section section-dark">
@@ -106,6 +141,22 @@
         </div>
         <p class="why-conclusion" data-i18n="why.conclusion">1つの企業がエージェントのトランザクション層を支配する代わりに—x402はその代替を提供します。誰でも参加でき、誰も締め出されない。</p>
       </div>
+      <!-- x402 vs MPP -->
+      <div class="x402-mpp">
+        <h3 data-i18n="x402mpp.title">x402 と MPP の関係</h3>
+        <div class="x402-mpp-grid">
+          <div class="x402-mpp-col">
+            <p class="x402-mpp-label">x402</p>
+            <p data-i18n="x402mpp.x402body">HTTP 402 × Web3の文脈で生まれ、ブロックチェーン上のUSDC決済にフォーカス。Linux Foundation傘下のオープンスタンダード。</p>
+          </div>
+          <div class="x402-mpp-col">
+            <p class="x402-mpp-label">MPP</p>
+            <p data-i18n="x402mpp.mppbody">x402の思想を継承しつつ、Stripe（カード）・Tempo（ステーブルコイン）・Lightning（BTC）を1つのインターフェースで統合。IETFにドラフト提出済み。後発なだけあってより広範な決済レールをカバーする。</p>
+          </div>
+        </div>
+        <p class="x402-mpp-conclusion" data-i18n="x402mpp.conclusion">→ StripeはMPPとx402の両方をサポートしている。レイヤーが違うだけで、どちらも公共財だ。</p>
+      </div>
+
       <div class="members-section">
         <p class="members-title" data-i18n="members.title">創設メンバー</p>
         <div class="members-grid">
@@ -209,6 +260,34 @@
       <div class="how-note">
         <p data-i18n-html="how.note">すべてのやり取りはHTTPの標準的な仕組みの上に構築されています。<br>既存のインフラを変更することなく、支払い機能を追加できます。</p>
       </div>
+      <!-- upto scheme + MPP Session -->
+      <div class="how-extra">
+        <div class="how-extra-block">
+          <h3 data-i18n="upto.title">exactスキームの限界 → uptoによる解決</h3>
+          <p data-i18n="upto.p1">当初のexactスキームは、リクエスト前に金額を確定させる必要があった。しかしLLM推論・帯域幅課金・GPU使用時間など、AIインフラのコストは実行完了後にしか確定しない。</p>
+          <p data-i18n="upto.p2">2026年4月に導入されたuptoスキームはこの制約を解消する。クライアントが事前に「上限額」にオフチェーン署名（ガスコストゼロ）し、サービス完了後にサーバーが実使用量ベースの金額のみを決済する。Permit2コントラクトが上限超過を技術的に不可能にする。</p>
+          <p class="how-extra-example" data-i18n="upto.example">例: エージェントが最大$5.00を承認 → サーバーが$0.42のみ決済（21,000トークン消費ベース）</p>
+          <p data-i18n="upto.p3">エスクロー方式と異なり、決済まで資金はウォレットに留まり流動性が維持される。並列APIコールが多いほど、この優位性が大きくなる。</p>
+          <a href="https://note.com/x402inc/n/ne08fec1ed387" class="btn-outline" target="_blank" rel="noopener" data-i18n="upto.link">uptoスキームの詳細 →</a>
+        </div>
+        <div class="how-extra-block">
+          <h3 data-i18n="mpp.session.title">MPPのSessionモード：LLMトークン課金に対応</h3>
+          <p data-i18n="mpp.session.body">MPPはChargeモード（1リクエスト1決済）に加え、Sessionモードを持つ。事前デポジット後はオフチェーンの署名済みバウチャーを提示するだけで決済が完結し、レイテンシはほぼゼロになる。LLMのトークン単位課金や、AIが複数APIを連続して叩くワークフローに特に有効だ。</p>
+          <div class="code-block" style="margin-top:24px">
+            <div class="code-header">
+              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
+              <span class="code-title">Hono + MPP</span>
+            </div>
+            <pre><code><span class="c-dim">// Honoでの実装例（MPP）</span>
+import { paymentMiddleware } from <span class="c-green">'mppx/hono'</span>;
+
+app.get(<span class="c-green">'/premium-data'</span>,
+  paymentMiddleware({ price: <span class="c-green">'$0.01'</span>, currency: <span class="c-green">'USD'</span> }),
+  async (c) =&gt; c.json({ data: <span class="c-green">'paid by AI agent'</span> })
+);</code></pre>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -248,6 +327,11 @@
           <h3 data-i18n="feature.6.title">IoT・機械間取引</h3>
           <p data-i18n="feature.6.body">スマートデバイスが自律的に電力・データ・サービスを売買。M2M経済の新しい基盤を提供します。</p>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3 data-i18n="feature.7.title">マシン経済のインフラ</h3>
+          <p data-i18n="feature.7.body">AIが検索・要約・画像生成を一連でこなす際、背後で複数のAPIにx402/MPPで数セントずつ自律的に支払う。ユーザーはプロトコルを意識しない——TCP/IPと同じように。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -258,7 +342,7 @@
       <div class="specs-row">
         <div class="spec">
           <div class="spec-value">165M+</div>
-          <div class="spec-label" data-i18n="spec.1.label">累計トランザクション数</div>
+          <div class="spec-label" data-i18n="spec.1.label">累計トランザクション（x402）</div>
         </div>
         <div class="spec">
           <div class="spec-value">500K+</div>
@@ -271,6 +355,10 @@
         <div class="spec">
           <div class="spec-value">&lt; 1s</div>
           <div class="spec-label" data-i18n="spec.4.label">決済完了時間</div>
+        </div>
+        <div class="spec">
+          <div class="spec-value">100+</div>
+          <div class="spec-label" data-i18n="spec.5.label">MPPローンチ時の統合サービス数</div>
         </div>
       </div>
     </div>

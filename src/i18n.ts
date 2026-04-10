@@ -3,6 +3,9 @@ export type Lang = 'ja' | 'en'
 type T = Record<string, string>
 
 const JA: T = {
+  // Hero
+  'hero.subtitle': 'AIエージェント決済のバックエンド。x402とMPPが、インターネットに支払いを組み込む。',
+
   // Nav
   'nav.protocol': 'プロトコル',
   'nav.how':      '仕組み',
@@ -25,6 +28,12 @@ const JA: T = {
   'why.conclusion':  '1つの企業がエージェントのトランザクション層を支配する代わりに—x402はその代替を提供します。誰でも参加でき、誰も締め出されない。',
   'members.title':   '創設メンバー',
 
+  // x402 vs MPP
+  'x402mpp.title':      'x402 と MPP の関係',
+  'x402mpp.x402body':   'HTTP 402 × Web3の文脈で生まれ、ブロックチェーン上のUSDC決済にフォーカス。Linux Foundation傘下のオープンスタンダード。',
+  'x402mpp.mppbody':    'x402の思想を継承しつつ、Stripe（カード）・Tempo（ステーブルコイン）・Lightning（BTC）を1つのインターフェースで統合。IETFにドラフト提出済み。後発なだけあってより広範な決済レールをカバーする。',
+  'x402mpp.conclusion': '→ StripeはMPPとx402の両方をサポートしている。レイヤーが違うだけで、どちらも公共財だ。',
+
   // Protocol
   'protocol.title': 'x402とは',
   'protocol.p1':    'HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。',
@@ -44,6 +53,18 @@ const JA: T = {
   'step.4.body':  'サーバーが支払いを確認し、200 OKでリソースを返します。',
   'how.note':     'すべてのやり取りはHTTPの標準的な仕組みの上に構築されています。<br>既存のインフラを変更することなく、支払い機能を追加できます。',
 
+  // upto scheme
+  'upto.title':   'exactスキームの限界 → uptoによる解決',
+  'upto.p1':      '当初のexactスキームは、リクエスト前に金額を確定させる必要があった。しかしLLM推論・帯域幅課金・GPU使用時間など、AIインフラのコストは実行完了後にしか確定しない。',
+  'upto.p2':      '2026年4月に導入されたuptoスキームはこの制約を解消する。クライアントが事前に「上限額」にオフチェーン署名（ガスコストゼロ）し、サービス完了後にサーバーが実使用量ベースの金額のみを決済する。Permit2コントラクトが上限超過を技術的に不可能にする。',
+  'upto.example': '例: エージェントが最大$5.00を承認 → サーバーが$0.42のみ決済（21,000トークン消費ベース）',
+  'upto.p3':      'エスクロー方式と異なり、決済まで資金はウォレットに留まり流動性が維持される。並列APIコールが多いほど、この優位性が大きくなる。',
+  'upto.link':    'uptoスキームの詳細 →',
+
+  // MPP Session
+  'mpp.session.title': 'MPPのSessionモード：LLMトークン課金に対応',
+  'mpp.session.body':  'MPPはChargeモード（1リクエスト1決済）に加え、Sessionモードを持つ。事前デポジット後はオフチェーンの署名済みバウチャーを提示するだけで決済が完結し、レイテンシはほぼゼロになる。LLMのトークン単位課金や、AIが複数APIを連続して叩くワークフローに特に有効だ。',
+
   // Use cases
   'features.title':   'ユースケース',
   'feature.1.title':  'AIエージェント間決済',
@@ -58,12 +79,15 @@ const JA: T = {
   'feature.5.body':   '国境を越えた即時送金。従来の国際送金の複雑さと高コストを排除し、シームレスなグローバル取引を実現。',
   'feature.6.title':  'IoT・機械間取引',
   'feature.6.body':   'スマートデバイスが自律的に電力・データ・サービスを売買。M2M経済の新しい基盤を提供します。',
+  'feature.7.title':  'マシン経済のインフラ',
+  'feature.7.body':   'AIが検索・要約・画像生成を一連でこなす際、背後で複数のAPIにx402/MPPで数セントずつ自律的に支払う。ユーザーはプロトコルを意識しない——TCP/IPと同じように。',
 
   // Specs
-  'spec.1.label': '累計トランザクション数',
+  'spec.1.label': '累計トランザクション（x402）',
   'spec.2.label': '利用エンティティ数',
   'spec.3.label': '創設メンバー企業',
   'spec.4.label': '決済完了時間',
+  'spec.5.label': 'MPPローンチ時の統合サービス数',
 
   // Footer
   'footer.tagline':             'HTTP 402 Payment Protocol<br>for Japan',
@@ -83,6 +107,9 @@ const JA: T = {
 }
 
 const EN: T = {
+  // Hero
+  'hero.subtitle': 'The backend for AI agent payments. x402 and MPP embed payments into the internet.',
+
   // Nav
   'nav.protocol': 'Protocol',
   'nav.how':      'How it works',
@@ -105,6 +132,12 @@ const EN: T = {
   'why.conclusion':  'Instead of one company owning the agentic transaction layer—x402 offers the alternative. Anyone can participate. No one gets locked out.',
   'members.title':   'Founding members',
 
+  // x402 vs MPP
+  'x402mpp.title':      'x402 and MPP: Complementary, Not Competing',
+  'x402mpp.x402body':   'Born from HTTP 402 × Web3, focused on USDC payments on blockchain. An open standard under the Linux Foundation.',
+  'x402mpp.mppbody':    'Inherits x402\'s philosophy while integrating Stripe (card), Tempo (stablecoin), and Lightning (BTC) under one interface. IETF draft submitted. Broader payment rail coverage as the newer standard.',
+  'x402mpp.conclusion': '→ Stripe supports both MPP and x402. Different layers, both public goods.',
+
   // Protocol
   'protocol.title': 'What is x402?',
   'protocol.p1':    'The HTTP 402 "Payment Required" status code has been reserved since 1997—unused for nearly 30 years.',
@@ -124,6 +157,18 @@ const EN: T = {
   'step.4.body':  'Server verifies payment, returns 200 OK with the resource.',
   'how.note':     'Everything runs on top of standard HTTP.<br>Drop it into existing infrastructure—no rewrites required.',
 
+  // upto scheme
+  'upto.title':   'The Limits of exact → Solved by upto',
+  'upto.p1':      'The original exact scheme required confirming the amount before the request. But for AI infrastructure—LLM inference, bandwidth billing, GPU compute—costs can only be determined after execution.',
+  'upto.p2':      'The upto scheme introduced in April 2026 removes this constraint. The client signs an offchain approval for a maximum amount (zero gas cost), and after completion the server settles only the actual amount consumed. The Permit2 contract makes exceeding the cap technically impossible.',
+  'upto.example': 'Example: Agent approves up to $5.00 → Server settles $0.42 only (21,000 tokens consumed)',
+  'upto.p3':      'Unlike escrow, funds stay in the wallet until settlement, maintaining 100% liquidity. The more parallel API calls, the greater this advantage.',
+  'upto.link':    'Learn more about upto →',
+
+  // MPP Session
+  'mpp.session.title': 'MPP Session Mode: Token-based LLM Billing',
+  'mpp.session.body':  'In addition to Charge mode (one payment per request), MPP has Session mode. After an initial deposit, payments complete by presenting an offchain signed voucher—near-zero latency. Ideal for per-token LLM billing and AI workflows that hit multiple APIs sequentially.',
+
   // Use cases
   'features.title':   'Use cases',
   'feature.1.title':  'Agent-to-Agent Payments',
@@ -138,12 +183,15 @@ const EN: T = {
   'feature.5.body':   'Instant settlement across borders. Eliminate the complexity and cost of legacy international wires.',
   'feature.6.title':  'Machine Economy',
   'feature.6.body':   'Smart devices autonomously buy and sell power, data, and services. The M2M economy, natively programmed.',
+  'feature.7.title':  'Machine Economy Infrastructure',
+  'feature.7.body':   'When AI handles search, summarization, and image generation in one workflow, it autonomously pays cents to multiple APIs via x402/MPP behind the scenes. Users don\'t think about the protocol—just like TCP/IP.',
 
   // Specs
-  'spec.1.label': 'Cumulative transactions',
+  'spec.1.label': 'Cumulative transactions (x402)',
   'spec.2.label': 'Active entities',
   'spec.3.label': 'Founding members',
   'spec.4.label': 'Settlement time',
+  'spec.5.label': 'Integrations at MPP launch',
 
   // Footer
   'footer.tagline':             'HTTP 402 Payment Protocol<br>for Japan',
