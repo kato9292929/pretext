@@ -522,41 +522,6 @@ strong {
   text-transform: uppercase;
 }
 
-/* ── Ticker ─────────────────────────────────────────────────────── */
-.ticker-wrap {
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  padding: 11px 0;
-  white-space: nowrap;
-}
-
-.ticker-track {
-  display: inline-flex;
-  animation: ticker-scroll 35s linear infinite;
-}
-
-.ticker-item {
-  font: 500 11px/1 "SF Mono", "Fira Code", ui-monospace, monospace;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  padding: 0 28px;
-}
-
-@keyframes ticker-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* ── Hero subtitle ──────────────────────────────────────────────── */
-.hero-subtitle {
-  font-size: clamp(13px, 1.6vw, 16px);
-  color: var(--text-dim);
-  max-width: 540px;
-  margin-top: 16px;
-  line-height: 1.6;
-}
-
 /* ── Ecosystem bar ──────────────────────────────────────────────── */
 .ecosystem-bar {
   padding: 48px 0;
@@ -1217,7 +1182,4 @@ blockquote cite {
     text-align: center;
   }
 
-  .hero-subtitle {
-    font-size: 13px;
-  }
 }
