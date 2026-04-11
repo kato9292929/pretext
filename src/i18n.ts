@@ -33,9 +33,24 @@ const JA: T = {
   'x402mpp.x402body':   'HTTP 402 × Web3の文脈で生まれ、ブロックチェーン上のUSDC決済にフォーカス。Linux Foundation傘下のオープンスタンダード。',
   'x402mpp.mppbody':    'x402の思想を継承しつつ、Stripe（カード）・Tempo（ステーブルコイン）・Lightning（BTC）を1つのインターフェースで統合。IETFにドラフト提出済み。後発なだけあってより広範な決済レールをカバーする。',
   'x402mpp.conclusion': '→ StripeはMPPとx402の両方をサポートしている。レイヤーが違うだけで、どちらも公共財だ。',
+  'x402mpp.risk.title': 'MPP吸収リスクとLinux Foundation独立性',
+  'x402mpp.risk.body':  'MPPがx402を完全に吸収するシナリオはゼロではありません。StripeとTempoがMPPにx402の機能を全部取り込んで「x402は不要」になる可能性はあります。ただし、Linux Foundation傘下のオープンスタンダードという性質上、特定プラットフォームに依存したくない開発者がx402を選び続ける理由は残ります。HTTPがAOLに勝ったように、オープンな標準は長期的に生き残りやすい。',
 
   // Protocol
   'protocol.title': 'x402とは',
+  'protocol.honryo.title': 'x402の本領：APIエコノミーの配管',
+  'protocol.honryo.body':  'x402が実際に使われているのは、ほぼすべてが「ソフトウェアがソフトウェアのサービスを買う」ユースケースです。',
+  'protocol.honryo.l1':    'APIコール・データ取得の従量課金',
+  'protocol.honryo.l2':    'LLM推論のトークン単位課金',
+  'protocol.honryo.l3':    'スクレイピングAPIのリクエスト単位課金',
+  'protocol.honryo.l4':    'ヘッドレスブラウザのセッション単位課金',
+  'protocol.honryo.note':  'LangChain・CrewAI・Claude MCPエコシステムはすでにx402ペイメントアダプターを標準搭載。エージェントが402レスポンスに当たると、自動的にウォレット残高を確認して支払います。',
+  'protocol.conclusion':   'x402 = AIエージェントとAPIサービスの間に流れる配管。TCP/IPと同じ。',
+  'protocol.flow.title':   'AIエージェントの資金フロー',
+  'pf.1': 'ユーザーが円でチャージ',
+  'pf.2': '自動でUSDCにスワップ',
+  'pf.3': 'AIエージェントがx402で自律決済',
+  'pf.4': '予算上限で制御・残高切れで停止',
   'protocol.p1':    'HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。',
   'protocol.p2':    'Coinbase、Cloudflare、Stripeが主導し、Linux Foundation傘下のx402 Foundationとして設立されたこのオープンスタンダードは、ウェブリクエストに支払いを直接組み込む普遍的な方法を定義します。製品ではなく、プラットフォームでもなく—<strong>公共財</strong>です。',
   'protocol.p3':    'サーバーが402を返したとき、クライアント（人間でもAIエージェントでも）は自動的に支払いを完了し、リクエストを再試行します。人間が毎回フォームを入力する必要はありません。',
@@ -64,6 +79,28 @@ const JA: T = {
   // MPP Session
   'mpp.session.title': 'MPPのSessionモード：LLMトークン課金に対応',
   'mpp.session.body':  'MPPはChargeモード（1リクエスト1決済）に加え、Sessionモードを持つ。事前デポジット後はオフチェーンの署名済みバウチャーを提示するだけで決済が完結し、レイテンシはほぼゼロになる。LLMのトークン単位課金や、AIが複数APIを連続して叩くワークフローに特に有効だ。',
+
+  // Use case table
+  'usecase.table.title': 'どのシーンでx402が本命か',
+  'usecase.th.usecase':  'ユースケース',
+  'usecase.th.solution': '最適なソリューション',
+  'usecase.row1.case':   '普通の買い物 → エージェント代行購入',
+  'usecase.row1.sol':    'Stripe MPP / Visa ICC',
+  'usecase.row2.case':   'APIコール・マイクロ課金',
+  'usecase.row2.sol':    'x402',
+  'usecase.row3.case':   '予算付きエージェント × 複数サービス',
+  'usecase.row3.sol':    'x402が本命（加盟店普及待ち）',
+  'usecase.row4.case':   'LLMトークン単位の高頻度課金',
+  'usecase.row4.sol':    'MPP Sessionモード',
+
+  // Growth
+  'growth.title':   'x402が普及する3つの経路',
+  'growth.1.title': 'Stripe両対応',
+  'growth.1.body':  'StripeはMPPとx402をどちらも統合。クリプトを知らない加盟店がx402対応APIのセラーになれる経路が開かれます。',
+  'growth.2.title': 'Visa ICC 4プロトコル対応',
+  'growth.2.body':  'VisaのInteroperable Commerce CloudがMPP・ACP・UCP・TAPを全対応。加盟店はVisaを使うだけでx402エコシステムに接続されます。',
+  'growth.3.title': 'AIエージェントが強制普及',
+  'growth.3.body':  'LangChain・CrewAI・Claude MCPはすでにx402アダプターを標準搭載。エージェントが普及するほどx402対応APIへの需要が増え、開発者は「対応しないと売れない」状況になっていきます。',
 
   // Use cases
   'features.title':   'ユースケース',
@@ -133,13 +170,28 @@ const EN: T = {
   'members.title':   'Founding members',
 
   // x402 vs MPP
-  'x402mpp.title':      'x402 and MPP: Complementary, Not Competing',
+  'x402mpp.title':      'x402 and MPP: the relationship',
   'x402mpp.x402body':   'Born from HTTP 402 × Web3, focused on USDC payments on blockchain. An open standard under the Linux Foundation.',
   'x402mpp.mppbody':    'Inherits x402\'s philosophy while integrating Stripe (card), Tempo (stablecoin), and Lightning (BTC) under one interface. IETF draft submitted. Broader payment rail coverage as the newer standard.',
   'x402mpp.conclusion': '→ Stripe supports both MPP and x402. Different layers, both public goods.',
+  'x402mpp.risk.title': 'MPP absorption risk and Linux Foundation independence',
+  'x402mpp.risk.body':  'A scenario where MPP fully absorbs x402 is not zero. Stripe and Tempo could integrate all x402 functionality into MPP and render x402 redundant. However, as a Linux Foundation open standard, developers who want to avoid platform lock-in will continue to have reason to choose x402. Just as HTTP beat AOL, open standards tend to survive long-term.',
 
   // Protocol
   'protocol.title': 'What is x402?',
+  'protocol.honryo.title': 'Where x402 shines: the API economy plumbing',
+  'protocol.honryo.body':  'Almost every real-world x402 use case is "software buying from software."',
+  'protocol.honryo.l1':    'API calls and data fetching on a per-request basis',
+  'protocol.honryo.l2':    'LLM inference billed per token',
+  'protocol.honryo.l3':    'Scraping APIs billed per request',
+  'protocol.honryo.l4':    'Headless browser sessions billed per session',
+  'protocol.honryo.note':  'LangChain, CrewAI, and the Claude MCP ecosystem already ship x402 payment adapters by default. When an agent hits a 402 response, it automatically checks wallet balance and settles.',
+  'protocol.conclusion':   'x402 = the plumbing between AI agents and API services. Same as TCP/IP.',
+  'protocol.flow.title':   'AI agent payment flow',
+  'pf.1': 'User tops up with fiat',
+  'pf.2': 'Auto-swap to USDC',
+  'pf.3': 'AI agent pays autonomously via x402',
+  'pf.4': 'Budget cap enforced — stops when balance runs out',
   'protocol.p1':    'The HTTP 402 "Payment Required" status code has been reserved since 1997—unused for nearly 30 years.',
   'protocol.p2':    'Led by Coinbase, Cloudflare, and Stripe and established as the x402 Foundation under the Linux Foundation, this open standard defines a universal way to embed payments directly into web requests. Not a product, not a platform—<strong>a public good</strong>.',
   'protocol.p3':    'When a server returns 402, the client—human or AI agent—automatically settles the payment and retries the request. No forms, no friction.',
@@ -168,6 +220,28 @@ const EN: T = {
   // MPP Session
   'mpp.session.title': 'MPP Session Mode: Token-based LLM Billing',
   'mpp.session.body':  'In addition to Charge mode (one payment per request), MPP has Session mode. After an initial deposit, payments complete by presenting an offchain signed voucher—near-zero latency. Ideal for per-token LLM billing and AI workflows that hit multiple APIs sequentially.',
+
+  // Use case table
+  'usecase.table.title': 'Where x402 is the right choice',
+  'usecase.th.usecase':  'Use case',
+  'usecase.th.solution': 'Best solution',
+  'usecase.row1.case':   'Regular shopping → agent-assisted purchase',
+  'usecase.row1.sol':    'Stripe MPP / Visa ICC',
+  'usecase.row2.case':   'API calls & micropayments',
+  'usecase.row2.sol':    'x402',
+  'usecase.row3.case':   'Budgeted agent × multiple services',
+  'usecase.row3.sol':    'x402 (pending merchant adoption)',
+  'usecase.row4.case':   'High-frequency LLM token billing',
+  'usecase.row4.sol':    'MPP Session mode',
+
+  // Growth
+  'growth.title':   'Three paths to x402 adoption',
+  'growth.1.title': 'Stripe dual support',
+  'growth.1.body':  'Stripe integrates both MPP and x402. Merchants who know nothing about crypto can become x402-enabled API sellers through a single Stripe dashboard.',
+  'growth.2.title': 'Visa ICC: 4-protocol support',
+  'growth.2.body':  'Visa\'s Interoperable Commerce Cloud supports MPP, ACP, UCP, and TAP. Merchants using Visa get plugged into the x402 ecosystem automatically.',
+  'growth.3.title': 'AI agents drive forced adoption',
+  'growth.3.body':  'LangChain, CrewAI, and Claude MCP already ship x402 adapters. As agents proliferate, demand for x402-enabled APIs grows—developers who don\'t support it simply won\'t get paid by agents.',
 
   // Use cases
   'features.title':   'Use cases',

@@ -105,6 +105,41 @@
           </div>
         </div>
       </div>
+      <!-- x402の本領 + 資金フロー -->
+      <div class="protocol-extra">
+        <div class="protocol-extra-block">
+          <h3 data-i18n="protocol.honryo.title">x402の本領：APIエコノミーの配管</h3>
+          <p data-i18n="protocol.honryo.body">x402が実際に使われているのは、ほぼすべてが「ソフトウェアがソフトウェアのサービスを買う」ユースケースです。</p>
+          <ul class="protocol-list">
+            <li data-i18n="protocol.honryo.l1">APIコール・データ取得の従量課金</li>
+            <li data-i18n="protocol.honryo.l2">LLM推論のトークン単位課金</li>
+            <li data-i18n="protocol.honryo.l3">スクレイピングAPIのリクエスト単位課金</li>
+            <li data-i18n="protocol.honryo.l4">ヘッドレスブラウザのセッション単位課金</li>
+          </ul>
+          <p data-i18n="protocol.honryo.note">LangChain・CrewAI・Claude MCPエコシステムはすでにx402ペイメントアダプターを標準搭載。エージェントが402レスポンスに当たると、自動的にウォレット残高を確認して支払います。</p>
+          <p class="protocol-conclusion" data-i18n="protocol.conclusion">x402 = AIエージェントとAPIサービスの間に流れる配管。TCP/IPと同じ。</p>
+        </div>
+        <div class="protocol-extra-block">
+          <h3 data-i18n="protocol.flow.title">AIエージェントの資金フロー</h3>
+          <div class="payment-flow">
+            <div class="pf-step">
+              <span class="pf-label" data-i18n="pf.1">ユーザーが円でチャージ</span>
+            </div>
+            <div class="pf-arrow">↓ <span class="pf-note">オンランプ（Coinbase）</span></div>
+            <div class="pf-step pf-mid">
+              <span class="pf-label" data-i18n="pf.2">自動でUSDCにスワップ</span>
+            </div>
+            <div class="pf-arrow">↓ <span class="pf-note">組み込みウォレット（Embedded Wallet）</span></div>
+            <div class="pf-step pf-accent">
+              <span class="pf-label" data-i18n="pf.3">AIエージェントがx402で自律決済</span>
+            </div>
+            <div class="pf-arrow">↓ <span class="pf-note">upto / Policy Engine</span></div>
+            <div class="pf-step pf-end">
+              <span class="pf-label" data-i18n="pf.4">予算上限で制御・残高切れで停止</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -235,6 +270,10 @@ app.get(<span class="c-green">'/premium-data'</span>,
           </div>
         </div>
         <p class="x402-mpp-conclusion" data-i18n="x402mpp.conclusion">→ StripeはMPPとx402の両方をサポートしている。レイヤーが違うだけで、どちらも公共財だ。</p>
+        <div class="x402-mpp-risk">
+          <h4 data-i18n="x402mpp.risk.title">MPP吸収リスクとLinux Foundation独立性</h4>
+          <p data-i18n="x402mpp.risk.body">MPPがx402を完全に吸収するシナリオはゼロではありません。StripeとTempoがMPPにx402の機能を全部取り込んで「x402は不要」になる可能性はあります。ただし、Linux Foundation傘下のオープンスタンダードという性質上、特定プラットフォームに依存したくない開発者がx402を選び続ける理由は残ります。HTTPがAOLに勝ったように、オープンな標準は長期的に生き残りやすい。</p>
+        </div>
       </div>
       <div class="members-section">
         <p class="members-title" data-i18n="members.title">創設メンバー</p>
@@ -272,6 +311,37 @@ app.get(<span class="c-green">'/premium-data'</span>,
     <div class="container">
       <p class="eyebrow">USE CASES</p>
       <h2 class="section-title" data-i18n="features.title">ユースケース</h2>
+      <!-- ユースケーステーブル -->
+      <div class="usecase-table-wrap">
+        <h3 data-i18n="usecase.table.title">どのシーンでx402が本命か</h3>
+        <table class="usecase-table">
+          <thead>
+            <tr>
+              <th data-i18n="usecase.th.usecase">ユースケース</th>
+              <th data-i18n="usecase.th.solution">最適なソリューション</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="usecase.row1.case">普通の買い物 → エージェント代行購入</td>
+              <td><span class="sol-tag sol-alt" data-i18n="usecase.row1.sol">Stripe MPP / Visa ICC</span></td>
+            </tr>
+            <tr class="usecase-highlight">
+              <td data-i18n="usecase.row2.case">APIコール・マイクロ課金</td>
+              <td><span class="sol-tag sol-main" data-i18n="usecase.row2.sol">x402</span></td>
+            </tr>
+            <tr class="usecase-highlight">
+              <td data-i18n="usecase.row3.case">予算付きエージェント × 複数サービス</td>
+              <td><span class="sol-tag sol-main" data-i18n="usecase.row3.sol">x402が本命（加盟店普及待ち）</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="usecase.row4.case">LLMトークン単位の高頻度課金</td>
+              <td><span class="sol-tag sol-mpp" data-i18n="usecase.row4.sol">MPP Sessionモード</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
@@ -307,6 +377,28 @@ app.get(<span class="c-green">'/premium-data'</span>,
           <div class="feature-icon">⬡</div>
           <h3 data-i18n="feature.7.title">マシン経済のインフラ</h3>
           <p data-i18n="feature.7.body">AIが検索・要約・画像生成を一連でこなす際、背後で複数のAPIにx402/MPPで数セントずつ自律的に支払う。ユーザーはプロトコルを意識しない——TCP/IPと同じように。</p>
+        </div>
+      </div>
+
+      <!-- x402が普及する3つの経路 -->
+      <div class="growth-section">
+        <h3 data-i18n="growth.title">x402が普及する3つの経路</h3>
+        <div class="growth-grid">
+          <div class="growth-card">
+            <p class="growth-num">01</p>
+            <h4 data-i18n="growth.1.title">Stripe両対応</h4>
+            <p data-i18n="growth.1.body">StripeはMPPとx402をどちらも統合。クリプトを知らない加盟店がx402対応APIのセラーになれる経路が開かれます。</p>
+          </div>
+          <div class="growth-card">
+            <p class="growth-num">02</p>
+            <h4 data-i18n="growth.2.title">Visa ICC 4プロトコル対応</h4>
+            <p data-i18n="growth.2.body">VisaのInteroperable Commerce CloudがMPP・ACP・UCP・TAPを全対応。加盟店はVisaを使うだけでx402エコシステムに接続されます。</p>
+          </div>
+          <div class="growth-card">
+            <p class="growth-num">03</p>
+            <h4 data-i18n="growth.3.title">AIエージェントが強制普及</h4>
+            <p data-i18n="growth.3.body">LangChain・CrewAI・Claude MCPはすでにx402アダプターを標準搭載。エージェントが普及するほどx402対応APIへの需要が増え、開発者は「対応しないと売れない」状況になっていきます。</p>
+          </div>
         </div>
       </div>
     </div>

@@ -1076,6 +1076,16 @@ blockquote cite {
   .why-open {
     padding: 32px;
   }
+
+  .protocol-extra {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .growth-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1182,4 +1192,280 @@ blockquote cite {
     text-align: center;
   }
 
+  .protocol-extra {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .growth-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .usecase-table th,
+  .usecase-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+}
+
+/* ── Protocol extra ──────────────────────────────────────────────── */
+.protocol-extra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.protocol-extra-block h3 {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.protocol-extra-block p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.protocol-list {
+  list-style: none;
+  margin: 12px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.protocol-list li {
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 8px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(196, 163, 90, 0.06);
+  border-radius: 0 6px 6px 0;
+}
+
+.protocol-conclusion {
+  font: 500 15px/1.6 var(--font-serif) !important;
+  color: var(--gold) !important;
+  background: var(--gold-glow);
+  border: 1px solid var(--gold-dim);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px !important;
+  margin-top: 16px !important;
+}
+
+/* ── Payment flow ────────────────────────────────────────────────── */
+.payment-flow {
+  display: flex;
+  flex-direction: column;
+}
+
+.pf-step {
+  padding: 12px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+}
+
+.pf-step.pf-mid {
+  border-color: rgba(196, 163, 90, 0.25);
+}
+
+.pf-step.pf-accent {
+  border-color: var(--gold-dim);
+  background: var(--gold-glow);
+}
+
+.pf-step.pf-end {
+  border-color: rgba(74, 223, 138, 0.3);
+  background: rgba(74, 223, 138, 0.05);
+}
+
+.pf-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.pf-step.pf-accent .pf-label {
+  color: var(--gold);
+}
+
+.pf-step.pf-end .pf-label {
+  color: var(--green);
+}
+
+.pf-arrow {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 5px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pf-note {
+  font: 11px/1 "SF Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* ── x402-mpp risk ───────────────────────────────────────────────── */
+.x402-mpp-risk {
+  margin-top: 24px;
+  padding: 24px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.x402-mpp-risk h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+.x402-mpp-risk p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ── Use case table ──────────────────────────────────────────────── */
+.usecase-table-wrap {
+  margin-bottom: 56px;
+}
+
+.usecase-table-wrap h3 {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.usecase-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.usecase-table th {
+  text-align: left;
+  padding: 13px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+}
+
+.usecase-table td {
+  padding: 15px 20px;
+  font-size: 14px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.usecase-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.usecase-highlight td:first-child {
+  color: var(--text);
+}
+
+.usecase-highlight {
+  background: rgba(196, 163, 90, 0.04);
+}
+
+.sol-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.sol-main {
+  background: var(--gold-glow);
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+}
+
+.sol-alt {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.sol-mpp {
+  background: rgba(74, 143, 255, 0.08);
+  border: 1px solid rgba(74, 143, 255, 0.3);
+  color: var(--blue);
+}
+
+/* ── Growth section ──────────────────────────────────────────────── */
+.growth-section {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.growth-section > h3 {
+  font-size: clamp(18px, 2.2vw, 24px);
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+.growth-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.growth-card {
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  transition: border-color var(--transition);
+}
+
+.growth-card:hover {
+  border-color: var(--gold-dim);
+}
+
+.growth-num {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gold-dim);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.growth-card h4 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.growth-card p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.75;
 }

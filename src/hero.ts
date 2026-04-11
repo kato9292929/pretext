@@ -29,35 +29,34 @@ const MAX_POOL  = 300  // pre-allocated line element pool
 // ── Body text ─────────────────────────────────────────────────────────────────
 
 const BODY_TEXT_JA =
-  'x402は、HTTPの402ステータスコードを活用した、インターネットネイティブな' +
-  '支払いプロトコルです。Coinbaseが開発したこのオープンスタンダードは、ウェブ' +
-  '上での価値交換を根本から変革します。AIエージェント同士がリアルタイムで決済' +
-  'を完了し、コンテンツクリエイターがマイクロペイメントで収益を得て、企業が' +
-  'APIアクセスに対して即座に課金できる。そんな未来が、x402によって実現します。' +
-  '従来のクレジットカード決済や銀行振込が持つ複雑さ、高手数料、遅延の問題を' +
-  '解消し、HTTP通信と同じシンプルさで資金移動を可能にします。リクエストと' +
-  'レスポンスのやり取りで支払いが完結する設計は、開発者にとっても直感的です。' +
-  'ブロックチェーン技術を基盤としながらも、エンドユーザーはその複雑さを意識' +
-  'することなく、シームレスな体験を享受できます。ステーブルコインを活用した' +
-  '安定した価値の移転と、オンチェーンの透明性が組み合わさることで、信頼性の' +
-  '高い取引環境を実現します。私たちx402 Inc.は、この革新的なプロトコルを' +
-  '日本市場に広め、次世代の決済インフラを構築することを使命としています。' +
-  '日本の優れた技術力と、グローバルなオープンスタンダードの融合により、' +
-  '新たな経済圏の創出を目指します。企業から個人まで、すべての人がシームレスな' +
-  '支払いの恩恵を受けられる、オープンでフラットな金融の未来を共に作りましょう。'
+  'x402はAIエージェントとAPIサービスの間に流れる配管だ。TCP/IPと同じように、' +
+  '誰も意識しないが全員が使っている。HTTPの402ステータスコードは1997年に予約' +
+  'されたまま30年近く眠っていた。Coinbase、Cloudflare、Stripeが叩き起こし、' +
+  'Linux Foundation傘下のオープンスタンダードとして動き出した。サーバーが402を' +
+  '返したとき、クライアントは自動的に支払いを完了してリクエストを再試行する。' +
+  '人間でもAIエージェントでも、フォームも手続きも要らない。ECサイトには既存の' +
+  '決済で十分だ。しかしAPIコールに値段をつけ、エージェントが何百ものサービスを' +
+  '自律的に利用するシナリオでは、x402が唯一の現実解になる。LangChain・CrewAI・' +
+  'Claude MCPはすでにx402アダプターを標準搭載している。エージェントが普及する' +
+  'ほど、x402対応APIへの需要が増える。開発者は対応しないと「エージェントから' +
+  '買ってもらえない」状況になっていく。StripeはMPPとx402の両方をサポートし、' +
+  'Visa ICCは4プロトコルを全対応している。「x402 = クリプトユーザーが意識的に' +
+  '選ぶ決済手段」という認識は間違いだ。正しくは「x402 = インフラ」だ。私たち' +
+  'x402 Inc.は、この配管を日本に引く。'
 
 const BODY_TEXT_EN =
-  'x402 is the native payment layer for the internet. Built on HTTP\'s reserved ' +
-  '402 status code, this open standard—backed by Coinbase, Cloudflare, and ' +
-  'Stripe—brings programmable money into the web stack. AI agents settle payments ' +
-  'in real time, no human in the loop. Creators earn per read, not per subscription. ' +
-  'Developers meter API access per request without middleware overhead. ' +
-  'The protocol is permissionless, multi-rail, and composable by design. ' +
-  'It runs across blockchains, stablecoins, and fiat rails. x402 Inc. is bringing ' +
-  'this infrastructure to Japan—merging world-class engineering with global open ' +
-  'standards to build the settlement layer for the next economy. No gatekeepers, ' +
-  'no walled gardens. Trustless, transparent, and onchain. The machine economy ' +
-  'needs a payment primitive. x402 is that primitive.'
+  'x402 is the plumbing between AI agents and API services. Like TCP/IP, nobody ' +
+  'thinks about it—everyone uses it. HTTP\'s 402 status code sat reserved since ' +
+  '1997, dormant for nearly thirty years. Coinbase, Cloudflare, and Stripe woke ' +
+  'it up. Now it\'s an open standard under the Linux Foundation. When a server ' +
+  'returns 402, the client—human or AI agent—automatically settles the payment ' +
+  'and retries. No forms, no friction. Existing payment rails handle commerce just ' +
+  'fine. But when APIs have prices and agents autonomously use hundreds of services ' +
+  'at once, x402 is the only realistic solution. LangChain, CrewAI, and Claude MCP ' +
+  'already ship x402 adapters by default. As agents proliferate, demand for x402-' +
+  'enabled APIs grows. Stripe supports both MPP and x402. Visa ICC backs all four ' +
+  'protocols. The frame "x402 = crypto-native payment choice" is wrong. The correct ' +
+  'frame: "x402 = infrastructure." We are x402 Inc. We are laying this pipe in Japan.'
 
 let currentBodyText = BODY_TEXT_JA
 
