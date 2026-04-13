@@ -125,17 +125,21 @@
             <div class="pf-step">
               <span class="pf-label" data-i18n="pf.1">ユーザーが円でチャージ</span>
             </div>
-            <div class="pf-arrow">↓ <span class="pf-note">オンランプ（Coinbase）</span></div>
+            <div class="pf-arrow">↓ <span class="pf-note">Coinbase オンランプ</span></div>
             <div class="pf-step pf-mid">
-              <span class="pf-label" data-i18n="pf.2">自動でUSDCにスワップ</span>
+              <span class="pf-label" data-i18n="pf.2">Agent WalletでUSDCに自動スワップ</span>
             </div>
-            <div class="pf-arrow">↓ <span class="pf-note">組み込みウォレット（Embedded Wallet）</span></div>
+            <div class="pf-arrow">↓ <span class="pf-note">MCP Server 経由</span></div>
+            <div class="pf-step pf-mid">
+              <span class="pf-label" data-i18n="pf.3">Claude CodeがMCPツールを呼び出し</span>
+            </div>
+            <div class="pf-arrow">↓ <span class="pf-note">402 → 自動決済</span></div>
             <div class="pf-step pf-accent">
-              <span class="pf-label" data-i18n="pf.3">AIエージェントがx402で自律決済</span>
+              <span class="pf-label" data-i18n="pf.4">MCPサーバーがx402で自動決済・リトライ</span>
             </div>
-            <div class="pf-arrow">↓ <span class="pf-note">upto / Policy Engine</span></div>
+            <div class="pf-arrow">↓ <span class="pf-note">Policy Engine 評価</span></div>
             <div class="pf-step pf-end">
-              <span class="pf-label" data-i18n="pf.4">予算上限で制御・残高切れで停止</span>
+              <span class="pf-label" data-i18n="pf.5">Policy Engineが予算チェック・監査ログ記録</span>
             </div>
           </div>
         </div>
