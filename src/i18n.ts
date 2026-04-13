@@ -25,27 +25,27 @@ const JA: T = {
   'why.title':       'なぜオープン標準が勝つのか',
   'why.http.body':   'AOLは3000万人のインターネットでしたが、クローズドなガーデンでした。HTTPはオープンなプロトコルで、誰でも構築できました。AOLは今や歴史の注釈に過ぎませんが、HTTPはウェブそのものです。',
   'why.tcpip.body':  '「公式」ネットワーク標準（OSI）は、完璧さよりも広く採用されたオープン版に敗れました。標準への合意は完璧な標準よりも多くの価値を生みます。',
-  'why.conclusion':  '1つの企業がエージェントのトランザクション層を支配する代わりに—x402はその代替を提供します。誰でも参加でき、誰も締め出されない。',
+  'why.conclusion':  '1つの企業がエージェントのトランザクション層を支配する代わりに—x402はその代替を提供します。誰でも参加でき、誰も締め出されません。',
   'members.title':   '創設メンバー',
 
   // x402 vs MPP
-  'x402mpp.title':      'x402 と MPP の関係',
+  'x402mpp.title':      'x402 or MPP——どちらを選ぶか',
   'x402mpp.x402body':   'HTTP 402 × Web3の文脈で生まれ、ブロックチェーン上のUSDC決済にフォーカス。Linux Foundation傘下のオープンスタンダード。',
   'x402mpp.mppbody':    'x402の思想を継承しつつ、Stripe（カード）・Tempo（ステーブルコイン）・Lightning（BTC）を1つのインターフェースで統合。IETFにドラフト提出済み。後発なだけあってより広範な決済レールをカバーする。',
-  'x402mpp.conclusion': '→ StripeはMPPとx402の両方をサポートしている。レイヤーが違うだけで、どちらも公共財だ。',
+  'x402mpp.conclusion': '→ StripeはMPPとx402の両方をサポートしています。レイヤーが違うだけで、どちらも公共財です。',
   'x402mpp.risk.title': 'MPP吸収リスクとLinux Foundation独立性',
-  'x402mpp.risk.body':  'MPPがx402を完全に吸収するシナリオはゼロではありません。StripeとTempoがMPPにx402の機能を全部取り込んで「x402は不要」になる可能性はあります。ただし、Linux Foundation傘下のオープンスタンダードという性質上、特定プラットフォームに依存したくない開発者がx402を選び続ける理由は残ります。HTTPがAOLに勝ったように、オープンな標準は長期的に生き残りやすい。',
+  'x402mpp.risk.body':  'MPPがx402を完全に吸収するシナリオはゼロではありません。StripeとTempoがMPPにx402の機能を全部取り込んで「x402は不要」になる可能性はあります。ただし、Linux Foundation傘下のオープンスタンダードという性質上、特定プラットフォームに依存したくない開発者がx402を選び続ける理由は残ります。HTTPがAOLに勝ったように、オープンな標準は長期的に生き残りやすいです。',
 
   // Protocol
   'protocol.title': 'x402とは',
-  'protocol.honryo.title': 'x402の本領：APIエコノミーの配管',
+  'protocol.honryo.title': 'x402の本領：APIエコノミーのパイプライン',
   'protocol.honryo.body':  'x402が実際に使われているのは、ほぼすべてが「ソフトウェアがソフトウェアのサービスを買う」ユースケースです。',
   'protocol.honryo.l1':    'APIコール・データ取得の従量課金',
   'protocol.honryo.l2':    'LLM推論のトークン単位課金',
   'protocol.honryo.l3':    'スクレイピングAPIのリクエスト単位課金',
   'protocol.honryo.l4':    'ヘッドレスブラウザのセッション単位課金',
   'protocol.honryo.note':  'LangChain・CrewAI・Claude MCPエコシステムはすでにx402ペイメントアダプターを標準搭載。エージェントが402レスポンスに当たると、自動的にウォレット残高を確認して支払います。',
-  'protocol.conclusion':   'x402 = AIエージェントとAPIサービスの間に流れる配管。TCP/IPと同じ。',
+  'protocol.conclusion':   'x402 = AIエージェントとAPIサービスの間に流れるパイプラインです。TCP/IPと同じです。',
   'protocol.flow.title':   'AIエージェントの資金フロー',
   'pf.1': 'ユーザーが円でチャージ',
   'pf.2': '自動でUSDCにスワップ',
@@ -70,15 +70,15 @@ const JA: T = {
 
   // upto scheme
   'upto.title':   'exactスキームの限界 → uptoによる解決',
-  'upto.p1':      '当初のexactスキームは、リクエスト前に金額を確定させる必要があった。しかしLLM推論・帯域幅課金・GPU使用時間など、AIインフラのコストは実行完了後にしか確定しない。',
-  'upto.p2':      '2026年4月に導入されたuptoスキームはこの制約を解消する。クライアントが事前に「上限額」にオフチェーン署名（ガスコストゼロ）し、サービス完了後にサーバーが実使用量ベースの金額のみを決済する。Permit2コントラクトが上限超過を技術的に不可能にする。',
+  'upto.p1':      '当初のexactスキームは、リクエスト前に金額を確定させる必要がありました。しかしLLM推論・帯域幅課金・GPU使用時間など、AIインフラのコストは実行完了後にしか確定しません。',
+  'upto.p2':      '2026年4月に導入されたuptoスキームはこの制約を解消します。クライアントが事前に「上限額」にオフチェーン署名（ガスコストゼロ）し、サービス完了後にサーバーが実使用量ベースの金額のみを決済します。Permit2コントラクトが上限超過を技術的に不可能にします。',
   'upto.example': '例: エージェントが最大$5.00を承認 → サーバーが$0.42のみ決済（21,000トークン消費ベース）',
-  'upto.p3':      'エスクロー方式と異なり、決済まで資金はウォレットに留まり流動性が維持される。並列APIコールが多いほど、この優位性が大きくなる。',
+  'upto.p3':      'エスクロー方式と異なり、決済まで資金はウォレットに留まり流動性が維持されます。並列APIコールが多いほど、この優位性が大きくなります。',
   'upto.link':    'uptoスキームの詳細 →',
 
   // MPP Session
   'mpp.session.title': 'MPPのSessionモード：LLMトークン課金に対応',
-  'mpp.session.body':  'MPPはChargeモード（1リクエスト1決済）に加え、Sessionモードを持つ。事前デポジット後はオフチェーンの署名済みバウチャーを提示するだけで決済が完結し、レイテンシはほぼゼロになる。LLMのトークン単位課金や、AIが複数APIを連続して叩くワークフローに特に有効だ。',
+  'mpp.session.body':  'MPPはChargeモード（1リクエスト1決済）に加え、Sessionモードを持ちます。事前デポジット後はオフチェーンの署名済みバウチャーを提示するだけで決済が完結し、レイテンシはほぼゼロになります。LLMのトークン単位課金や、AIが複数APIを連続して叩くワークフローに特に有効です。',
 
   // Use case table
   'usecase.table.title': 'どのシーンでx402が本命か',
@@ -170,7 +170,7 @@ const EN: T = {
   'members.title':   'Founding members',
 
   // x402 vs MPP
-  'x402mpp.title':      'x402 and MPP: the relationship',
+  'x402mpp.title':      'x402 or MPP: which to choose',
   'x402mpp.x402body':   'Born from HTTP 402 × Web3, focused on USDC payments on blockchain. An open standard under the Linux Foundation.',
   'x402mpp.mppbody':    'Inherits x402\'s philosophy while integrating Stripe (card), Tempo (stablecoin), and Lightning (BTC) under one interface. IETF draft submitted. Broader payment rail coverage as the newer standard.',
   'x402mpp.conclusion': '→ Stripe supports both MPP and x402. Different layers, both public goods.',
@@ -179,14 +179,14 @@ const EN: T = {
 
   // Protocol
   'protocol.title': 'What is x402?',
-  'protocol.honryo.title': 'Where x402 shines: the API economy plumbing',
+  'protocol.honryo.title': 'Where x402 shines: the API economy pipeline',
   'protocol.honryo.body':  'Almost every real-world x402 use case is "software buying from software."',
   'protocol.honryo.l1':    'API calls and data fetching on a per-request basis',
   'protocol.honryo.l2':    'LLM inference billed per token',
   'protocol.honryo.l3':    'Scraping APIs billed per request',
   'protocol.honryo.l4':    'Headless browser sessions billed per session',
   'protocol.honryo.note':  'LangChain, CrewAI, and the Claude MCP ecosystem already ship x402 payment adapters by default. When an agent hits a 402 response, it automatically checks wallet balance and settles.',
-  'protocol.conclusion':   'x402 = the plumbing between AI agents and API services. Same as TCP/IP.',
+  'protocol.conclusion':   'x402 = the pipeline between AI agents and API services. Same as TCP/IP.',
   'protocol.flow.title':   'AI agent payment flow',
   'pf.1': 'User tops up with fiat',
   'pf.2': 'Auto-swap to USDC',
