@@ -147,8 +147,206 @@
     </div>
   </section>
 
+  <!-- ── Features / Use cases ──────────────────────────────────── -->
+  <section id="features" class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">USE CASES</p>
+      <h2 class="section-title" data-i18n="features.title">ユースケース</h2>
+
+      <!-- パラダイム対比 -->
+      <div class="paradigm-split">
+        <div class="paradigm-card paradigm-old">
+          <p class="paradigm-badge" data-i18n="paradigm.old.label">現在の主流</p>
+          <h3 data-i18n="paradigm.old.title">「人間の代わりに注文」</h3>
+          <p data-i18n-html="paradigm.old.desc">クレカ × AIエージェント<br>EC・小売・代行購入</p>
+          <p class="paradigm-example" data-i18n="paradigm.old.example">GAP × Gemini × Google Pay など</p>
+        </div>
+        <div class="paradigm-arrow">→</div>
+        <div class="paradigm-card paradigm-new">
+          <p class="paradigm-badge" data-i18n="paradigm.new.label">新しいレイヤー</p>
+          <h3 data-i18n="paradigm.new.title">「自律的な購入」</h3>
+          <p data-i18n-html="paradigm.new.desc">x402 × MCP × Agent Wallet<br>APIリソースの自律調達</p>
+          <p class="paradigm-example" data-i18n="paradigm.new.example">AIが仕事に必要なリソースを自ら買う</p>
+        </div>
+      </div>
+
+      <!-- AIエージェントがx402で買えるもの -->
+      <div class="agent-buy-wrap">
+        <h3 data-i18n="agent.buy.title">AIエージェントがx402で買えるもの</h3>
+        <table class="agent-buy-table">
+          <tbody>
+            <tr><td data-i18n="agent.buy.cat1">APIコール</td><td data-i18n="agent.buy.ex1">LLM推論、検索、翻訳、OCRなど</td></tr>
+            <tr><td data-i18n="agent.buy.cat2">データ</td><td data-i18n="agent.buy.ex2">リアルタイム情報、金融データ、空撮データフィード</td></tr>
+            <tr><td data-i18n="agent.buy.cat3">コンテンツ</td><td data-i18n="agent.buy.ex3">有料記事、レポート、画像・動画</td></tr>
+            <tr><td data-i18n="agent.buy.cat4">コンピュート</td><td data-i18n="agent.buy.ex4">GPUジョブ、ヘッドレスブラウザ処理</td></tr>
+            <tr><td data-i18n="agent.buy.cat5">ツール実行</td><td data-i18n="agent.buy.ex5">Webスクレイピング、ブラウザ操作</td></tr>
+            <tr><td data-i18n="agent.buy.cat6">ストレージ/CDN</td><td data-i18n="agent.buy.ex6">ファイル保存・取得</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 5つのユースケースカード -->
+      <div class="usecase-cards">
+        <div class="uc-card">
+          <div class="uc-num">01</div>
+          <h3 data-i18n="uc.1.title">APIコール・マイクロ課金</h3>
+          <p data-i18n="uc.1.body">Claude Code・LangChain・CrewAIはx402ペイメントアダプターを標準搭載しています。エージェントが402レスポンスを受け取ると、Agent Walletの残高を自動確認して支払い、即座にリトライします。月額固定費も事前登録も必要ありません。</p>
+          <div class="code-block uc-code">
+            <div class="code-header">
+              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
+              <span class="code-title">MCP + x402</span>
+            </div>
+            <pre><code><span class="c-dim">// MCP Server（x402クライアント）</span>
+import { wrapAxiosWithPayment } from <span class="c-green">'@x402/axios'</span>
+import { x402Client } from <span class="c-green">'@x402/core/client'</span>
+
+const client = new x402Client()
+registerExactEvmScheme(client, { signer: agentWallet.signer })
+
+<span class="c-dim">// 402に当たると自動で支払い→リトライ</span>
+const http = wrapAxiosWithPayment(axios.create(), client)
+server.tool(<span class="c-green">'fetch_paid_data'</span>, async ({ url }) =&gt; {
+  return (await http.get(url)).data
+})</code></pre>
+          </div>
+        </div>
+
+        <div class="uc-card">
+          <div class="uc-num">02</div>
+          <h3 data-i18n="uc.2.title">登録・APIキー不要のデータ取得</h3>
+          <p data-i18n="uc.2.body">APIキーは「誰が叩いているか」を識別しますが、エージェントが何百ものサービスを同時利用するとき管理が破綻します。x402は「支払われているか」だけを問います。ウォレット残高さえあれば即アクセス——オンボーディング不要。</p>
+        </div>
+
+        <div class="uc-card">
+          <div class="uc-num">03</div>
+          <h3 data-i18n="uc.3.title">物理サービスへの自律決済</h3>
+          <p data-i18n="uc.3.body">PostalFormの事例：Claude Codeが確定申告書を作成し、x402経由で$3.80を支払い、郵便局に送付——すべて人間の操作なしに完了しました。x402はAPIの外、リアルワールドのサービスへの自律決済も可能にします。</p>
+          <div class="code-block uc-code">
+            <div class="code-header">
+              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
+              <span class="code-title">PostalForm × x402</span>
+            </div>
+            <pre><code><span class="c-dim">// Claude Codeが自律実行</span>
+<span class="c-gold">1.</span> 確定申告書 PDF 生成
+<span class="c-gold">2.</span> POST /mail/send
+   <span class="c-gold">← 402</span> amount: <span class="c-green">$3.80 USDC</span>
+<span class="c-gold">3.</span> x402 ウォレットが自動決済
+<span class="c-gold">4.</span> <span class="c-green">200 OK</span> → 郵便局へ送付完了</code></pre>
+          </div>
+        </div>
+
+        <div class="uc-card">
+          <div class="uc-num">04</div>
+          <h3 data-i18n="uc.4.title">Agent Wallet × Policy Engine</h3>
+          <p data-i18n="uc.4.body">Policy Engineでエージェントの支出を細かく制御できます。1トランザクション上限・加盟店許可リスト・時間あたり予算・監査ログをすべて搭載。solana.newではAgent Walletを標準スキルとして提供しており、Claude Codeのプロンプト1行で生成できます。</p>
+          <div class="code-block uc-code">
+            <div class="code-header">
+              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
+              <span class="code-title">Policy Engine</span>
+            </div>
+            <pre><code>const wallet = new AgentWallet({
+  policy: {
+    maxAmountPerTx: <span class="c-green">1.00</span>,   <span class="c-dim">// 1回 $1 まで</span>
+    dailyLimit:     <span class="c-green">10.00</span>,  <span class="c-dim">// 1日 $10 まで</span>
+    allowedMerchants: [<span class="c-green">'0xAbCd...PostalForm'</span>],
+  },
+})
+<span class="c-dim">// 全アクションを監査ログに記録</span>
+const log = await wallet.getAuditLog()</code></pre>
+          </div>
+        </div>
+
+        <div class="uc-card">
+          <div class="uc-num">05</div>
+          <h3 data-i18n="uc.5.title">APAC向けAPI事業者のx402対応</h3>
+          <p data-i18n="uc.5.body">x402対応APIは、AIエージェントから自動的に購入されます。StripeダッシュボードからONにするだけで、LangChain・CrewAI・Claude MCPの何百万ものエージェントから見つかるようになります。x402 Inc.は日本・APAC地域の事業者の対応を支援しています。</p>
+        </div>
+      </div>
+
+      <!-- x402 or MPP -->
+      <div class="x402-mpp">
+        <h3 data-i18n="x402mpp.title">x402 or MPP——どちらを選ぶか</h3>
+        <div class="x402-mpp-grid">
+          <div class="x402-mpp-col">
+            <p class="x402-mpp-label">x402</p>
+            <p data-i18n="x402mpp.x402body">HTTP 402 × Web3の文脈で生まれ、ブロックチェーン上のUSDC決済にフォーカス。Linux Foundation傘下のオープンスタンダード。</p>
+          </div>
+          <div class="x402-mpp-col">
+            <p class="x402-mpp-label">MPP</p>
+            <p data-i18n="x402mpp.mppbody">x402の思想を継承しつつ、Stripe（カード）・Tempo（ステーブルコイン）・Lightning（BTC）を1つのインターフェースで統合。IETFにドラフト提出済み。後発なだけあってより広範な決済レールをカバーします。</p>
+          </div>
+        </div>
+        <p class="x402-mpp-conclusion" data-i18n="x402mpp.conclusion">→ StripeはMPPとx402の両方をサポートしています。レイヤーが違うだけで、どちらも公共財です。</p>
+        <div class="x402-mpp-risk">
+          <h4 data-i18n="x402mpp.risk.title">MPP吸収リスクとLinux Foundation独立性</h4>
+          <p data-i18n="x402mpp.risk.body">MPPがx402を完全に吸収するシナリオはゼロではありません。StripeとTempoがMPPにx402の機能を全部取り込んで「x402は不要」になる可能性はあります。ただし、Linux Foundation傘下のオープンスタンダードという性質上、特定プラットフォームに依存したくない開発者がx402を選び続ける理由は残ります。HTTPがAOLに勝ったように、オープンな標準は長期的に生き残りやすいです。</p>
+        </div>
+      </div>
+
+      <!-- シナリオ別テーブル -->
+      <div class="usecase-table-wrap">
+        <h3 data-i18n="usecase.table.title">x402 or MPP——どちらが最適か</h3>
+        <table class="usecase-table">
+          <thead>
+            <tr>
+              <th data-i18n="usecase.th.usecase">ユースケース</th>
+              <th data-i18n="usecase.th.solution">最適な方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="usecase.row1.case">ECショッピング・AIによる代行注文</td>
+              <td><span class="sol-tag sol-alt" data-i18n="usecase.row1.sol">クレカ × AIエージェント（現在主流）</span></td>
+            </tr>
+            <tr class="usecase-highlight">
+              <td data-i18n="usecase.row2.case">APIコール・マイクロ課金</td>
+              <td><span class="sol-tag sol-main" data-i18n="usecase.row2.sol">x402</span></td>
+            </tr>
+            <tr class="usecase-highlight">
+              <td data-i18n="usecase.row3.case">物理サービスへの自律決済（PostalForm等）</td>
+              <td><span class="sol-tag sol-main" data-i18n="usecase.row3.sol">x402</span></td>
+            </tr>
+            <tr class="usecase-highlight">
+              <td data-i18n="usecase.row4.case">予算付き複数サービス自律運用</td>
+              <td><span class="sol-tag sol-main" data-i18n="usecase.row4.sol">x402 + Policy Engine</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="usecase.row5.case">LLMトークン単位の高頻度課金</td>
+              <td><span class="sol-tag sol-mpp" data-i18n="usecase.row5.sol">MPP Sessionモード</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 普及の3経路 -->
+      <div class="growth-section">
+        <h3 data-i18n="growth.title">x402が普及する3つの経路</h3>
+        <div class="growth-grid">
+          <div class="growth-card">
+            <p class="growth-num">01</p>
+            <h4 data-i18n="growth.1.title">Stripe両対応</h4>
+            <p data-i18n="growth.1.body">StripeはMPPとx402をどちらも統合。クリプトを知らない加盟店がx402対応APIのセラーになれる経路が開かれます。</p>
+          </div>
+          <div class="growth-card">
+            <p class="growth-num">02</p>
+            <h4 data-i18n="growth.2.title">Visa ICC 4プロトコル対応</h4>
+            <p data-i18n="growth.2.body">VisaのInteroperable Commerce CloudがMPP・ACP・UCP・TAPを全対応。加盟店はVisaを使うだけでx402エコシステムに接続されます。</p>
+          </div>
+          <div class="growth-card">
+            <p class="growth-num">03</p>
+            <h4 data-i18n="growth.3.title">AIエージェントが強制普及</h4>
+            <p data-i18n="growth.3.body">LangChain・CrewAI・Claude MCPはすでにx402アダプターを標準搭載。エージェントが普及するほどx402対応APIへの需要が増え、開発者は「対応しないと売れない」状況になっていきます。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- まとめ -->
+      <p class="usecase-conclusion" data-i18n="usecase.conclusion">クレカ×AIエージェントによる代行注文が引き続き主流です。x402×MCPはその一段下——AIが仕事に必要なAPIリソースを自律的に調達するという、新しいレイヤーのユースケースを生み出しています。</p>
+    </div>
+  </section>
+
   <!-- ── How it works ──────────────────────────────────────────── -->
-  <section id="how" class="section section-dark">
+  <section id="how" class="section">
     <div class="container">
       <p class="eyebrow">HOW IT WORKS</p>
       <h2 class="section-title" data-i18n="how.title">仕組み</h2>
@@ -212,7 +410,7 @@ app.get(<span class="c-green">'/premium-data'</span>,
   </section>
 
   <!-- ── Foundation ────────────────────────────────────────────── -->
-  <section id="foundation" class="section">
+  <section id="foundation" class="section section-dark">
     <div class="container">
       <p class="eyebrow">FOUNDATION</p>
       <h2 class="section-title">x402 Foundation</h2>
@@ -258,26 +456,7 @@ app.get(<span class="c-green">'/premium-data'</span>,
             <p data-i18n="why.tcpip.body">「公式」ネットワーク標準（OSI）は、完璧さよりも広く採用されたオープン版に敗れました。標準への合意は完璧な標準よりも多くの価値を生みます。</p>
           </div>
         </div>
-        <p class="why-conclusion" data-i18n="why.conclusion">1つの企業がエージェントのトランザクション層を支配する代わりに—x402はその代替を提供します。誰でも参加でき、誰も締め出されない。</p>
-      </div>
-      <!-- x402 vs MPP -->
-      <div class="x402-mpp">
-        <h3 data-i18n="x402mpp.title">x402 と MPP の関係</h3>
-        <div class="x402-mpp-grid">
-          <div class="x402-mpp-col">
-            <p class="x402-mpp-label">x402</p>
-            <p data-i18n="x402mpp.x402body">HTTP 402 × Web3の文脈で生まれ、ブロックチェーン上のUSDC決済にフォーカス。Linux Foundation傘下のオープンスタンダード。</p>
-          </div>
-          <div class="x402-mpp-col">
-            <p class="x402-mpp-label">MPP</p>
-            <p data-i18n="x402mpp.mppbody">x402の思想を継承しつつ、Stripe（カード）・Tempo（ステーブルコイン）・Lightning（BTC）を1つのインターフェースで統合。IETFにドラフト提出済み。後発なだけあってより広範な決済レールをカバーする。</p>
-          </div>
-        </div>
-        <p class="x402-mpp-conclusion" data-i18n="x402mpp.conclusion">→ StripeはMPPとx402の両方をサポートしている。レイヤーが違うだけで、どちらも公共財だ。</p>
-        <div class="x402-mpp-risk">
-          <h4 data-i18n="x402mpp.risk.title">MPP吸収リスクとLinux Foundation独立性</h4>
-          <p data-i18n="x402mpp.risk.body">MPPがx402を完全に吸収するシナリオはゼロではありません。StripeとTempoがMPPにx402の機能を全部取り込んで「x402は不要」になる可能性はあります。ただし、Linux Foundation傘下のオープンスタンダードという性質上、特定プラットフォームに依存したくない開発者がx402を選び続ける理由は残ります。HTTPがAOLに勝ったように、オープンな標準は長期的に生き残りやすい。</p>
-        </div>
+        <p class="why-conclusion" data-i18n="why.conclusion">1つの企業がエージェントのトランザクション層を支配する代わりに—x402はその代替を提供します。誰でも参加でき、誰も締め出されません。</p>
       </div>
       <div class="members-section">
         <p class="members-title" data-i18n="members.title">創設メンバー</p>
@@ -305,104 +484,6 @@ app.get(<span class="c-green">'/premium-data'</span>,
           <span class="member">Stripe</span>
           <span class="member">Thirdweb</span>
           <span class="member">Visa</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Features / Use cases ──────────────────────────────────── -->
-  <section id="features" class="section">
-    <div class="container">
-      <p class="eyebrow">USE CASES</p>
-      <h2 class="section-title" data-i18n="features.title">ユースケース</h2>
-      <!-- ユースケーステーブル -->
-      <div class="usecase-table-wrap">
-        <h3 data-i18n="usecase.table.title">どのシーンでx402が本命か</h3>
-        <table class="usecase-table">
-          <thead>
-            <tr>
-              <th data-i18n="usecase.th.usecase">ユースケース</th>
-              <th data-i18n="usecase.th.solution">最適なソリューション</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-i18n="usecase.row1.case">普通の買い物 → エージェント代行購入</td>
-              <td><span class="sol-tag sol-alt" data-i18n="usecase.row1.sol">Stripe MPP / Visa ICC</span></td>
-            </tr>
-            <tr class="usecase-highlight">
-              <td data-i18n="usecase.row2.case">APIコール・マイクロ課金</td>
-              <td><span class="sol-tag sol-main" data-i18n="usecase.row2.sol">x402</span></td>
-            </tr>
-            <tr class="usecase-highlight">
-              <td data-i18n="usecase.row3.case">予算付きエージェント × 複数サービス</td>
-              <td><span class="sol-tag sol-main" data-i18n="usecase.row3.sol">x402が本命（加盟店普及待ち）</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="usecase.row4.case">LLMトークン単位の高頻度課金</td>
-              <td><span class="sol-tag sol-mpp" data-i18n="usecase.row4.sol">MPP Sessionモード</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3 data-i18n="feature.1.title">AIエージェント間決済</h3>
-          <p data-i18n="feature.1.body">自律型AIエージェントが人間の介在なしにリアルタイムで決済。API呼び出しごとに自動的に課金・支払いが完結します。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">✦</div>
-          <h3 data-i18n="feature.2.title">マイクロペイメント</h3>
-          <p data-i18n="feature.2.body">0.001円単位の超小額決済が可能。記事1本、楽曲1曲、データ1件ごとの柔軟な課金モデルを実現します。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">◎</div>
-          <h3 data-i18n="feature.3.title">コンテンツ収益化</h3>
-          <p data-i18n="feature.3.body">サブスクリプション不要。読んだ記事、視聴したコンテンツに対してのみ支払う、公正な収益化モデル。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⬡</div>
-          <h3 data-i18n="feature.4.title">API マネタイズ</h3>
-          <p data-i18n="feature.4.body">APIアクセスに対してリクエスト単位で課金。従量制の柔軟なビジネスモデルを簡単に構築できます。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">↗</div>
-          <h3 data-i18n="feature.5.title">クロスボーダー決済</h3>
-          <p data-i18n="feature.5.body">国境を越えた即時送金。従来の国際送金の複雑さと高コストを排除し、シームレスなグローバル取引を実現。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⊕</div>
-          <h3 data-i18n="feature.6.title">IoT・機械間取引</h3>
-          <p data-i18n="feature.6.body">スマートデバイスが自律的に電力・データ・サービスを売買。M2M経済の新しい基盤を提供します。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⬡</div>
-          <h3 data-i18n="feature.7.title">マシン経済のインフラ</h3>
-          <p data-i18n="feature.7.body">AIが検索・要約・画像生成を一連でこなす際、背後で複数のAPIにx402/MPPで数セントずつ自律的に支払う。ユーザーはプロトコルを意識しない——TCP/IPと同じように。</p>
-        </div>
-      </div>
-
-      <!-- x402が普及する3つの経路 -->
-      <div class="growth-section">
-        <h3 data-i18n="growth.title">x402が普及する3つの経路</h3>
-        <div class="growth-grid">
-          <div class="growth-card">
-            <p class="growth-num">01</p>
-            <h4 data-i18n="growth.1.title">Stripe両対応</h4>
-            <p data-i18n="growth.1.body">StripeはMPPとx402をどちらも統合。クリプトを知らない加盟店がx402対応APIのセラーになれる経路が開かれます。</p>
-          </div>
-          <div class="growth-card">
-            <p class="growth-num">02</p>
-            <h4 data-i18n="growth.2.title">Visa ICC 4プロトコル対応</h4>
-            <p data-i18n="growth.2.body">VisaのInteroperable Commerce CloudがMPP・ACP・UCP・TAPを全対応。加盟店はVisaを使うだけでx402エコシステムに接続されます。</p>
-          </div>
-          <div class="growth-card">
-            <p class="growth-num">03</p>
-            <h4 data-i18n="growth.3.title">AIエージェントが強制普及</h4>
-            <p data-i18n="growth.3.body">LangChain・CrewAI・Claude MCPはすでにx402アダプターを標準搭載。エージェントが普及するほどx402対応APIへの需要が増え、開発者は「対応しないと売れない」状況になっていきます。</p>
-          </div>
         </div>
       </div>
     </div>
