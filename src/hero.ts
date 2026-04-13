@@ -29,23 +29,23 @@ const MAX_POOL  = 300  // pre-allocated line element pool
 // ── Body text ─────────────────────────────────────────────────────────────────
 
 const BODY_TEXT_JA =
-  'x402はAIエージェントとAPIサービスの間に流れる配管だ。TCP/IPと同じように、' +
-  '誰も意識しないが全員が使っている。HTTPの402ステータスコードは1997年に予約' +
-  'されたまま30年近く眠っていた。Coinbase、Cloudflare、Stripeが叩き起こし、' +
-  'Linux Foundation傘下のオープンスタンダードとして動き出した。サーバーが402を' +
-  '返したとき、クライアントは自動的に支払いを完了してリクエストを再試行する。' +
-  '人間でもAIエージェントでも、フォームも手続きも要らない。ECサイトには既存の' +
-  '決済で十分だ。しかしAPIコールに値段をつけ、エージェントが何百ものサービスを' +
-  '自律的に利用するシナリオでは、x402が唯一の現実解になる。LangChain・CrewAI・' +
-  'Claude MCPはすでにx402アダプターを標準搭載している。エージェントが普及する' +
-  'ほど、x402対応APIへの需要が増える。開発者は対応しないと「エージェントから' +
-  '買ってもらえない」状況になっていく。StripeはMPPとx402の両方をサポートし、' +
-  'Visa ICCは4プロトコルを全対応している。「x402 = クリプトユーザーが意識的に' +
-  '選ぶ決済手段」という認識は間違いだ。正しくは「x402 = インフラ」だ。私たち' +
-  'x402 Inc.は、この配管を日本に引く。'
+  'x402はAIエージェントとAPIサービスの間に流れるパイプラインです。TCP/IPと同じように、' +
+  '誰も意識しないが全員が使っています。HTTPの402ステータスコードは1997年に予約' +
+  'されたまま30年近く眠っていました。Coinbase、Cloudflare、Stripeが叩き起こし、' +
+  'Linux Foundation傘下のオープンスタンダードとして動き出しました。サーバーが402を' +
+  '返したとき、クライアントは自動的に支払いを完了してリクエストを再試行します。' +
+  '人間でもAIエージェントでも、フォームも手続きも要りません。ECサイトには既存の' +
+  '決済で十分です。しかしAPIコールに値段をつけ、エージェントが何百ものサービスを' +
+  '自律的に利用するシナリオでは、x402が唯一の現実解になります。LangChain・CrewAI・' +
+  'Claude MCPはすでにx402アダプターを標準搭載しています。エージェントが普及する' +
+  'ほど、x402対応APIへの需要が増えます。開発者は対応しないと「エージェントから' +
+  '買ってもらえない」状況になっていきます。StripeはMPPとx402の両方をサポートし、' +
+  'Visa ICCは4プロトコルを全対応しています。「x402 = クリプトユーザーが意識的に' +
+  '選ぶ決済手段」という認識は間違いです。正しくは「x402 = インフラ」です。私たち' +
+  'x402 Inc.は、このパイプラインを日本に引きます。'
 
 const BODY_TEXT_EN =
-  'x402 is the plumbing between AI agents and API services. Like TCP/IP, nobody ' +
+  'x402 is the pipeline between AI agents and API services. Like TCP/IP, nobody ' +
   'thinks about it—everyone uses it. HTTP\'s 402 status code sat reserved since ' +
   '1997, dormant for nearly thirty years. Coinbase, Cloudflare, and Stripe woke ' +
   'it up. Now it\'s an open standard under the Linux Foundation. When a server ' +
@@ -56,7 +56,7 @@ const BODY_TEXT_EN =
   'already ship x402 adapters by default. As agents proliferate, demand for x402-' +
   'enabled APIs grows. Stripe supports both MPP and x402. Visa ICC backs all four ' +
   'protocols. The frame "x402 = crypto-native payment choice" is wrong. The correct ' +
-  'frame: "x402 = infrastructure." We are x402 Inc. We are laying this pipe in Japan.'
+  'frame: "x402 = infrastructure." We are x402 Inc. We are laying this pipeline in Japan.'
 
 let currentBodyText = BODY_TEXT_JA
 
