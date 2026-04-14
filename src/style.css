@@ -1658,4 +1658,41 @@ blockquote cite {
   .usecase-cards {
     grid-template-columns: 1fr;
   }
+  /* growth-grid and protocol-extra are defined after main media queries, so override here */
+  .growth-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .protocol-extra {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  /* code blocks: prevent card overflow, enable touch-scroll */
+  .uc-card {
+    padding: 24px 20px;
+    overflow: hidden;
+  }
+  .uc-code .code-block {
+    max-width: 100%;
+  }
+  .uc-code .code-block pre {
+    font-size: 11px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* code block in Foundation / how-it-works */
+  .code-block pre {
+    font-size: 11.5px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* usecase table: allow horizontal scroll on mobile */
+  .usecase-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .usecase-table {
+    min-width: 480px;
+  }
 }
