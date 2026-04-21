@@ -29,34 +29,61 @@ const MAX_POOL  = 300  // pre-allocated line element pool
 // ── Body text ─────────────────────────────────────────────────────────────────
 
 const BODY_TEXT_JA =
-  'x402はAIエージェントとAPIサービスの間に流れるパイプラインです。TCP/IPと同じように、' +
-  '誰も意識しないが全員が使っています。HTTPの402ステータスコードは1997年に予約' +
-  'されたまま30年近く眠っていました。Coinbase、Cloudflare、Stripeが叩き起こし、' +
-  'Linux Foundation傘下のオープンスタンダードとして動き出しました。サーバーが402を' +
-  '返したとき、クライアントは自動的に支払いを完了してリクエストを再試行します。' +
-  '人間でもAIエージェントでも、フォームも手続きも要りません。ECサイトには既存の' +
-  '決済で十分です。しかしAPIコールに値段をつけ、エージェントが何百ものサービスを' +
-  '自律的に利用するシナリオでは、x402が唯一の現実解になります。LangChain・CrewAI・' +
-  'Claude MCPはすでにx402アダプターを標準搭載しています。エージェントが普及する' +
-  'ほど、x402対応APIへの需要が増えます。開発者は対応しないと「エージェントから' +
-  '買ってもらえない」状況になっていきます。StripeはMPPとx402の両方をサポートし、' +
-  'Visa ICCは4プロトコルを全対応しています。「x402 = クリプトユーザーが意識的に' +
-  '選ぶ決済手段」という認識は間違いです。正しくは「x402 = インフラ」です。私たち' +
-  'x402 Inc.は、このパイプラインを日本に引きます。'
+  'エージェンティックコマースの習熟度は、現在レベル1〜2です。Stripeが東京のイベントで' +
+  '提示したフレームによれば、レベル1は「フォームへの入力代行」、レベル2は「文脈による' +
+  '検索と意思決定支援」。この段階では、Visa・Mastercard・American Expressが主導する' +
+  '既存カードネットワークが市場の主軸です。GAP × Gemini × Google Payのように、AIが' +
+  '人間の代わりにECで注文する体験はすでに動いています。最終的な決済はVisaNetを通ります。' +
+  'レベル4「判断の委譲」に到達したとき、構造が変わります。「予算1万円以内で揃えて」と' +
+  '指示するだけでAIが自律的に購入を完結させる世界では、エージェントはフォームを埋められ' +
+  'ないし、クレジットカードを持てない。しかしUSDCの署名はできます。American Expressは' +
+  '2026年4月、AIエージェントが購買をミスした場合にAmexが費用を負担するAgent Purchase' +
+  ' Protectionを発表しました。Visaは「AIマレット戦略」としてフロント側に既存カード' +
+  'ネットワーク、バックエンド側にステーブルコインという二層構造を提唱しています。' +
+  'Mastercardはエージェントへの権限委譲を保証するAgent Payを主要金融機関に展開済みです。' +
+  '「カードかステーブルコインか」という二項対立はすでに終わっています。x402とMPP' +
+  '（Machine Payments Protocol）は、この構造の「下の配管」として機能します。x402は' +
+  'HTTP 402ステータスコードに決済を乗せ、エージェントが1リクエスト・1決済・1完結で' +
+  '自律的にAPIリソースを調達できるようにします。MPPはStripe × TempoによってIETFに' +
+  '標準提案され、カード・ステーブルコイン・Lightningを1つのインターフェースで統合します。' +
+  'LangChain・CrewAI・Claude MCPはすでにx402アダプターを標準搭載しており、エージェント' +
+  'が普及するほどx402対応APIへの需要が増えます。Fireblocksが指摘するように、クレジット' +
+  'カードは1日5回スワイプする人間のために設計されました。エージェントは数百万件の取引を' +
+  '処理します。AgentCashは1つの残高で250以上のAPIへのアクセスを提供し、Meowはエージェント' +
+  'が自律的に法人口座を開設できる仕組みを実装しました。Worldは虹彩スキャンによる生体認証' +
+  'でエージェントの背後に実在する人間を証明し、シビル攻撃を防ぎます。日本のAPIエコノミー' +
+  'では、x402 Bazaarに登録された70以上のエンドポイントがほぼすべて英語圏のものです。' +
+  '世界中のAIエージェントがBazaar経由でAPIを自律発見するとき、日本のデータが取得できない' +
+  '空白が続いています。APIキーは「誰が叩いているか」を問う。x402は「支払われているか」' +
+  'を問う。この問いの転換が起きている今、私たちx402 Inc.はこの配管を日本・APACに引きます。'
 
 const BODY_TEXT_EN =
-  'x402 is the pipeline between AI agents and API services. Like TCP/IP, nobody ' +
-  'thinks about it—everyone uses it. HTTP\'s 402 status code sat reserved since ' +
-  '1997, dormant for nearly thirty years. Coinbase, Cloudflare, and Stripe woke ' +
-  'it up. Now it\'s an open standard under the Linux Foundation. When a server ' +
-  'returns 402, the client—human or AI agent—automatically settles the payment ' +
-  'and retries. No forms, no friction. Existing payment rails handle commerce just ' +
-  'fine. But when APIs have prices and agents autonomously use hundreds of services ' +
-  'at once, x402 is the only realistic solution. LangChain, CrewAI, and Claude MCP ' +
-  'already ship x402 adapters by default. As agents proliferate, demand for x402-' +
-  'enabled APIs grows. Stripe supports both MPP and x402. Visa ICC backs all four ' +
-  'protocols. The frame "x402 = crypto-native payment choice" is wrong. The correct ' +
-  'frame: "x402 = infrastructure." We are x402 Inc. We are laying this pipeline in Japan.'
+  'Agentic commerce is at Level 1–2. According to Stripe\'s framework presented in Tokyo, ' +
+  'Level 1 is automated form-filling; Level 2 is contextual search and decision support. ' +
+  'At this stage, the market is anchored by Visa, Mastercard, and American Express. ' +
+  'GAP × Gemini × Google Pay already works — AI ordering on behalf of humans, settled ' +
+  'through VisaNet. This is the current mainstream, and it will remain so. Level 4 changes ' +
+  'the structure. In a world where "buy everything under ¥10,000" executes autonomously, ' +
+  'agents can\'t fill out forms. They can\'t hold credit cards. But they can sign USDC ' +
+  'transactions. American Express launched Agent Purchase Protection in April 2026 — Amex ' +
+  'covers costs when an AI agent makes a purchasing mistake. Visa\'s "AI Mullet" strategy ' +
+  'places existing card networks at the front, stablecoins at the back. Mastercard Agent Pay, ' +
+  'already deployed across major financial institutions, provides cryptographic proof of ' +
+  'delegated authority. The binary of "card or stablecoin" is over. x402 and MPP (Machine ' +
+  'Payments Protocol) operate as the plumbing beneath this structure. x402 embeds payment ' +
+  'into HTTP 402, enabling agents to autonomously procure API resources in a single ' +
+  'request-pay-complete cycle. MPP, co-developed by Stripe and Tempo and submitted to the ' +
+  'IETF, unifies cards, stablecoins, and Lightning under one interface. LangChain, CrewAI, ' +
+  'and Claude MCP ship x402 adapters as standard. As agents proliferate, demand for x402-' +
+  'enabled APIs grows. As Fireblocks observed: credit cards were designed for humans who ' +
+  'swipe five times a day. Agents process millions of transactions. AgentCash gives one ' +
+  'balance access to 250+ APIs. Meow lets agents open corporate bank accounts autonomously. ' +
+  'World uses iris biometrics to prove a real human stands behind each agent, preventing ' +
+  'Sybil attacks. In Japan\'s API ecosystem, virtually all 70+ endpoints in the x402 Bazaar ' +
+  'are English-language services. When AI agents worldwide discover APIs autonomously through ' +
+  'Bazaar, Japanese data simply doesn\'t exist in that map. API keys ask: who is calling? ' +
+  'x402 asks: was it paid? This shift is happening now. x402 Inc. brings this infrastructure ' +
+  'to Japan and APAC.'
 
 let currentBodyText = BODY_TEXT_JA
 
