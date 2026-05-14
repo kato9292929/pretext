@@ -1699,6 +1699,13 @@ blockquote cite {
   .contact-cards {
     grid-template-columns: 1fr;
   }
+  .agent-buy-grid {
+    grid-template-columns: 1fr;
+  }
+  .vr-columns {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
 }
 
 /* ── Products section ──────────────────────────────────────────── */
@@ -1770,6 +1777,168 @@ blockquote cite {
 
 .product-link:hover {
   opacity: 0.75;
+}
+
+/* ── Products: intro & phase blocks ───────────────────────────── */
+.products-intro {
+  font-size: 15px;
+  color: var(--text-dim);
+  margin-top: 16px;
+  line-height: 1.75;
+}
+
+.phase-block {
+  margin-top: 64px;
+}
+
+.phase-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.phase-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  background: var(--gold-glow);
+  border: 1px solid var(--gold-dim);
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.phase-title {
+  font-size: 15px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.phase-block .products-grid {
+  margin-top: 24px;
+}
+
+/* Multiple product links per card */
+.product-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+/* ── Agent buy grid (updated) ──────────────────────────────────── */
+.agent-buy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.agent-buy-card {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--bg) 70%, var(--surface2) 30%);
+}
+
+.agent-buy-cat {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.agent-buy-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.agent-buy-card li {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.agent-buy-card li:last-child {
+  border-bottom: none;
+}
+
+.agent-buy-note {
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 500;
+  padding: 14px 20px;
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius);
+  background: var(--gold-glow);
+}
+
+/* ── Protocol extra single column ─────────────────────────────── */
+.protocol-extra--single {
+  grid-template-columns: 1fr;
+  max-width: 680px;
+}
+
+/* ── Vision & Research section ─────────────────────────────────── */
+.vr-columns {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.vr-col-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.vr-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vr-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface2) 50%, var(--bg) 50%);
+  transition: border-color var(--transition), background var(--transition);
+  text-decoration: none;
+}
+
+.vr-card:hover {
+  border-color: var(--gold-dim);
+  background: color-mix(in srgb, var(--surface2) 70%, var(--gold-glow) 30%);
+}
+
+.vr-card-title {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.vr-link {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 500;
+  opacity: 0.8;
 }
 
 /* ── Contact section ───────────────────────────────────────────── */
