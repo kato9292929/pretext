@@ -33,11 +33,10 @@
   <nav class="nav" id="nav">
     <a class="nav-logo" href="/">x402 <span>Inc.</span></a>
     <ul class="nav-links">
-      <li><a href="#about" data-i18n="nav.protocol">プロトコル</a></li>
-      <li><a href="#how" data-i18n="nav.how">仕組み</a></li>
       <li><a href="#features" data-i18n="nav.usecases">ユースケース</a></li>
       <li><a href="#products">プロダクト</a></li>
       <li><a href="#vision">Vision</a></li>
+      <li><a href="#about" data-i18n="nav.protocol">プロトコル</a></li>
     </ul>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="ja" aria-pressed="true">JP</button>
@@ -69,60 +68,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ── About / Protocol ──────────────────────────────────────── -->
-  <section id="about" class="section">
-    <div class="container">
-      <p class="eyebrow">PROTOCOL</p>
-      <h2 class="section-title" data-i18n="protocol.title">x402とは</h2>
-      <div class="about-grid">
-        <div class="about-lead">
-          <p data-i18n="protocol.p1">HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。</p>
-          <p data-i18n-html="protocol.p2">Coinbase、Cloudflare、Stripeが主導し、Linux Foundation傘下のx402 Foundationとして設立されたこのオープンスタンダードは、ウェブリクエストに支払いを直接組み込む普遍的な方法を定義します。製品ではなく、プラットフォームでもなく—<strong>公共財</strong>です。</p>
-          <p data-i18n="protocol.p3">サーバーが402を返したとき、クライアント（人間でもAIエージェントでも）は自動的に支払いを完了し、リクエストを再試行します。人間が毎回フォームを入力する必要はありません。</p>
-          <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener" data-i18n="protocol.cta">仕様を読む →</a>
-        </div>
-        <div class="about-code">
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-dot"></span>
-              <span class="code-dot"></span>
-              <span class="code-dot"></span>
-              <span class="code-title">HTTP Flow</span>
-            </div>
-            <pre><code><span class="c-dim">→</span> GET /api/data HTTP/1.1
-  Host: api.example.com
-
-<span class="c-gold">←</span> <span class="c-gold">HTTP/1.1 402 Payment Required</span>
-  X-Payment-Required: version=1
-  X-Payment-Amount: 0.001
-  X-Payment-Token: USDC
-
-<span class="c-dim">→</span> GET /api/data HTTP/1.1
-  X-Payment: &lt;signed_payload&gt;
-
-<span class="c-green">←</span> <span class="c-green">HTTP/1.1 200 OK</span>
-  Content-Type: application/json</code></pre>
-          </div>
-        </div>
-      </div>
-      <!-- x402の本領 -->
-      <div class="protocol-extra protocol-extra--single">
-        <div class="protocol-extra-block">
-          <h3 data-i18n="protocol.honryo.title">x402の本領：APIエコノミーの配管</h3>
-          <p data-i18n="protocol.honryo.body">x402が実際に使われているのは、ほぼすべてが「ソフトウェアがソフトウェアのサービスを買う」ユースケースです。</p>
-          <ul class="protocol-list">
-            <li data-i18n="protocol.honryo.l1">APIコール・データ取得の従量課金</li>
-            <li data-i18n="protocol.honryo.l2">LLM推論のトークン単位課金</li>
-            <li data-i18n="protocol.honryo.l3">スクレイピングAPIのリクエスト単位課金</li>
-            <li data-i18n="protocol.honryo.l4">ヘッドレスブラウザのセッション単位課金</li>
-          </ul>
-          <p data-i18n="protocol.honryo.note">LangChain・CrewAI・Claude MCPエコシステムはすでにx402ペイメントアダプターを標準搭載。エージェントが402レスポンスに当たると、自動的にウォレット残高を確認して支払います。</p>
-          <p class="protocol-conclusion" data-i18n="protocol.conclusion">x402 = AIエージェントとAPIサービスの間に流れる配管。TCP/IPと同じ。</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ── Products ─────────────────────────────────────────────── -->
   <section id="products" class="section">
@@ -436,150 +381,6 @@
         <p class="agent-buy-note">月額契約もAPIキーも不要。ウォレット残高があれば即アクセス。</p>
       </div>
 
-      <!-- 5つのユースケースカード -->
-      <div class="usecase-cards">
-        <div class="uc-card">
-          <div class="uc-num">01</div>
-          <h3 data-i18n="uc.1.title">APIコール・マイクロ課金</h3>
-          <p data-i18n="uc.1.body">Claude Code・LangChain・CrewAIはx402ペイメントアダプターを標準搭載しています。エージェントが402レスポンスを受け取ると、Agent Walletの残高を自動確認して支払い、即座にリトライします。月額固定費も事前登録も必要ありません。</p>
-          <div class="code-block uc-code">
-            <div class="code-header">
-              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-              <span class="code-title">MCP + x402</span>
-            </div>
-            <pre><code><span class="c-dim">// MCP Server（x402クライアント）</span>
-import { wrapAxiosWithPayment } from <span class="c-green">'@x402/axios'</span>
-import { x402Client } from <span class="c-green">'@x402/core/client'</span>
-
-const client = new x402Client()
-registerExactEvmScheme(client, { signer: agentWallet.signer })
-
-<span class="c-dim">// 402に当たると自動で支払い→リトライ</span>
-const http = wrapAxiosWithPayment(axios.create(), client)
-server.tool(<span class="c-green">'fetch_paid_data'</span>, async ({ url }) =&gt; {
-  return (await http.get(url)).data
-})</code></pre>
-          </div>
-        </div>
-
-        <div class="uc-card">
-          <div class="uc-num">02</div>
-          <h3 data-i18n="uc.2.title">登録・APIキー不要のデータ取得</h3>
-          <p data-i18n="uc.2.body">APIキーは「誰が叩いているか」を識別しますが、エージェントが何百ものサービスを同時利用するとき管理が破綻します。x402は「支払われているか」だけを問います。ウォレット残高さえあれば即アクセス——オンボーディング不要。</p>
-        </div>
-
-        <div class="uc-card">
-          <div class="uc-num">03</div>
-          <h3 data-i18n="uc.3.title">物理サービスへの自律決済</h3>
-          <p data-i18n="uc.3.body">PostalFormの事例：Claude Codeが確定申告書を作成し、x402経由で$3.80を支払い、郵便局に送付——すべて人間の操作なしに完了しました。x402はAPIの外、リアルワールドのサービスへの自律決済も可能にします。</p>
-          <div class="code-block uc-code">
-            <div class="code-header">
-              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-              <span class="code-title">PostalForm × x402</span>
-            </div>
-            <pre><code><span class="c-dim">// Claude Codeが自律実行</span>
-<span class="c-gold">1.</span> 確定申告書 PDF 生成
-<span class="c-gold">2.</span> POST /mail/send
-   <span class="c-gold">← 402</span> amount: <span class="c-green">$3.80 USDC</span>
-<span class="c-gold">3.</span> x402 ウォレットが自動決済
-<span class="c-gold">4.</span> <span class="c-green">200 OK</span> → 郵便局へ送付完了</code></pre>
-          </div>
-        </div>
-
-        <div class="uc-card">
-          <div class="uc-num">04</div>
-          <h3 data-i18n="uc.4.title">Agent Wallet × Policy Engine</h3>
-          <p data-i18n="uc.4.body">Policy Engineでエージェントの支出を細かく制御できます。1トランザクション上限・加盟店許可リスト・時間あたり予算・監査ログをすべて搭載。solana.newではAgent Walletを標準スキルとして提供しており、Claude Codeのプロンプト1行で生成できます。</p>
-          <div class="code-block uc-code">
-            <div class="code-header">
-              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-              <span class="code-title">Policy Engine</span>
-            </div>
-            <pre><code>const wallet = new AgentWallet({
-  policy: {
-    maxAmountPerTx: <span class="c-green">1.00</span>,   <span class="c-dim">// 1回 $1 まで</span>
-    dailyLimit:     <span class="c-green">10.00</span>,  <span class="c-dim">// 1日 $10 まで</span>
-    allowedMerchants: [<span class="c-green">'0xAbCd...PostalForm'</span>],
-  },
-})
-<span class="c-dim">// 全アクションを監査ログに記録</span>
-const log = await wallet.getAuditLog()</code></pre>
-          </div>
-        </div>
-
-        <div class="uc-card">
-          <div class="uc-num">05</div>
-          <h3 data-i18n="uc.5.title">APAC向けAPI事業者のx402対応</h3>
-          <p data-i18n="uc.5.body">x402対応APIは、AIエージェントから自動的に購入されます。StripeダッシュボードからONにするだけで、LangChain・CrewAI・Claude MCPの何百万ものエージェントから見つかるようになります。x402 Inc.は日本・APAC地域の事業者の対応を支援しています。</p>
-        </div>
-      </div>
-
-      <!-- まとめ -->
-      <p class="usecase-conclusion" data-i18n="usecase.conclusion">クレカ×AIエージェントによる代行注文が引き続き主流です。x402×MCPはその一段下——AIが仕事に必要なAPIリソースを自律的に調達するという、新しいレイヤーのユースケースを生み出しています。</p>
-    </div>
-  </section>
-
-  <!-- ── How it works ──────────────────────────────────────────── -->
-  <section id="how" class="section">
-    <div class="container">
-      <p class="eyebrow">HOW IT WORKS</p>
-      <h2 class="section-title" data-i18n="how.title">仕組み</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">01</div>
-          <h3 data-i18n="step.1.title">リクエスト</h3>
-          <p data-i18n="step.1.body">クライアント（人間またはAIエージェント）がHTTPリクエストを送信します。</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-number">02</div>
-          <h3 data-i18n="step.2.title">402レスポンス</h3>
-          <p data-i18n="step.2.body">サーバーが支払い条件（金額・通貨・アドレス）を含む402を返します。</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-number">03</div>
-          <h3 data-i18n="step.3.title">支払い実行</h3>
-          <p data-i18n="step.3.body">ブロックチェーン上でオンチェーン決済が自動的に完了します。</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-number">04</div>
-          <h3 data-i18n="step.4.title">アクセス付与</h3>
-          <p data-i18n="step.4.body">サーバーが支払いを確認し、200 OKでリソースを返します。</p>
-        </div>
-      </div>
-      <div class="how-note">
-        <p data-i18n-html="how.note">すべてのやり取りはHTTPの標準的な仕組みの上に構築されています。<br>既存のインフラを変更することなく、支払い機能を追加できます。</p>
-      </div>
-      <!-- upto scheme + MPP Session -->
-      <div class="how-extra">
-        <div class="how-extra-block">
-          <h3 data-i18n="upto.title">exactスキームの限界 → uptoによる解決</h3>
-          <p data-i18n="upto.p1">当初のexactスキームは、リクエスト前に金額を確定させる必要があった。しかしLLM推論・帯域幅課金・GPU使用時間など、AIインフラのコストは実行完了後にしか確定しない。</p>
-          <p data-i18n="upto.p2">2026年4月に導入されたuptoスキームはこの制約を解消する。クライアントが事前に「上限額」にオフチェーン署名（ガスコストゼロ）し、サービス完了後にサーバーが実使用量ベースの金額のみを決済する。Permit2コントラクトが上限超過を技術的に不可能にする。</p>
-          <p class="how-extra-example" data-i18n="upto.example">例: エージェントが最大$5.00を承認 → サーバーが$0.42のみ決済（21,000トークン消費ベース）</p>
-          <p data-i18n="upto.p3">エスクロー方式と異なり、決済まで資金はウォレットに留まり流動性が維持される。並列APIコールが多いほど、この優位性が大きくなる。</p>
-          <a href="https://note.com/x402inc/n/ne08fec1ed387" class="btn-outline" target="_blank" rel="noopener" data-i18n="upto.link">uptoスキームの詳細 →</a>
-        </div>
-        <div class="how-extra-block">
-          <h3 data-i18n="mpp.session.title">MPPのSessionモード：LLMトークン課金に対応</h3>
-          <p data-i18n="mpp.session.body">MPPはChargeモード（1リクエスト1決済）に加え、Sessionモードを持つ。事前デポジット後はオフチェーンの署名済みバウチャーを提示するだけで決済が完結し、レイテンシはほぼゼロになる。LLMのトークン単位課金や、AIが複数APIを連続して叩くワークフローに特に有効だ。</p>
-          <div class="code-block" style="margin-top:24px">
-            <div class="code-header">
-              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-              <span class="code-title">Hono + MPP</span>
-            </div>
-            <pre><code><span class="c-dim">// Honoでの実装例（MPP）</span>
-import { paymentMiddleware } from <span class="c-green">'mppx/hono'</span>;
-
-app.get(<span class="c-green">'/premium-data'</span>,
-  paymentMiddleware({ price: <span class="c-green">'$0.01'</span>, currency: <span class="c-green">'USD'</span> }),
-  async (c) =&gt; c.json({ data: <span class="c-green">'paid by AI agent'</span> })
-);</code></pre>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -640,6 +441,45 @@ app.get(<span class="c-green">'/premium-data'</span>,
     </div>
   </section>
 
+  <!-- ── About / Protocol ──────────────────────────────────────── -->
+  <section id="about" class="section">
+    <div class="container">
+      <p class="eyebrow">PROTOCOL</p>
+      <h2 class="section-title" data-i18n="protocol.title">x402とは</h2>
+      <div class="about-grid">
+        <div class="about-lead">
+          <p data-i18n="protocol.p1">HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。</p>
+          <p data-i18n-html="protocol.p2">Coinbase、Cloudflare、Stripeが主導し、Linux Foundation傘下のx402 Foundationとして設立されたこのオープンスタンダードは、ウェブリクエストに支払いを直接組み込む普遍的な方法を定義します。製品ではなく、プラットフォームでもなく—<strong>公共財</strong>です。</p>
+          <p data-i18n="protocol.p3">サーバーが402を返したとき、クライアント（人間でもAIエージェントでも）は自動的に支払いを完了し、リクエストを再試行します。人間が毎回フォームを入力する必要はありません。</p>
+          <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener" data-i18n="protocol.cta">仕様を読む →</a>
+        </div>
+        <div class="about-code">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-title">HTTP Flow</span>
+            </div>
+            <pre><code><span class="c-dim">→</span> GET /api/data HTTP/1.1
+  Host: api.example.com
+
+<span class="c-gold">←</span> <span class="c-gold">HTTP/1.1 402 Payment Required</span>
+  X-Payment-Required: version=1
+  X-Payment-Amount: 0.001
+  X-Payment-Token: USDC
+
+<span class="c-dim">→</span> GET /api/data HTTP/1.1
+  X-Payment: &lt;signed_payload&gt;
+
+<span class="c-green">←</span> <span class="c-green">HTTP/1.1 200 OK</span>
+  Content-Type: application/json</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Footer ────────────────────────────────────────────────── -->
   <footer id="company" class="footer">
     <div class="container footer-inner">
@@ -649,11 +489,10 @@ app.get(<span class="c-green">'/premium-data'</span>,
       </div>
       <nav class="footer-nav">
         <ul>
-          <li><a href="#about" data-i18n="footer.nav.protocol">プロトコル</a></li>
-          <li><a href="#how" data-i18n="footer.nav.how">仕組み</a></li>
           <li><a href="#features" data-i18n="footer.nav.usecases">ユースケース</a></li>
           <li><a href="#products">プロダクト</a></li>
           <li><a href="#vision">Vision</a></li>
+          <li><a href="#about" data-i18n="footer.nav.protocol">プロトコル</a></li>
         </ul>
         <ul>
           <li><a href="https://www.x402.org/" target="_blank" rel="noopener">x402.org ↗</a></li>
