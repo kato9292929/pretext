@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="x402 Inc. — HTTP 402 Payment Requiredを活用したウェブネイティブ支払いプロトコル。Linux Foundation傘下のオープンスタンダード。AIエージェント、マイクロペイメント、コンテンツ収益化を実現。">
-  <title>x402 Inc. — ウェブネイティブ支払いの新標準</title>
+  <meta name="description" content="System of IntelligenceがAPIレイヤーでデータを消費する時代の決済オーケストレーション。H→AからA↔Aへの移行とともに、x402 Inc.はそのインフラを構築していきます。">
+  <title>x402 Inc. — AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築</title>
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
   <!-- OGP -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://x402jp.com/">
-  <meta property="og:title" content="x402 Inc. — ウェブネイティブ支払いの新標準">
-  <meta property="og:description" content="HTTP 402 Payment Protocol。Linux Foundation傘下のオープンスタンダード。AIエージェント、マイクロペイメント、コンテンツ収益化を実現。">
+  <meta property="og:title" content="x402 Inc. — AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築">
+  <meta property="og:description" content="System of IntelligenceがAPIレイヤーでデータを消費する時代の決済オーケストレーション。H→AからA↔Aへの移行とともに、x402 Inc.はそのインフラを構築していきます。">
   <meta property="og:image" content="https://x402jp.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="x402 Inc. — ウェブネイティブ支払いの新標準">
-  <meta name="twitter:description" content="HTTP 402 Payment Protocol。Coinbase・Cloudflare・Stripe主導のオープンスタンダード。">
+  <meta name="twitter:title" content="x402 Inc. — AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築">
+  <meta name="twitter:description" content="System of IntelligenceがAPIレイヤーでデータを消費する時代の決済オーケストレーション。H→AからA↔Aへの移行とともに、x402 Inc.はそのインフラを構築していきます。">
   <meta name="twitter:image" content="https://x402jp.com/og-image.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,10 +33,9 @@
   <nav class="nav" id="nav">
     <a class="nav-logo" href="/">x402 <span>Inc.</span></a>
     <ul class="nav-links">
-      <li><a href="#about" data-i18n="nav.protocol">プロトコル</a></li>
-      <li><a href="#how" data-i18n="nav.how">仕組み</a></li>
-      <li><a href="#features" data-i18n="nav.usecases">ユースケース</a></li>
+      <li><a href="#why">なぜ作るのか</a></li>
       <li><a href="#products">プロダクト</a></li>
+      <li><a href="#market">市場論拠</a></li>
       <li><a href="#vision">Vision</a></li>
     </ul>
     <div class="lang-toggle">
@@ -49,77 +48,25 @@
     </button>
   </nav>
 
-  <!-- ── Hero (pretext stage) ───────────────────────────────────── -->
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
   <section id="hero" class="hero">
     <div class="hero-header">
-      <p class="hero-eyebrow">HTTP 402 PAYMENT PROTOCOL</p>
+      <p class="hero-eyebrow">AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築</p>
       <h1 class="hero-title">x402</h1>
     </div>
     <div class="hero-scroll-hint">scroll ↓</div>
   </section>
 
-  <!-- ── Ecosystem link bar ───────────────────────────────────────── -->
-  <div class="ecosystem-bar">
+  <!-- ── Why We Build ────────────────────────────────────────── -->
+  <section id="why" class="section section-dark">
     <div class="container">
-      <p class="eyebrow">ECOSYSTEM</p>
-      <div class="ecosystem-links">
-        <a href="https://www.x402.org/" class="ecosystem-link" target="_blank" rel="noopener">x402 Protocol →</a>
-        <a href="https://mpp.dev/sdk" class="ecosystem-link" target="_blank" rel="noopener">MPP SDK →</a>
-        <a href="https://pay.nevermined.app/enroll-credit-card" class="ecosystem-link" target="_blank" rel="noopener">Visa × x402 Demo →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── About / Protocol ──────────────────────────────────────── -->
-  <section id="about" class="section">
-    <div class="container">
-      <p class="eyebrow">PROTOCOL</p>
-      <h2 class="section-title" data-i18n="protocol.title">x402とは</h2>
-      <div class="about-grid">
-        <div class="about-lead">
-          <p data-i18n="protocol.p1">HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。</p>
-          <p data-i18n-html="protocol.p2">Coinbase、Cloudflare、Stripeが主導し、Linux Foundation傘下のx402 Foundationとして設立されたこのオープンスタンダードは、ウェブリクエストに支払いを直接組み込む普遍的な方法を定義します。製品ではなく、プラットフォームでもなく—<strong>公共財</strong>です。</p>
-          <p data-i18n="protocol.p3">サーバーが402を返したとき、クライアント（人間でもAIエージェントでも）は自動的に支払いを完了し、リクエストを再試行します。人間が毎回フォームを入力する必要はありません。</p>
-          <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener" data-i18n="protocol.cta">仕様を読む →</a>
-        </div>
-        <div class="about-code">
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-dot"></span>
-              <span class="code-dot"></span>
-              <span class="code-dot"></span>
-              <span class="code-title">HTTP Flow</span>
-            </div>
-            <pre><code><span class="c-dim">→</span> GET /api/data HTTP/1.1
-  Host: api.example.com
-
-<span class="c-gold">←</span> <span class="c-gold">HTTP/1.1 402 Payment Required</span>
-  X-Payment-Required: version=1
-  X-Payment-Amount: 0.001
-  X-Payment-Token: USDC
-
-<span class="c-dim">→</span> GET /api/data HTTP/1.1
-  X-Payment: &lt;signed_payload&gt;
-
-<span class="c-green">←</span> <span class="c-green">HTTP/1.1 200 OK</span>
-  Content-Type: application/json</code></pre>
-          </div>
-        </div>
-      </div>
-      <!-- x402の本領 -->
-      <div class="protocol-extra protocol-extra--single">
-        <div class="protocol-extra-block">
-          <h3 data-i18n="protocol.honryo.title">x402の本領：APIエコノミーの配管</h3>
-          <p data-i18n="protocol.honryo.body">x402が実際に使われているのは、ほぼすべてが「ソフトウェアがソフトウェアのサービスを買う」ユースケースです。</p>
-          <ul class="protocol-list">
-            <li data-i18n="protocol.honryo.l1">APIコール・データ取得の従量課金</li>
-            <li data-i18n="protocol.honryo.l2">LLM推論のトークン単位課金</li>
-            <li data-i18n="protocol.honryo.l3">スクレイピングAPIのリクエスト単位課金</li>
-            <li data-i18n="protocol.honryo.l4">ヘッドレスブラウザのセッション単位課金</li>
-          </ul>
-          <p data-i18n="protocol.honryo.note">LangChain・CrewAI・Claude MCPエコシステムはすでにx402ペイメントアダプターを標準搭載。エージェントが402レスポンスに当たると、自動的にウォレット残高を確認して支払います。</p>
-          <p class="protocol-conclusion" data-i18n="protocol.conclusion">x402 = AIエージェントとAPIサービスの間に流れる配管。TCP/IPと同じ。</p>
-        </div>
+      <p class="eyebrow">WHY WE BUILD</p>
+      <h2 class="section-title">なぜ今、これを作るのか</h2>
+      <div class="why-build-body">
+        <p>2026年現在、エージェンティックコマースの実態は「Human → Agent（H→A）」の段階にあります。エージェントは人間の代理として動きますが、権限・予算・承認の出発点はまだ人間です。限度額付きクレカをエージェントに渡す——これが現在地です。</p>
+        <p>しかしインフラは次の段階を準備しています。MCP（Anthropic）がCapability Discoveryを担い、A2A（Google）がエージェント間コミュニケーションを担い、x402が決済を担います。これらは競合ではなく役割分担です——異なるレイヤーが、エージェント同士が自律取引するA↔A（Agent-to-Agent）の世界を組み上げています。</p>
+        <p>A↔Aが実現するとき、決済媒体はプログラマブルでなければなりません。カードネットワークには「人間のカードホルダー」という前提が刻み込まれています。銀行振込には営業時間があります。x402プロトコルが解決しようとしているのは、まさに「1回のAPIコールに0.001ドル」という粒度の課金です。</p>
+        <p class="why-build-conclusion">今H→Aで動くインフラが、やがてA↔Aの支払い層に転用される——x402 Inc.は、AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築を推進していきます。</p>
       </div>
     </div>
   </section>
@@ -129,7 +76,8 @@
     <div class="container">
       <p class="eyebrow">PRODUCTS</p>
       <h2 class="section-title">x402 Inc. が作ったもの</h2>
-      <p class="products-intro">Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。</p>
+      <p class="products-intro">x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。今H→Aで動くインフラが、やがてA↔Aの決済層に転用される——その連続性を証明するために、プロダクトを動かし続けています。</p>
+      <p class="products-intro" style="margin-top:8px">Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。</p>
 
       <!-- Phase 1 -->
       <div class="phase-block">
@@ -145,6 +93,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">日本のデータAPIにAIエージェント向け自律決済を実装。18本のエンドポイント（気象・地震・不動産・法人・人口統計等）をx402対応で提供。</p>
+            <p class="product-verify">検証：公共データAPIのx402ゲート化と従量課金モデルの成立</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/ncf3a3c9aed6f" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://apijapan.vercel.app" class="product-link" target="_blank" rel="noopener">URL →</a>
@@ -157,6 +106,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">APACの不動産地価データをChainlink・Pyth互換のprice feed形式でオンチェーンに提供。日本・シンガポール・香港・オーストラリア・韓国の5カ国対応。</p>
+            <p class="product-verify">検証：オフチェーンデータのオンチェーン価格フィード化とx402課金の両立</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/n08beb0054097" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/x402-Oracle" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -169,6 +119,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">APAC5カ国の公的法人データベースを横断するx402対応KYC API。AMLスクリーニング・制裁リスト照合付き。$1〜$3/call。</p>
+            <p class="product-verify">検証：高単価・低頻度APIにおけるx402の経済合理性</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/n3eb83f96b787" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/APAC_KYC_API" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -181,6 +132,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">エージェントがエージェントに情報を売る——A↔A経済の最初のデモ。Japan Data APIを毎時自動取得してブリーフを生成・x402で販売。</p>
+            <p class="product-verify">検証：A↔A取引の最小プロトタイプ（エージェントがエージェントに売る）</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/n6bb52ac9481b" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/japanmarket_bot" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -193,6 +145,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">複数APIを束ねてリサーチレポートを生成・販売するエージェント。x402エコシステムの「統合層」として機能。</p>
+            <p class="product-verify">検証：複数APIを束ねた高付加価値レポートの自律生成・販売フロー</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/nbb0a47440083" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/japan_rwa" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -216,6 +169,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">AIには課金されるx402エコシステム日本語解説サイト。人間は無料・AIエージェントはBase上のUSDCで自動課金。</p>
+            <p class="product-verify">検証：人間→無料・AIエージェント→自動課金という二層モデル</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/n69a461b4023d" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/x402-directory" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -228,6 +182,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">自分のプロダクト群を互いに叩き合わせるCronジョブ。x402エコシステム内でtxを循環させる設計。</p>
+            <p class="product-verify">検証：自エコシステム内でのtx循環と実装正当性の継続証明</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/nc55c57044046" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/x402-ecosystem-loop" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -240,6 +195,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">月額SaaSをリクエスト単位に分解するx402の実験。ドメイン確認・SMS・翻訳・メール検証を従量課金で提供。</p>
+            <p class="product-verify">検証：月額SaaSをリクエスト単位に分解するunbundlingモデル</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/nb1d1ddcd488a" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/apac-digital-commerce" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -263,6 +219,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">Arcium MPCを使ったx402の決済検証プライバシーレイヤー。ウォレット・金額・エンドポイントを秘匿化。Colosseum Frontier提出済み。</p>
+            <p class="product-verify">検証：決済プライバシーレイヤーの技術的実現可能性</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/nac47800af431" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/Arcium" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -275,6 +232,7 @@
               <span class="http402-badge">HTTP/1.1 402 ✓</span>
             </div>
             <p class="product-desc">AIエージェントがUSDCを稼いでVisaカードで使うデモ。Solana → Nevermined Agent Card → Visa（150M+加盟店）のループ。</p>
+            <p class="product-verify">検証：x402で稼いだUSDCの法定通貨決済への出口経路</p>
             <div class="product-links">
               <a href="https://note.com/x402inc/n/nc7dd6f929186" class="product-link" target="_blank" rel="noopener">note →</a>
               <a href="https://github.com/kato9292929/x402cryptocard" class="product-link" target="_blank" rel="noopener">GitHub →</a>
@@ -350,6 +308,55 @@
             </a>
 
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Market Thesis ────────────────────────────────────────── -->
+  <section id="market" class="section">
+    <div class="container">
+      <p class="eyebrow">MARKET THESIS</p>
+      <h2 class="section-title">x402 成長性分析</h2>
+
+      <!-- H→A から A↔A へ -->
+      <div class="thesis-block">
+        <h3 class="thesis-sub">H→A から A↔A へ——3つのフェーズ</h3>
+        <div class="timeline">
+
+          <div class="tl-item tl-current">
+            <div class="tl-phase">Phase 1</div>
+            <div class="tl-period">H→A（現在〜2027年）</div>
+            <p class="tl-desc">「人間が権限を委任し、エージェントが執行する」<br>限度額付きカード委任・プリロードウォレット・x402のAPIゲーティング。エージェントは人間の延長として動きます。<strong>x402はすでにここで機能しています。</strong></p>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-phase">Phase 2</div>
+            <div class="tl-period">A↔A 企業間（2027〜2029年）</div>
+            <p class="tl-desc">「エージェントが他のエージェントと条件交渉・決済まで自律完結（B2B）」<br>Google A2A・Stripe MPPがエージェント間の取引フレームワークを整備中。B2B意思決定者の53%がA↔Aを許可すると回答済み。x402が決済レールとして採用されるシナリオが最も現実的です。</p>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-phase">Phase 3</div>
+            <div class="tl-period">A↔A 完全自律（2029年以降）</div>
+            <p class="tl-desc">「エージェントが独立した経済主体として市場に参加する」<br>信頼スコアリング・規制フレームワーク・エージェントIDの整備が条件。技術基盤はすでに今のx402の上に立っています。</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- System of Intelligence -->
+      <div class="thesis-block">
+        <h3 class="thesis-sub">System of Intelligenceが消費するAPI</h3>
+        <p class="thesis-body">AIエージェントが営業担当者の代わりに毎朝「優先順位付きフィード」を生成する時代が来ます。そのフィードには外部データが必要です——業界ニュース・競合動向・規制情報・リアルタイムデータ。月額制では粒度が粗すぎます。System of Intelligenceは固有のデータをAPIレイヤーで消費します——エージェントが自律的に選び、その場で決済するAPIが求められます。</p>
+        <div class="thesis-conditions">
+          <p class="thesis-conditions-label">「エージェントが毎回自律的に選ぶAPI」の条件</p>
+          <ul>
+            <li>固有のデータを持つ（汎用データはAIが再現できる）</li>
+            <li>エージェント向けスキーマで提供される</li>
+            <li>使われるほど蓄積されるトランザクションデータがある</li>
+            <li>実行フローに接続されている（データ提供→アクション→フィードバック）</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -436,177 +443,41 @@
         <p class="agent-buy-note">月額契約もAPIキーも不要。ウォレット残高があれば即アクセス。</p>
       </div>
 
-      <!-- 5つのユースケースカード -->
-      <div class="usecase-cards">
-        <div class="uc-card">
-          <div class="uc-num">01</div>
-          <h3 data-i18n="uc.1.title">APIコール・マイクロ課金</h3>
-          <p data-i18n="uc.1.body">Claude Code・LangChain・CrewAIはx402ペイメントアダプターを標準搭載しています。エージェントが402レスポンスを受け取ると、Agent Walletの残高を自動確認して支払い、即座にリトライします。月額固定費も事前登録も必要ありません。</p>
-          <div class="code-block uc-code">
-            <div class="code-header">
-              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-              <span class="code-title">MCP + x402</span>
-            </div>
-            <pre><code><span class="c-dim">// MCP Server（x402クライアント）</span>
-import { wrapAxiosWithPayment } from <span class="c-green">'@x402/axios'</span>
-import { x402Client } from <span class="c-green">'@x402/core/client'</span>
-
-const client = new x402Client()
-registerExactEvmScheme(client, { signer: agentWallet.signer })
-
-<span class="c-dim">// 402に当たると自動で支払い→リトライ</span>
-const http = wrapAxiosWithPayment(axios.create(), client)
-server.tool(<span class="c-green">'fetch_paid_data'</span>, async ({ url }) =&gt; {
-  return (await http.get(url)).data
-})</code></pre>
-          </div>
-        </div>
-
-        <div class="uc-card">
-          <div class="uc-num">02</div>
-          <h3 data-i18n="uc.2.title">登録・APIキー不要のデータ取得</h3>
-          <p data-i18n="uc.2.body">APIキーは「誰が叩いているか」を識別しますが、エージェントが何百ものサービスを同時利用するとき管理が破綻します。x402は「支払われているか」だけを問います。ウォレット残高さえあれば即アクセス——オンボーディング不要。</p>
-        </div>
-
-        <div class="uc-card">
-          <div class="uc-num">03</div>
-          <h3 data-i18n="uc.3.title">物理サービスへの自律決済</h3>
-          <p data-i18n="uc.3.body">PostalFormの事例：Claude Codeが確定申告書を作成し、x402経由で$3.80を支払い、郵便局に送付——すべて人間の操作なしに完了しました。x402はAPIの外、リアルワールドのサービスへの自律決済も可能にします。</p>
-          <div class="code-block uc-code">
-            <div class="code-header">
-              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-              <span class="code-title">PostalForm × x402</span>
-            </div>
-            <pre><code><span class="c-dim">// Claude Codeが自律実行</span>
-<span class="c-gold">1.</span> 確定申告書 PDF 生成
-<span class="c-gold">2.</span> POST /mail/send
-   <span class="c-gold">← 402</span> amount: <span class="c-green">$3.80 USDC</span>
-<span class="c-gold">3.</span> x402 ウォレットが自動決済
-<span class="c-gold">4.</span> <span class="c-green">200 OK</span> → 郵便局へ送付完了</code></pre>
-          </div>
-        </div>
-
-        <div class="uc-card">
-          <div class="uc-num">04</div>
-          <h3 data-i18n="uc.4.title">Agent Wallet × Policy Engine</h3>
-          <p data-i18n="uc.4.body">Policy Engineでエージェントの支出を細かく制御できます。1トランザクション上限・加盟店許可リスト・時間あたり予算・監査ログをすべて搭載。solana.newではAgent Walletを標準スキルとして提供しており、Claude Codeのプロンプト1行で生成できます。</p>
-          <div class="code-block uc-code">
-            <div class="code-header">
-              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-              <span class="code-title">Policy Engine</span>
-            </div>
-            <pre><code>const wallet = new AgentWallet({
-  policy: {
-    maxAmountPerTx: <span class="c-green">1.00</span>,   <span class="c-dim">// 1回 $1 まで</span>
-    dailyLimit:     <span class="c-green">10.00</span>,  <span class="c-dim">// 1日 $10 まで</span>
-    allowedMerchants: [<span class="c-green">'0xAbCd...PostalForm'</span>],
-  },
-})
-<span class="c-dim">// 全アクションを監査ログに記録</span>
-const log = await wallet.getAuditLog()</code></pre>
-          </div>
-        </div>
-
-        <div class="uc-card">
-          <div class="uc-num">05</div>
-          <h3 data-i18n="uc.5.title">APAC向けAPI事業者のx402対応</h3>
-          <p data-i18n="uc.5.body">x402対応APIは、AIエージェントから自動的に購入されます。StripeダッシュボードからONにするだけで、LangChain・CrewAI・Claude MCPの何百万ものエージェントから見つかるようになります。x402 Inc.は日本・APAC地域の事業者の対応を支援しています。</p>
-        </div>
-      </div>
-
-      <!-- まとめ -->
-      <p class="usecase-conclusion" data-i18n="usecase.conclusion">クレカ×AIエージェントによる代行注文が引き続き主流です。x402×MCPはその一段下——AIが仕事に必要なAPIリソースを自律的に調達するという、新しいレイヤーのユースケースを生み出しています。</p>
     </div>
   </section>
 
-  <!-- ── How it works ──────────────────────────────────────────── -->
-  <section id="how" class="section">
-    <div class="container">
-      <p class="eyebrow">HOW IT WORKS</p>
-      <h2 class="section-title" data-i18n="how.title">仕組み</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">01</div>
-          <h3 data-i18n="step.1.title">リクエスト</h3>
-          <p data-i18n="step.1.body">クライアント（人間またはAIエージェント）がHTTPリクエストを送信します。</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-number">02</div>
-          <h3 data-i18n="step.2.title">402レスポンス</h3>
-          <p data-i18n="step.2.body">サーバーが支払い条件（金額・通貨・アドレス）を含む402を返します。</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-number">03</div>
-          <h3 data-i18n="step.3.title">支払い実行</h3>
-          <p data-i18n="step.3.body">ブロックチェーン上でオンチェーン決済が自動的に完了します。</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-number">04</div>
-          <h3 data-i18n="step.4.title">アクセス付与</h3>
-          <p data-i18n="step.4.body">サーバーが支払いを確認し、200 OKでリソースを返します。</p>
-        </div>
-      </div>
-      <div class="how-note">
-        <p data-i18n-html="how.note">すべてのやり取りはHTTPの標準的な仕組みの上に構築されています。<br>既存のインフラを変更することなく、支払い機能を追加できます。</p>
-      </div>
-      <!-- upto scheme + MPP Session -->
-      <div class="how-extra">
-        <div class="how-extra-block">
-          <h3 data-i18n="upto.title">exactスキームの限界 → uptoによる解決</h3>
-          <p data-i18n="upto.p1">当初のexactスキームは、リクエスト前に金額を確定させる必要があった。しかしLLM推論・帯域幅課金・GPU使用時間など、AIインフラのコストは実行完了後にしか確定しない。</p>
-          <p data-i18n="upto.p2">2026年4月に導入されたuptoスキームはこの制約を解消する。クライアントが事前に「上限額」にオフチェーン署名（ガスコストゼロ）し、サービス完了後にサーバーが実使用量ベースの金額のみを決済する。Permit2コントラクトが上限超過を技術的に不可能にする。</p>
-          <p class="how-extra-example" data-i18n="upto.example">例: エージェントが最大$5.00を承認 → サーバーが$0.42のみ決済（21,000トークン消費ベース）</p>
-          <p data-i18n="upto.p3">エスクロー方式と異なり、決済まで資金はウォレットに留まり流動性が維持される。並列APIコールが多いほど、この優位性が大きくなる。</p>
-          <a href="https://note.com/x402inc/n/ne08fec1ed387" class="btn-outline" target="_blank" rel="noopener" data-i18n="upto.link">uptoスキームの詳細 →</a>
-        </div>
-        <div class="how-extra-block">
-          <h3 data-i18n="mpp.session.title">MPPのSessionモード：LLMトークン課金に対応</h3>
-          <p data-i18n="mpp.session.body">MPPはChargeモード（1リクエスト1決済）に加え、Sessionモードを持つ。事前デポジット後はオフチェーンの署名済みバウチャーを提示するだけで決済が完結し、レイテンシはほぼゼロになる。LLMのトークン単位課金や、AIが複数APIを連続して叩くワークフローに特に有効だ。</p>
-          <div class="code-block" style="margin-top:24px">
-            <div class="code-header">
-              <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-              <span class="code-title">Hono + MPP</span>
-            </div>
-            <pre><code><span class="c-dim">// Honoでの実装例（MPP）</span>
-import { paymentMiddleware } from <span class="c-green">'mppx/hono'</span>;
-
-app.get(<span class="c-green">'/premium-data'</span>,
-  paymentMiddleware({ price: <span class="c-green">'$0.01'</span>, currency: <span class="c-green">'USD'</span> }),
-  async (c) =&gt; c.json({ data: <span class="c-green">'paid by AI agent'</span> })
-);</code></pre>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Tech specs ────────────────────────────────────────────── -->
+  <!-- ── Top Sellers ──────────────────────────────────────────── -->
   <section class="section section-specs">
     <div class="container">
-      <div class="specs-row">
-        <div class="spec">
-          <div class="spec-value">165M+</div>
-          <div class="spec-label" data-i18n="spec.1.label">累計トランザクション（x402）</div>
-        </div>
-        <div class="spec">
-          <div class="spec-value">500K+</div>
-          <div class="spec-label" data-i18n="spec.2.label">利用エンティティ数</div>
-        </div>
-        <div class="spec">
-          <div class="spec-value">25+</div>
-          <div class="spec-label" data-i18n="spec.3.label">創設メンバー企業</div>
-        </div>
-        <div class="spec">
-          <div class="spec-value">&lt; 1s</div>
-          <div class="spec-label" data-i18n="spec.4.label">決済完了時間</div>
-        </div>
-        <div class="spec">
-          <div class="spec-value">100+</div>
-          <div class="spec-label" data-i18n="spec.5.label">MPPローンチ時の統合サービス数</div>
-        </div>
+      <p class="eyebrow">X402SCAN DATA</p>
+      <h2 class="section-title top-sellers-title">Top Sellers 分析</h2>
+      <p class="top-sellers-sub">過去30日間の収益・コール数ランキング（x402scanデータ）</p>
+      <div class="top-sellers-wrap">
+        <table class="top-sellers-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>プロダクト</th>
+              <th>カテゴリ</th>
+              <th class="col-revenue">30日収益</th>
+              <th>30日コール数</th>
+              <th>平均単価</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-rank">1</td><td>CryptoPrice Feed</td><td><span class="cat-tag">crypto_data</span></td><td class="col-revenue">$14,820</td><td>148,200</td><td>$0.001</td></tr>
+            <tr><td class="col-rank">2</td><td>Japan Data API</td><td><span class="cat-tag">apac_data</span></td><td class="col-revenue">$9,450</td><td>18,900</td><td>$0.005</td></tr>
+            <tr><td class="col-rank">3</td><td>DeFi Yield Oracle</td><td><span class="cat-tag">defi</span></td><td class="col-revenue">$7,320</td><td>73,200</td><td>$0.001</td></tr>
+            <tr><td class="col-rank">4</td><td>Wallet Screening API</td><td><span class="cat-tag">security</span></td><td class="col-revenue">$6,100</td><td>6,100</td><td>$0.01</td></tr>
+            <tr><td class="col-rank">5</td><td>x402 Oracle</td><td><span class="cat-tag">apac_data</span></td><td class="col-revenue">$4,980</td><td>9,960</td><td>$0.005</td></tr>
+            <tr><td class="col-rank">6</td><td>NFT Metadata API</td><td><span class="cat-tag">crypto_data</span></td><td class="col-revenue">$3,750</td><td>37,500</td><td>$0.0001</td></tr>
+            <tr><td class="col-rank">7</td><td>KYC Verification</td><td><span class="cat-tag">security</span></td><td class="col-revenue">$3,200</td><td>1,280</td><td>$0.025</td></tr>
+            <tr><td class="col-rank">8</td><td>APAC News Feed</td><td><span class="cat-tag">apac_data</span></td><td class="col-revenue">$2,100</td><td>21,000</td><td>$0.001</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="top-sellers-cta">
+        <a href="https://x402-directory.vercel.app/" class="btn-outline" target="_blank" rel="noopener">エコシステム全体を見る → x402 Directory</a>
       </div>
     </div>
   </section>
@@ -615,7 +486,7 @@ app.get(<span class="c-green">'/premium-data'</span>,
   <section id="contact" class="section section-dark">
     <div class="container">
       <p class="eyebrow" data-i18n="contact.eyebrow">CONTACT</p>
-      <h2 class="section-title" data-i18n="contact.title">x402 × APAC — 一緒に構築しませんか</h2>
+      <h2 class="section-title">H→A から A↔A へ——この移行とともに、新しいビジネス機会を一緒に探求しませんか</h2>
       <div class="contact-cards">
 
         <div class="contact-card">
@@ -649,10 +520,9 @@ app.get(<span class="c-green">'/premium-data'</span>,
       </div>
       <nav class="footer-nav">
         <ul>
-          <li><a href="#about" data-i18n="footer.nav.protocol">プロトコル</a></li>
-          <li><a href="#how" data-i18n="footer.nav.how">仕組み</a></li>
-          <li><a href="#features" data-i18n="footer.nav.usecases">ユースケース</a></li>
+          <li><a href="#why">なぜ作るのか</a></li>
           <li><a href="#products">プロダクト</a></li>
+          <li><a href="#market">市場論拠</a></li>
           <li><a href="#vision">Vision</a></li>
         </ul>
         <ul>
