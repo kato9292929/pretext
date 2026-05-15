@@ -1702,9 +1702,8 @@ blockquote cite {
   .agent-buy-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .vr-columns {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+  .vr-cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1890,8 +1889,8 @@ blockquote cite {
 
 /* ── Vision & Research section ─────────────────────────────────── */
 .vr-columns {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+  display: flex;
+  flex-direction: column;
   gap: 48px;
   margin-top: 48px;
 }
@@ -1902,13 +1901,13 @@ blockquote cite {
   letter-spacing: 0.12em;
   color: var(--gold);
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .vr-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 .vr-card {
@@ -2255,9 +2254,8 @@ blockquote cite {
   .products-grid {
     grid-template-columns: 1fr;
   }
-  .vr-columns {
+  .vr-cards {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
 }
 
