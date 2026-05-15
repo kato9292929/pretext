@@ -1697,14 +1697,14 @@ blockquote cite {
   }
   .products-grid,
   .contact-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   .agent-buy-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   .vr-columns {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
 }
 
@@ -2248,5 +2248,28 @@ blockquote cite {
   }
   .why-build-conclusion {
     font-size: 14px;
+  }
+  .agent-buy-grid {
+    grid-template-columns: 1fr;
+  }
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  .vr-columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* ── Contact heading size ──────────────────────────────────────── */
+.contact-simple .section-title {
+  font-size: clamp(20px, 2.8vw, 30px);
+  margin-bottom: 40px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .contact-simple .section-title {
+    font-size: clamp(17px, 5vw, 22px);
   }
 }
