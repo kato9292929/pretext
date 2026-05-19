@@ -2259,6 +2259,44 @@ blockquote cite {
   }
 }
 
+/* ── Trading Stack ─────────────────────────────────────────────── */
+.tstack-header {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+}
+
+.tstack-header .section-title {
+  margin-bottom: 0;
+}
+
+.railway-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: rgba(74, 143, 255, 0.12);
+  border: 1px solid rgba(74, 143, 255, 0.35);
+  color: var(--blue);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.product-price {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-top: -2px;
+}
+
+.product-price-amount {
+  color: var(--green);
+  font-weight: 600;
+}
+
 /* ── Contact heading size ──────────────────────────────────────── */
 .contact-simple .section-title {
   font-size: clamp(20px, 2.8vw, 30px);
