@@ -2257,15 +2257,20 @@ blockquote cite {
   }
 }
 
-/* ── Trading Stack ─────────────────────────────────────────────── */
-.tstack-header {
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: 20px;
+/* ── Endpoints ──────────────────────────────────────────────────── */
+.ep-category {
+  margin-top: 48px;
 }
 
-.tstack-header .section-title {
-  margin-bottom: 0;
+.ep-category-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
 }
 
 .railway-badge {
