@@ -12,6 +12,18 @@ const JA: T = {
   // Hero
   'hero.eyebrow': 'AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築',
 
+  // FEATURED
+  'feat.title':         '注目エンドポイント',
+  'feat.intro':         '最新のエンドポイントと、エージェントのウォレット連携を実現するCLIツール群です。',
+  'feat.cli.title':     '▸ CLI / エージェントウォレット連携',
+  'feat.x402ep.desc':   '6つのエンドポイントディレクトリ（x402scan・Agentic.Market・Pay.sh ほか）を横断集約する統合カタログ。Base・Solana・Polygon、x402・MPP・L402を1つの検索画面でまとめて探索できる。',
+  'feat.x402ep.verify': '検証：分散したx402エンドポイント情報の統合カタログ化',
+  'feat.osd.desc':      'Solanaの株式トークン（xStocks）とBackpack IPOのオンチェーンデータを提供。人間はHTML無料・エージェントはx402で有料JSON（$0.01/コール）。Jupiter・Raydium・Orca・Heliusを統合。',
+  'feat.osd.verify':    '検証：株式トークンのオンチェーンデータ配信とAI投資メモのx402従量課金',
+  'feat.visa.title':    'Visa CLI の使い方——カードを agent の wallet にして x402 / MPP endpoint を叩く',
+  'feat.moonpay.title': 'MoonPay CLI の使い方——エージェントに wallet を持たせて MCP で叩く',
+  'feat.circle.title':  'Circle Agent Stack の使い方——API を AI エージェント向けの有料 endpoint にする',
+
   // USE CASES
   'uc.title': 'ユースケース',
   'paradigm.old.badge':   '現在の主流',
@@ -80,6 +92,15 @@ const JA: T = {
   'vr.r4.title': 'AIエージェントがSubstackの有料記事を自律決済で読む時代——DripStackが示すx402の本命ユースケース',
   'vr.r5.title': 'a16zが22億ドルを投じる理由：クリプトが「革命」を捨て「実用主義」を選んだ5つの決定的理由',
   'vr.r6.title': 'Stripeが「AIの経済インフラ」を本気で作り始めた——Stripe Sessions 2026、288の発表を読み解く',
+  'vr.r7.title': 'ヘッドレスマーチャント普及後の未来図——エージェント決済はクレカで足りるのかx402 が要るのか',
+  'vr.r8.title': 'エージェント決済スタックの MCP / Wallet / CLI を比較する——Solana / Circle / MoonPay / OKX / Coinbase / Base',
+  'vr.r9.title': '企業 AI 決済とは何か——承認付きの「サブスク払いのオンチェーン化」として実装する',
+  'vr.r10.title': 'エージェント決済の未来予想図——2026 年から 2029 年への 4 つの移行',
+  'vr.r11.title': '需要は H→A、供給は A↔A——エージェント経済への先行投資をどう読むか',
+  'vr.r12.title': '企業 AI が「自律決済」に到達するのはいつか——プラグイン経由クレカという現実と、x402 自律決済までの距離',
+  'vr.r13.title': 'AI エージェントが稼いで使うバックエンド——5 月の業界進捗を踏まえて',
+  'vr.r14.title': 'AI エージェントに商品を売らせるためのバックエンド——決済 4 層構造とエコシステム接続',
+  'vr.r15.title': 'エージェンティックコマースのフェーズ論を更新する——Dan Shipper の 6 つの予測と、5 月の業界進捗',
 
   // PRODUCTS
   'prod.title':  'x402 Inc. が作ったもの',
@@ -119,11 +140,10 @@ const JA: T = {
 
   // ENDPOINTS
   'ep.title':         'エンドポイント一覧',
-  'ep.intro':         'カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系、自律エージェントの4カテゴリで提供しています。',
+  'ep.intro':         'カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系の3カテゴリで提供しています。',
   'ep.cat.nansen':    '▸ Nansen × Claude',
   'ep.cat.trading':   '▸ Trading',
   'ep.cat.assetmgmt': '▸ Asset Management',
-  'ep.cat.agent':     '▸ Autonomous Agent',
   // Nansen × Claude
   'ep.smss.desc':   'Nansenのスマートマネーデータをx402でゲート。STRONG BUYシグナルを検知してエージェントに返す。Base・Polygon・Solana対応。',
   'ep.smss.verify': '検証：スマートマネーシグナルのx402従量課金モデル',
@@ -196,6 +216,18 @@ const EN: T = {
   // Hero
   'hero.eyebrow': 'Building the API Ecosystem and Payment Infrastructure Autonomously Selected by AI Agents',
 
+  // FEATURED
+  'feat.title':         'Featured Endpoints',
+  'feat.intro':         'Our latest endpoints, plus the CLI tools that connect agents to wallets.',
+  'feat.cli.title':     '▸ CLI / Agent Wallet Integration',
+  'feat.x402ep.desc':   'A unified catalog aggregating six endpoint directories (x402scan, Agentic.Market, Pay.sh, and more). Browse endpoints across Base, Solana, and Polygon — and the x402, MPP, and L402 protocols — from a single search.',
+  'feat.x402ep.verify': 'Proof of concept: a unified catalog for fragmented x402 endpoint listings',
+  'feat.osd.desc':      'Onchain data for Solana stock tokens (xStocks) and Backpack IPOs. Free HTML for humans, paid JSON for agents via x402 ($0.01/call). Aggregates Jupiter, Raydium, Orca, and Helius.',
+  'feat.osd.verify':    'Proof of concept: onchain stock token data delivery and x402 pay-per-use AI investment memos',
+  'feat.visa.title':    'How to Use the Visa CLI — Turn a Card into an Agent\'s Wallet to Call x402 / MPP Endpoints',
+  'feat.moonpay.title': 'How to Use the MoonPay CLI — Give an Agent a Wallet and Call It via MCP',
+  'feat.circle.title':  'How to Use the Circle Agent Stack — Turn APIs into Paid Endpoints for AI Agents',
+
   // USE CASES
   'uc.title': 'Use Cases',
   'paradigm.old.badge':   'Current Mainstream',
@@ -264,6 +296,15 @@ const EN: T = {
   'vr.r4.title': 'When AI Agents Autonomously Pay to Read Substack Articles — The Killer x402 Use Case DripStack Reveals',
   'vr.r5.title': 'Why a16z Is Betting $2.2B: 5 Decisive Reasons Crypto Chose Pragmatism Over Revolution',
   'vr.r6.title': 'Stripe Is Seriously Building "AI\'s Economic Infrastructure" — Decoding 288 Announcements from Stripe Sessions 2026',
+  'vr.r7.title': 'The Future After Headless Merchants Go Mainstream — Are Credit Cards Enough for Agent Payments, or Is x402 Needed?',
+  'vr.r8.title': 'Comparing MCP / Wallet / CLI Across the Agent Payment Stack — Solana / Circle / MoonPay / OKX / Coinbase / Base',
+  'vr.r9.title': 'What Is Enterprise AI Payment? — Implementing It as Approval-Gated "On-chain Subscription Billing"',
+  'vr.r10.title': 'A Forecast for Agent Payments — Four Transitions from 2026 to 2029',
+  'vr.r11.title': 'Demand Is H→A, Supply Is A↔A — How to Read Early Investment in the Agent Economy',
+  'vr.r12.title': 'When Will Enterprise AI Reach "Autonomous Payment"? — Plugin-Routed Credit Cards Today and the Distance to x402 Autonomous Payment',
+  'vr.r13.title': 'The Backend Where AI Agents Earn and Spend — In Light of May\'s Industry Progress',
+  'vr.r14.title': 'The Backend for Letting AI Agents Sell Products — A Four-Layer Payment Structure and Ecosystem Connectivity',
+  'vr.r15.title': 'Updating the Phase Theory of Agentic Commerce — Dan Shipper\'s Six Predictions and May\'s Industry Progress',
 
   // PRODUCTS
   'prod.title':  'What x402 Inc. Has Built',
@@ -303,11 +344,10 @@ const EN: T = {
 
   // ENDPOINTS
   'ep.title':         'Endpoints',
-  'ep.intro':         'x402 Inc. products organized by category — a Nansen × Claude data layer, Trading, Asset Management, and Autonomous Agent.',
+  'ep.intro':         'x402 Inc. products organized by category — a Nansen × Claude data layer, Trading, and Asset Management.',
   'ep.cat.nansen':    '▸ Nansen × Claude',
   'ep.cat.trading':   '▸ Trading',
   'ep.cat.assetmgmt': '▸ Asset Management',
-  'ep.cat.agent':     '▸ Autonomous Agent',
   // Nansen × Claude
   'ep.smss.desc':   'Nansen smart money data gated by x402. Detects STRONG BUY signals and returns them to agents. Supports Base, Polygon, and Solana.',
   'ep.smss.verify': 'Proof of concept: x402 pay-per-query model for smart money signals',

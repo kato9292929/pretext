@@ -58,12 +58,108 @@
     <div class="hero-scroll-hint">scroll ↓</div>
   </section>
 
+  <!-- ── Featured ─────────────────────────────────────────────────── -->
+  <section id="featured" class="section">
+    <div class="container">
+      <p class="eyebrow">FEATURED</p>
+      <h2 class="section-title" data-i18n="feat.title">注目エンドポイント</h2>
+      <p class="products-intro" data-i18n="feat.intro">最新のエンドポイントと、エージェントのウォレット連携を実現するCLIツール群です。</p>
+
+      <div class="ep-category">
+        <div class="products-grid">
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Endpoint</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="feat.x402ep.desc">6つのエンドポイントディレクトリ（x402scan・Agentic.Market・Pay.sh ほか）を横断集約する統合カタログ。Base・Solana・Polygon、x402・MPP・L402を1つの検索画面でまとめて探索できる。</p>
+            <p class="product-verify" data-i18n="feat.x402ep.verify">検証：分散したx402エンドポイント情報の統合カタログ化</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nb30efb0e7e92" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://x402endpoint.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
+              <a href="https://github.com/kato9292929/endpoint" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">Onchain Stock Data</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="feat.osd.desc">Solanaの株式トークン（xStocks）とBackpack IPOのオンチェーンデータを提供。人間はHTML無料・エージェントはx402で有料JSON（$0.01/コール）。Jupiter・Raydium・Orca・Heliusを統合。</p>
+            <p class="product-verify" data-i18n="feat.osd.verify">検証：株式トークンのオンチェーンデータ配信とAI投資メモのx402従量課金</p>
+            <p class="product-price"><span class="product-price-amount">$0.01</span>/コール・Analyst <span class="product-price-amount">$0.50〜$3.00</span></p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/n28686d262552" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://osd-coral.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
+              <a href="https://github.com/kato9292929/onchain-stock-data" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Autonomous Agent</h3>
+              <span class="railway-badge">Railway ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="ep.aa.desc">19本のAPIを横断して毎朝6時JSTに自動起動する自律エージェント。x402で自律決済しながらシグナル検知・分析・執行を実行。AI ↔ AI ループの実証。</p>
+            <p class="product-verify" data-i18n="ep.aa.verify">検証：供給側（API）と需要側（エージェント）を自前で持つ AI ↔ AI ループ</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nfe50d4acfcd8" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/x402-Autonomous-Agent-" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CLI / Agent Wallet Integration -->
+      <div class="ep-category">
+        <h3 class="ep-category-title" data-i18n="feat.cli.title">▸ CLI / エージェントウォレット連携</h3>
+        <div class="products-grid">
+
+          <!-- TODO: 専用デモ/サイトURLが確定したら「URL →」リンクを追加する -->
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name" data-i18n="feat.visa.title">Visa CLI の使い方——カードを agent の wallet にして x402 / MPP endpoint を叩く</h3>
+            </div>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/n950d8c55a08a" class="product-link" target="_blank" rel="noopener">note →</a>
+            </div>
+          </div>
+
+          <!-- TODO: 専用デモ/サイトURLが確定したら「URL →」リンクを追加する -->
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name" data-i18n="feat.moonpay.title">MoonPay CLI の使い方——エージェントに wallet を持たせて MCP で叩く</h3>
+            </div>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nece87053af68" class="product-link" target="_blank" rel="noopener">note →</a>
+            </div>
+          </div>
+
+          <!-- TODO: 専用デモ/サイトURLが確定したら「URL →」リンクを追加する -->
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name" data-i18n="feat.circle.title">Circle Agent Stack の使い方——API を AI エージェント向けの有料 endpoint にする</h3>
+            </div>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/n032b69494fc6" class="product-link" target="_blank" rel="noopener">note →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ── Endpoints ────────────────────────────────────────────────── -->
-  <section id="endpoints" class="section">
+  <section id="endpoints" class="section section-dark">
     <div class="container">
       <p class="eyebrow">ENDPOINTS</p>
       <h2 class="section-title" data-i18n="ep.title">エンドポイント一覧</h2>
-      <p class="products-intro" data-i18n="ep.intro">カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系、自律エージェントの4カテゴリで提供しています。</p>
+      <p class="products-intro" data-i18n="ep.intro">カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系の3カテゴリで提供しています。</p>
 
       <!-- Nansen × Claude -->
       <div class="ep-category">
@@ -285,27 +381,120 @@
         </div>
       </div>
 
-      <!-- Autonomous Agent -->
-      <div class="ep-category">
-        <h3 class="ep-category-title" data-i18n="ep.cat.agent">▸ Autonomous Agent</h3>
-        <div class="products-grid">
+    </div>
+  </section>
 
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">x402 Autonomous Agent</h3>
-              <span class="railway-badge">Railway ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="ep.aa.desc">19本のAPIを横断して毎朝6時JSTに自動起動する自律エージェント。x402で自律決済しながらシグナル検知・分析・執行を実行。AI ↔ AI ループの実証。</p>
-            <p class="product-verify" data-i18n="ep.aa.verify">検証：供給側（API）と需要側（エージェント）を自前で持つ AI ↔ AI ループ</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/nfe50d4acfcd8" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/x402-Autonomous-Agent-" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
+  <!-- ── Vision & Research ────────────────────────────────────── -->
+  <section id="vision" class="section">
+    <div class="container">
+      <p class="eyebrow">VISION &amp; RESEARCH</p>
+      <h2 class="section-title" data-i18n="vr.title">考察・調査</h2>
+
+      <div class="vr-columns">
+        <div class="vr-col">
+          <h3 class="vr-col-title">Vision</h3>
+          <div class="vr-cards">
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n9f72e49f7d6e" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.v1.title">AIエージェントがアクセスできないデータを、公共財にする</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n3dc6f62c363d" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.v2.title">エージェンティックコマース元年の「現在地」：Human → AI 段階から AI ↔ AI への移行はいつ起きるか</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/nb266051df2bc" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.v3.title">ステーブルコイン決済の62.9%はB2B——Stripeが企業間の決済インフラを再設計する2026年</p>
+              <span class="vr-link">note →</span>
+            </a>
+
           </div>
+        </div>
 
+        <div class="vr-col">
+          <h3 class="vr-col-title">Research</h3>
+          <div class="vr-cards">
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n0e30d662d0f0" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r1.title">Claude for Financial Services時代の「エージェント決済」——クレカで十分か、それともステーブルコインが必要か</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n3defba4a1a28" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r2.title">Amex ACEの「インテントコントラクト」と「シングルユーストークン」——決済レイヤーに残る最後の空白</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/na798062b2b1a" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r3.title">AIエージェント × クレジットカード：MoonAgents Card・Oobit Agent Cards・Stripe Issuing for agentsを整理する</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n9c179c890113" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r4.title">AIエージェントがSubstackの有料記事を自律決済で読む時代——DripStackが示すx402の本命ユースケース</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n117082cc82b5" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r5.title">a16zが22億ドルを投じる理由：クリプトが「革命」を捨て「実用主義」を選んだ5つの決定的理由</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/nd945306fb457" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r6.title">Stripeが「AIの経済インフラ」を本気で作り始めた——Stripe Sessions 2026、288の発表を読み解く</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/nf7b60bdf0a56" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r7.title">ヘッドレスマーチャント普及後の未来図——エージェント決済はクレカで足りるのかx402 が要るのか</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n823acd3be97e" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r8.title">エージェント決済スタックの MCP / Wallet / CLI を比較する——Solana / Circle / MoonPay / OKX / Coinbase / Base</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/na3d3b01dbd1c" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r9.title">企業 AI 決済とは何か——承認付きの「サブスク払いのオンチェーン化」として実装する</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n57ac88867b5d" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r10.title">エージェント決済の未来予想図——2026 年から 2029 年への 4 つの移行</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n86211ffa3ff9" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r11.title">需要は H→A、供給は A↔A——エージェント経済への先行投資をどう読むか</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n89d4f38377cd" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r12.title">企業 AI が「自律決済」に到達するのはいつか——プラグイン経由クレカという現実と、x402 自律決済までの距離</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/nb02c810843f6" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r13.title">AI エージェントが稼いで使うバックエンド——5 月の業界進捗を踏まえて</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n72418e4adbac" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r14.title">AI エージェントに商品を売らせるためのバックエンド——決済 4 層構造とエコシステム接続</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/nb6f4cac169e8" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r15.title">エージェンティックコマースのフェーズ論を更新する——Dan Shipper の 6 つの予測と、5 月の業界進捗</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+          </div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -442,77 +631,8 @@
     </div>
   </section>
 
-  <!-- ── Vision & Research ────────────────────────────────────── -->
-  <section id="vision" class="section section-dark">
-    <div class="container">
-      <p class="eyebrow">VISION &amp; RESEARCH</p>
-      <h2 class="section-title" data-i18n="vr.title">考察・調査</h2>
-
-      <div class="vr-columns">
-        <div class="vr-col">
-          <h3 class="vr-col-title">Vision</h3>
-          <div class="vr-cards">
-
-            <a class="vr-card" href="https://note.com/x402inc/n/n9f72e49f7d6e" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.v1.title">AIエージェントがアクセスできないデータを、公共財にする</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-            <a class="vr-card" href="https://note.com/x402inc/n/n3dc6f62c363d" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.v2.title">エージェンティックコマース元年の「現在地」：Human → AI 段階から AI ↔ AI への移行はいつ起きるか</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-            <a class="vr-card" href="https://note.com/x402inc/n/nb266051df2bc" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.v3.title">ステーブルコイン決済の62.9%はB2B——Stripeが企業間の決済インフラを再設計する2026年</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-          </div>
-        </div>
-
-        <div class="vr-col">
-          <h3 class="vr-col-title">Research</h3>
-          <div class="vr-cards">
-
-            <a class="vr-card" href="https://note.com/x402inc/n/n0e30d662d0f0" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.r1.title">Claude for Financial Services時代の「エージェント決済」——クレカで十分か、それともステーブルコインが必要か</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-            <a class="vr-card" href="https://note.com/x402inc/n/n3defba4a1a28" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.r2.title">Amex ACEの「インテントコントラクト」と「シングルユーストークン」——決済レイヤーに残る最後の空白</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-            <a class="vr-card" href="https://note.com/x402inc/n/na798062b2b1a" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.r3.title">AIエージェント × クレジットカード：MoonAgents Card・Oobit Agent Cards・Stripe Issuing for agentsを整理する</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-            <a class="vr-card" href="https://note.com/x402inc/n/n9c179c890113" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.r4.title">AIエージェントがSubstackの有料記事を自律決済で読む時代——DripStackが示すx402の本命ユースケース</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-            <a class="vr-card" href="https://note.com/x402inc/n/n117082cc82b5" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.r5.title">a16zが22億ドルを投じる理由：クリプトが「革命」を捨て「実用主義」を選んだ5つの決定的理由</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-            <a class="vr-card" href="https://note.com/x402inc/n/nd945306fb457" target="_blank" rel="noopener">
-              <p class="vr-card-title" data-i18n="vr.r6.title">Stripeが「AIの経済インフラ」を本気で作り始めた——Stripe Sessions 2026、288の発表を読み解く</p>
-              <span class="vr-link">note →</span>
-            </a>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ── Products ─────────────────────────────────────────────── -->
-  <section id="products" class="section">
+  <section id="products" class="section section-dark">
     <div class="container">
       <p class="eyebrow">PRODUCTS</p>
       <h2 class="section-title" data-i18n="prod.title">x402 Inc. が作ったもの</h2>
