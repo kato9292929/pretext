@@ -322,8 +322,8 @@ strong {
 }
 
 .section-title {
-  font-size: clamp(32px, 4vw, 48px);
-  margin-bottom: 56px;
+  font-size: clamp(20px, 2.4vw, 26px);
+  margin-bottom: 40px;
   color: var(--text);
 }
 
@@ -1153,6 +1153,11 @@ blockquote cite {
 
   .features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .foundation-pillars {
@@ -2036,6 +2041,17 @@ blockquote cite {
 }
 
 /* ── Why We Build ──────────────────────────────────────────────── */
+.why-build-integrated {
+  margin-top: 80px;
+  padding-top: 56px;
+  border-top: 1px solid var(--border);
+}
+
+.why-build-integrated-title {
+  font-size: clamp(20px, 2.4vw, 26px);
+  color: var(--text);
+}
+
 .why-build-body {
   display: flex;
   flex-direction: column;
