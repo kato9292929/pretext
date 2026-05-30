@@ -225,15 +225,16 @@ strong {
 }
 
 .hero-eyebrow {
-  font: 500 clamp(10px, 2.4vw, 12px)/1.6 var(--font-sans);
+  font: 500 clamp(10px, 2.4vw, 12px)/1.7 var(--font-sans);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #f3f0ea;
   margin: 0 auto 20px;
-  max-width: 36em;
-  opacity: 0.85;
+  max-width: 40em;
+  opacity: 0.92;
   overflow-wrap: anywhere;
   word-break: normal;
+  text-wrap: balance;
 }
 
 /* "x402" gold wordmark — rich gold gradient + soft glow (ref: x402amp) */
@@ -247,11 +248,11 @@ strong {
   overflow-wrap: break-word;
   background: linear-gradient(
     96deg,
-    #f7e7b0 0%,
-    #f5d27a 22%,
-    #d4af37 48%,
-    #b8860b 70%,
-    #f5d27a 100%
+    #fff7e2 0%,
+    #f6dc97 26%,
+    #ecc869 52%,
+    #d9b44c 76%,
+    #f3d488 100%
   );
   background-size: 220% auto;
   -webkit-background-clip: text;
@@ -259,8 +260,8 @@ strong {
   -webkit-text-fill-color: transparent;
   color: transparent;
   filter:
-    drop-shadow(0 0 28px rgba(212, 175, 55, 0.45))
-    drop-shadow(0 0 72px rgba(184, 134, 11, 0.22));
+    drop-shadow(0 0 28px rgba(226, 190, 90, 0.42))
+    drop-shadow(0 0 72px rgba(201, 158, 64, 0.20));
   animation: heroGoldShimmer 7s linear infinite;
 }
 

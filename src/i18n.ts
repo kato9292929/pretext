@@ -10,10 +10,10 @@ const JA: T = {
   'nav.endpoints': 'エンドポイント',
 
   // Hero
-  'hero.eyebrow': 'AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築',
+  'hero.eyebrow': 'AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築',
 
   // FEATURED
-  'feat.title':         '注目エンドポイント',
+  'feat.title':         '最新事例',
   'feat.intro':         '最新のエンドポイントと、エージェントのウォレット連携を実現するCLIツール群です。',
   'feat.cli.title':     '▸ CLI / エージェントウォレット連携',
   'feat.x402ep.desc':   '6つのエンドポイントディレクトリ（x402scan・Agentic.Market・Pay.sh ほか）を横断集約する統合カタログ。Base・Solana・Polygon、x402・MPP・L402を1つの検索画面でまとめて探索できる。',
@@ -214,10 +214,10 @@ const EN: T = {
   'nav.endpoints': 'Endpoints',
 
   // Hero
-  'hero.eyebrow': 'Building the API Ecosystem and Payment Infrastructure Autonomously Selected by AI Agents',
+  'hero.eyebrow': 'Building the API Ecosystem and Payment Infrastructure<br>Autonomously Selected by AI Agents',
 
   // FEATURED
-  'feat.title':         'Featured Endpoints',
+  'feat.title':         'Latest Cases',
   'feat.intro':         'Our latest endpoints, plus the CLI tools that connect agents to wallets.',
   'feat.cli.title':     '▸ CLI / Agent Wallet Integration',
   'feat.x402ep.desc':   'A unified catalog aggregating six endpoint directories (x402scan, Agentic.Market, Pay.sh, and more). Browse endpoints across Base, Solana, and Polygon — and the x402, MPP, and L402 protocols — from a single search.',
