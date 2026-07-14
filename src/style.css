@@ -1865,19 +1865,62 @@ blockquote cite {
   margin-top: 24px;
 }
 
-/* FEATURED 3-layer blocks (01 MAP / 02 CONSUME / 03 PRODUCE) */
+/* FEATURED 3-layer editorial blocks (01 MAP / 02 CONSUME / 03 PRODUCE) */
 .layer-block {
-  margin-top: 40px;
+  display: grid;
+  grid-template-columns: minmax(170px, 220px) 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
 }
 
-.layer-block .phase-num {
+.layer-head {
+  position: sticky;
+  top: 88px;
+}
+
+.layer-head .phase-num {
   font-variant-numeric: tabular-nums;
+  margin-bottom: 14px;
 }
 
-.layer-block .phase-title {
+.layer-title {
+  display: block;
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--text);
+  line-height: 1.3;
+}
+
+.layer-desc {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+.layer-body .products-grid {
+  margin-top: 0;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+/* A layer with a single card: let it fill the body but cap the reading measure */
+.layer-body .products-grid:has(.product-card:only-child) {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 900px) {
+  .layer-block {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 40px;
+    padding-top: 32px;
+  }
+  .layer-head {
+    position: static;
+  }
 }
 
 /* Multiple product links per card */

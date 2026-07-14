@@ -29,7 +29,6 @@ const JA: T = {
   'feat.jin.desc':      '東京のあるスーパーの店頭価格を毎日記録して作る独自の物価指数。10カテゴリ等加重のJevons幾何平均で日次指数化(基準日2026-06-04)、上流のCGPI(企業物価, Shift-JIS処理に対応)も取り込み、上流から店頭までを接続して観測。x402エンドポイントとして配信し、per-callで購入できる。',
 
   // USE CASES
-  'uc.title': 'ユースケース',
   'paradigm.old.badge':   '現在の主流',
   'paradigm.old.title':   '「人間の代わりに注文」',
   'paradigm.old.desc':    'クレカ × AIエージェント<br>EC・小売・代行購入',
@@ -77,8 +76,8 @@ const JA: T = {
   'tl.phase3':  'Phase 3',
   'tl.period3': 'AI ↔ AI 完全自律（2029年以降）',
   'tl.desc3':   '「エージェントが独立した経済主体として市場に参加する」<br>信頼スコアリング・規制フレームワーク・エージェントIDの整備が条件。技術基盤はすでに今のx402の上に立っています。',
-  'soi.title':       'System of Intelligenceが消費するAPI',
-  'soi.body':        'AIエージェントが営業担当者の代わりに毎朝「優先順位付きフィード」を生成する時代が来ます。そのフィードには外部データが必要です——業界ニュース・競合動向・規制情報・リアルタイムデータ。月額制では粒度が粗すぎます。System of Intelligenceは固有のデータをAPIレイヤーで消費します——エージェントが自律的に選び、その場で決済するAPIが求められます。',
+  'soi.title':       'System of Intelligence × x402',
+  'soi.body':        'AIエージェントが営業担当者の代わりに毎朝「優先順位付きフィード」を生成する時代が到来した場合、そのフィードには外部データが必要です——業界ニュース・競合動向・規制情報・リアルタイムデータ。月額制では粒度が粗すぎます。System of Intelligenceは固有のデータをAPIレイヤーで消費します——エージェントが自律的に選び、その場で決済するAPIが求められます。',
   'soi.cond.label':  '「エージェントが毎回自律的に選ぶAPI」の条件',
   'soi.cond.1':      '固有のデータを持つ（汎用データはAIが再現できる）',
   'soi.cond.2':      'エージェント向けスキーマで提供される',
@@ -229,7 +228,6 @@ const EN: T = {
   'feat.jin.desc':      'A proprietary price index built by recording the shelf prices of one Tokyo supermarket every day. Daily indexation via an equal-weighted Jevons geometric mean across 10 categories (base date 2026-06-04), also ingesting upstream CGPI (corporate goods prices, with Shift-JIS handling) to connect upstream to the shelf. Served as an x402 endpoint and purchasable per-call.',
 
   // USE CASES
-  'uc.title': 'Use Cases',
   'paradigm.old.badge':   'Current Mainstream',
   'paradigm.old.title':   '"Order on Behalf of Humans"',
   'paradigm.old.desc':    'Credit card × AI agent<br>E-commerce, retail, proxy purchasing',
@@ -277,8 +275,8 @@ const EN: T = {
   'tl.phase3':  'Phase 3',
   'tl.period3': 'AI ↔ AI Full Autonomy (2029+)',
   'tl.desc3':   '"Agents participate in markets as independent economic actors."<br>Requires trust scoring, regulatory frameworks, and agent identity infrastructure. The technical foundation already rests on today\'s x402.',
-  'soi.title':       'APIs Consumed by the System of Intelligence',
-  'soi.body':        'A world is coming where AI agents generate a "prioritized feed" every morning in place of salespeople. That feed needs external data — industry news, competitive intelligence, regulatory updates, real-time signals. Monthly subscriptions are too coarse. Systems of Intelligence consume proprietary data at the API layer — APIs that agents autonomously select and pay for on the spot.',
+  'soi.title':       'System of Intelligence × x402',
+  'soi.body':        'Should a world arrive where AI agents generate a "prioritized feed" every morning in place of salespeople, that feed needs external data — industry news, competitive intelligence, regulatory updates, real-time signals. Monthly subscriptions are too coarse. Systems of Intelligence consume proprietary data at the API layer — APIs that agents autonomously select and pay for on the spot.',
   'soi.cond.label':  'Conditions for "APIs agents choose autonomously every time"',
   'soi.cond.1':      'Holds proprietary data (generic data can be reproduced by AI)',
   'soi.cond.2':      'Delivered with agent-ready schemas',
