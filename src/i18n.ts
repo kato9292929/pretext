@@ -8,7 +8,6 @@ const JA: T = {
   'nav.market':    '市場論拠',
   'nav.vision':    '考察・調査',
   'nav.products':  'プロダクト',
-  'nav.endpoints': 'エンドポイント',
 
   // Hero
   'hero.eyebrow': 'AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築',
@@ -108,7 +107,8 @@ const JA: T = {
   // PRODUCTS
   'prod.title':  'x402 Inc. が作ったもの',
   'prod.intro1': 'x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。今 Human → AI で動くインフラが、やがて AI ↔ AI の決済層に転用される——その連続性を証明するために、プロダクトを動かし続けています。',
-  'prod.intro2': 'Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。',
+  'prod.intro2': 'Phase 0（Autonomous Agent × Nansen）→ Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）で設計されています。',
+  'phase0.title': 'Autonomous Agent × Nansen',
   'phase1.title': 'データインフラ層',
   'phase2.title': 'エコシステム層',
   'phase3.title': 'プライバシー・決済出口',
@@ -136,8 +136,6 @@ const JA: T = {
 
 
   // ENDPOINTS
-  'ep.title':         'エンドポイント一覧',
-  'ep.intro':         'カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系の3カテゴリで提供しています。',
   'ep.cat.nansen':    '▸ Nansen × Claude',
   'ep.cat.trading':   '▸ Trading',
   'ep.cat.assetmgmt': '▸ Asset Management',
@@ -192,7 +190,6 @@ const JA: T = {
   'ft.nav.market':         '市場論拠',
   'ft.nav.vision':         '考察・調査',
   'ft.nav.products':       'プロダクト',
-  'ft.nav.endpoints':      'エンドポイント',
   'ft.company.name.dt':    '社名',
   'ft.company.ceo.dt':     '代表取締役',
   'ft.company.address.dt': '所在地',
@@ -207,7 +204,6 @@ const EN: T = {
   'nav.market':    'Market Thesis',
   'nav.vision':    'Vision & Research',
   'nav.products':  'Products',
-  'nav.endpoints': 'Endpoints',
 
   // Hero
   'hero.eyebrow': 'Building the API Ecosystem and Payment Infrastructure<br>Autonomously Selected by AI Agents',
@@ -307,7 +303,8 @@ const EN: T = {
   // PRODUCTS
   'prod.title':  'What x402 Inc. Has Built',
   'prod.intro1': 'Every product at x402 Inc. exists to validate the market while building. We keep products running to prove that the infrastructure working for Human → AI today will eventually convert into the payment layer for AI ↔ AI.',
-  'prod.intro2': 'Designed across three phases: Phase 1 (Data Infrastructure) → Phase 2 (Ecosystem) → Phase 3 (Privacy & Payment Exit).',
+  'prod.intro2': 'Designed across phases: Phase 0 (Autonomous Agent × Nansen) → Phase 1 (Data Infrastructure) → Phase 2 (Ecosystem) → Phase 3 (Privacy & Payment Exit).',
+  'phase0.title': 'Autonomous Agent × Nansen',
   'phase1.title': 'Data Infrastructure Layer',
   'phase2.title': 'Ecosystem Layer',
   'phase3.title': 'Privacy & Payment Exit',
@@ -335,8 +332,6 @@ const EN: T = {
 
 
   // ENDPOINTS
-  'ep.title':         'Endpoints',
-  'ep.intro':         'x402 Inc. products organized by category — a Nansen × Claude data layer, Trading, and Asset Management.',
   'ep.cat.nansen':    '▸ Nansen × Claude',
   'ep.cat.trading':   '▸ Trading',
   'ep.cat.assetmgmt': '▸ Asset Management',
@@ -391,7 +386,6 @@ const EN: T = {
   'ft.nav.market':         'Market Thesis',
   'ft.nav.vision':         'Vision & Research',
   'ft.nav.products':       'Products',
-  'ft.nav.endpoints':      'Endpoints',
   'ft.company.name.dt':    'Company',
   'ft.company.ceo.dt':     'CEO',
   'ft.company.address.dt': 'Address',

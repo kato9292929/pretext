@@ -1515,6 +1515,13 @@ blockquote cite {
 }
 
 /* ── Paradigm split ────────────────────────────────────────────── */
+/* Use Cases merged into the x402とは section */
+.usecases-merged {
+  margin-top: 72px;
+  padding-top: 56px;
+  border-top: 1px solid var(--border);
+}
+
 .paradigm-split {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -1759,6 +1766,11 @@ blockquote cite {
   margin-top: 48px;
 }
 
+/* Products section: full-width stacked cards (no side-by-side) */
+#products .products-grid {
+  grid-template-columns: 1fr;
+}
+
 .product-card {
   display: flex;
   flex-direction: column;
@@ -1903,11 +1915,6 @@ blockquote cite {
 
 .layer-body .products-grid {
   margin-top: 0;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-}
-
-/* A layer with a single card: let it fill the body but cap the reading measure */
-.layer-body .products-grid:has(.product-card:only-child) {
   grid-template-columns: 1fr;
 }
 
