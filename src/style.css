@@ -1865,6 +1865,21 @@ blockquote cite {
   margin-top: 24px;
 }
 
+/* FEATURED 3-layer blocks (01 MAP / 02 CONSUME / 03 PRODUCE) */
+.layer-block {
+  margin-top: 40px;
+}
+
+.layer-block .phase-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.layer-block .phase-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--text);
+}
+
 /* Multiple product links per card */
 .product-links {
   display: flex;

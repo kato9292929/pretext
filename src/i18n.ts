@@ -20,12 +20,13 @@ const JA: T = {
 
   // FEATURED
   'feat.title':         '最新事例',
-  'feat.intro':         '最新のエンドポイントと、エージェントのウォレット連携を実現するCLIツール群です。',
+  'feat.intro':         'x402 Inc.は、x402規格に対応したエンドポイントと独自データを作り、それを使う自律エージェントを動かしています。HTTP 402を共通の決済レールに、Base/Solana上のオンチェーン決済とERC-8004のエージェントidentityを土台にしています。事業は発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)の3層で構成されます。',
   'feat.cli.title':     '▸ CLI / エージェントウォレット連携',
-  'feat.x402ep.desc':   '6つのエンドポイントディレクトリ（x402scan・Agentic.Market・Pay.sh ほか）を横断集約する統合カタログ。Base・Solana・Polygon、x402・MPP・L402を1つの検索画面でまとめて探索できる。',
-  'feat.x402ep.verify': '検証：分散したx402エンドポイント情報の統合カタログ化',
-  'feat.osd.desc':      'Solanaの株式トークン（xStocks）とBackpack IPOのオンチェーンデータを提供。人間はHTML無料・エージェントはx402で有料JSON（$0.01/コール）。Jupiter・Raydium・Orca・Heliusを統合。',
-  'feat.osd.verify':    '検証：株式トークンのオンチェーンデータ配信とAI投資メモのx402従量課金',
+  'feat.map.desc':      'x402対応の課金エンドポイントを集めた一覧。約19,000件超を毎日記録し、推移を時系列で追える。x402scan・agentic-market・ampersend・visa-cli・circle-marketplace など複数ソースを毎日cronで集約・正規化し、日次スナップショットとして保存。カテゴリ分類と利用頻度ランキングを持ち、REST と MCP の両方で配信するのでエージェントが直接読める。',
+  'feat.consume.desc':  'オンチェーンの身元(ERC-8004, agentId 55560)を持つエージェントが、毎朝データをper-callで購入し日次の判断を記録。identityはCircleのDeveloper-Controlled Wallet経由でオンチェーン登録。Base mainnetのUSDCで実際にper-call決済し、自社のx402エンドポイントを自社エージェントが消費する自己完結の検証ループ（外部需要ではなく決済と観測の往復を検証）。Railwayで毎日定刻に稼働。重要な判断の前にはWorld IDで本人性を確認し、人間が承認を挟む。',
+  'feat.produce.desc':  'エージェント向けに独自データと予想・採点を出す取り組み。2プロダクトで構成。',
+  'feat.osd.desc':      'Claude(Opus)が毎週、米国株と日本株を10銘柄ずつ選んで予想。各銘柄に判定日付きの数値カタリストを付け、GitHub Actionsのcronで週次ファイルをgit commit、Vercelが配信。判定日後に決算短信・適時開示と突き合わせてscorecardに採点を残す。日本株は銘柄コードの正リストでユニバースを制約し、出力を検証して常に10銘柄・全銘柄が対象内に収まるよう正規化。トークン化された米国株はオンチェーンのliquidity/holdersも観測。記録は消さずにgitへ残す設計で、このtrack recordがmoat。配信は /api/alpha/* の REST と MCP。',
+  'feat.jin.desc':      '東京のあるスーパーの店頭価格を毎日記録して作る独自の物価指数。10カテゴリ等加重のJevons幾何平均で日次指数化(基準日2026-06-04)、上流のCGPI(企業物価, Shift-JIS処理に対応)も取り込み、上流から店頭までを接続して観測。x402エンドポイントとして配信し、per-callで購入できる。',
   'feat.visa.title':    'Visa CLI の使い方——カードを agent の wallet にして x402 / MPP endpoint を叩く',
   'feat.moonpay.title': 'MoonPay CLI の使い方——エージェントに wallet を持たせて MCP で叩く',
   'feat.circle.title':  'Circle Agent Stack の使い方——API を AI エージェント向けの有料 endpoint にする',
@@ -181,9 +182,6 @@ const JA: T = {
   'ep.amd.verify':  '検証：APACマクロ指標のリアルタイム統合分析',
   'ep.jrey.desc':   '日本不動産の利回り・空室・将来予測を国土交通省・e-Stat統合で提供。Base・Solana・Polygon・BNB対応。',
   'ep.jrey.verify': '検証：日本不動産利回りデータのx402従量課金配信',
-  // Autonomous Agent
-  'ep.aa.desc':     '19本のAPIを横断して毎朝6時JSTに自動起動する自律エージェント。x402で自律決済しながらシグナル検知・分析・執行を実行。AI ↔ AI ループの実証。',
-  'ep.aa.verify':   '検証：供給側（API）と需要側（エージェント）を自前で持つ AI ↔ AI ループ',
 
   // TOP SELLERS
   'ts.title':       'Top Sellers 分析',
@@ -230,12 +228,13 @@ const EN: T = {
 
   // FEATURED
   'feat.title':         'Latest Cases',
-  'feat.intro':         'Our latest endpoints, plus the CLI tools that connect agents to wallets.',
+  'feat.intro':         'x402 Inc. builds x402-compatible endpoints and proprietary data, and runs the autonomous agents that consume them. HTTP 402 is the shared payment rail, built on onchain settlement on Base/Solana and ERC-8004 agent identity. The business spans three layers: discovery (MAP), autonomous consumption (CONSUME), and data generation (PRODUCE).',
   'feat.cli.title':     '▸ CLI / Agent Wallet Integration',
-  'feat.x402ep.desc':   'A unified catalog aggregating six endpoint directories (x402scan, Agentic.Market, Pay.sh, and more). Browse endpoints across Base, Solana, and Polygon — and the x402, MPP, and L402 protocols — from a single search.',
-  'feat.x402ep.verify': 'Proof of concept: a unified catalog for fragmented x402 endpoint listings',
-  'feat.osd.desc':      'Onchain data for Solana stock tokens (xStocks) and Backpack IPOs. Free HTML for humans, paid JSON for agents via x402 ($0.01/call). Aggregates Jupiter, Raydium, Orca, and Helius.',
-  'feat.osd.verify':    'Proof of concept: onchain stock token data delivery and x402 pay-per-use AI investment memos',
+  'feat.map.desc':      'A directory of x402-enabled paid endpoints. Records 19,000+ entries daily and tracks their movement over time. Multiple sources — x402scan, agentic-market, ampersend, visa-cli, circle-marketplace — are aggregated and normalized by a daily cron and stored as daily snapshots. It carries category classification and usage-frequency rankings, and is served over both REST and MCP so agents can read it directly.',
+  'feat.consume.desc':  'An agent with an onchain identity (ERC-8004, agentId 55560) buys data per-call every morning and records its daily decisions. The identity is registered onchain via Circle\'s Developer-Controlled Wallet. It settles real per-call payments in USDC on Base mainnet — a self-contained validation loop where our own agent consumes our own x402 endpoints (validating the round-trip of settlement and observation, not external demand). It runs on Railway on a daily schedule. Before critical decisions, World ID confirms personhood and a human approval step is inserted.',
+  'feat.produce.desc':  'An effort to publish proprietary data, forecasts, and scoring for agents. Composed of two products.',
+  'feat.osd.desc':      'Every week, Claude (Opus) selects 10 US stocks and 10 Japanese stocks and forecasts them. Each ticker gets a numeric catalyst with a judgment date; a GitHub Actions cron git-commits the weekly file and Vercel serves it. After the judgment date, results are reconciled against earnings reports and timely disclosures, leaving a score on the scorecard. Japanese stocks are constrained to a canonical ticker-code universe, with output validated and normalized so it always holds exactly 10 in-universe tickers. For tokenized US stocks, onchain liquidity/holders are also observed. Records are never deleted — kept in git by design — and this track record is the moat. Served over /api/alpha/* REST and MCP.',
+  'feat.jin.desc':      'A proprietary price index built by recording the shelf prices of one Tokyo supermarket every day. Daily indexation via an equal-weighted Jevons geometric mean across 10 categories (base date 2026-06-04), also ingesting upstream CGPI (corporate goods prices, with Shift-JIS handling) to connect upstream to the shelf. Served as an x402 endpoint and purchasable per-call.',
   'feat.visa.title':    'How to Use the Visa CLI — Turn a Card into an Agent\'s Wallet to Call x402 / MPP Endpoints',
   'feat.moonpay.title': 'How to Use the MoonPay CLI — Give an Agent a Wallet and Call It via MCP',
   'feat.circle.title':  'How to Use the Circle Agent Stack — Turn APIs into Paid Endpoints for AI Agents',
@@ -391,9 +390,6 @@ const EN: T = {
   'ep.amd.verify':  'Proof of concept: real-time integrated analysis of APAC macro indicators',
   'ep.jrey.desc':   'Provides Japanese real estate yield, vacancy rates, and forecasts via MLIT and e-Stat integration. Supports Base, Solana, Polygon, and BNB.',
   'ep.jrey.verify': 'Proof of concept: x402 pay-per-use delivery of Japan real estate yield data',
-  // Autonomous Agent
-  'ep.aa.desc':     'An autonomous agent that auto-starts daily at 6AM JST across 19 APIs. Executes signal detection, analysis, and execution while settling autonomously via x402. AI ↔ AI loop in practice.',
-  'ep.aa.verify':   'Proof of concept: AI ↔ AI loop with both supply-side (APIs) and demand-side (agent) self-owned',
 
   // TOP SELLERS
   'ts.title':       'Top Sellers Analysis',
