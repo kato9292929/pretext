@@ -3,14 +3,30 @@ type T = Record<string, string>
 
 const JA: T = {
   // Nav
-  'nav.usecases':  'ユースケース',
+  'nav.featured':  '最新事例',
+  'nav.about':     'x402とは',
   'nav.market':    '市場論拠',
   'nav.vision':    '考察・調査',
   'nav.products':  'プロダクト',
   'nav.endpoints': 'エンドポイント',
 
   // Hero
-  'hero.eyebrow': 'AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築',
+  'hero.eyebrow': 'AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築',
+
+  // PROTOCOL (x402とは)
+  'protocol.title': 'x402とは',
+  'protocol.p1':    'HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。',
+  'protocol.p2':    'x402はこの未使用のHTTPステータスコードを再活性化し、AIエージェントや自律システムがHTTPネイティブに支払いを行えるようにするプロトコルです。サーバーが402を返すと、クライアントは支払いを完了してリクエストを再試行します。',
+  'protocol.cta':   '仕様を読む →',
+
+  // FEATURED
+  'feat.title':         '最新事例',
+  'feat.intro':         'x402 Inc.は、x402規格に対応したエンドポイントと独自データを作り、それを使う自律エージェントを動かしています。HTTP 402を共通の決済レールに、Base/Solana上のオンチェーン決済とERC-8004のエージェントidentityを土台にしています。事業は発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)の3層で構成されます。',
+  'feat.map.desc':      'x402対応の課金エンドポイントを集めた一覧。約19,000件超を毎日記録し、推移を時系列で追える。x402scan・agentic-market・ampersend・visa-cli・circle-marketplace など複数ソースを毎日cronで集約・正規化し、日次スナップショットとして保存。カテゴリ分類と利用頻度ランキングを持ち、REST と MCP の両方で配信するのでエージェントが直接読める。',
+  'feat.consume.desc':  'オンチェーンの身元(ERC-8004, agentId 55560)を持つエージェントが、毎朝データをper-callで購入し日次の判断を記録。identityはCircleのDeveloper-Controlled Wallet経由でオンチェーン登録。Base mainnetのUSDCで実際にper-call決済し、自社のx402エンドポイントを自社エージェントが消費する自己完結の検証ループ（外部需要ではなく決済と観測の往復を検証）。Railwayで毎日定刻に稼働。重要な判断の前にはWorld IDで本人性を確認し、人間が承認を挟む。',
+  'feat.produce.desc':  'エージェント向けに独自データと予想・採点を出す取り組み。2プロダクトで構成。',
+  'feat.osd.desc':      'Claude(Opus)が毎週、米国株と日本株を10銘柄ずつ選んで予想。各銘柄に判定日付きの数値カタリストを付け、GitHub Actionsのcronで週次ファイルをgit commit、Vercelが配信。判定日後に決算短信・適時開示と突き合わせてscorecardに採点を残す。日本株は銘柄コードの正リストでユニバースを制約し、出力を検証して常に10銘柄・全銘柄が対象内に収まるよう正規化。トークン化された米国株はオンチェーンのliquidity/holdersも観測。記録は消さずにgitへ残す設計で、このtrack recordがmoat。配信は /api/alpha/* の REST と MCP。',
+  'feat.jin.desc':      '東京のあるスーパーの店頭価格を毎日記録して作る独自の物価指数。10カテゴリ等加重のJevons幾何平均で日次指数化(基準日2026-06-04)、上流のCGPI(企業物価, Shift-JIS処理に対応)も取り込み、上流から店頭までを接続して観測。x402エンドポイントとして配信し、per-callで購入できる。',
 
   // USE CASES
   'uc.title': 'ユースケース',
@@ -80,6 +96,15 @@ const JA: T = {
   'vr.r4.title': 'AIエージェントがSubstackの有料記事を自律決済で読む時代——DripStackが示すx402の本命ユースケース',
   'vr.r5.title': 'a16zが22億ドルを投じる理由：クリプトが「革命」を捨て「実用主義」を選んだ5つの決定的理由',
   'vr.r6.title': 'Stripeが「AIの経済インフラ」を本気で作り始めた——Stripe Sessions 2026、288の発表を読み解く',
+  'vr.r7.title': 'ヘッドレスマーチャント普及後の未来図——エージェント決済はクレカで足りるのかx402 が要るのか',
+  'vr.r8.title': 'エージェント決済スタックの MCP / Wallet / CLI を比較する——Solana / Circle / MoonPay / OKX / Coinbase / Base',
+  'vr.r9.title': '企業 AI 決済とは何か——承認付きの「サブスク払いのオンチェーン化」として実装する',
+  'vr.r10.title': 'エージェント決済の未来予想図——2026 年から 2029 年への 4 つの移行',
+  'vr.r11.title': '需要は H→A、供給は A↔A——エージェント経済への先行投資をどう読むか',
+  'vr.r12.title': '企業 AI が「自律決済」に到達するのはいつか——プラグイン経由クレカという現実と、x402 自律決済までの距離',
+  'vr.r13.title': 'AI エージェントが稼いで使うバックエンド——5 月の業界進捗を踏まえて',
+  'vr.r14.title': 'AI エージェントに商品を売らせるためのバックエンド——決済 4 層構造とエコシステム接続',
+  'vr.r15.title': 'エージェンティックコマースのフェーズ論を更新する——Dan Shipper の 6 つの予測と、5 月の業界進捗',
 
   // PRODUCTS
   'prod.title':  'x402 Inc. が作ったもの',
@@ -110,20 +135,13 @@ const JA: T = {
   'prod.cryptocard.desc':      'AIエージェントがUSDCを稼いでVisaカードで使うデモ。Solana → Nevermined Agent Card → Visa（150M+加盟店）のループ。',
   'prod.cryptocard.verify':    '検証：x402で稼いだUSDCの法定通貨決済への出口経路',
 
-  // WHY WE BUILD
-  'why.title':      'なぜ今、これを作るのか',
-  'why.p1':         '2026年現在、エージェンティックコマースの実態は「Human → AI」の段階にあります。エージェントは人間の代理として動きますが、権限・予算・承認の出発点はまだ人間です。限度額付きクレカをエージェントに渡す——これが現在地です。',
-  'why.p2':         'しかしインフラは次の段階を準備しています。MCP（Anthropic）がCapability Discoveryを担い、A2A（Google）がエージェント間コミュニケーションを担い、x402が決済を担います。これらは競合ではなく役割分担です——異なるレイヤーが、エージェント同士が自律取引する AI ↔ AI（Agent-to-Agent）の世界を組み上げています。',
-  'why.p3':         'AI ↔ AI が実現するとき、決済媒体はプログラマブルでなければなりません。カードネットワークには「人間のカードホルダー」という前提が刻み込まれています。銀行振込には営業時間があります。x402プロトコルが解決しようとしているのは、まさに「1回のAPIコールに0.001ドル」という粒度の課金です。',
-  'why.conclusion': '今 Human → AI で動くインフラが、やがて AI ↔ AI の支払い層に転用される——x402 Inc.は、AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築を推進していきます。',
 
   // ENDPOINTS
   'ep.title':         'エンドポイント一覧',
-  'ep.intro':         'カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系、自律エージェントの4カテゴリで提供しています。',
+  'ep.intro':         'カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系の3カテゴリで提供しています。',
   'ep.cat.nansen':    '▸ Nansen × Claude',
   'ep.cat.trading':   '▸ Trading',
   'ep.cat.assetmgmt': '▸ Asset Management',
-  'ep.cat.agent':     '▸ Autonomous Agent',
   // Nansen × Claude
   'ep.smss.desc':   'Nansenのスマートマネーデータをx402でゲート。STRONG BUYシグナルを検知してエージェントに返す。Base・Polygon・Solana対応。',
   'ep.smss.verify': '検証：スマートマネーシグナルのx402従量課金モデル',
@@ -155,9 +173,6 @@ const JA: T = {
   'ep.amd.verify':  '検証：APACマクロ指標のリアルタイム統合分析',
   'ep.jrey.desc':   '日本不動産の利回り・空室・将来予測を国土交通省・e-Stat統合で提供。Base・Solana・Polygon・BNB対応。',
   'ep.jrey.verify': '検証：日本不動産利回りデータのx402従量課金配信',
-  // Autonomous Agent
-  'ep.aa.desc':     '19本のAPIを横断して毎朝6時JSTに自動起動する自律エージェント。x402で自律決済しながらシグナル検知・分析・執行を実行。AI ↔ AI ループの実証。',
-  'ep.aa.verify':   '検証：供給側（API）と需要側（エージェント）を自前で持つ AI ↔ AI ループ',
 
   // TOP SELLERS
   'ts.title':       'Top Sellers 分析',
@@ -173,7 +188,8 @@ const JA: T = {
   'ct.title': 'Human → AI から AI ↔ AI へ——<br>この移行とともに、新しいビジネス機会を一緒に探求しませんか',
 
   // FOOTER
-  'ft.nav.usecases':       'ユースケース',
+  'ft.nav.featured':       '最新事例',
+  'ft.nav.about':          'x402とは',
   'ft.nav.market':         '市場論拠',
   'ft.nav.vision':         '考察・調査',
   'ft.nav.products':       'プロダクト',
@@ -187,14 +203,30 @@ const JA: T = {
 
 const EN: T = {
   // Nav
-  'nav.usecases':  'Use Cases',
+  'nav.featured':  'Latest Cases',
+  'nav.about':     'What Is x402',
   'nav.market':    'Market Thesis',
   'nav.vision':    'Vision & Research',
   'nav.products':  'Products',
   'nav.endpoints': 'Endpoints',
 
   // Hero
-  'hero.eyebrow': 'Building the API Ecosystem and Payment Infrastructure Autonomously Selected by AI Agents',
+  'hero.eyebrow': 'Building the API Ecosystem and Payment Infrastructure<br>Autonomously Selected by AI Agents',
+
+  // PROTOCOL (What is x402)
+  'protocol.title': 'What Is x402',
+  'protocol.p1':    'The HTTP 402 "Payment Required" status code was reserved back in 1997, yet sat unused for nearly 30 years.',
+  'protocol.p2':    'x402 reactivates this dormant HTTP status code, letting AI agents and autonomous systems pay natively over HTTP. When a server returns 402, the client completes payment and retries the request.',
+  'protocol.cta':   'Read the spec →',
+
+  // FEATURED
+  'feat.title':         'Latest Cases',
+  'feat.intro':         'x402 Inc. builds x402-compatible endpoints and proprietary data, and runs the autonomous agents that consume them. HTTP 402 is the shared payment rail, built on onchain settlement on Base/Solana and ERC-8004 agent identity. The business spans three layers: discovery (MAP), autonomous consumption (CONSUME), and data generation (PRODUCE).',
+  'feat.map.desc':      'A directory of x402-enabled paid endpoints. Records 19,000+ entries daily and tracks their movement over time. Multiple sources — x402scan, agentic-market, ampersend, visa-cli, circle-marketplace — are aggregated and normalized by a daily cron and stored as daily snapshots. It carries category classification and usage-frequency rankings, and is served over both REST and MCP so agents can read it directly.',
+  'feat.consume.desc':  'An agent with an onchain identity (ERC-8004, agentId 55560) buys data per-call every morning and records its daily decisions. The identity is registered onchain via Circle\'s Developer-Controlled Wallet. It settles real per-call payments in USDC on Base mainnet — a self-contained validation loop where our own agent consumes our own x402 endpoints (validating the round-trip of settlement and observation, not external demand). It runs on Railway on a daily schedule. Before critical decisions, World ID confirms personhood and a human approval step is inserted.',
+  'feat.produce.desc':  'An effort to publish proprietary data, forecasts, and scoring for agents. Composed of two products.',
+  'feat.osd.desc':      'Every week, Claude (Opus) selects 10 US stocks and 10 Japanese stocks and forecasts them. Each ticker gets a numeric catalyst with a judgment date; a GitHub Actions cron git-commits the weekly file and Vercel serves it. After the judgment date, results are reconciled against earnings reports and timely disclosures, leaving a score on the scorecard. Japanese stocks are constrained to a canonical ticker-code universe, with output validated and normalized so it always holds exactly 10 in-universe tickers. For tokenized US stocks, onchain liquidity/holders are also observed. Records are never deleted — kept in git by design — and this track record is the moat. Served over /api/alpha/* REST and MCP.',
+  'feat.jin.desc':      'A proprietary price index built by recording the shelf prices of one Tokyo supermarket every day. Daily indexation via an equal-weighted Jevons geometric mean across 10 categories (base date 2026-06-04), also ingesting upstream CGPI (corporate goods prices, with Shift-JIS handling) to connect upstream to the shelf. Served as an x402 endpoint and purchasable per-call.',
 
   // USE CASES
   'uc.title': 'Use Cases',
@@ -264,6 +296,15 @@ const EN: T = {
   'vr.r4.title': 'When AI Agents Autonomously Pay to Read Substack Articles — The Killer x402 Use Case DripStack Reveals',
   'vr.r5.title': 'Why a16z Is Betting $2.2B: 5 Decisive Reasons Crypto Chose Pragmatism Over Revolution',
   'vr.r6.title': 'Stripe Is Seriously Building "AI\'s Economic Infrastructure" — Decoding 288 Announcements from Stripe Sessions 2026',
+  'vr.r7.title': 'The Future After Headless Merchants Go Mainstream — Are Credit Cards Enough for Agent Payments, or Is x402 Needed?',
+  'vr.r8.title': 'Comparing MCP / Wallet / CLI Across the Agent Payment Stack — Solana / Circle / MoonPay / OKX / Coinbase / Base',
+  'vr.r9.title': 'What Is Enterprise AI Payment? — Implementing It as Approval-Gated "On-chain Subscription Billing"',
+  'vr.r10.title': 'A Forecast for Agent Payments — Four Transitions from 2026 to 2029',
+  'vr.r11.title': 'Demand Is H→A, Supply Is A↔A — How to Read Early Investment in the Agent Economy',
+  'vr.r12.title': 'When Will Enterprise AI Reach "Autonomous Payment"? — Plugin-Routed Credit Cards Today and the Distance to x402 Autonomous Payment',
+  'vr.r13.title': 'The Backend Where AI Agents Earn and Spend — In Light of May\'s Industry Progress',
+  'vr.r14.title': 'The Backend for Letting AI Agents Sell Products — A Four-Layer Payment Structure and Ecosystem Connectivity',
+  'vr.r15.title': 'Updating the Phase Theory of Agentic Commerce — Dan Shipper\'s Six Predictions and May\'s Industry Progress',
 
   // PRODUCTS
   'prod.title':  'What x402 Inc. Has Built',
@@ -294,20 +335,13 @@ const EN: T = {
   'prod.cryptocard.desc':      'A demo of AI agents earning USDC and spending it via a Visa card. Solana → Nevermined Agent Card → Visa (150M+ merchants).',
   'prod.cryptocard.verify':    'Proof of concept: exit route from x402-earned USDC to fiat currency payments',
 
-  // WHY WE BUILD
-  'why.title':      'Why We Build This Now',
-  'why.p1':         'As of 2026, agentic commerce is still in the "Human → AI" phase. Agents act as human proxies, but the origin of authority, budget, and approval remains human. Handing a capped credit card to an agent — that is the current state.',
-  'why.p2':         'But infrastructure is preparing for the next phase. MCP (Anthropic) handles Capability Discovery, A2A (Google) handles agent-to-agent communication, and x402 handles payments. These are not competing — they are a division of roles. Different layers assembling the AI ↔ AI (Agent-to-Agent) world where agents trade autonomously.',
-  'why.p3':         'When AI ↔ AI arrives, the payment medium must be programmable. Card networks are hardwired with the assumption of a human cardholder. Bank transfers have business hours. The x402 protocol addresses exactly this: billing at the granularity of "$0.001 per API call."',
-  'why.conclusion': 'The infrastructure running on Human → AI today will eventually convert into the AI ↔ AI payment layer — x402 Inc. is advancing the construction of the API ecosystem and payment infrastructure autonomously chosen by AI agents.',
 
   // ENDPOINTS
   'ep.title':         'Endpoints',
-  'ep.intro':         'x402 Inc. products organized by category — a Nansen × Claude data layer, Trading, Asset Management, and Autonomous Agent.',
+  'ep.intro':         'x402 Inc. products organized by category — a Nansen × Claude data layer, Trading, and Asset Management.',
   'ep.cat.nansen':    '▸ Nansen × Claude',
   'ep.cat.trading':   '▸ Trading',
   'ep.cat.assetmgmt': '▸ Asset Management',
-  'ep.cat.agent':     '▸ Autonomous Agent',
   // Nansen × Claude
   'ep.smss.desc':   'Nansen smart money data gated by x402. Detects STRONG BUY signals and returns them to agents. Supports Base, Polygon, and Solana.',
   'ep.smss.verify': 'Proof of concept: x402 pay-per-query model for smart money signals',
@@ -339,9 +373,6 @@ const EN: T = {
   'ep.amd.verify':  'Proof of concept: real-time integrated analysis of APAC macro indicators',
   'ep.jrey.desc':   'Provides Japanese real estate yield, vacancy rates, and forecasts via MLIT and e-Stat integration. Supports Base, Solana, Polygon, and BNB.',
   'ep.jrey.verify': 'Proof of concept: x402 pay-per-use delivery of Japan real estate yield data',
-  // Autonomous Agent
-  'ep.aa.desc':     'An autonomous agent that auto-starts daily at 6AM JST across 19 APIs. Executes signal detection, analysis, and execution while settling autonomously via x402. AI ↔ AI loop in practice.',
-  'ep.aa.verify':   'Proof of concept: AI ↔ AI loop with both supply-side (APIs) and demand-side (agent) self-owned',
 
   // TOP SELLERS
   'ts.title':       'Top Sellers Analysis',
@@ -357,7 +388,8 @@ const EN: T = {
   'ct.title': 'From Human → AI to AI ↔ AI ——<br>Let\'s explore new business opportunities together as this transition unfolds',
 
   // FOOTER
-  'ft.nav.usecases':       'Use Cases',
+  'ft.nav.featured':       'Latest Cases',
+  'ft.nav.about':          'What Is x402',
   'ft.nav.market':         'Market Thesis',
   'ft.nav.vision':         'Vision & Research',
   'ft.nav.products':       'Products',

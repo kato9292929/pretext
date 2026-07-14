@@ -12,7 +12,7 @@ x402 open standard — enabling permissionless, onchain payments directly inside
 request/response cycles.
 
 **Founder & CEO:** Masato Kato (加藤 雅人)
-**Headquarters:** 5-10-16 Shirokanedai, Minato-ku, Tokyo 108-0071, Japan
+**Headquarters:** Hamamatsucho Dia Building 2F, 2-2-15 Hamamatsucho, Minato-ku, Tokyo 105-0013, Japan
 **Website:** https://x402jp.com
 **Protocol reference:** https://x402.org
 

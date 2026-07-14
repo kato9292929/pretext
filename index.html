@@ -33,11 +33,12 @@
   <nav class="nav" id="nav">
     <a class="nav-logo" href="/">x402 <span>Inc.</span></a>
     <ul class="nav-links">
-      <li><a href="#features" data-i18n="nav.usecases">ユースケース</a></li>
+      <li><a href="#featured" data-i18n="nav.featured">最新事例</a></li>
+      <li><a href="#about" data-i18n="nav.about">x402とは</a></li>
       <li><a href="#market" data-i18n="nav.market">市場論拠</a></li>
-      <li><a href="#vision" data-i18n="nav.vision">考察・調査</a></li>
       <li><a href="#products" data-i18n="nav.products">プロダクト</a></li>
       <li><a href="#endpoints" data-i18n="nav.endpoints">エンドポイント</a></li>
+      <li><a href="#vision" data-i18n="nav.vision">考察・調査</a></li>
     </ul>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="ja" aria-pressed="true">JP</button>
@@ -52,10 +53,443 @@
   <!-- ── Hero ─────────────────────────────────────────────────── -->
   <section id="hero" class="hero">
     <div class="hero-header">
-      <p class="hero-eyebrow" data-i18n="hero.eyebrow">AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築</p>
+      <p class="hero-eyebrow" data-i18n-html="hero.eyebrow">AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築</p>
       <h1 class="hero-title">x402</h1>
     </div>
     <div class="hero-scroll-hint">scroll ↓</div>
+  </section>
+
+  <!-- ── Featured ─────────────────────────────────────────────────── -->
+  <section id="featured" class="section">
+    <div class="container">
+      <p class="eyebrow">FEATURED</p>
+      <h2 class="section-title" data-i18n="feat.title">最新事例</h2>
+      <p class="products-intro" data-i18n="feat.intro">x402 Inc.は、x402規格に対応したエンドポイントと独自データを作り、それを使う自律エージェントを動かしています。HTTP 402を共通の決済レールに、Base/Solana上のオンチェーン決済とERC-8004のエージェントidentityを土台にしています。事業は発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)の3層で構成されます。</p>
+
+      <!-- 01 · MAP -->
+      <div class="phase-block layer-block">
+        <div class="phase-label">
+          <span class="phase-num">01 · MAP</span>
+          <span class="phase-title">x402 Endpoint</span>
+        </div>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Endpoint</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="feat.map.desc">x402対応の課金エンドポイントを集めた一覧。約19,000件超を毎日記録し、推移を時系列で追える。x402scan・agentic-market・ampersend・visa-cli・circle-marketplace など複数ソースを毎日cronで集約・正規化し、日次スナップショットとして保存。カテゴリ分類と利用頻度ランキングを持ち、REST と MCP の両方で配信するのでエージェントが直接読める。</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nb30efb0e7e92" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://x402endpoint.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
+              <a href="https://github.com/kato9292929/endpoint" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 · CONSUME -->
+      <div class="phase-block layer-block">
+        <div class="phase-label">
+          <span class="phase-num">02 · CONSUME</span>
+          <span class="phase-title">x402 Autonomous Agent</span>
+        </div>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Autonomous Agent</h3>
+              <span class="railway-badge">Railway ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="feat.consume.desc">オンチェーンの身元(ERC-8004, agentId 55560)を持つエージェントが、毎朝データをper-callで購入し日次の判断を記録。identityはCircleのDeveloper-Controlled Wallet経由でオンチェーン登録。Base mainnetのUSDCで実際にper-call決済し、自社のx402エンドポイントを自社エージェントが消費する自己完結の検証ループ（外部需要ではなく決済と観測の往復を検証）。Railwayで毎日定刻に稼働。重要な判断の前にはWorld IDで本人性を確認し、人間が承認を挟む。</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nfe50d4acfcd8" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/x402-Autonomous-Agent-" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 · PRODUCE -->
+      <div class="phase-block layer-block">
+        <div class="phase-label">
+          <span class="phase-num">03 · PRODUCE</span>
+          <span class="phase-title">AlternaData for agents</span>
+        </div>
+        <p class="products-intro" style="margin-top:0" data-i18n="feat.produce.desc">エージェント向けに独自データと予想・採点を出す取り組み。2プロダクトで構成。</p>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">Onchain Stock Data</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="feat.osd.desc">Claude(Opus)が毎週、米国株と日本株を10銘柄ずつ選んで予想。各銘柄に判定日付きの数値カタリストを付け、GitHub Actionsのcronで週次ファイルをgit commit、Vercelが配信。判定日後に決算短信・適時開示と突き合わせてscorecardに採点を残す。日本株は銘柄コードの正リストでユニバースを制約し、出力を検証して常に10銘柄・全銘柄が対象内に収まるよう正規化。トークン化された米国株はオンチェーンのliquidity/holdersも観測。記録は消さずにgitへ残す設計で、このtrack recordがmoat。配信は /api/alpha/* の REST と MCP。</p>
+            <p class="product-price"><span class="product-price-amount">$0.01</span>/コール・Analyst <span class="product-price-amount">$0.50〜$3.00</span></p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/n28686d262552" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://osd-coral.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
+              <a href="https://github.com/kato9292929/onchain-stock-data" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">Japan Inflation Nowcast</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="feat.jin.desc">東京のあるスーパーの店頭価格を毎日記録して作る独自の物価指数。10カテゴリ等加重のJevons幾何平均で日次指数化(基準日2026-06-04)、上流のCGPI(企業物価, Shift-JIS処理に対応)も取り込み、上流から店頭までを接続して観測。x402エンドポイントとして配信し、per-callで購入できる。</p>
+            <div class="product-links">
+              <a href="https://jin-orcin-pi.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Protocol (x402とは) ──────────────────────────────────────── -->
+  <section id="about" class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">PROTOCOL</p>
+      <h2 class="section-title" data-i18n="protocol.title">x402とは</h2>
+      <div class="about-grid">
+        <div class="about-lead">
+          <p data-i18n="protocol.p1">HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。</p>
+          <p data-i18n="protocol.p2">x402はこの未使用のHTTPステータスコードを再活性化し、AIエージェントや自律システムがHTTPネイティブに支払いを行えるようにするプロトコルです。サーバーが402を返すと、クライアントは支払いを完了してリクエストを再試行します。</p>
+          <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener" data-i18n="protocol.cta">仕様を読む →</a>
+        </div>
+        <div class="about-code">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-title">HTTP Flow</span>
+            </div>
+            <pre><code><span class="c-dim">→</span> GET /api/data HTTP/1.1
+  Host: api.example.com
+
+<span class="c-gold">←</span> <span class="c-gold">HTTP/1.1 402 Payment Required</span>
+  X-Payment-Required: version=1
+  X-Payment-Amount: 0.001
+  X-Payment-Token: USDC
+
+<span class="c-dim">→</span> GET /api/data HTTP/1.1
+  X-Payment: &lt;signed_payload&gt;
+
+<span class="c-green">←</span> <span class="c-green">HTTP/1.1 200 OK</span>
+  Content-Type: application/json</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Use Cases（x402とはに統合） -->
+      <div class="usecases-merged">
+        <p class="eyebrow">USE CASES</p>
+        <h2 class="section-title" data-i18n="uc.title">ユースケース</h2>
+
+        <!-- パラダイム対比 -->
+        <div class="paradigm-split">
+          <div class="paradigm-card paradigm-old">
+            <p class="paradigm-badge" data-i18n="paradigm.old.badge">現在の主流</p>
+            <h3 data-i18n="paradigm.old.title">「人間の代わりに注文」</h3>
+            <p data-i18n-html="paradigm.old.desc">クレカ × AIエージェント<br>EC・小売・代行購入</p>
+            <p class="paradigm-example" data-i18n="paradigm.old.example">GAP × Gemini × Google Pay など</p>
+          </div>
+          <div class="paradigm-arrow">→</div>
+          <div class="paradigm-card paradigm-new">
+            <p class="paradigm-badge" data-i18n="paradigm.new.badge">新しいレイヤー</p>
+            <h3 data-i18n="paradigm.new.title">「自律的な購入」</h3>
+            <p data-i18n-html="paradigm.new.desc">x402 × MCP × Agent Wallet<br>APIリソースの自律調達</p>
+            <p class="paradigm-example" data-i18n="paradigm.new.example">AIが仕事に必要なリソースを自ら買う</p>
+          </div>
+        </div>
+
+        <!-- AIエージェントがx402で買えるもの -->
+        <div class="agent-buy-wrap">
+          <h3 data-i18n="ab.title">AIエージェントがx402で買えるもの</h3>
+          <div class="agent-buy-grid">
+
+            <div class="agent-buy-card">
+              <p class="agent-buy-cat" data-i18n="ab.cat1">データ・情報</p>
+              <ul>
+                <li data-i18n="ab.cat1.l1">リアルタイム気象・地震・津波情報</li>
+                <li data-i18n="ab.cat1.l2">不動産地価・取引データ（APAC5カ国）</li>
+                <li data-i18n="ab.cat1.l3">法人KYC・AMLスクリーニング</li>
+                <li data-i18n="ab.cat1.l4">為替・暗号資産価格・マクロ経済統計</li>
+                <li data-i18n="ab.cat1.l5">ニュース・マーケットブリーフィング</li>
+              </ul>
+            </div>
+
+            <div class="agent-buy-card">
+              <p class="agent-buy-cat" data-i18n="ab.cat2">デジタルサービス</p>
+              <ul>
+                <li data-i18n="ab.cat2.l1">ドメイン登録・空き確認</li>
+                <li data-i18n="ab.cat2.l2">SMS送信・メール検証</li>
+                <li data-i18n="ab.cat2.l3">IP情報・位置情報</li>
+                <li data-i18n="ab.cat2.l4">テキスト翻訳（日英中韓）</li>
+                <li data-i18n="ab.cat2.l5">Webスクリーンショット</li>
+              </ul>
+            </div>
+
+            <div class="agent-buy-card">
+              <p class="agent-buy-cat" data-i18n="ab.cat3">コンピュート・推論</p>
+              <ul>
+                <li data-i18n="ab.cat3.l1">LLM推論（トークン単位課金）</li>
+                <li data-i18n="ab.cat3.l2">GPUジョブ・ヘッドレスブラウザ</li>
+                <li data-i18n="ab.cat3.l3">音声認識・画像処理</li>
+              </ul>
+            </div>
+
+            <div class="agent-buy-card">
+              <p class="agent-buy-cat" data-i18n="ab.cat4">コンテンツ・レポート</p>
+              <ul>
+                <li data-i18n="ab.cat4.l1">有料記事・調査レポート</li>
+                <li data-i18n="ab.cat4.l2">不動産リサーチレポート（AI生成）</li>
+                <li data-i18n="ab.cat4.l3">マーケットアナリシス</li>
+              </ul>
+            </div>
+
+            <div class="agent-buy-card">
+              <p class="agent-buy-cat" data-i18n="ab.cat5">オンチェーンデータ</p>
+              <ul>
+                <li data-i18n="ab.cat5.l1">DeFiイールドスコア・プロトコルリスク</li>
+                <li data-i18n="ab.cat5.l2">トレーディングシグナル・価格予測</li>
+                <li data-i18n="ab.cat5.l3">ウォレットレピュテーションスコア</li>
+              </ul>
+            </div>
+
+          </div>
+          <p class="agent-buy-note" data-i18n="ab.note">月額契約もAPIキーも不要。ウォレット残高があれば即アクセス。</p>
+        </div>
+
+    
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Market Thesis ────────────────────────────────────────── -->
+  <section id="market" class="section">
+    <div class="container">
+      <p class="eyebrow">MARKET THESIS</p>
+      <h2 class="section-title" data-i18n="mt.title">x402 成長性分析</h2>
+
+      <!-- Human → AI から AI ↔ AI へ -->
+      <div class="thesis-block">
+        <h3 class="thesis-sub" data-i18n="mt.phase.title">Human → AI から AI ↔ AI へ——3つのフェーズ</h3>
+        <div class="timeline">
+
+          <div class="tl-item tl-current">
+            <div class="tl-phase" data-i18n="tl.phase1">Phase 1</div>
+            <div class="tl-period" data-i18n="tl.period1">Human → AI（現在〜2027年）</div>
+            <p class="tl-desc" data-i18n-html="tl.desc1">「人間が権限を委任し、エージェントが執行する」<br>限度額付きカード委任・プリロードウォレット・x402のAPIゲーティング。エージェントは人間の延長として動きます。<strong>x402はすでにここで機能しています。</strong></p>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-phase" data-i18n="tl.phase2">Phase 2</div>
+            <div class="tl-period" data-i18n="tl.period2">AI ↔ AI 企業間（2027〜2029年）</div>
+            <p class="tl-desc" data-i18n-html="tl.desc2">「エージェントが他のエージェントと条件交渉・決済まで自律完結（B2B）」<br>Google A2A・Stripe MPPがエージェント間の取引フレームワークを整備中。B2B意思決定者の53%が AI ↔ AI を許可すると回答済み。x402が決済レールとして採用されるシナリオが最も現実的です。</p>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-phase" data-i18n="tl.phase3">Phase 3</div>
+            <div class="tl-period" data-i18n="tl.period3">AI ↔ AI 完全自律（2029年以降）</div>
+            <p class="tl-desc" data-i18n-html="tl.desc3">「エージェントが独立した経済主体として市場に参加する」<br>信頼スコアリング・規制フレームワーク・エージェントIDの整備が条件。技術基盤はすでに今のx402の上に立っています。</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- System of Intelligence -->
+      <div class="thesis-block">
+        <h3 class="thesis-sub" data-i18n="soi.title">System of Intelligenceが消費するAPI</h3>
+        <p class="thesis-body" data-i18n="soi.body">AIエージェントが営業担当者の代わりに毎朝「優先順位付きフィード」を生成する時代が来ます。そのフィードには外部データが必要です——業界ニュース・競合動向・規制情報・リアルタイムデータ。月額制では粒度が粗すぎます。System of Intelligenceは固有のデータをAPIレイヤーで消費します——エージェントが自律的に選び、その場で決済するAPIが求められます。</p>
+        <div class="thesis-conditions">
+          <p class="thesis-conditions-label" data-i18n="soi.cond.label">「エージェントが毎回自律的に選ぶAPI」の条件</p>
+          <ul>
+            <li data-i18n="soi.cond.1">固有のデータを持つ（汎用データはAIが再現できる）</li>
+            <li data-i18n="soi.cond.2">エージェント向けスキーマで提供される</li>
+            <li data-i18n="soi.cond.3">使われるほど蓄積されるトランザクションデータがある</li>
+            <li data-i18n="soi.cond.4">実行フローに接続されている（データ提供→アクション→フィードバック）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Products ─────────────────────────────────────────────── -->
+  <section id="products" class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">PRODUCTS</p>
+      <h2 class="section-title" data-i18n="prod.title">x402 Inc. が作ったもの</h2>
+      <p class="products-intro" data-i18n="prod.intro1">x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。今 Human → AI で動くインフラが、やがて AI ↔ AI の決済層に転用される——その連続性を証明するために、プロダクトを動かし続けています。</p>
+      <p class="products-intro" style="margin-top:8px" data-i18n="prod.intro2">Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。</p>
+
+      <!-- Phase 1 -->
+      <div class="phase-block">
+        <div class="phase-label">
+          <span class="phase-num">Phase 1</span>
+          <span class="phase-title" data-i18n="phase1.title">データインフラ層</span>
+        </div>
+        <div class="products-grid">
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">Japan x402 APIs</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.japan-apis.desc">日本のデータAPIにAIエージェント向け自律決済を実装。18本のエンドポイント（気象・地震・不動産・法人・人口統計等）をx402対応で提供。</p>
+            <p class="product-verify" data-i18n="prod.japan-apis.verify">検証：公共データAPIのx402ゲート化と従量課金モデルの成立</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/ncf3a3c9aed6f" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://apijapan.vercel.app" class="product-link" target="_blank" rel="noopener">URL →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Oracle</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.oracle.desc">APACの不動産地価データをChainlink・Pyth互換のprice feed形式でオンチェーンに提供。日本・シンガポール・香港・オーストラリア・韓国の5カ国対応。</p>
+            <p class="product-verify" data-i18n="prod.oracle.verify">検証：オフチェーンデータのオンチェーン価格フィード化とx402課金の両立</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/n08beb0054097" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/x402-Oracle" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">APAC KYC API</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.kyc.desc">APAC5カ国の公的法人データベースを横断するx402対応KYC API。AMLスクリーニング・制裁リスト照合付き。$1〜$3/call。</p>
+            <p class="product-verify" data-i18n="prod.kyc.verify">検証：高単価・低頻度APIにおけるx402の経済合理性</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/n3eb83f96b787" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/APAC_KYC_API" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">Japan Market Bot</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.jmbot.desc">エージェントがエージェントに情報を売る—— AI ↔ AI 経済の最初のデモ。Japan Data APIを毎時自動取得してブリーフを生成・x402で販売。</p>
+            <p class="product-verify" data-i18n="prod.jmbot.verify">検証：AI ↔ AI 取引の最小プロトタイプ（エージェントがエージェントに売る）</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/n6bb52ac9481b" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/japanmarket_bot" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">Japan Real Estate Agent</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.jrea.desc">複数APIを束ねてリサーチレポートを生成・販売するエージェント。x402エコシステムの「統合層」として機能。</p>
+            <p class="product-verify" data-i18n="prod.jrea.verify">検証：複数APIを束ねた高付加価値レポートの自律生成・販売フロー</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nbb0a47440083" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/japan_rwa" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-block">
+        <div class="phase-label">
+          <span class="phase-num">Phase 2</span>
+          <span class="phase-title" data-i18n="phase2.title">エコシステム層</span>
+        </div>
+        <div class="products-grid">
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Directory</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.directory.desc">AIには課金されるx402エコシステム日本語解説サイト。人間は無料・AIエージェントはBase上のUSDCで自動課金。</p>
+            <p class="product-verify" data-i18n="prod.directory.verify">検証：人間→無料・AIエージェント→自動課金という二層モデル</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/n69a461b4023d" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/x402-directory" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Ecosystem Loop</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.loop.desc">自分のプロダクト群を互いに叩き合わせるCronジョブ。x402エコシステム内でtxを循環させる設計。</p>
+            <p class="product-verify" data-i18n="prod.loop.verify">検証：自エコシステム内でのtx循環と実装正当性の継続証明</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nc55c57044046" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/x402-ecosystem-loop" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">APAC Digital Commerce API</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.apac-digital.desc">月額SaaSをリクエスト単位に分解するx402の実験。ドメイン確認・SMS・翻訳・メール検証を従量課金で提供。</p>
+            <p class="product-verify" data-i18n="prod.apac-digital.verify">検証：月額SaaSをリクエスト単位に分解するunbundlingモデル</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nb1d1ddcd488a" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/apac-digital-commerce" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-block">
+        <div class="phase-label">
+          <span class="phase-num">Phase 3</span>
+          <span class="phase-title" data-i18n="phase3.title">プライバシー・決済出口</span>
+        </div>
+        <div class="products-grid">
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Private Gateway</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.gateway.desc">Arcium MPCを使ったx402の決済検証プライバシーレイヤー。ウォレット・金額・エンドポイントを秘匿化。Colosseum Frontier提出済み。</p>
+            <p class="product-verify" data-i18n="prod.gateway.verify">検証：決済プライバシーレイヤーの技術的実現可能性</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nac47800af431" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/Arcium" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-card-top">
+              <h3 class="product-name">x402 Crypto Card</h3>
+              <span class="http402-badge">HTTP/1.1 402 ✓</span>
+            </div>
+            <p class="product-desc" data-i18n="prod.cryptocard.desc">AIエージェントがUSDCを稼いでVisaカードで使うデモ。Solana → Nevermined Agent Card → Visa（150M+加盟店）のループ。</p>
+            <p class="product-verify" data-i18n="prod.cryptocard.verify">検証：x402で稼いだUSDCの法定通貨決済への出口経路</p>
+            <div class="product-links">
+              <a href="https://note.com/x402inc/n/nc7dd6f929186" class="product-link" target="_blank" rel="noopener">note →</a>
+              <a href="https://github.com/kato9292929/x402cryptocard" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <!-- ── Endpoints ────────────────────────────────────────────────── -->
@@ -63,7 +497,7 @@
     <div class="container">
       <p class="eyebrow">ENDPOINTS</p>
       <h2 class="section-title" data-i18n="ep.title">エンドポイント一覧</h2>
-      <p class="products-intro" data-i18n="ep.intro">カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系、自律エージェントの4カテゴリで提供しています。</p>
+      <p class="products-intro" data-i18n="ep.intro">カテゴリ別に整理された x402 Inc. のプロダクト群です。NansenデータをClaudeで解析するデータレイヤー、Trading系、Asset Management系の3カテゴリで提供しています。</p>
 
       <!-- Nansen × Claude -->
       <div class="ep-category">
@@ -285,160 +719,6 @@
         </div>
       </div>
 
-      <!-- Autonomous Agent -->
-      <div class="ep-category">
-        <h3 class="ep-category-title" data-i18n="ep.cat.agent">▸ Autonomous Agent</h3>
-        <div class="products-grid">
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">x402 Autonomous Agent</h3>
-              <span class="railway-badge">Railway ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="ep.aa.desc">19本のAPIを横断して毎朝6時JSTに自動起動する自律エージェント。x402で自律決済しながらシグナル検知・分析・執行を実行。AI ↔ AI ループの実証。</p>
-            <p class="product-verify" data-i18n="ep.aa.verify">検証：供給側（API）と需要側（エージェント）を自前で持つ AI ↔ AI ループ</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/nfe50d4acfcd8" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/x402-Autonomous-Agent-" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── Features / Use cases ──────────────────────────────────── -->
-  <section id="features" class="section section-dark">
-    <div class="container">
-      <p class="eyebrow">USE CASES</p>
-      <h2 class="section-title" data-i18n="uc.title">ユースケース</h2>
-
-      <!-- パラダイム対比 -->
-      <div class="paradigm-split">
-        <div class="paradigm-card paradigm-old">
-          <p class="paradigm-badge" data-i18n="paradigm.old.badge">現在の主流</p>
-          <h3 data-i18n="paradigm.old.title">「人間の代わりに注文」</h3>
-          <p data-i18n-html="paradigm.old.desc">クレカ × AIエージェント<br>EC・小売・代行購入</p>
-          <p class="paradigm-example" data-i18n="paradigm.old.example">GAP × Gemini × Google Pay など</p>
-        </div>
-        <div class="paradigm-arrow">→</div>
-        <div class="paradigm-card paradigm-new">
-          <p class="paradigm-badge" data-i18n="paradigm.new.badge">新しいレイヤー</p>
-          <h3 data-i18n="paradigm.new.title">「自律的な購入」</h3>
-          <p data-i18n-html="paradigm.new.desc">x402 × MCP × Agent Wallet<br>APIリソースの自律調達</p>
-          <p class="paradigm-example" data-i18n="paradigm.new.example">AIが仕事に必要なリソースを自ら買う</p>
-        </div>
-      </div>
-
-      <!-- AIエージェントがx402で買えるもの -->
-      <div class="agent-buy-wrap">
-        <h3 data-i18n="ab.title">AIエージェントがx402で買えるもの</h3>
-        <div class="agent-buy-grid">
-
-          <div class="agent-buy-card">
-            <p class="agent-buy-cat" data-i18n="ab.cat1">データ・情報</p>
-            <ul>
-              <li data-i18n="ab.cat1.l1">リアルタイム気象・地震・津波情報</li>
-              <li data-i18n="ab.cat1.l2">不動産地価・取引データ（APAC5カ国）</li>
-              <li data-i18n="ab.cat1.l3">法人KYC・AMLスクリーニング</li>
-              <li data-i18n="ab.cat1.l4">為替・暗号資産価格・マクロ経済統計</li>
-              <li data-i18n="ab.cat1.l5">ニュース・マーケットブリーフィング</li>
-            </ul>
-          </div>
-
-          <div class="agent-buy-card">
-            <p class="agent-buy-cat" data-i18n="ab.cat2">デジタルサービス</p>
-            <ul>
-              <li data-i18n="ab.cat2.l1">ドメイン登録・空き確認</li>
-              <li data-i18n="ab.cat2.l2">SMS送信・メール検証</li>
-              <li data-i18n="ab.cat2.l3">IP情報・位置情報</li>
-              <li data-i18n="ab.cat2.l4">テキスト翻訳（日英中韓）</li>
-              <li data-i18n="ab.cat2.l5">Webスクリーンショット</li>
-            </ul>
-          </div>
-
-          <div class="agent-buy-card">
-            <p class="agent-buy-cat" data-i18n="ab.cat3">コンピュート・推論</p>
-            <ul>
-              <li data-i18n="ab.cat3.l1">LLM推論（トークン単位課金）</li>
-              <li data-i18n="ab.cat3.l2">GPUジョブ・ヘッドレスブラウザ</li>
-              <li data-i18n="ab.cat3.l3">音声認識・画像処理</li>
-            </ul>
-          </div>
-
-          <div class="agent-buy-card">
-            <p class="agent-buy-cat" data-i18n="ab.cat4">コンテンツ・レポート</p>
-            <ul>
-              <li data-i18n="ab.cat4.l1">有料記事・調査レポート</li>
-              <li data-i18n="ab.cat4.l2">不動産リサーチレポート（AI生成）</li>
-              <li data-i18n="ab.cat4.l3">マーケットアナリシス</li>
-            </ul>
-          </div>
-
-          <div class="agent-buy-card">
-            <p class="agent-buy-cat" data-i18n="ab.cat5">オンチェーンデータ</p>
-            <ul>
-              <li data-i18n="ab.cat5.l1">DeFiイールドスコア・プロトコルリスク</li>
-              <li data-i18n="ab.cat5.l2">トレーディングシグナル・価格予測</li>
-              <li data-i18n="ab.cat5.l3">ウォレットレピュテーションスコア</li>
-            </ul>
-          </div>
-
-        </div>
-        <p class="agent-buy-note" data-i18n="ab.note">月額契約もAPIキーも不要。ウォレット残高があれば即アクセス。</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── Market Thesis ────────────────────────────────────────── -->
-  <section id="market" class="section">
-    <div class="container">
-      <p class="eyebrow">MARKET THESIS</p>
-      <h2 class="section-title" data-i18n="mt.title">x402 成長性分析</h2>
-
-      <!-- Human → AI から AI ↔ AI へ -->
-      <div class="thesis-block">
-        <h3 class="thesis-sub" data-i18n="mt.phase.title">Human → AI から AI ↔ AI へ——3つのフェーズ</h3>
-        <div class="timeline">
-
-          <div class="tl-item tl-current">
-            <div class="tl-phase" data-i18n="tl.phase1">Phase 1</div>
-            <div class="tl-period" data-i18n="tl.period1">Human → AI（現在〜2027年）</div>
-            <p class="tl-desc" data-i18n-html="tl.desc1">「人間が権限を委任し、エージェントが執行する」<br>限度額付きカード委任・プリロードウォレット・x402のAPIゲーティング。エージェントは人間の延長として動きます。<strong>x402はすでにここで機能しています。</strong></p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-phase" data-i18n="tl.phase2">Phase 2</div>
-            <div class="tl-period" data-i18n="tl.period2">AI ↔ AI 企業間（2027〜2029年）</div>
-            <p class="tl-desc" data-i18n-html="tl.desc2">「エージェントが他のエージェントと条件交渉・決済まで自律完結（B2B）」<br>Google A2A・Stripe MPPがエージェント間の取引フレームワークを整備中。B2B意思決定者の53%が AI ↔ AI を許可すると回答済み。x402が決済レールとして採用されるシナリオが最も現実的です。</p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-phase" data-i18n="tl.phase3">Phase 3</div>
-            <div class="tl-period" data-i18n="tl.period3">AI ↔ AI 完全自律（2029年以降）</div>
-            <p class="tl-desc" data-i18n-html="tl.desc3">「エージェントが独立した経済主体として市場に参加する」<br>信頼スコアリング・規制フレームワーク・エージェントIDの整備が条件。技術基盤はすでに今のx402の上に立っています。</p>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- System of Intelligence -->
-      <div class="thesis-block">
-        <h3 class="thesis-sub" data-i18n="soi.title">System of Intelligenceが消費するAPI</h3>
-        <p class="thesis-body" data-i18n="soi.body">AIエージェントが営業担当者の代わりに毎朝「優先順位付きフィード」を生成する時代が来ます。そのフィードには外部データが必要です——業界ニュース・競合動向・規制情報・リアルタイムデータ。月額制では粒度が粗すぎます。System of Intelligenceは固有のデータをAPIレイヤーで消費します——エージェントが自律的に選び、その場で決済するAPIが求められます。</p>
-        <div class="thesis-conditions">
-          <p class="thesis-conditions-label" data-i18n="soi.cond.label">「エージェントが毎回自律的に選ぶAPI」の条件</p>
-          <ul>
-            <li data-i18n="soi.cond.1">固有のデータを持つ（汎用データはAIが再現できる）</li>
-            <li data-i18n="soi.cond.2">エージェント向けスキーマで提供される</li>
-            <li data-i18n="soi.cond.3">使われるほど蓄積されるトランザクションデータがある</li>
-            <li data-i18n="soi.cond.4">実行フローに接続されている（データ提供→アクション→フィードバック）</li>
-          </ul>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -507,197 +787,64 @@
 
           </div>
         </div>
+
+        <div class="vr-col">
+          <h3 class="vr-col-title">Research to B</h3>
+          <div class="vr-cards">
+
+            <a class="vr-card" href="https://note.com/x402inc/n/nf7b60bdf0a56" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r7.title">ヘッドレスマーチャント普及後の未来図——エージェント決済はクレカで足りるのかx402 が要るのか</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n823acd3be97e" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r8.title">エージェント決済スタックの MCP / Wallet / CLI を比較する——Solana / Circle / MoonPay / OKX / Coinbase / Base</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/na3d3b01dbd1c" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r9.title">企業 AI 決済とは何か——承認付きの「サブスク払いのオンチェーン化」として実装する</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n57ac88867b5d" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r10.title">エージェント決済の未来予想図——2026 年から 2029 年への 4 つの移行</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n86211ffa3ff9" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r11.title">需要は H→A、供給は A↔A——エージェント経済への先行投資をどう読むか</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n89d4f38377cd" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r12.title">企業 AI が「自律決済」に到達するのはいつか——プラグイン経由クレカという現実と、x402 自律決済までの距離</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/nb02c810843f6" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r13.title">AI エージェントが稼いで使うバックエンド——5 月の業界進捗を踏まえて</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/n72418e4adbac" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r14.title">AI エージェントに商品を売らせるためのバックエンド——決済 4 層構造とエコシステム接続</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+            <a class="vr-card" href="https://note.com/x402inc/n/nb6f4cac169e8" target="_blank" rel="noopener">
+              <p class="vr-card-title" data-i18n="vr.r15.title">エージェンティックコマースのフェーズ論を更新する——Dan Shipper の 6 つの予測と、5 月の業界進捗</p>
+              <span class="vr-link">note →</span>
+            </a>
+
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Products ─────────────────────────────────────────────── -->
-  <section id="products" class="section">
-    <div class="container">
-      <p class="eyebrow">PRODUCTS</p>
-      <h2 class="section-title" data-i18n="prod.title">x402 Inc. が作ったもの</h2>
-      <p class="products-intro" data-i18n="prod.intro1">x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。今 Human → AI で動くインフラが、やがて AI ↔ AI の決済層に転用される——その連続性を証明するために、プロダクトを動かし続けています。</p>
-      <p class="products-intro" style="margin-top:8px" data-i18n="prod.intro2">Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。</p>
-
-      <!-- Phase 1 -->
-      <div class="phase-block">
-        <div class="phase-label">
-          <span class="phase-num">Phase 1</span>
-          <span class="phase-title" data-i18n="phase1.title">データインフラ層</span>
-        </div>
-        <div class="products-grid">
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">Japan x402 APIs</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.japan-apis.desc">日本のデータAPIにAIエージェント向け自律決済を実装。18本のエンドポイント（気象・地震・不動産・法人・人口統計等）をx402対応で提供。</p>
-            <p class="product-verify" data-i18n="prod.japan-apis.verify">検証：公共データAPIのx402ゲート化と従量課金モデルの成立</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/ncf3a3c9aed6f" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://apijapan.vercel.app" class="product-link" target="_blank" rel="noopener">URL →</a>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">x402 Oracle</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.oracle.desc">APACの不動産地価データをChainlink・Pyth互換のprice feed形式でオンチェーンに提供。日本・シンガポール・香港・オーストラリア・韓国の5カ国対応。</p>
-            <p class="product-verify" data-i18n="prod.oracle.verify">検証：オフチェーンデータのオンチェーン価格フィード化とx402課金の両立</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/n08beb0054097" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/x402-Oracle" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">APAC KYC API</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.kyc.desc">APAC5カ国の公的法人データベースを横断するx402対応KYC API。AMLスクリーニング・制裁リスト照合付き。$1〜$3/call。</p>
-            <p class="product-verify" data-i18n="prod.kyc.verify">検証：高単価・低頻度APIにおけるx402の経済合理性</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/n3eb83f96b787" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/APAC_KYC_API" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">Japan Market Bot</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.jmbot.desc">エージェントがエージェントに情報を売る—— AI ↔ AI 経済の最初のデモ。Japan Data APIを毎時自動取得してブリーフを生成・x402で販売。</p>
-            <p class="product-verify" data-i18n="prod.jmbot.verify">検証：AI ↔ AI 取引の最小プロトタイプ（エージェントがエージェントに売る）</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/n6bb52ac9481b" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/japanmarket_bot" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">Japan Real Estate Agent</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.jrea.desc">複数APIを束ねてリサーチレポートを生成・販売するエージェント。x402エコシステムの「統合層」として機能。</p>
-            <p class="product-verify" data-i18n="prod.jrea.verify">検証：複数APIを束ねた高付加価値レポートの自律生成・販売フロー</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/nbb0a47440083" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/japan_rwa" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Phase 2 -->
-      <div class="phase-block">
-        <div class="phase-label">
-          <span class="phase-num">Phase 2</span>
-          <span class="phase-title" data-i18n="phase2.title">エコシステム層</span>
-        </div>
-        <div class="products-grid">
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">x402 Directory</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.directory.desc">AIには課金されるx402エコシステム日本語解説サイト。人間は無料・AIエージェントはBase上のUSDCで自動課金。</p>
-            <p class="product-verify" data-i18n="prod.directory.verify">検証：人間→無料・AIエージェント→自動課金という二層モデル</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/n69a461b4023d" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/x402-directory" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">x402 Ecosystem Loop</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.loop.desc">自分のプロダクト群を互いに叩き合わせるCronジョブ。x402エコシステム内でtxを循環させる設計。</p>
-            <p class="product-verify" data-i18n="prod.loop.verify">検証：自エコシステム内でのtx循環と実装正当性の継続証明</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/nc55c57044046" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/x402-ecosystem-loop" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">APAC Digital Commerce API</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.apac-digital.desc">月額SaaSをリクエスト単位に分解するx402の実験。ドメイン確認・SMS・翻訳・メール検証を従量課金で提供。</p>
-            <p class="product-verify" data-i18n="prod.apac-digital.verify">検証：月額SaaSをリクエスト単位に分解するunbundlingモデル</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/nb1d1ddcd488a" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/apac-digital-commerce" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Phase 3 -->
-      <div class="phase-block">
-        <div class="phase-label">
-          <span class="phase-num">Phase 3</span>
-          <span class="phase-title" data-i18n="phase3.title">プライバシー・決済出口</span>
-        </div>
-        <div class="products-grid">
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">x402 Private Gateway</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.gateway.desc">Arcium MPCを使ったx402の決済検証プライバシーレイヤー。ウォレット・金額・エンドポイントを秘匿化。Colosseum Frontier提出済み。</p>
-            <p class="product-verify" data-i18n="prod.gateway.verify">検証：決済プライバシーレイヤーの技術的実現可能性</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/nac47800af431" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/Arcium" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-card-top">
-              <h3 class="product-name">x402 Crypto Card</h3>
-              <span class="http402-badge">HTTP/1.1 402 ✓</span>
-            </div>
-            <p class="product-desc" data-i18n="prod.cryptocard.desc">AIエージェントがUSDCを稼いでVisaカードで使うデモ。Solana → Nevermined Agent Card → Visa（150M+加盟店）のループ。</p>
-            <p class="product-verify" data-i18n="prod.cryptocard.verify">検証：x402で稼いだUSDCの法定通貨決済への出口経路</p>
-            <div class="product-links">
-              <a href="https://note.com/x402inc/n/nc7dd6f929186" class="product-link" target="_blank" rel="noopener">note →</a>
-              <a href="https://github.com/kato9292929/x402cryptocard" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Why We Build（統合） -->
-      <div class="why-build-integrated">
-        <p class="eyebrow" style="margin-bottom:16px">WHY WE BUILD</p>
-        <h3 class="why-build-integrated-title" data-i18n="why.title">なぜ今、これを作るのか</h3>
-        <div class="why-build-body">
-          <p data-i18n="why.p1">2026年現在、エージェンティックコマースの実態は「Human → AI」の段階にあります。エージェントは人間の代理として動きますが、権限・予算・承認の出発点はまだ人間です。限度額付きクレカをエージェントに渡す——これが現在地です。</p>
-          <p data-i18n="why.p2">しかしインフラは次の段階を準備しています。MCP（Anthropic）がCapability Discoveryを担い、A2A（Google）がエージェント間コミュニケーションを担い、x402が決済を担います。これらは競合ではなく役割分担です——異なるレイヤーが、エージェント同士が自律取引する AI ↔ AI（Agent-to-Agent）の世界を組み上げています。</p>
-          <p data-i18n="why.p3">AI ↔ AI が実現するとき、決済媒体はプログラマブルでなければなりません。カードネットワークには「人間のカードホルダー」という前提が刻み込まれています。銀行振込には営業時間があります。x402プロトコルが解決しようとしているのは、まさに「1回のAPIコールに0.001ドル」という粒度の課金です。</p>
-          <p class="why-build-conclusion" data-i18n="why.conclusion">今 Human → AI で動くインフラが、やがて AI ↔ AI の支払い層に転用される——x402 Inc.は、AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築を推進していきます。</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── Top Sellers ──────────────────────────────────────────── -->
+  <!-- ── Top Sellers（一旦非表示 / temporarily hidden）──────────────── -->
+  <!--
   <section class="section section-specs">
     <div class="container">
       <p class="eyebrow">X402SCAN DATA</p>
@@ -732,6 +879,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- ── Contact ──────────────────────────────────────────────── -->
   <section id="contact" class="section section-dark">
@@ -740,6 +888,9 @@
       <h2 class="section-title" data-i18n-html="ct.title">Human → AI から AI ↔ AI へ——<br>この移行とともに、新しいビジネス機会を一緒に探求しませんか</h2>
       <div class="contact-cta-wrap">
         <a href="mailto:hello@x402jp.com" class="contact-cta">hello@x402jp.com →</a>
+      </div>
+      <div class="contact-cta-wrap" style="margin-top:20px">
+        <a href="https://x402-directory.vercel.app/" class="btn-outline" target="_blank" rel="noopener" data-i18n="ts.cta">エコシステム全体を見る → x402 Directory</a>
       </div>
     </div>
   </section>
@@ -753,11 +904,12 @@
       </div>
       <nav class="footer-nav">
         <ul>
-          <li><a href="#features" data-i18n="ft.nav.usecases">ユースケース</a></li>
+          <li><a href="#featured" data-i18n="ft.nav.featured">最新事例</a></li>
+          <li><a href="#about" data-i18n="ft.nav.about">x402とは</a></li>
           <li><a href="#market" data-i18n="ft.nav.market">市場論拠</a></li>
-          <li><a href="#vision" data-i18n="ft.nav.vision">考察・調査</a></li>
           <li><a href="#products" data-i18n="ft.nav.products">プロダクト</a></li>
           <li><a href="#endpoints" data-i18n="ft.nav.endpoints">エンドポイント</a></li>
+          <li><a href="#vision" data-i18n="ft.nav.vision">考察・調査</a></li>
         </ul>
         <ul>
           <li><a href="https://www.x402.org/" target="_blank" rel="noopener">x402.org ↗</a></li>
@@ -772,7 +924,7 @@
         <dl class="footer-company-dl">
           <div><dt data-i18n="ft.company.name.dt">社名</dt><dd>x402株式会社（x402 Inc.）</dd></div>
           <div><dt data-i18n="ft.company.ceo.dt">代表取締役</dt><dd>加藤 雅人（Masato Kato）</dd></div>
-          <div><dt data-i18n="ft.company.address.dt">所在地</dt><dd>〒108-0071 東京都港区白金台5-10-16</dd></div>
+          <div><dt data-i18n="ft.company.address.dt">所在地</dt><dd>〒105-0013 東京都港区浜松町2丁目2番15号 浜松町ダイヤビル2F</dd></div>
           <div><dt data-i18n="ft.company.founded.dt">設立</dt><dd>2025年</dd></div>
         </dl>
       </div>
