@@ -1766,9 +1766,27 @@ blockquote cite {
   margin-top: 48px;
 }
 
-/* Products section: full-width stacked cards (no side-by-side) */
-#products .products-grid {
-  grid-template-columns: 1fr;
+/* Products section: side-by-side grid with slightly smaller, balanced text */
+#products .product-name {
+  font-size: 16px;
+}
+
+#products .product-desc {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+#products .product-verify {
+  font-size: 11px;
+  padding: 5px 9px;
+}
+
+#products .product-price {
+  font-size: 11px;
+}
+
+#products .product-link {
+  font-size: 12px;
 }
 
 .product-card {
