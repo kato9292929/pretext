@@ -216,9 +216,9 @@ export function initHero(container: HTMLElement): () => void {
     H = container.offsetHeight
     isMobile = W < 768
 
-    const headerEl = container.querySelector<HTMLElement>('.hero-header')
+    const headerEl = container.querySelector<HTMLElement>('.hero-header, [data-pretext-anchor]')
     textStartY = headerEl
-      ? headerEl.offsetTop + headerEl.offsetHeight + 16
+      ? headerEl.offsetTop + headerEl.offsetHeight + 24
       : Math.round(H * 0.38)
 
     // Prepare text once per font (font must be loaded for accuracy)
