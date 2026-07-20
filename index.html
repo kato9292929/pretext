@@ -30,21 +30,25 @@
 <body>
 
   <!-- ── Hero ─────────────────────────────────────────────────── -->
-  <section id="hero" class="hero">
+  <section id="hero" class="hero hero--studio">
     <div class="hero-media" aria-hidden="true">
       <!-- 差し替え: Higgsfield等で生成した背景動画を入れるだけ →
            <video class="hero-video" src="/media/hero.mp4" autoplay muted loop playsinline preload="auto"></video>
-           画像なら <img class="hero-video" src="/media/hero.jpg" alt=""> でもOK。未設定時はゴールドのネビュラ背景を表示。 -->
+           画像なら <img class="hero-video" src="/media/hero.jpg" alt=""> でもOK。未設定時は暗い虹色プレースホルダーを表示。 -->
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <p class="hero-eyebrow" data-i18n-html="hero.eyebrow">AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築</p>
-      <h1 class="hero-title">x402</h1>
-      <div class="hero-cta">
-        <a class="glass-btn glass-btn--gold" href="/products.html" data-i18n="hero.cta">プロダクトを見る →</a>
-        <a class="glass-btn" href="https://www.x402.org/" target="_blank" rel="noopener" data-i18n="protocol.cta">仕様を読む →</a>
+
+    <div class="hs">
+      <div class="hs-obj" aria-hidden="true"></div>
+
+      <a class="hs-cta" href="/products.html" data-i18n="hero.cta">プロダクトを見る →</a>
+
+      <div class="hs-bottom">
+        <h1 class="hs-title">x402</h1>
+        <p class="hs-desc" data-i18n-html="hero.eyebrow">AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築</p>
       </div>
     </div>
+
     <div class="hero-scroll-hint">scroll ↓</div>
   </section>
 
