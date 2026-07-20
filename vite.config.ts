@@ -9,7 +9,7 @@ export default defineConfig({
       input: {
         main:     resolve(__dirname, 'index.html'),
         about:    resolve(__dirname, 'about.html'),
-        market:   resolve(__dirname, 'market.html'),
+        products: resolve(__dirname, 'products.html'),
         research: resolve(__dirname, 'research.html'),
       },
     },
