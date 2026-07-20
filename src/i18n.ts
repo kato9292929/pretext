@@ -5,7 +5,6 @@ const JA: T = {
   // Nav
   'nav.featured':  '最新事例',
   'nav.about':     'x402とは',
-  'nav.market':    '市場論拠',
   'nav.vision':    '考察・調査',
   'nav.products':  'プロダクト',
 
@@ -156,7 +155,6 @@ const JA: T = {
   // FOOTER
   'ft.nav.featured':       '最新事例',
   'ft.nav.about':          'x402とは',
-  'ft.nav.market':         '市場論拠',
   'ft.nav.vision':         '考察・調査',
   'ft.nav.products':       'プロダクト',
   'ft.company.name.dt':    '社名',
@@ -170,7 +168,6 @@ const EN: T = {
   // Nav
   'nav.featured':  'Latest Cases',
   'nav.about':     'What Is x402',
-  'nav.market':    'Market Thesis',
   'nav.vision':    'Vision & Research',
   'nav.products':  'Products',
 
@@ -321,7 +318,6 @@ const EN: T = {
   // FOOTER
   'ft.nav.featured':       'Latest Cases',
   'ft.nav.about':          'What Is x402',
-  'ft.nav.market':         'Market Thesis',
   'ft.nav.vision':         'Vision & Research',
   'ft.nav.products':       'Products',
   'ft.company.name.dt':    'Company',
