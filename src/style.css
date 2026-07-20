@@ -2690,3 +2690,55 @@ blockquote cite {
   pointer-events: none;
   background: linear-gradient(to bottom, transparent, var(--surface));
 }
+
+/* ═══ Hero v3 — black bg, mirrored (x402 left / keywords right), gold wordmark ═ */
+.hero--fv { background: #000; }
+.hero--fv .fv { justify-content: flex-end; }
+.hero--fv .fv-bottom {
+  margin-top: auto;
+  display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 24px;
+}
+.fv-x402 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(5rem, 22vw, 19rem);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  background: linear-gradient(96deg, #fff7e2 0%, #f6dc97 26%, #ecc869 52%, #d9b44c 76%, #f3d488 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  filter: drop-shadow(0 0 34px rgba(226,190,90,0.42)) drop-shadow(0 0 90px rgba(201,158,64,0.22));
+  animation: heroGoldShimmer 7s linear infinite;
+}
+@keyframes heroGoldShimmer { to { background-position: 220% center; } }
+.fv-words {
+  list-style: none;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  text-align: right;
+  padding-bottom: 0.4em;
+}
+.fv-words li {
+  font-family: 'Inter', var(--font-sans);
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.9);
+  font-size: clamp(0.8rem, 1.35vw, 1.3rem); line-height: 1.2;
+}
+@media (max-width: 767px) {
+  .hero--fv .fv-bottom { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .fv-words { align-items: flex-start; text-align: left; }
+}
+
+/* ═══ Foundation authority strip ═════════════════════════════════════════════ */
+.foundation-lead { max-width: 800px; font-size: 15px; line-height: 1.85; color: var(--text-dim); margin-bottom: 40px; }
+.foundation-lead strong { color: var(--text); font-weight: 600; }
+.members-section { margin-top: 8px; }
+.members-title { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+.members-grid { display: flex; flex-wrap: wrap; gap: 12px 22px; }
+.member { font-size: 14px; font-weight: 500; color: var(--text-dim); transition: color var(--transition); }
+.member:hover { color: var(--text); }
+.foundation-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+
+/* pretext in CONTACT — faint so it blends into the background */
+#contact[data-pretext] .hero-line { opacity: 0.14; }

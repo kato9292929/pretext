@@ -15,6 +15,8 @@ const JA: T = {
   'protocol.p1':    'HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。',
   'protocol.p2':    'x402はこの未使用のHTTPステータスコードを再活性化し、AIエージェントや自律システムがHTTPネイティブに支払いを行えるようにするプロトコルです。サーバーが402を返すと、クライアントは支払いを完了してリクエストを再試行します。',
   'protocol.cta':   '仕様を読む →',
+  'foundation.lead': 'x402は、Coinbase・Cloudflare・Stripe らが主導し <strong>Linux Foundation</strong> 傘下の x402 Foundation として設立されたオープンスタンダードです。単一企業が所有せず、誰でも読み・構築し・貢献できます。',
+  'foundation.members': '創設メンバー',
 
   // FEATURED
   'feat.title':         '最新事例',
@@ -176,6 +178,8 @@ const EN: T = {
   'protocol.p1':    'The HTTP 402 "Payment Required" status code was reserved back in 1997, yet sat unused for nearly 30 years.',
   'protocol.p2':    'x402 reactivates this dormant HTTP status code, letting AI agents and autonomous systems pay natively over HTTP. When a server returns 402, the client completes payment and retries the request.',
   'protocol.cta':   'Read the spec →',
+  'foundation.lead': 'x402 is an open standard led by Coinbase, Cloudflare, and Stripe and established as the x402 Foundation under the <strong>Linux Foundation</strong>. No single company owns it — anyone can read, build on, and contribute to it.',
+  'foundation.members': 'Founding members',
 
   // FEATURED
   'feat.title':         'Latest Cases',
