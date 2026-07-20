@@ -2599,3 +2599,94 @@ blockquote cite {
   position: relative;
   z-index: 1;
 }
+
+/* ═══ Hero — creative-studio spec (dark tone) ════════════════════════════════ */
+.hero--fv { background: #08080c; }
+.fv-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.fv-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to bottom, rgba(7,7,9,0.55) 0%, rgba(7,7,9,0.32) 34%, rgba(7,7,9,0.62) 100%);
+}
+.fv {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  padding: 92px clamp(20px, 5vw, 48px) clamp(32px, 5vh, 48px);
+  font-family: 'Inter', var(--font-sans);
+  color: #fff;
+  text-transform: uppercase;
+  --acc: #8b5cf6;                 /* dark-legible purple (spec #5E0ED7 too dark on black) */
+}
+.fv-stats { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: clamp(20px, 4vw, 40px); padding: 32px 0; }
+.fv-stat { text-align: right; }
+.fv-num { font-weight: 600; font-size: clamp(1.5rem, 5vw, 3.5rem); line-height: 1; letter-spacing: -0.01em; }
+.fv-plus { color: var(--acc); font-size: 0.5em; vertical-align: 0.55em; margin-right: 0.02em; }
+.fv-label { margin-top: 8px; font-size: clamp(10px, 0.85vw, 14px); font-weight: 600; letter-spacing: 0.16em; line-height: 1.15; }
+.fv-bottom { display: flex; flex-direction: column; gap: clamp(24px, 4vw, 48px); }
+.fv-rowA { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.fv-tag { font-size: clamp(10px, 0.85vw, 14px); font-weight: 600; letter-spacing: 0.16em; line-height: 1.5; max-width: 280px; }
+.fv-cta { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; color: var(--acc); font-weight: 600; font-size: clamp(1rem, 1.6vw, 1.5rem); letter-spacing: 0.08em; transition: opacity var(--transition); }
+.fv-cta svg { width: 20px; height: 20px; }
+.fv-cta:hover { opacity: 0.78; }
+.fv-rowB { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.fv-desc { flex-shrink: 0; width: clamp(120px, 20vw, 280px); font-size: clamp(9px, 0.8vw, 14px); font-weight: 600; letter-spacing: 0.16em; line-height: 1.5; text-align: right; color: rgba(255,255,255,0.9); }
+.fv-title { text-align: right; }
+.fv-word { display: block; overflow: hidden; }
+.fv-word > span { display: block; font-size: clamp(2rem, 9vw, 9rem); line-height: 0.88; font-weight: 700; letter-spacing: -0.02em; }
+
+@keyframes fvUp   { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+@keyframes fvWord { from { transform: translateY(110%); } to { transform: translateY(0); } }
+.fv-stat, .fv-tag, .fv-cta, .fv-desc { opacity: 0; animation: fvUp 0.6s cubic-bezier(.22,1,.36,1) both; animation-delay: var(--d, 0s); }
+.fv-word > span { transform: translateY(110%); animation: fvWord 0.7s cubic-bezier(.22,1,.36,1) both; animation-delay: var(--d, 0s); }
+@media (prefers-reduced-motion: reduce) {
+  .fv-stat, .fv-tag, .fv-cta, .fv-desc, .fv-word > span { animation: none; opacity: 1; transform: none; }
+}
+@media (max-width: 767px) {
+  .fv-stats { justify-content: flex-start; }
+  .fv-rowB { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .fv-desc { text-align: left; width: auto; max-width: 300px; }
+  .fv-title { text-align: left; }
+}
+
+/* ═══ FEATURED — horizontal scroll (no preview media) ════════════════════════ */
+.featured-scroll {
+  display: flex; gap: 20px; margin-top: 40px; padding: 4px 4px 20px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin; scrollbar-color: var(--gold-dim) transparent;
+}
+.featured-scroll::-webkit-scrollbar { height: 8px; }
+.featured-scroll::-webkit-scrollbar-track { background: transparent; }
+.featured-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 999px; }
+.featured-scroll::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+.feat-card { flex: 0 0 clamp(280px, 30vw, 360px); scroll-snap-align: start; }
+.feat-tag {
+  align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--gold); background: var(--gold-glow); border: 1px solid var(--gold-dim);
+  padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
+  font-variant-numeric: tabular-nums; margin-bottom: 4px;
+}
+@media (max-width: 640px) { .feat-card { flex-basis: 82vw; } }
+
+/* ═══ pretext hosted in CONTACT — message on top, flowing text as a field below ═ */
+#contact[data-pretext] {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: block;
+}
+/* the message block; pretext is anchored to start BELOW it (see hero.ts) so they never overlap */
+.contact-panel {
+  position: relative;
+  z-index: 3;
+}
+/* soft fade so the pretext field dissolves into the page toward the bottom */
+#contact[data-pretext]::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 160px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--surface));
+}

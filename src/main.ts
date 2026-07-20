@@ -7,7 +7,7 @@ import { mountChrome } from './chrome'
 mountChrome()
 
 // ── Hero (pretext-powered) ──────────────────────────────────────────────────
-const heroEl = document.getElementById('hero')
+const heroEl = document.querySelector<HTMLElement>('[data-pretext]')
 if (heroEl) {
   // Wait for fonts before initialising so pretext measurements are accurate
   document.fonts.ready.then(() => { initHero(heroEl) })
