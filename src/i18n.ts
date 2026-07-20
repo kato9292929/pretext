@@ -10,6 +10,7 @@ const JA: T = {
 
   // Hero
   'hero.eyebrow': 'AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築',
+  'hero.cta':     'プロダクトを見る →',
 
   // PROTOCOL (x402とは)
   'protocol.title': 'x402とは',
@@ -172,6 +173,7 @@ const EN: T = {
 
   // Hero
   'hero.eyebrow': 'Building the API Ecosystem and Payment Infrastructure<br>Autonomously Selected by AI Agents',
+  'hero.cta':     'Browse the products →',
 
   // PROTOCOL (What is x402)
   'protocol.title': 'What Is x402',
