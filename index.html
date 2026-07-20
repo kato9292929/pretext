@@ -30,25 +30,11 @@
 <body>
 
   <!-- ── Hero ─────────────────────────────────────────────────── -->
-  <section id="hero" class="hero hero--studio">
-    <div class="hero-media" aria-hidden="true">
-      <!-- 差し替え: Higgsfield等で生成した背景動画を入れるだけ →
-           <video class="hero-video" src="/media/hero.mp4" autoplay muted loop playsinline preload="auto"></video>
-           画像なら <img class="hero-video" src="/media/hero.jpg" alt=""> でもOK。未設定時は暗い虹色プレースホルダーを表示。 -->
+  <section id="hero" class="hero">
+    <div class="hero-header">
+      <p class="hero-eyebrow" data-i18n-html="hero.eyebrow">AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築</p>
+      <h1 class="hero-title">x402</h1>
     </div>
-    <div class="hero-scrim" aria-hidden="true"></div>
-
-    <div class="hs">
-      <div class="hs-obj" aria-hidden="true"></div>
-
-      <a class="hs-cta" href="/products.html" data-i18n="hero.cta">プロダクトを見る →</a>
-
-      <div class="hs-bottom">
-        <h1 class="hs-title">x402</h1>
-        <p class="hs-desc" data-i18n-html="hero.eyebrow">AIエージェントが自律的に選ぶ<br>APIエコシステムと決済インフラの構築</p>
-      </div>
-    </div>
-
     <div class="hero-scroll-hint">scroll ↓</div>
   </section>
 
@@ -59,73 +45,103 @@
       <h2 class="section-title" data-i18n="feat.title">最新事例</h2>
       <p class="products-intro" data-i18n="feat.intro">x402 Inc.は、x402規格に対応したエンドポイントと独自データを作り、それを使う自律エージェントを動かしています。HTTP 402を共通の決済レールに、Base/Solana上のオンチェーン決済とERC-8004のエージェントidentityを土台にしています。事業は発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)の3層で構成されます。</p>
 
-      <div class="featured-scroll" role="list">
+      <div class="featured-grid">
 
-        <article class="product-card feat-card" role="listitem">
-          <span class="feat-tag">01 · MAP</span>
-          <div class="product-media" aria-hidden="true"></div>
-          <div class="product-card-top">
-            <h3 class="product-name">x402 Endpoint</h3>
-            <span class="http402-badge">HTTP/1.1 402 ✓</span>
+      <!-- 01 · MAP -->
+      <div class="layer-block">
+        <div class="layer-head">
+          <span class="phase-num">01 · MAP</span>
+          <span class="layer-title">x402 Endpoint</span>
+        </div>
+        <div class="layer-body">
+          <div class="products-grid">
+            <div class="product-card">
+              <div class="product-media" aria-hidden="true"></div>
+              <div class="product-card-top">
+                <h3 class="product-name">x402 Endpoint</h3>
+                <span class="http402-badge">HTTP/1.1 402 ✓</span>
+              </div>
+              <p class="product-desc" data-i18n="feat.map.desc">x402対応の課金エンドポイントを集めた一覧。約19,000件超を毎日記録し、推移を時系列で追える。x402scan・agentic-market・ampersend・visa-cli・circle-marketplace など複数ソースを毎日cronで集約・正規化し、日次スナップショットとして保存。カテゴリ分類と利用頻度ランキングを持ち、REST と MCP の両方で配信するのでエージェントが直接読める。</p>
+              <div class="product-links">
+                <a href="https://note.com/x402inc/n/nb30efb0e7e92" class="product-link" target="_blank" rel="noopener">note →</a>
+                <a href="https://x402endpoint.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
+                <a href="https://github.com/kato9292929/endpoint" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+              </div>
+            </div>
           </div>
-          <p class="product-desc" data-i18n="feat.map.desc">x402対応の課金エンドポイントを集めた一覧。約19,000件超を毎日記録し、推移を時系列で追える。x402scan・agentic-market・ampersend・visa-cli・circle-marketplace など複数ソースを毎日cronで集約・正規化し、日次スナップショットとして保存。カテゴリ分類と利用頻度ランキングを持ち、REST と MCP の両方で配信するのでエージェントが直接読める。</p>
-          <div class="product-links">
-            <a href="https://note.com/x402inc/n/nb30efb0e7e92" class="product-link" target="_blank" rel="noopener">note →</a>
-            <a href="https://x402endpoint.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
-            <a href="https://github.com/kato9292929/endpoint" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-          </div>
-        </article>
-
-        <article class="product-card feat-card" role="listitem">
-          <span class="feat-tag">02 · CONSUME</span>
-          <div class="product-media" aria-hidden="true"></div>
-          <div class="product-card-top">
-            <h3 class="product-name">x402 Autonomous Agent</h3>
-            <span class="railway-badge">Railway ✓</span>
-          </div>
-          <p class="product-desc" data-i18n="feat.consume.desc">オンチェーンの身元(ERC-8004, agentId 55560)を持つエージェントが、毎朝データをper-callで購入し日次の判断を記録。identityはCircleのDeveloper-Controlled Wallet経由でオンチェーン登録。Base mainnetのUSDCで実際にper-call決済し、自社のx402エンドポイントを自社エージェントが消費する自己完結の検証ループ（外部需要ではなく決済と観測の往復を検証）。Railwayで毎日定刻に稼働。重要な判断の前にはWorld IDで本人性を確認し、人間が承認を挟む。</p>
-          <div class="product-links">
-            <a href="https://note.com/x402inc/n/nfe50d4acfcd8" class="product-link" target="_blank" rel="noopener">note →</a>
-            <a href="https://github.com/kato9292929/x402-Autonomous-Agent-" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-          </div>
-        </article>
-
-        <article class="product-card feat-card" role="listitem">
-          <span class="feat-tag">03 · PRODUCE</span>
-          <div class="product-media" aria-hidden="true"></div>
-          <div class="product-card-top">
-            <h3 class="product-name">Onchain Stock Data</h3>
-            <span class="http402-badge">HTTP/1.1 402 ✓</span>
-          </div>
-          <p class="product-desc" data-i18n="feat.osd.desc">Claude(Opus)が毎週、米国株と日本株を10銘柄ずつ選んで予想。各銘柄に判定日付きの数値カタリストを付け、GitHub Actionsのcronで週次ファイルをgit commit、Vercelが配信。判定日後に決算短信・適時開示と突き合わせてscorecardに採点を残す。日本株は銘柄コードの正リストでユニバースを制約し、出力を検証して常に10銘柄・全銘柄が対象内に収まるよう正規化。トークン化された米国株はオンチェーンのliquidity/holdersも観測。記録は消さずにgitへ残す設計で、このtrack recordがmoat。配信は /api/alpha/* の REST と MCP。</p>
-          <p class="product-price"><span class="product-price-amount">$0.01</span>/コール・Analyst <span class="product-price-amount">$0.50〜$3.00</span></p>
-          <div class="product-links">
-            <a href="https://note.com/x402inc/n/n28686d262552" class="product-link" target="_blank" rel="noopener">note →</a>
-            <a href="https://osd-coral.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
-            <a href="https://github.com/kato9292929/onchain-stock-data" class="product-link" target="_blank" rel="noopener">GitHub →</a>
-          </div>
-        </article>
-
-        <article class="product-card feat-card" role="listitem">
-          <span class="feat-tag">03 · PRODUCE</span>
-          <div class="product-media" aria-hidden="true"></div>
-          <div class="product-card-top">
-            <h3 class="product-name">Japan Inflation Nowcast</h3>
-            <span class="http402-badge">HTTP/1.1 402 ✓</span>
-          </div>
-          <p class="product-desc" data-i18n="feat.jin.desc">東京のあるスーパーの店頭価格を毎日記録して作る独自の物価指数。10カテゴリ等加重のJevons幾何平均で日次指数化(基準日2026-06-04)、上流のCGPI(企業物価, Shift-JIS処理に対応)も取り込み、上流から店頭までを接続して観測。x402エンドポイントとして配信し、per-callで購入できる。</p>
-          <div class="product-links">
-            <a href="https://jin-orcin-pi.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
-          </div>
-        </article>
-
+        </div>
       </div>
+
+      <!-- 02 · CONSUME -->
+      <div class="layer-block">
+        <div class="layer-head">
+          <span class="phase-num">02 · CONSUME</span>
+          <span class="layer-title">x402 Autonomous Agent</span>
+        </div>
+        <div class="layer-body">
+          <div class="products-grid">
+            <div class="product-card">
+              <div class="product-media" aria-hidden="true"></div>
+              <div class="product-card-top">
+                <h3 class="product-name">x402 Autonomous Agent</h3>
+                <span class="railway-badge">Railway ✓</span>
+              </div>
+              <p class="product-desc" data-i18n="feat.consume.desc">オンチェーンの身元(ERC-8004, agentId 55560)を持つエージェントが、毎朝データをper-callで購入し日次の判断を記録。identityはCircleのDeveloper-Controlled Wallet経由でオンチェーン登録。Base mainnetのUSDCで実際にper-call決済し、自社のx402エンドポイントを自社エージェントが消費する自己完結の検証ループ（外部需要ではなく決済と観測の往復を検証）。Railwayで毎日定刻に稼働。重要な判断の前にはWorld IDで本人性を確認し、人間が承認を挟む。</p>
+              <div class="product-links">
+                <a href="https://note.com/x402inc/n/nfe50d4acfcd8" class="product-link" target="_blank" rel="noopener">note →</a>
+                <a href="https://github.com/kato9292929/x402-Autonomous-Agent-" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 · PRODUCE -->
+      <div class="layer-block">
+        <div class="layer-head">
+          <span class="phase-num">03 · PRODUCE</span>
+          <span class="layer-title">AlternaData for agents</span>
+          <p class="layer-desc" data-i18n="feat.produce.desc">エージェント向けに独自データと予想・採点を出す取り組み。2プロダクトで構成。</p>
+        </div>
+        <div class="layer-body">
+          <div class="products-grid">
+            <div class="product-card">
+              <div class="product-media" aria-hidden="true"></div>
+              <div class="product-card-top">
+                <h3 class="product-name">Onchain Stock Data</h3>
+                <span class="http402-badge">HTTP/1.1 402 ✓</span>
+              </div>
+              <p class="product-desc" data-i18n="feat.osd.desc">Claude(Opus)が毎週、米国株と日本株を10銘柄ずつ選んで予想。各銘柄に判定日付きの数値カタリストを付け、GitHub Actionsのcronで週次ファイルをgit commit、Vercelが配信。判定日後に決算短信・適時開示と突き合わせてscorecardに採点を残す。日本株は銘柄コードの正リストでユニバースを制約し、出力を検証して常に10銘柄・全銘柄が対象内に収まるよう正規化。トークン化された米国株はオンチェーンのliquidity/holdersも観測。記録は消さずにgitへ残す設計で、このtrack recordがmoat。配信は /api/alpha/* の REST と MCP。</p>
+              <p class="product-price"><span class="product-price-amount">$0.01</span>/コール・Analyst <span class="product-price-amount">$0.50〜$3.00</span></p>
+              <div class="product-links">
+                <a href="https://note.com/x402inc/n/n28686d262552" class="product-link" target="_blank" rel="noopener">note →</a>
+                <a href="https://osd-coral.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
+                <a href="https://github.com/kato9292929/onchain-stock-data" class="product-link" target="_blank" rel="noopener">GitHub →</a>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-media" aria-hidden="true"></div>
+              <div class="product-card-top">
+                <h3 class="product-name">Japan Inflation Nowcast</h3>
+                <span class="http402-badge">HTTP/1.1 402 ✓</span>
+              </div>
+              <p class="product-desc" data-i18n="feat.jin.desc">東京のあるスーパーの店頭価格を毎日記録して作る独自の物価指数。10カテゴリ等加重のJevons幾何平均で日次指数化(基準日2026-06-04)、上流のCGPI(企業物価, Shift-JIS処理に対応)も取り込み、上流から店頭までを接続して観測。x402エンドポイントとして配信し、per-callで購入できる。</p>
+              <div class="product-links">
+                <a href="https://jin-orcin-pi.vercel.app/" class="product-link" target="_blank" rel="noopener">URL →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- /.featured-grid -->
 
     </div>
   </section>
 
   <!-- ── Contact ──────────────────────────────────────────────── -->
-  <section id="contact" class="section section-dark" data-pretext>
+  <section id="contact" class="section section-dark">
     <div class="container contact-simple">
       <p class="eyebrow">CONTACT</p>
       <h2 class="section-title" data-i18n-html="ct.title">Human → AI から AI ↔ AI へ——<br>この移行とともに、新しいビジネス機会を一緒に探求しませんか</h2>
