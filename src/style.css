@@ -17,6 +17,7 @@
   --gold-glow:  rgba(196, 163, 90, 0.15);
   --blue:       #4a8fff;
   --green:      #4adf8a;
+  --purple:     #8b5cf6;
   --font-serif:   "Instrument Serif", "Noto Sans JP", serif;   /* display / italic (Latin) */
   --font-sans:    "Barlow", "Noto Sans JP", sans-serif;         /* body */
   --font-display: "Instrument Serif", "Noto Sans JP", serif;
@@ -2749,4 +2750,90 @@ blockquote cite {
   z-index: -1;
   background: radial-gradient(62% 62% at 50% 46%, rgba(7,7,9,0.86), rgba(7,7,9,0.5) 66%, transparent 100%);
   pointer-events: none;
+}
+
+/* ═══ Hero — creative-studio layout (dark, mirrored: object right / heading left) ═══ */
+.hero--studio .hero-media {
+  background:
+    radial-gradient(50% 45% at 78% 42%, rgba(139,92,246,0.22), transparent 60%),
+    radial-gradient(40% 40% at 82% 55%, rgba(34,211,238,0.14), transparent 60%),
+    linear-gradient(135deg, #0a0a12 0%, #07070b 55%, #100a18 100%);
+}
+.hero--studio .hero-scrim {
+  background:
+    linear-gradient(to right, rgba(7,7,9,0.72) 0%, rgba(7,7,9,0.35) 42%, transparent 70%),
+    linear-gradient(to top, var(--bg) 2%, transparent 34%);
+}
+
+.hs {
+  position: relative;
+  z-index: 2;
+  width: min(1200px, calc(100vw - 48px));
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 104px 0 52px;
+}
+
+/* iridescent object — RIGHT side (mirror of reference). Placeholder for a render/video. */
+.hs-obj {
+  position: absolute;
+  z-index: -1;
+  right: -6%;
+  top: 46%;
+  transform: translateY(-50%);
+  width: min(56vw, 640px);
+  aspect-ratio: 1;
+  border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%;
+  background: conic-gradient(from 210deg,
+    #8b5cf6, #22d3ee, #f0abfc, #a78bfa, #38bdf8, #f5d27a, #c084fc, #8b5cf6);
+  filter: blur(7px) saturate(1.15);
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  animation: hsSpin 40s linear infinite;
+}
+@keyframes hsSpin { to { transform: translateY(-50%) rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .hs-obj { animation: none; } }
+
+.hs-cta {
+  align-self: center;
+  justify-self: start;
+  color: var(--purple);
+  font: 600 clamp(15px, 1.9vw, 22px)/1 var(--font-sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity var(--transition);
+}
+.hs-cta:hover { opacity: 0.75; }
+
+.hs-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.hs-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 14vw, 12rem);
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+  color: #fff;
+  font-style: normal;
+}
+.hs-desc {
+  flex-shrink: 0;
+  max-width: clamp(140px, 22vw, 300px);
+  text-align: right;
+  font: 600 clamp(9px, 1.05vw, 13px)/1.55 var(--font-sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+@media (max-width: 640px) {
+  .hs-obj { right: -20%; top: 38%; width: 92vw; opacity: 0.7; }
+  .hs-bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .hs-desc { text-align: left; max-width: 300px; }
 }
