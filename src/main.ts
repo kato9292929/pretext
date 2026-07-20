@@ -1,6 +1,10 @@
 import './style.css'
 import { initHero } from './hero'
 import { initI18n } from './i18n'
+import { mountChrome } from './chrome'
+
+// ── Shared nav + footer (injected on every page) ────────────────────────────
+mountChrome()
 
 // ── Hero (pretext-powered) ──────────────────────────────────────────────────
 const heroEl = document.getElementById('hero')

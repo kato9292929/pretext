@@ -166,9 +166,9 @@ export function initHero(container: HTMLElement): () => void {
 
   // ── Orbs (decorative glowing blobs) ───────────────────────────────────────
   const ORB_DEFS = [
-    { r: 110, color: 'rgba(196, 163, 90, 0.22)',  blur: 50, vx:  0.38, vy:  0.22 },
-    { r:  72, color: 'rgba(74, 143, 255, 0.18)',  blur: 36, vx: -0.28, vy:  0.40 },
-    { r:  52, color: 'rgba(196, 163, 90, 0.14)',  blur: 28, vx:  0.18, vy: -0.32 },
+    { r: 110, color: 'rgba(212, 175, 55, 0.24)',  blur: 50, vx:  0.38, vy:  0.22 },
+    { r:  72, color: 'rgba(247, 231, 176, 0.18)', blur: 36, vx: -0.28, vy:  0.40 },
+    { r:  52, color: 'rgba(184, 134, 11, 0.16)',  blur: 28, vx:  0.18, vy: -0.32 },
   ]
 
   const orbs: OrbState[] = ORB_DEFS.map(d => {
