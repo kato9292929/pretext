@@ -148,13 +148,6 @@ const JA: T = {
   'ep.jrey.desc':   '「日本不動産利回りデータのx402従量課金配信」日本不動産の利回り・空室・将来予測を国土交通省・e-Stat統合で提供。Base・Solana・Polygon・BNB対応。',
 
   // TOP SELLERS
-  'ts.title':       'Top Sellers 分析',
-  'ts.sub':         '過去30日間の収益・コール数ランキング（x402scanデータ）',
-  'ts.th.product':  'プロダクト',
-  'ts.th.category': 'カテゴリ',
-  'ts.th.revenue':  '30日収益',
-  'ts.th.calls':    '30日コール数',
-  'ts.th.price':    '平均単価',
   'ts.cta':         'エコシステム全体を見る → x402 Directory',
 
   // CONTACT
@@ -320,13 +313,6 @@ const EN: T = {
   'ep.jrey.desc':   '“x402 pay-per-use delivery of Japan real estate yield data” Provides Japanese real estate yield, vacancy rates, and forecasts via MLIT and e-Stat integration. Supports Base, Solana, Polygon, and BNB.',
 
   // TOP SELLERS
-  'ts.title':       'Top Sellers Analysis',
-  'ts.sub':         'Revenue & Call Volume Ranking — Past 30 Days (x402scan data)',
-  'ts.th.product':  'Product',
-  'ts.th.category': 'Category',
-  'ts.th.revenue':  '30d Revenue',
-  'ts.th.calls':    '30d Calls',
-  'ts.th.price':    'Avg. Price',
   'ts.cta':         'Explore the Full Ecosystem → x402 Directory',
 
   // CONTACT
