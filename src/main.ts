@@ -6,11 +6,11 @@ import { mountChrome } from './chrome'
 // ── Shared nav + footer (injected on every page) ────────────────────────────
 mountChrome()
 
-// ── Hero (pretext-powered) ──────────────────────────────────────────────────
-const heroEl = document.getElementById('hero')
-if (heroEl) {
+// ── pretext-powered flowing text (now hosted in CONTACT) ────────────────────
+const pretextEl = document.querySelector<HTMLElement>('[data-pretext]')
+if (pretextEl) {
   // Wait for fonts before initialising so pretext measurements are accurate
-  document.fonts.ready.then(() => { initHero(heroEl) })
+  document.fonts.ready.then(() => { initHero(pretextEl) })
 }
 
 // ── Language toggle ─────────────────────────────────────────────────────────
@@ -55,27 +55,14 @@ document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(a => {
   })
 })
 
-// ── Intersection Observer: fade-in on scroll ─────────────────────────────────
-const style = document.createElement('style')
-style.textContent = `
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-in.visible {
-    opacity: 1;
-    transform: none;
-  }
-`
-document.head.appendChild(style)
-
+// ── Intersection Observer: blur-in reveal on scroll ──────────────────────────
 const animTargets = document.querySelectorAll(
-  '.feature-card, .step, .spec, .about-lead, .about-code, .company-info, .company-mission'
+  '.product-card, .feat-card, .vr-card, .section-title, .products-intro, ' +
+  '.paradigm-card, .agent-buy-card, .thesis-block, .about-grid, .layer-block, .ep-category-title'
 )
 animTargets.forEach((el, i) => {
-  el.classList.add('fade-in')
-  ;(el as HTMLElement).style.transitionDelay = `${(i % 6) * 60}ms`
+  el.classList.add('reveal')
+  ;(el as HTMLElement).style.transitionDelay = `${(i % 5) * 55}ms`
 })
 
 const observer = new IntersectionObserver(
@@ -87,7 +74,7 @@ const observer = new IntersectionObserver(
       }
     })
   },
-  { threshold: 0.12 }
+  { threshold: 0.08 }
 )
 
 animTargets.forEach(el => observer.observe(el))

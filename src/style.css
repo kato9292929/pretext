@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600;700&display=swap');
+
 /* ── Reset & Variables ────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,8 +17,9 @@
   --gold-glow:  rgba(196, 163, 90, 0.15);
   --blue:       #4a8fff;
   --green:      #4adf8a;
-  --font-serif: "Outfit", "Noto Sans JP", sans-serif;
-  --font-sans:  "Outfit", "Noto Sans JP", sans-serif;
+  --font-serif:   "Instrument Serif", "Noto Sans JP", serif;   /* display / italic (Latin) */
+  --font-sans:    "Barlow", "Noto Sans JP", sans-serif;         /* body */
+  --font-display: "Instrument Serif", "Noto Sans JP", serif;
   --radius:     16px;
   --transition: 200ms ease;
 }
@@ -2653,4 +2656,97 @@ blockquote cite {
 
 @media (max-width: 640px) {
   .feat-card { flex-basis: 82vw; }
+}
+
+/* ═══ Clean cinematic pass — Instrument Serif, liquid-glass, video hero, pretext-in-contact ═══ */
+
+/* Display type: Instrument Serif italic on Latin display elements */
+.hero-title,
+.product-name,
+.layer-title { font-style: italic; letter-spacing: -0.005em; }
+
+/* Liquid-glass utilities (per spec) */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.012);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.10);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+    rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+}
+
+/* ── Hero v2: full-bleed media background + centered content ─────── */
+.hero { display: grid; place-items: center; }
+.hero-media {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+  background:
+    radial-gradient(55% 45% at 50% 32%, rgba(212,175,55,0.18), transparent 62%),
+    conic-gradient(from 210deg at 50% 42%, #191307, #0a0a0e, #14101a, #0a0a0e, #191307);
+}
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(78% 66% at 50% 40%, transparent 40%, rgba(7,7,9,0.5) 88%),
+    linear-gradient(to bottom, rgba(7,7,9,0.3) 0%, transparent 26%, transparent 62%, var(--bg) 100%);
+}
+.hero-inner { position: relative; z-index: 2; text-align: center; padding: 0 24px; max-width: 960px; }
+.hero-cta { display: flex; gap: 14px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+
+.glass-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px; border-radius: 999px;
+  font: 500 14px/1 var(--font-sans); color: #fff;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+.glass-btn:hover { background: rgba(255,255,255,0.13); transform: translateY(-1px); }
+.glass-btn--gold {
+  color: var(--gold);
+  border-color: var(--gold-dim);
+  background: var(--gold-glow);
+}
+.glass-btn--gold:hover { border-color: var(--gold); background: rgba(196,163,90,0.22); }
+
+/* ── pretext relocated into CONTACT ─────────────────────────────── */
+#contact[data-pretext] {
+  position: relative;
+  overflow: hidden;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+}
+#contact[data-pretext] .contact-simple {
+  position: relative;
+  z-index: 3;
+}
+
+/* ── Blur-in reveal on scroll ───────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(22px); filter: blur(8px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.22,1,.36,1), filter 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; filter: blur(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+}
+
+/* legibility scrim behind CONTACT content (over the pretext text) */
+#contact[data-pretext] .contact-simple::before {
+  content: '';
+  position: absolute;
+  inset: -48px -64px;
+  z-index: -1;
+  background: radial-gradient(62% 62% at 50% 46%, rgba(7,7,9,0.86), rgba(7,7,9,0.5) 66%, transparent 100%);
+  pointer-events: none;
 }
