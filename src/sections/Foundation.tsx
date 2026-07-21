@@ -1,6 +1,22 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
+import { useLang } from '../i18n'
+
+const COPY = {
+  ja: {
+    lead: 'x402は、Coinbaseが開発したHTTPペイメント・プロトコルで、現在はLinux Foundation傘下のx402 Foundationが中立的に管理するオープンスタンダードです。x402 Foundationは当初Coinbase・Cloudflare・Stripeの3社が立ち上げ、2026年7月14日にLinux Foundationの下で40組織を擁して正式ローンチしました。プロトコルはCoinbaseが寄贈しましたが、その進化は単一企業ではなくFoundationが統括しています。',
+    members: '創設メンバー',
+    momentum:
+      '7月14日の x402 Foundation 発足、Stripe が A to A で MPP経由の受け入れと x402 の両方を担ぐ構造、そして AWS・Cloudflare の x402対応——CloudFront/Cloudflare を使う全事業者の参入で、市場は「x402を知っている開発者」から一気に広がりつつあります。',
+  },
+  en: {
+    lead: 'x402 is an HTTP payment protocol created by Coinbase, now an open standard neutrally stewarded by the x402 Foundation under the Linux Foundation. The x402 Foundation was first started by Coinbase, Cloudflare and Stripe, and formally launched on July 14, 2026 under the Linux Foundation with 40 organizations. Coinbase donated the protocol, but its evolution is governed by the Foundation rather than any single company.',
+    members: 'Founding members',
+    momentum:
+      'The July 14 launch of the x402 Foundation, Stripe carrying both MPP acceptance and x402 in an A-to-A structure, and AWS/Cloudflare support for x402 — as every business on CloudFront/Cloudflare enters, the market is rapidly expanding beyond “developers who know x402.”',
+  },
+} satisfies Record<'ja' | 'en', { lead: string; members: string; momentum: string }>
 
 const MEMBERS = [
   'Visa',
@@ -34,6 +50,8 @@ const LINKS = [
 ]
 
 export function Foundation() {
+  const { lang } = useLang()
+  const t = COPY[lang]
   return (
     <section
       id="foundation"
@@ -47,17 +65,11 @@ export function Foundation() {
         className="max-w-3xl"
       >
         <SectionEyebrow label="Foundation" tag="Open standard" heading />
-        <p className="mt-6 text-white/60 text-base leading-[1.7]">
-          x402は、Coinbaseが開発したHTTPペイメント・プロトコルで、現在はLinux
-          Foundation傘下のx402
-          Foundationが中立的に管理するオープンスタンダードです。x402
-          Foundationは当初Coinbase・Cloudflare・Stripeの3社が立ち上げ、2026年7月14日にLinux
-          Foundationの下で40組織を擁して正式ローンチしました。プロトコルはCoinbaseが寄贈しましたが、その進化は単一企業ではなくFoundationが統括しています。
-        </p>
+        <p className="mt-6 text-white/60 text-base leading-[1.7]">{t.lead}</p>
       </motion.div>
 
       <div className="mt-12">
-        <p className="text-xs uppercase tracking-widest text-white/40">創設メンバー</p>
+        <p className="text-xs uppercase tracking-widest text-white/40">{t.members}</p>
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4">
           {MEMBERS.map((member, i) => (
             <motion.span
@@ -76,11 +88,7 @@ export function Foundation() {
 
       <div className="mt-12 liquid-glass rounded-2xl p-6 max-w-3xl">
         <p className="text-xs uppercase tracking-widest text-white/40">Momentum</p>
-        <p className="mt-3 text-sm text-white/70 leading-[1.8]">
-          7月14日の x402 Foundation 発足、Stripe が A to A で MPP経由の受け入れと x402
-          の両方を担ぐ構造、そして AWS・Cloudflare の x402対応——CloudFront/Cloudflare
-          を使う全事業者の参入で、市場は「x402を知っている開発者」から一気に広がりつつあります。
-        </p>
+        <p className="mt-3 text-sm text-white/70 leading-[1.8]">{t.momentum}</p>
       </div>
 
       <div className="mt-10 flex flex-wrap gap-4">

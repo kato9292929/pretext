@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { LanguageProvider } from './i18n'
 import { Navbar } from './sections/Navbar'
 import { Contact } from './sections/Contact'
 
@@ -57,9 +58,11 @@ export function Layout({ children }: { children: ReactNode }) {
         />
       </div>
 
-      <Navbar />
-      {children}
-      <Contact />
+      <LanguageProvider>
+        <Navbar />
+        {children}
+        <Contact />
+      </LanguageProvider>
     </div>
   )
 }
