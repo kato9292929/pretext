@@ -29,20 +29,30 @@ export function Layout({ children }: { children: ReactNode }) {
           playsInline
           className="w-full h-full object-cover pointer-events-none"
           style={{
-            // Light blur only smooths the grainy texture; keeps the rich gold look.
-            filter: 'sepia(1) saturate(2.1) hue-rotate(5deg) brightness(1.04) contrast(1.08) blur(10px)',
-            transform: 'scale(1.08)',
+            // Strong blur smooths the grainy texture into a silky gold flow.
+            filter: 'saturate(1.7) brightness(1.05) contrast(1.05) blur(16px)',
+            transform: 'scale(1.1)',
           }}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
         />
-        {/* Rich, lustrous satin-gold wash */}
+        {/* Gold stays the dominant cast across the whole frame */}
         <div
           className="absolute inset-0"
           style={{
             background:
               'linear-gradient(120deg, #6B5310 0%, #C99A24 26%, #FDF6D0 50%, #E8C338 68%, #A67C10 86%, #6B5310 100%)',
             mixBlendMode: 'overlay',
-            opacity: 0.5,
+            opacity: 0.4,
+          }}
+        />
+        {/* Aurora color accents (blue / teal / purple / orange) glowing in the corners */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(900px circle at 8% 96%, rgba(40, 140, 255, 0.38), transparent 55%), radial-gradient(950px circle at 92% 100%, rgba(155, 70, 235, 0.34), transparent 55%), radial-gradient(1000px circle at 103% 60%, rgba(255, 120, 40, 0.26), transparent 55%), radial-gradient(820px circle at -3% 42%, rgba(30, 200, 190, 0.22), transparent 55%)',
+            mixBlendMode: 'screen',
+            opacity: 0.9,
           }}
         />
         {/* Soft specular sheen for a luminous gold highlight */}
@@ -50,7 +60,7 @@ export function Layout({ children }: { children: ReactNode }) {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(1200px circle at 72% 28%, rgba(253, 246, 208, 0.3), transparent 62%)',
+              'radial-gradient(1200px circle at 72% 28%, rgba(253, 246, 208, 0.28), transparent 62%)',
             mixBlendMode: 'soft-light',
             opacity: 0.85,
           }}
