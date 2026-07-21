@@ -1,8 +1,7 @@
 import { motion } from 'motion/react'
-import { Search } from 'lucide-react'
-import { AppleLogo } from '../primitives'
+import { LogoMark } from '../primitives'
 
-const ITEMS = ['File', 'Edit', 'View', 'Go', 'Window', 'Help']
+const ITEMS = ['MAP', 'CONSUME', 'PRODUCE', 'Foundation', 'Directory']
 
 export function MenuBar() {
   return (
@@ -14,8 +13,8 @@ export function MenuBar() {
     >
       <div className="max-w-6xl mx-auto px-6 h-full flex items-center justify-between text-xs">
         <div className="flex items-center gap-4">
-          <AppleLogo className="w-3.5 h-3.5" />
-          <span className="font-bold text-white">Aura</span>
+          <LogoMark className="w-3.5 h-3.5" />
+          <span className="font-bold text-white">x402</span>
           {ITEMS.map((item, i) => (
             <span
               key={item}
@@ -27,9 +26,9 @@ export function MenuBar() {
             </span>
           ))}
         </div>
-        <div className="flex items-center gap-3 text-white/70">
-          <Search className="w-3.5 h-3.5" />
-          <span>Wed May 6 1:09 PM</span>
+        <div className="flex items-center gap-2 text-white/70">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#28c840]" />
+          <span>USDC · Base / Solana</span>
         </div>
       </div>
     </motion.div>

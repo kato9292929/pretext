@@ -1,8 +1,13 @@
 import { motion } from 'motion/react'
 import { Menu } from 'lucide-react'
-import { AppleButton, LogoMark } from '../primitives'
+import { LogoMark, Pill } from '../primitives'
 
-const LINKS = ['Solutions', 'Pricing', 'Blog', 'Documentation', 'Careers']
+const LINKS = [
+  { label: 'Products', href: '#products' },
+  { label: 'Architecture', href: '#architecture' },
+  { label: 'Foundation', href: '#foundation' },
+  { label: 'Contact', href: '#contact' },
+]
 
 export function Navbar() {
   return (
@@ -13,27 +18,28 @@ export function Navbar() {
       className="relative z-10 max-w-6xl mx-auto px-6"
     >
       <div className="flex items-center justify-between py-5">
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <LogoMark className="w-8 h-8" />
+          <span className="font-bold tracking-tight text-lg">x402</span>
         </div>
 
         <div className="hidden md:flex gap-8">
           {LINKS.map((link, i) => (
             <motion.a
-              key={link}
-              href="#"
+              key={link.label}
+              href={link.href}
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 + i * 0.05 }}
               className="text-white/70 text-sm font-medium hover:text-white transition-colors"
             >
-              {link}
+              {link.label}
             </motion.a>
           ))}
         </div>
 
         <div className="hidden md:block">
-          <AppleButton />
+          <Pill label="x402 Directory" href="https://x402-directory.vercel.app/" gold />
         </div>
 
         <button

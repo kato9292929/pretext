@@ -4,10 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: '#3D81E3',
+        brand: '#B8860B',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Noto Sans JP', 'system-ui', 'sans-serif'],
       },
     },
   },

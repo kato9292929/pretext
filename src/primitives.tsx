@@ -19,24 +19,32 @@ export function LogoMark({ className = 'w-8 h-8' }: { className?: string }) {
   )
 }
 
-/* ── AppleButton ─────────────────────────────────────────────── */
-export function AppleButton({
-  label = 'Download Aura',
+/* ── Pill (link-capable CTA) ─────────────────────────────────── */
+export function Pill({
+  label,
+  href = '#',
+  gold = false,
   full = false,
 }: {
-  label?: string
+  label: string
+  href?: string
+  gold?: boolean
   full?: boolean
 }) {
+  const external = href.startsWith('http')
   return (
-    <button
-      className={`group inline-flex items-center justify-center gap-2 rounded-full bg-white text-black font-medium text-sm px-5 py-3 transition-all hover:bg-white/90 active:scale-[0.98] ${
-        full ? 'w-full' : ''
-      }`}
+    <a
+      href={href}
+      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      className={`group inline-flex items-center justify-center gap-2 rounded-full font-medium text-sm px-5 py-3 transition-all active:scale-[0.98] ${
+        gold
+          ? 'bg-[#E8C338] text-black hover:brightness-105'
+          : 'bg-white text-black hover:bg-white/90'
+      } ${full ? 'w-full' : ''}`}
     >
-      <AppleLogo className="w-4 h-4" />
       {label}
       <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-[1px]" />
-    </button>
+    </a>
   )
 }
 
@@ -56,7 +64,7 @@ export function SectionEyebrow({ label, tag }: { label: string; tag?: string }) 
 /* ── Shared shiny-gradient style ─────────────────────────────── */
 export const gradientStyle: CSSProperties = {
   backgroundImage:
-    'linear-gradient(to right, #091020 0%, #0B2551 12.5%, #A4F4FD 32.5%, #00d2ff 50%, #0B2551 67.5%, #091020 87.5%, #091020 100%)',
+    'linear-gradient(to right, #4A3B08 0%, #A67C10 12.5%, #F5D84E 32.5%, #E8C338 50%, #A67C10 67.5%, #4A3B08 87.5%, #4A3B08 100%)',
   backgroundSize: '200% auto',
   WebkitBackgroundClip: 'text',
   backgroundClip: 'text',
