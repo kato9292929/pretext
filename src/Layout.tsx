@@ -20,8 +20,8 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
-      {/* Fixed fullscreen background video — tinted to brand gold */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon */}
+      <div className="fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
         <video
           autoPlay
           loop
@@ -29,38 +29,28 @@ export function Layout({ children }: { children: ReactNode }) {
           playsInline
           className="w-full h-full object-cover pointer-events-none"
           style={{
-            // sepia recolors the video's native blue ribbon to gold; blur smooths it.
-            filter: 'sepia(1) saturate(2) hue-rotate(2deg) brightness(1.02) contrast(1.05) blur(16px)',
+            // Grayscale keeps only the flowing shape/motion; the gradient below paints the color.
+            filter: 'grayscale(1) brightness(1.08) contrast(1.18) blur(14px)',
             transform: 'scale(1.1)',
           }}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
         />
-        {/* Gold stays the dominant cast across the whole frame */}
+        {/* Paint the reference palette onto the moving ribbon (warm-led, gold center, blue minority) */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(120deg, #6B5310 0%, #C99A24 26%, #FDF6D0 50%, #E8C338 68%, #A67C10 86%, #6B5310 100%)',
-            mixBlendMode: 'overlay',
-            opacity: 0.4,
+              'linear-gradient(100deg, #C85AA8 0%, #E8632E 20%, #F2A63C 35%, #F4D24A 50%, #7FC96B 64%, #34B9C2 80%, #3B82E6 100%)',
+            mixBlendMode: 'color',
+            opacity: 0.95,
           }}
         />
-        {/* Aurora color accents — warm-led (orange / gold / pink); blue kept subtle */}
+        {/* Gentle gold sheen to keep gold prominent and luminous */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(950px circle at 22% 90%, rgba(255, 140, 45, 0.36), transparent 55%), radial-gradient(820px circle at 2% 60%, rgba(232, 95, 180, 0.30), transparent 55%), radial-gradient(760px circle at 58% 82%, rgba(245, 205, 80, 0.28), transparent 55%), radial-gradient(900px circle at 96% 97%, rgba(30, 195, 200, 0.13), transparent 52%), radial-gradient(760px circle at 100% 30%, rgba(80, 120, 210, 0.09), transparent 50%)',
-            mixBlendMode: 'screen',
-            opacity: 0.9,
-          }}
-        />
-        {/* Soft specular sheen for a luminous gold highlight */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(1200px circle at 72% 28%, rgba(253, 246, 208, 0.28), transparent 62%)',
+              'radial-gradient(1100px circle at 55% 45%, rgba(253, 246, 208, 0.22), transparent 62%)',
             mixBlendMode: 'soft-light',
             opacity: 0.85,
           }}
