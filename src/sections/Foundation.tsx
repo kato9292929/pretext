@@ -37,7 +37,7 @@ export function Foundation() {
   return (
     <section
       id="foundation"
-      className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 border-t border-white/10"
+      className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28"
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}

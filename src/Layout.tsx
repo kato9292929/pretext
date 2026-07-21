@@ -29,9 +29,9 @@ export function Layout({ children }: { children: ReactNode }) {
           playsInline
           className="w-full h-full object-cover pointer-events-none"
           style={{
-            // Blur dissolves the grainy texture into a soft, smoky gold haze.
-            filter: 'sepia(1) saturate(2.05) hue-rotate(5deg) brightness(1.06) contrast(0.96) blur(28px)',
-            transform: 'scale(1.14)',
+            // Light blur only smooths the grainy texture; keeps the rich gold look.
+            filter: 'sepia(1) saturate(2.1) hue-rotate(5deg) brightness(1.04) contrast(1.08) blur(10px)',
+            transform: 'scale(1.08)',
           }}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
         />
@@ -56,10 +56,6 @@ export function Layout({ children }: { children: ReactNode }) {
           }}
         />
       </div>
-
-      {/* Vertical guide lines at the 36rem container edges */}
-      <div className="hidden md:block pointer-events-none fixed inset-y-0 left-1/2 -translate-x-[calc(50%+36rem)] w-px bg-white/10 z-[5]" />
-      <div className="hidden md:block pointer-events-none fixed inset-y-0 left-1/2 translate-x-[calc(-50%+36rem)] w-px bg-white/10 z-[5]" />
 
       <Navbar />
       {children}
