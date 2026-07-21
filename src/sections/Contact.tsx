@@ -4,11 +4,9 @@ import { useLang } from '../i18n'
 
 const COPY = {
   ja: {
-    heading: 'AIエージェント × 決済市場の発展に向けて',
     body: '委任付き自律決済から per-call 自律決済まで——実装・検証のご相談、事業連携やデータ提供のお問い合わせは、お気軽にご連絡ください。',
   },
   en: {
-    heading: 'Toward the growth of the AI-agent × payments market',
     body: 'From delegated autonomous payments to per-call autonomous payments — for implementation, validation, partnerships, or data access, feel free to reach out.',
   },
 }
@@ -34,10 +32,7 @@ export function Contact() {
           }}
         />
         <div className="relative">
-          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.2]">
-            {t.heading}
-          </h2>
-          <p className="mt-6 text-white/60 max-w-lg mx-auto text-sm leading-[1.7]">{t.body}</p>
+          <p className="text-white/60 max-w-lg mx-auto text-sm leading-[1.7]">{t.body}</p>
           <div className="mt-8 flex justify-center">
             <Pill label={CONTACT_EMAIL} href={`mailto:${CONTACT_EMAIL}`} gold />
           </div>

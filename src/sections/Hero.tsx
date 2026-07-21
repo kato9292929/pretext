@@ -29,7 +29,6 @@ export function Hero() {
           href={`mailto:${CONTACT_EMAIL}`}
           gold
         />
-        <Pill label={lang === 'ja' ? 'プロダクトを見る' : 'View products'} href="/products.html" />
       </motion.div>
     </section>
   )
