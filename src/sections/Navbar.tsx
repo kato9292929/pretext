@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Menu } from 'lucide-react'
-import { CONTACT_EMAIL, LogoMark, NAV_LINKS, Pill } from '../primitives'
+import { CONTACT_EMAIL, NAV_LINKS, Pill, Wordmark } from '../primitives'
 
 export function Navbar() {
   return (
@@ -11,9 +11,8 @@ export function Navbar() {
       className="relative z-10 max-w-6xl mx-auto px-6"
     >
       <div className="flex items-center justify-between py-5">
-        <a href="/" className="flex items-center gap-2">
-          <LogoMark className="w-8 h-8" />
-          <span className="font-bold tracking-tight text-lg">x402</span>
+        <a href="/" className="flex items-center">
+          <Wordmark className="text-xl" />
         </a>
 
         <div className="hidden md:flex gap-8">

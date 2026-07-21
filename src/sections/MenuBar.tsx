@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { LogoMark } from '../primitives'
+import { Wordmark } from '../primitives'
 
 const ITEMS = ['MAP', 'CONSUME', 'PRODUCE', 'Foundation', 'Research']
 
@@ -13,8 +13,7 @@ export function MenuBar() {
     >
       <div className="max-w-6xl mx-auto px-6 h-full flex items-center justify-between text-xs">
         <div className="flex items-center gap-4">
-          <LogoMark className="w-3.5 h-3.5" />
-          <span className="font-bold text-white">x402</span>
+          <Wordmark className="text-sm" />
           {ITEMS.map((item, i) => (
             <span
               key={item}

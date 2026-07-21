@@ -20,10 +20,8 @@ export function Contact() {
           }}
         />
         <div className="relative">
-          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
-            エージェント決済の実装を、
-            <br />
-            一緒に。
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.2]">
+            AIエージェント × 決済市場の発展に向けて
           </h2>
           <p className="mt-6 text-white/60 max-w-lg mx-auto text-sm leading-[1.7]">
             委任付き自律決済から per-call

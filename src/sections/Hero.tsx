@@ -22,8 +22,7 @@ export function Hero() {
         transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="mt-8 text-white/60 max-w-xl text-base leading-[1.7]"
       >
-        System of IntelligenceがAPIレイヤーでデータを消費する時代の決済オーケストレーション。委任付き自律決済から
-        per-call 自律決済へ——Human → AI から AI ↔ AI
+        委任付き自律決済から per-call 自律決済へ——Human → AI から AI ↔ AI
         への移行とともに、x402 Inc.はそのインフラを構築していきます。
       </motion.p>
 

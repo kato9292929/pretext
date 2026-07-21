@@ -333,7 +333,7 @@ export function Products() {
       <PageHero
         eyebrow="Products"
         tag="プロダクト"
-        title="x402 Inc. が作ったもの"
+        title="Endpoint and Next Vision"
         intro="x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。今 Human → AI で動くインフラが、やがて AI ↔ AI の決済層に転用される——その連続性を証明するために、プロダクトを動かし続けています。Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。"
       />
 

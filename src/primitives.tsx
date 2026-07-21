@@ -73,6 +73,30 @@ export const gradientStyle: CSSProperties = {
   filter: 'url(#c3-noise)',
 }
 
+/* ── Wordmark (x402 white + Inc. gold gradient) ──────────────── */
+export function Wordmark({ className = 'text-xl' }: { className?: string }) {
+  return (
+    <span
+      className={`font-bold tracking-tight ${className}`}
+      style={{ fontFamily: 'Outfit, Inter, sans-serif' }}
+    >
+      <span style={{ color: '#fff' }}>x402</span>
+      <span
+        style={{
+          backgroundImage: 'linear-gradient(120deg, #B8901A 0%, #E8C338 55%, #A67C10 100%)',
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          color: 'transparent',
+          WebkitTextFillColor: 'transparent',
+        }}
+      >
+        {' '}
+        Inc.
+      </span>
+    </span>
+  )
+}
+
 /* ── Shared navigation ───────────────────────────────────────── */
 export const NAV_LINKS = [
   { label: 'x402とは', href: '/about.html' },

@@ -156,7 +156,7 @@ export function Research() {
 
       {/* Featured latest articles */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-8 md:py-12">
-        <p className="text-xs uppercase tracking-widest text-white/40">最新の考察</p>
+        <p className="text-xs uppercase tracking-widest text-white/40">Education</p>
         <div className="mt-6 grid md:grid-cols-3 gap-5">
           {FEATURED_ARTICLES.map((article, i) => (
             <motion.a
