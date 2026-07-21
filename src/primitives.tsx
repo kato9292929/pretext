@@ -61,6 +61,11 @@ export function SectionEyebrow({
   tag?: string
   heading?: boolean
 }) {
+  const tagStyle = {
+    color: '#E8C338',
+    borderColor: 'rgba(232, 195, 56, 0.45)',
+    backgroundColor: 'rgba(232, 195, 56, 0.08)',
+  }
   if (heading) {
     return (
       <div className="inline-flex items-center gap-3">
@@ -68,7 +73,10 @@ export function SectionEyebrow({
           {label}
         </span>
         {tag && (
-          <span className="text-xs md:text-sm text-white/70 px-2.5 py-1 rounded-full border border-white/15">
+          <span
+            className="text-xs md:text-sm px-2.5 py-1 rounded-full border"
+            style={tagStyle}
+          >
             {tag}
           </span>
         )}
@@ -79,7 +87,9 @@ export function SectionEyebrow({
     <div className="inline-flex items-center gap-2 text-sm text-white/70">
       <span>{label}</span>
       {tag && (
-        <span className="px-2 py-0.5 rounded-full border border-white/10 text-white/50">{tag}</span>
+        <span className="px-2 py-0.5 rounded-full border text-xs" style={tagStyle}>
+          {tag}
+        </span>
       )}
     </div>
   )
