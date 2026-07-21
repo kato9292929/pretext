@@ -5,7 +5,7 @@ import { useLang } from '../i18n'
 export function Hero() {
   const { lang } = useLang()
   return (
-    <section className="relative z-10 pt-16 md:pt-28 pb-20 text-center flex flex-col items-center px-6">
+    <section className="relative z-10 min-h-[80vh] pb-16 text-center flex flex-col items-center justify-center px-6">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
