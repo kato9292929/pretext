@@ -2742,3 +2742,17 @@ blockquote cite {
 
 /* pretext in CONTACT — faint so it blends into the background */
 #contact[data-pretext] .hero-line { opacity: 0.14; }
+
+/* ═══ Foundation — compact band (sits just above the CONTACT pretext) ═════════ */
+.foundation-compact { padding: 56px 0 48px; }
+.foundation-compact .eyebrow { margin-bottom: 14px; }
+.foundation-compact .foundation-lead { font-size: 13px; line-height: 1.75; margin-bottom: 22px; max-width: 760px; }
+.foundation-compact .members-title { font-size: 10px; margin-bottom: 12px; }
+.foundation-compact .members-grid { gap: 7px 16px; }
+.foundation-compact .member { font-size: 12px; color: var(--muted); }
+.foundation-compact .member:hover { color: var(--text-dim); }
+.foundation-compact .foundation-links { margin-top: 24px; gap: 12px; }
+.foundation-compact .foundation-links .btn-outline { padding: 8px 16px; font-size: 13px; margin-top: 0; }
+
+/* CONTACT: keep the faint pretext a tidy band rather than a full-viewport void */
+#contact[data-pretext] { min-height: 0; padding-bottom: clamp(40px, 8vh, 96px); }
