@@ -16,21 +16,11 @@ export function Hero() {
         </span>
       </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-8 text-white/60 max-w-xl text-base leading-[1.7]"
-      >
-        委任付き自律決済から per-call 自律決済へ——Human → AI から AI ↔ AI
-        への移行とともに、x402 Inc.はそのインフラを構築していきます。
-      </motion.p>
-
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-8 flex flex-col sm:flex-row items-center gap-3"
+        transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-10 flex flex-col sm:flex-row items-center gap-3"
       >
         <Pill label="お問い合わせ" href={`mailto:${CONTACT_EMAIL}`} gold />
         <Pill label="プロダクトを見る" href="/products.html" />
