@@ -45,7 +45,7 @@ export function Architecture() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <SectionEyebrow label="Architecture" tag="3-layer" />
+          <SectionEyebrow label="Architecture" tag="3-layer" heading />
           <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-md">
             発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)。人間の委任による「委任付き自律決済」から、エージェントが都度支払う
             per-call

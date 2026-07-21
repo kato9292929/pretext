@@ -46,7 +46,7 @@ export function Foundation() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="max-w-3xl"
       >
-        <SectionEyebrow label="Foundation" tag="Open standard" />
+        <SectionEyebrow label="Foundation" tag="Open standard" heading />
         <p className="mt-6 text-white/60 text-base leading-[1.7]">
           x402は、Coinbaseが開発したHTTPペイメント・プロトコルで、現在はLinux
           Foundation傘下のx402

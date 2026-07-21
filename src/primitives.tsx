@@ -1,6 +1,10 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { ChevronRight } from 'lucide-react'
 
+/* Rich, lustrous brand gold — deep antique → warm gold → bright highlight → gold → antique */
+export const GOLD_GRADIENT =
+  'linear-gradient(120deg, #8A6D10 0%, #C99A24 20%, #F3DE8E 42%, #FDF6D0 52%, #E8C338 66%, #B8901A 88%, #8A6D10 100%)'
+
 /* ── AppleLogo ───────────────────────────────────────────────── */
 export function AppleLogo({ className = 'w-4 h-4' }: { className?: string }) {
   return (
@@ -39,11 +43,7 @@ export function Pill({
       className={`group inline-flex items-center justify-center gap-2 rounded-full font-medium text-sm px-5 py-3 transition-all active:scale-[0.98] ${
         gold ? 'text-black hover:brightness-105' : 'bg-white text-black hover:bg-white/90'
       } ${full ? 'w-full' : ''}`}
-      style={
-        gold
-          ? { backgroundImage: 'linear-gradient(120deg, #B8901A 0%, #E8C338 55%, #A67C10 100%)' }
-          : undefined
-      }
+      style={gold ? { backgroundImage: GOLD_GRADIENT } : undefined}
     >
       {label}
       <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-[1px]" />
@@ -52,10 +52,31 @@ export function Pill({
 }
 
 /* ── SectionEyebrow ──────────────────────────────────────────── */
-export function SectionEyebrow({ label, tag }: { label: string; tag?: string }) {
+export function SectionEyebrow({
+  label,
+  tag,
+  heading = false,
+}: {
+  label: string
+  tag?: string
+  heading?: boolean
+}) {
+  if (heading) {
+    return (
+      <div className="inline-flex items-center gap-3">
+        <span className="text-2xl md:text-3xl font-semibold tracking-tight text-white">
+          {label}
+        </span>
+        {tag && (
+          <span className="text-xs md:text-sm text-white/70 px-2.5 py-1 rounded-full border border-white/15">
+            {tag}
+          </span>
+        )}
+      </div>
+    )
+  }
   return (
     <div className="inline-flex items-center gap-2 text-sm text-white/70">
-      <span className="w-1.5 h-1.5 rounded-full bg-white" />
       <span>{label}</span>
       {tag && (
         <span className="px-2 py-0.5 rounded-full border border-white/10 text-white/50">{tag}</span>
@@ -67,7 +88,7 @@ export function SectionEyebrow({ label, tag }: { label: string; tag?: string }) 
 /* ── Shared shiny-gradient style ─────────────────────────────── */
 export const gradientStyle: CSSProperties = {
   backgroundImage:
-    'linear-gradient(to right, #4A3B08 0%, #A67C10 12.5%, #F5D84E 32.5%, #E8C338 50%, #A67C10 67.5%, #4A3B08 87.5%, #4A3B08 100%)',
+    'linear-gradient(to right, #6B5310 0%, #A67C10 12.5%, #FDF6D0 32.5%, #E8C338 50%, #A67C10 67.5%, #6B5310 87.5%, #6B5310 100%)',
   backgroundSize: '200% auto',
   WebkitBackgroundClip: 'text',
   backgroundClip: 'text',
@@ -86,7 +107,7 @@ export function Wordmark({ className = 'text-xl' }: { className?: string }) {
       <span style={{ color: '#fff' }}>x402</span>
       <span
         style={{
-          backgroundImage: 'linear-gradient(120deg, #B8901A 0%, #E8C338 55%, #A67C10 100%)',
+          backgroundImage: GOLD_GRADIENT,
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           color: 'transparent',

@@ -14,7 +14,7 @@ export function Insights() {
         className="flex flex-wrap items-end justify-between gap-4"
       >
         <div>
-          <SectionEyebrow label="Insights" tag="考察・調査" />
+          <SectionEyebrow label="Insights" tag="Research" heading />
           <p className="mt-4 text-white/60 text-base leading-[1.7] max-w-xl">
             エージェント決済の「現在地」を、一次情報から読み解く。委任付き自律決済から market
             の拡大まで、直近のトピックを深掘りしています。

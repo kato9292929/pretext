@@ -65,7 +65,7 @@ export function Featured() {
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <SectionEyebrow label="Featured" tag="Products" />
+        <SectionEyebrow label="Featured" tag="Products" heading />
         <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-3xl">
           x402
           Inc.は、x402規格に対応したエンドポイントと独自データを作り、それを使う自律エージェントを動かしています。HTTP
