@@ -3,167 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="System of IntelligenceがAPIレイヤーでデータを消費する時代の決済オーケストレーション。Human → AI から AI ↔ AI への移行とともに、x402 Inc.はそのインフラを構築していきます。">
+  <meta name="description" content="x402とは——1997年から未使用だったHTTP 402をAIエージェントの自律決済プロトコルとして再活性化する。委任付き自律決済から per-call 自律決済へ。">
   <title>x402とは — x402 Inc.</title>
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-  <!-- OGP -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://x402jp.com/about.html">
-  <meta property="og:title" content="x402 Inc. — AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築">
-  <meta property="og:description" content="System of IntelligenceがAPIレイヤーでデータを消費する時代の決済オーケストレーション。Human → AI から AI ↔ AI への移行とともに、x402 Inc.はそのインフラを構築していきます。">
+  <meta property="og:title" content="x402とは — x402 Inc.">
+  <meta property="og:description" content="x402とは——1997年から未使用だったHTTP 402をAIエージェントの自律決済プロトコルとして再活性化する。">
   <meta property="og:image" content="https://x402jp.com/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="x402 Inc. — AIエージェントが自律的に選ぶAPIエコシステムと決済インフラの構築">
-  <meta name="twitter:description" content="System of IntelligenceがAPIレイヤーでデータを消費する時代の決済オーケストレーション。Human → AI から AI ↔ AI への移行とともに、x402 Inc.はそのインフラを構築していきます。">
-  <meta name="twitter:image" content="https://x402jp.com/og-image.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-
-  <!-- ── Protocol (x402とは) ──────────────────────────────────────── -->
-  <section id="about" class="section section-dark">
-    <div class="container">
-      <p class="eyebrow">PROTOCOL</p>
-      <h2 class="section-title" data-i18n="protocol.title">x402とは</h2>
-      <div class="about-grid">
-        <div class="about-lead">
-          <p data-i18n="protocol.p1">HTTP 402 "Payment Required" ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。</p>
-          <p data-i18n="protocol.p2">x402はこの未使用のHTTPステータスコードを再活性化し、AIエージェントや自律システムがHTTPネイティブに支払いを行えるようにするプロトコルです。サーバーが402を返すと、クライアントは支払いを完了してリクエストを再試行します。</p>
-          <a href="https://www.x402.org/" class="btn-outline" target="_blank" rel="noopener" data-i18n="protocol.cta">仕様を読む →</a>
-        </div>
-        <div class="about-code">
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-dot"></span>
-              <span class="code-dot"></span>
-              <span class="code-dot"></span>
-              <span class="code-title">HTTP Flow</span>
-            </div>
-            <pre><code><span class="c-dim">→</span> GET /api/data HTTP/1.1
-  Host: api.example.com
-
-<span class="c-gold">←</span> <span class="c-gold">HTTP/1.1 402 Payment Required</span>
-  X-Payment-Required: version=1
-  X-Payment-Amount: 0.001
-  X-Payment-Token: USDC
-
-<span class="c-dim">→</span> GET /api/data HTTP/1.1
-  X-Payment: &lt;signed_payload&gt;
-
-<span class="c-green">←</span> <span class="c-green">HTTP/1.1 200 OK</span>
-  Content-Type: application/json</code></pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- Use Cases（x402とはに統合） -->
-      <div class="usecases-merged">
-
-        <!-- パラダイム対比 -->
-        <div class="paradigm-split">
-          <div class="paradigm-card paradigm-old">
-            <p class="paradigm-badge" data-i18n="paradigm.old.badge">現在の主流</p>
-            <h3 data-i18n="paradigm.old.title">「人間の代わりに注文」</h3>
-            <p data-i18n-html="paradigm.old.desc">クレカ × AIエージェント<br>EC・小売・代行購入</p>
-            <p class="paradigm-example" data-i18n="paradigm.old.example">GAP × Gemini × Google Pay など</p>
-          </div>
-          <div class="paradigm-arrow">→</div>
-          <div class="paradigm-card paradigm-new">
-            <p class="paradigm-badge" data-i18n="paradigm.new.badge">新しいレイヤー</p>
-            <h3 data-i18n="paradigm.new.title">「自律的な購入」</h3>
-            <p data-i18n-html="paradigm.new.desc">x402 × MCP × Agent Wallet<br>APIリソースの自律調達</p>
-            <p class="paradigm-example" data-i18n="paradigm.new.example">AIが仕事に必要なリソースを自ら買う</p>
-          </div>
-        </div>
-
-        <!-- System of Intelligence × x402 -->
-        <div class="thesis-block">
-          <h3 class="thesis-sub" data-i18n="soi.title">System of Intelligence × x402</h3>
-          <p class="thesis-body" data-i18n="soi.body">AIエージェントが営業担当者の代わりに毎朝「優先順位付きフィード」を生成する時代が到来した場合、そのフィードには外部データが必要です——業界ニュース・競合動向・規制情報・リアルタイムデータ。月額制では粒度が粗すぎます。System of Intelligenceは固有のデータをAPIレイヤーで消費します——エージェントが自律的に選び、その場で決済するAPIが求められます。</p>
-          <div class="thesis-conditions">
-            <p class="thesis-conditions-label" data-i18n="soi.cond.label">「エージェントが毎回自律的に選ぶAPI」の条件</p>
-            <ul>
-              <li data-i18n="soi.cond.1">固有のデータを持つ（汎用データはAIが再現できる）</li>
-              <li data-i18n="soi.cond.2">エージェント向けスキーマで提供される</li>
-              <li data-i18n="soi.cond.3">使われるほど蓄積されるトランザクションデータがある</li>
-              <li data-i18n="soi.cond.4">実行フローに接続されている（データ提供→アクション→フィードバック）</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- AIエージェントがx402で買えるもの -->
-        <div class="agent-buy-wrap">
-          <h3 data-i18n="ab.title">AIエージェントがx402で買えるもの</h3>
-          <div class="agent-buy-grid">
-
-            <div class="agent-buy-card">
-              <p class="agent-buy-cat" data-i18n="ab.cat1">データ・情報</p>
-              <ul>
-                <li data-i18n="ab.cat1.l1">リアルタイム気象・地震・津波情報</li>
-                <li data-i18n="ab.cat1.l2">不動産地価・取引データ（APAC5カ国）</li>
-                <li data-i18n="ab.cat1.l3">法人KYC・AMLスクリーニング</li>
-                <li data-i18n="ab.cat1.l4">為替・暗号資産価格・マクロ経済統計</li>
-                <li data-i18n="ab.cat1.l5">ニュース・マーケットブリーフィング</li>
-              </ul>
-            </div>
-
-            <div class="agent-buy-card">
-              <p class="agent-buy-cat" data-i18n="ab.cat2">デジタルサービス</p>
-              <ul>
-                <li data-i18n="ab.cat2.l1">ドメイン登録・空き確認</li>
-                <li data-i18n="ab.cat2.l2">SMS送信・メール検証</li>
-                <li data-i18n="ab.cat2.l3">IP情報・位置情報</li>
-                <li data-i18n="ab.cat2.l4">テキスト翻訳（日英中韓）</li>
-                <li data-i18n="ab.cat2.l5">Webスクリーンショット</li>
-              </ul>
-            </div>
-
-            <div class="agent-buy-card">
-              <p class="agent-buy-cat" data-i18n="ab.cat3">コンピュート・推論</p>
-              <ul>
-                <li data-i18n="ab.cat3.l1">LLM推論（トークン単位課金）</li>
-                <li data-i18n="ab.cat3.l2">GPUジョブ・ヘッドレスブラウザ</li>
-                <li data-i18n="ab.cat3.l3">音声認識・画像処理</li>
-              </ul>
-            </div>
-
-            <div class="agent-buy-card">
-              <p class="agent-buy-cat" data-i18n="ab.cat4">コンテンツ・レポート</p>
-              <ul>
-                <li data-i18n="ab.cat4.l1">有料記事・調査レポート</li>
-                <li data-i18n="ab.cat4.l2">不動産リサーチレポート（AI生成）</li>
-                <li data-i18n="ab.cat4.l3">マーケットアナリシス</li>
-              </ul>
-            </div>
-
-            <div class="agent-buy-card">
-              <p class="agent-buy-cat" data-i18n="ab.cat5">オンチェーンデータ</p>
-              <ul>
-                <li data-i18n="ab.cat5.l1">DeFiイールドスコア・プロトコルリスク</li>
-                <li data-i18n="ab.cat5.l2">トレーディングシグナル・価格予測</li>
-                <li data-i18n="ab.cat5.l3">ウォレットレピュテーションスコア</li>
-              </ul>
-            </div>
-
-          </div>
-          <p class="agent-buy-note" data-i18n="ab.note">月額契約もAPIキーも不要。ウォレット残高があれば即アクセス。</p>
-        </div>
-
-    
-      </div>
-
-    </div>
-  </section>
-
-  <script type="module" src="/src/main.ts"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main-about.tsx"></script>
 </body>
 </html>

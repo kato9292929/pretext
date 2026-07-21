@@ -1,16 +1,17 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  plugins: [react()],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main:     resolve(__dirname, 'index.html'),
-        about:    resolve(__dirname, 'about.html'),
-        products: resolve(__dirname, 'products.html'),
-        research: resolve(__dirname, 'research.html'),
+        main: 'index.html',
+        about: 'about.html',
+        products: 'products.html',
+        research: 'research.html',
       },
     },
   },
