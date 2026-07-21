@@ -45,12 +45,12 @@ export function Layout({ children }: { children: ReactNode }) {
             opacity: 0.4,
           }}
         />
-        {/* Aurora color accents (blue / teal / purple / orange) glowing in the corners */}
+        {/* Aurora color accents — warm-led (orange / gold / pink); blue kept subtle */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(900px circle at 8% 96%, rgba(40, 140, 255, 0.38), transparent 55%), radial-gradient(950px circle at 92% 100%, rgba(155, 70, 235, 0.34), transparent 55%), radial-gradient(1000px circle at 103% 60%, rgba(255, 120, 40, 0.26), transparent 55%), radial-gradient(820px circle at -3% 42%, rgba(30, 200, 190, 0.22), transparent 55%)',
+              'radial-gradient(950px circle at 22% 90%, rgba(255, 140, 45, 0.36), transparent 55%), radial-gradient(820px circle at 2% 60%, rgba(232, 95, 180, 0.30), transparent 55%), radial-gradient(760px circle at 58% 82%, rgba(245, 205, 80, 0.26), transparent 55%), radial-gradient(1000px circle at 99% 34%, rgba(48, 120, 235, 0.18), transparent 52%), radial-gradient(880px circle at 92% 99%, rgba(30, 195, 200, 0.18), transparent 55%)',
             mixBlendMode: 'screen',
             opacity: 0.9,
           }}
