@@ -28,17 +28,27 @@ export function Layout({ children }: { children: ReactNode }) {
           muted
           playsInline
           className="w-full h-full object-cover pointer-events-none"
-          /* Approved gold treatment — DO NOT modify the video filter/wash. */
-          style={{ filter: 'sepia(1) saturate(1.9) hue-rotate(3deg) brightness(0.9) contrast(1.05)' }}
+          style={{ filter: 'sepia(1) saturate(2.1) hue-rotate(5deg) brightness(1.04) contrast(1.1)' }}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
         />
-        {/* Approved gold wash — DO NOT modify. */}
+        {/* Rich, lustrous satin-gold wash */}
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(120deg, #B8901A 0%, #E8C338 55%, #A67C10 100%)',
+            background:
+              'linear-gradient(120deg, #6B5310 0%, #C99A24 26%, #FDF6D0 50%, #E8C338 68%, #A67C10 86%, #6B5310 100%)',
             mixBlendMode: 'overlay',
-            opacity: 0.35,
+            opacity: 0.5,
+          }}
+        />
+        {/* Soft specular sheen for a luminous gold highlight */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(1200px circle at 72% 28%, rgba(253, 246, 208, 0.3), transparent 62%)',
+            mixBlendMode: 'soft-light',
+            opacity: 0.85,
           }}
         />
       </div>
