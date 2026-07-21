@@ -42,7 +42,7 @@ export function Pill({
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className={`group inline-flex items-center justify-center gap-2 rounded-full font-medium text-sm px-5 py-3 transition-all active:scale-[0.98] ${
         gold
-          ? 'animate-aurora text-black hover:brightness-105'
+          ? 'liquid-glass text-white hover:brightness-125'
           : 'bg-white text-black hover:bg-white/90'
       } ${full ? 'w-full' : ''}`}
     >
