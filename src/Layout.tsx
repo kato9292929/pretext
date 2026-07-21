@@ -29,8 +29,8 @@ export function Layout({ children }: { children: ReactNode }) {
           playsInline
           className="w-full h-full object-cover pointer-events-none"
           style={{
-            // Strong blur smooths the grainy texture into a silky gold flow.
-            filter: 'saturate(1.7) brightness(1.05) contrast(1.05) blur(16px)',
+            // sepia recolors the video's native blue ribbon to gold; blur smooths it.
+            filter: 'sepia(1) saturate(2) hue-rotate(2deg) brightness(1.02) contrast(1.05) blur(16px)',
             transform: 'scale(1.1)',
           }}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
@@ -50,7 +50,7 @@ export function Layout({ children }: { children: ReactNode }) {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(950px circle at 22% 90%, rgba(255, 140, 45, 0.36), transparent 55%), radial-gradient(820px circle at 2% 60%, rgba(232, 95, 180, 0.30), transparent 55%), radial-gradient(760px circle at 58% 82%, rgba(245, 205, 80, 0.26), transparent 55%), radial-gradient(1000px circle at 99% 34%, rgba(48, 120, 235, 0.18), transparent 52%), radial-gradient(880px circle at 92% 99%, rgba(30, 195, 200, 0.18), transparent 55%)',
+              'radial-gradient(950px circle at 22% 90%, rgba(255, 140, 45, 0.36), transparent 55%), radial-gradient(820px circle at 2% 60%, rgba(232, 95, 180, 0.30), transparent 55%), radial-gradient(760px circle at 58% 82%, rgba(245, 205, 80, 0.28), transparent 55%), radial-gradient(900px circle at 96% 97%, rgba(30, 195, 200, 0.13), transparent 52%), radial-gradient(760px circle at 100% 30%, rgba(80, 120, 210, 0.09), transparent 50%)',
             mixBlendMode: 'screen',
             opacity: 0.9,
           }}
