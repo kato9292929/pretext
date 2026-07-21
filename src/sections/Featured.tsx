@@ -67,7 +67,7 @@ export function Featured() {
       >
         <SectionEyebrow label="Featured" tag="Products" />
         <h2 className="mt-5 text-3xl md:text-5xl font-semibold tracking-tight leading-[1.02]">
-          Products Research and Development
+          R&amp;D
         </h2>
         <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-3xl">
           x402

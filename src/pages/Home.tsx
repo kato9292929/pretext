@@ -1,5 +1,4 @@
 import { Hero } from '../sections/Hero'
-import { MenuBar } from '../sections/MenuBar'
 import { Featured } from '../sections/Featured'
 import { Architecture } from '../sections/Architecture'
 import { Foundation } from '../sections/Foundation'
@@ -9,7 +8,6 @@ export function Home() {
   return (
     <>
       <Hero />
-      <MenuBar />
       <Featured />
       <Architecture />
       <Foundation />
