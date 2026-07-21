@@ -66,9 +66,6 @@ export function Featured() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
         <SectionEyebrow label="Featured" tag="Products" />
-        <h2 className="mt-5 text-3xl md:text-5xl font-semibold tracking-tight leading-[1.02]">
-          R&amp;D
-        </h2>
         <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-3xl">
           x402
           Inc.は、x402規格に対応したエンドポイントと独自データを作り、それを使う自律エージェントを動かしています。HTTP

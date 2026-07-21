@@ -46,11 +46,6 @@ export function Architecture() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <SectionEyebrow label="Architecture" tag="3-layer" />
-          <h2 className="mt-5 text-3xl md:text-5xl font-semibold tracking-tight leading-[1.02]">
-            3層で
-            <br />
-            エコシステムを回す。
-          </h2>
           <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-md">
             発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)。人間の委任による「委任付き自律決済」から、エージェントが都度支払う
             per-call

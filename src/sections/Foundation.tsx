@@ -47,10 +47,12 @@ export function Foundation() {
         className="max-w-3xl"
       >
         <SectionEyebrow label="Foundation" tag="Open standard" />
-        <p className="mt-6 text-lg md:text-2xl text-white/80 leading-[1.6] font-medium tracking-tight">
-          x402は、Coinbase・Cloudflare・Stripe らが主導し{' '}
-          <span className="text-white">Linux Foundation</span> 傘下の x402 Foundation
-          として設立されたオープンスタンダードです。単一企業が所有せず、誰でも読み・構築し・貢献できます。
+        <p className="mt-6 text-white/60 text-base leading-[1.7]">
+          x402は、Coinbaseが開発したHTTPペイメント・プロトコルで、現在はLinux
+          Foundation傘下のx402
+          Foundationが中立的に管理するオープンスタンダードです。x402
+          Foundationは当初Coinbase・Cloudflare・Stripeの3社が立ち上げ、2026年7月14日にLinux
+          Foundationの下で40組織を擁して正式ローンチしました。プロトコルはCoinbaseが寄贈しましたが、その進化は単一企業ではなくFoundationが統括しています。
         </p>
       </motion.div>
 

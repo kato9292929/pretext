@@ -37,10 +37,13 @@ export function Pill({
       href={href}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className={`group inline-flex items-center justify-center gap-2 rounded-full font-medium text-sm px-5 py-3 transition-all active:scale-[0.98] ${
-        gold
-          ? 'bg-[#E8C338] text-black hover:brightness-105'
-          : 'bg-white text-black hover:bg-white/90'
+        gold ? 'text-black hover:brightness-105' : 'bg-white text-black hover:bg-white/90'
       } ${full ? 'w-full' : ''}`}
+      style={
+        gold
+          ? { backgroundImage: 'linear-gradient(120deg, #B8901A 0%, #E8C338 55%, #A67C10 100%)' }
+          : undefined
+      }
     >
       {label}
       <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-[1px]" />
