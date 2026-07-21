@@ -72,6 +72,15 @@ export function Foundation() {
         </div>
       </div>
 
+      <div className="mt-12 liquid-glass rounded-2xl p-6 max-w-3xl">
+        <p className="text-xs uppercase tracking-widest text-white/40">Momentum</p>
+        <p className="mt-3 text-sm text-white/70 leading-[1.8]">
+          7月14日の x402 Foundation 発足、Stripe が A to A で MPP経由の受け入れと x402
+          の両方を担ぐ構造、そして AWS・Cloudflare の x402対応——CloudFront/Cloudflare
+          を使う全事業者の参入で、市場は「x402を知っている開発者」から一気に広がりつつあります。
+        </p>
+      </div>
+
       <div className="mt-10 flex flex-wrap gap-4">
         {LINKS.map((link) => (
           <a

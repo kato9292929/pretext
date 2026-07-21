@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { LogoMark } from '../primitives'
 
-const ITEMS = ['MAP', 'CONSUME', 'PRODUCE', 'Foundation', 'Directory']
+const ITEMS = ['MAP', 'CONSUME', 'PRODUCE', 'Foundation', 'Research']
 
 export function MenuBar() {
   return (

@@ -1,13 +1,6 @@
 import { motion } from 'motion/react'
 import { Menu } from 'lucide-react'
-import { LogoMark, Pill } from '../primitives'
-
-const LINKS = [
-  { label: 'Products', href: '#products' },
-  { label: 'Architecture', href: '#architecture' },
-  { label: 'Foundation', href: '#foundation' },
-  { label: 'Contact', href: '#contact' },
-]
+import { CONTACT_EMAIL, LogoMark, NAV_LINKS, Pill } from '../primitives'
 
 export function Navbar() {
   return (
@@ -18,13 +11,13 @@ export function Navbar() {
       className="relative z-10 max-w-6xl mx-auto px-6"
     >
       <div className="flex items-center justify-between py-5">
-        <div className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2">
           <LogoMark className="w-8 h-8" />
           <span className="font-bold tracking-tight text-lg">x402</span>
-        </div>
+        </a>
 
         <div className="hidden md:flex gap-8">
-          {LINKS.map((link, i) => (
+          {NAV_LINKS.map((link, i) => (
             <motion.a
               key={link.label}
               href={link.href}
@@ -39,7 +32,7 @@ export function Navbar() {
         </div>
 
         <div className="hidden md:block">
-          <Pill label="x402 Directory" href="https://x402-directory.vercel.app/" gold />
+          <Pill label="お問い合わせ" href={`mailto:${CONTACT_EMAIL}`} gold />
         </div>
 
         <button

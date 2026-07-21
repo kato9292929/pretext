@@ -1,13 +1,8 @@
+import type { ReactNode } from 'react'
 import { Navbar } from './sections/Navbar'
-import { Hero } from './sections/Hero'
-import { MenuBar } from './sections/MenuBar'
-import { Featured } from './sections/Featured'
-import { Architecture } from './sections/Architecture'
-import { Foundation } from './sections/Foundation'
-import { WatermarkBand } from './sections/WatermarkBand'
 import { Contact } from './sections/Contact'
 
-export default function App() {
+export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#0c0c0c] text-white">
       {/* Root SVG noise filter (subtle grain, multiply blend) for the shiny headline */}
@@ -52,12 +47,7 @@ export default function App() {
       <div className="hidden md:block pointer-events-none fixed inset-y-0 left-1/2 translate-x-[calc(-50%+36rem)] w-px bg-white/10 z-[5]" />
 
       <Navbar />
-      <Hero />
-      <MenuBar />
-      <Featured />
-      <Architecture />
-      <Foundation />
-      <WatermarkBand />
+      {children}
       <Contact />
     </div>
   )

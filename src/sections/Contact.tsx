@@ -1,15 +1,15 @@
 import { motion } from 'motion/react'
-import { Pill } from '../primitives'
+import { CONTACT_EMAIL, Pill } from '../primitives'
 
 export function Contact() {
   return (
-    <section id="contact" className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-32">
+    <section id="contact" className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="liquid-glass relative overflow-hidden rounded-3xl px-8 py-16 md:py-24 text-center"
+        className="liquid-glass relative overflow-hidden rounded-3xl px-8 py-16 md:py-20 text-center"
       >
         <div
           className="pointer-events-none absolute inset-0"
@@ -20,17 +20,17 @@ export function Contact() {
           }}
         />
         <div className="relative">
-          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.15]">
-            Human → AI から AI ↔ AI へ——
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
+            エージェント決済の実装を、
             <br />
-            新しいビジネス機会を、一緒に。
+            一緒に。
           </h2>
-          <p className="mt-6 text-white/60 max-w-md mx-auto text-sm leading-[1.7]">
-            この移行とともに、新しいビジネス機会を一緒に探求しませんか。お気軽にご連絡ください。
+          <p className="mt-6 text-white/60 max-w-lg mx-auto text-sm leading-[1.7]">
+            委任付き自律決済から per-call
+            自律決済まで——実装・検証のご相談、事業連携やデータ提供のお問い合わせは、お気軽にご連絡ください。
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Pill label="hello@x402jp.com" href="mailto:hello@x402jp.com" gold />
-            <Pill label="x402 Directory" href="https://x402-directory.vercel.app/" />
+          <div className="mt-8 flex justify-center">
+            <Pill label={CONTACT_EMAIL} href={`mailto:${CONTACT_EMAIL}`} gold />
           </div>
         </div>
       </motion.div>

@@ -1,7 +1,14 @@
 import { motion } from 'motion/react'
 import { SectionEyebrow } from '../primitives'
 
-const CHIPS = ['HTTP 402', 'Base / Solana', 'USDC per-call', 'ERC-8004 identity', 'REST + MCP']
+const CHIPS = [
+  '委任付き自律決済',
+  'per-call 自律決済',
+  'HTTP 402',
+  'Base / Solana',
+  'ERC-8004 identity',
+  'REST + MCP',
+]
 
 const LAYERS = [
   {
@@ -45,8 +52,9 @@ export function Architecture() {
             エコシステムを回す。
           </h2>
           <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-md">
-            発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)。HTTP
-            402を共通の決済レールに、Base/Solana上のオンチェーン決済とエージェントidentityを土台として、需要と観測の往復を検証し続けています。
+            発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)。人間の委任による「委任付き自律決済」から、エージェントが都度支払う
+            per-call
+            自律決済へ。HTTP 402を共通の決済レールに、Base/Solana上のオンチェーン決済とエージェントidentityを土台として、需要と観測の往復を検証し続けています。
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             {CHIPS.map((chip) => (

@@ -73,5 +73,39 @@ export const gradientStyle: CSSProperties = {
   filter: 'url(#c3-noise)',
 }
 
+/* ── Shared navigation ───────────────────────────────────────── */
+export const NAV_LINKS = [
+  { label: 'x402とは', href: '/about.html' },
+  { label: 'プロダクト', href: '/products.html' },
+  { label: '考察・調査', href: '/research.html' },
+]
+
+export const CONTACT_EMAIL = 'hello@x402jp.com'
+
+/* ── PageHero (sub-page header) ──────────────────────────────── */
+export function PageHero({
+  eyebrow,
+  tag,
+  title,
+  intro,
+}: {
+  eyebrow: string
+  tag?: string
+  title: string
+  intro?: ReactNode
+}) {
+  return (
+    <section className="relative z-10 max-w-6xl mx-auto px-6 pt-14 md:pt-24 pb-6">
+      <SectionEyebrow label={eyebrow} tag={tag} />
+      <h1 className="mt-5 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.02]">
+        {title}
+      </h1>
+      {intro && (
+        <p className="mt-6 text-white/60 max-w-2xl text-base leading-[1.7]">{intro}</p>
+      )}
+    </section>
+  )
+}
+
 /* helper wrapper so children typing stays tidy */
 export type WithChildren = { children?: ReactNode }
