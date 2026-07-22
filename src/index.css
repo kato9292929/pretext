@@ -30,17 +30,42 @@ body {
   background-color: rgba(61, 129, 227, 0.3);
 }
 
-/* Hide the (dark) background video in light theme; use a soft light wash */
+/* Hide the (dark) background video in light theme; show a soft flowing color wash */
 :root[data-theme='light'] .bg-media {
   display: none;
 }
 
-:root[data-theme='light'] .bg-light {
-  display: block;
-}
-
 .bg-light {
   display: none;
+  background: linear-gradient(
+    120deg,
+    #f7d7e6,
+    #fbe3c6,
+    #fdf1cc,
+    #d8efd7,
+    #cfe8f3,
+    #ded6f3,
+    #f7d7e6
+  );
+  background-size: 300% 300%;
+  opacity: 0.5;
+  animation: light-aurora 26s ease-in-out infinite;
+}
+
+@keyframes light-aurora {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+:root[data-theme='light'] .bg-light {
+  display: block;
 }
 
 /* Liquid-glass reads inverted on a light background */

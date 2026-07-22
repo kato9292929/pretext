@@ -15,8 +15,8 @@ type Product = {
 }
 
 const INTRO: Localized = {
-  ja: 'エコシステムを内側から観測・検証するための instruments。x402対応エンドポイント、独自データ、それを叩くエージェントを自ら作り、per-callのオンチェーン決済レールと検証可能な実績を積み上げています。',
-  en: 'The instruments we run to observe and verify the ecosystem from within — x402-compatible endpoints, proprietary data and the agents that call them — built in-house to accumulate a per-call on-chain payment rail and a verifiable track record.',
+  ja: 'x402 Inc.は、エージェント経済とエージェント決済のエコシステムを、AIとの詳細なリサーチで分析するリサーチ会社です。x402対応のエンドポイント、独自データ、それを叩くエージェントを自ら作り、観測と検証の instruments として使います。HTTP 402を共通の決済レールに、Base/Solana上のper-callオンチェーン決済とERC-8004のエージェントidentityを土台にしています。',
+  en: 'x402 Inc. is a research company that analyzes the agent economy and the agent-payments ecosystem through detailed research with AI. We build x402-compatible endpoints, proprietary data and the agents that call them, and use them as instruments for observation and verification. With HTTP 402 as the shared payment rail, we build on per-call on-chain settlement across Base/Solana and ERC-8004 agent identity.',
 }
 
 const PRODUCTS: Product[] = [

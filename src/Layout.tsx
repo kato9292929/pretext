@@ -21,14 +21,8 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
-      {/* Soft light wash shown only in light theme (video is hidden then) */}
-      <div
-        className="bg-light fixed inset-0 z-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(1200px circle at 78% 18%, rgba(232,195,56,0.10), transparent 60%), radial-gradient(1000px circle at 12% 90%, rgba(200,90,168,0.08), transparent 60%)',
-        }}
-      />
+      {/* Soft flowing color wash shown only in light theme (video is hidden then) */}
+      <div className="bg-light fixed inset-0 z-0 pointer-events-none" />
 
       {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon */}
       <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
