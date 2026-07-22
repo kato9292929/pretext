@@ -30,14 +30,40 @@ body {
   background-color: rgba(61, 129, 227, 0.3);
 }
 
-/* Light theme reuses the same video ribbon: invert flips black→white while
-   hue-rotate(180) keeps the ribbon roughly its original colors on a light bg. */
+/* Light theme: hide the dark video, use a clean flowing pastel gradient */
 :root[data-theme='light'] .bg-media {
-  filter: invert(1) hue-rotate(180deg) saturate(1.15) brightness(1.02);
+  display: none;
 }
 
 .bg-light {
   display: none;
+  background: linear-gradient(
+    105deg,
+    #5ac99c 0%,
+    #38c6c6 22%,
+    #55b7ea 45%,
+    #8ea9ea 66%,
+    #c3a4e6 84%,
+    #ecb6d8 100%
+  );
+  background-size: 200% 100%;
+  animation: light-flow 22s ease-in-out infinite;
+}
+
+@keyframes light-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+:root[data-theme='light'] .bg-light {
+  display: block;
 }
 
 /* Liquid-glass reads inverted on a light background */
