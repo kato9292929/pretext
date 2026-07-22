@@ -4,16 +4,61 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme tokens ────────────────────────────────────────────── */
+:root,
+:root[data-theme='dark'] {
+  --fg: 255 255 255;
+  --bg: 12 12 12; /* #0c0c0c */
+  --gold: 232 195 56; /* #E8C338 */
+}
+
+:root[data-theme='light'] {
+  --fg: 26 22 15; /* warm near-black */
+  --bg: 245 242 236; /* warm off-white */
+  --gold: 154 123 18; /* #9A7B12 */
+}
+
 html,
 body {
   font-family: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-color: #0c0c0c;
-  color: #fff;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
 }
 
 ::selection {
   background-color: rgba(61, 129, 227, 0.3);
+}
+
+/* Hide the (dark) background video in light theme; use a soft light wash */
+:root[data-theme='light'] .bg-media {
+  display: none;
+}
+
+:root[data-theme='light'] .bg-light {
+  display: block;
+}
+
+.bg-light {
+  display: none;
+}
+
+/* Liquid-glass reads inverted on a light background */
+:root[data-theme='light'] .liquid-glass {
+  background: rgba(0, 0, 0, 0.015);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme='light'] .liquid-glass::before {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.22) 0%,
+    rgba(0, 0, 0, 0.08) 20%,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.08) 80%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
 }
 
 /* ── Shiny headline ──────────────────────────────────────────── */

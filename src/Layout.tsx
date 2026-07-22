@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react'
-import { LanguageProvider } from './i18n'
+import { LanguageProvider, ThemeProvider } from './i18n'
 import { Navbar } from './sections/Navbar'
 import { Contact } from './sections/Contact'
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#0c0c0c] text-white">
+    <div className="relative min-h-screen overflow-x-hidden bg-bg text-fg">
       {/* Root SVG noise filter (subtle grain, multiply blend) for the shiny headline */}
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <filter id="c3-noise">
@@ -21,8 +21,17 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
+      {/* Soft light wash shown only in light theme (video is hidden then) */}
+      <div
+        className="bg-light fixed inset-0 z-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(1200px circle at 78% 18%, rgba(232,195,56,0.10), transparent 60%), radial-gradient(1000px circle at 12% 90%, rgba(200,90,168,0.08), transparent 60%)',
+        }}
+      />
+
       {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon */}
-      <div className="fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
+      <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
         <video
           autoPlay
           loop
@@ -58,11 +67,13 @@ export function Layout({ children }: { children: ReactNode }) {
         />
       </div>
 
-      <LanguageProvider>
-        <Navbar />
-        {children}
-        <Contact />
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <Navbar />
+          {children}
+          <Contact />
+        </LanguageProvider>
+      </ThemeProvider>
     </div>
   )
 }

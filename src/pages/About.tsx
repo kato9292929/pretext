@@ -134,12 +134,12 @@ export function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-white/70 text-base leading-[1.8]">{t.body as string}</p>
+            <p className="text-fg/70 text-base leading-[1.8]">{t.body as string}</p>
             <a
               href="https://www.x402.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-1.5 text-sm text-white/70 px-4 py-2 rounded-full border border-white/15 hover:bg-white/5 transition-colors"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm text-fg/70 px-4 py-2 rounded-full border border-fg/15 hover:bg-fg/5 transition-colors"
             >
               {t.readSpec as string}
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -153,22 +153,22 @@ export function About() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
             className="liquid-glass rounded-2xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 h-10 border-b border-white/10">
+            <div className="flex items-center gap-2 px-4 h-10 border-b border-fg/10">
               <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-              <span className="ml-2 text-xs text-white/50">HTTP Flow</span>
+              <span className="ml-2 text-xs text-fg/50">HTTP Flow</span>
             </div>
-            <pre className="p-4 text-[11px] md:text-xs leading-[1.7] overflow-x-auto font-mono text-white/70">
+            <pre className="p-4 text-[11px] md:text-xs leading-[1.7] overflow-x-auto font-mono text-fg/70">
               <code>
-                <span className="text-white/30">→</span> GET /api/data HTTP/1.1{'\n'}
+                <span className="text-fg/30">→</span> GET /api/data HTTP/1.1{'\n'}
                 {'  '}Host: api.example.com{'\n\n'}
-                <span className="text-[#E8C338]">← HTTP/1.1 402 Payment Required</span>
+                <span className="text-gold">← HTTP/1.1 402 Payment Required</span>
                 {'\n'}
                 {'  '}X-Payment-Required: version=1{'\n'}
                 {'  '}X-Payment-Amount: 0.001{'\n'}
                 {'  '}X-Payment-Token: USDC{'\n\n'}
-                <span className="text-white/30">→</span> GET /api/data HTTP/1.1{'\n'}
+                <span className="text-fg/30">→</span> GET /api/data HTTP/1.1{'\n'}
                 {'  '}X-Payment: &lt;signed_payload&gt;{'\n\n'}
                 <span className="text-[#28c840]">← HTTP/1.1 200 OK</span>
                 {'\n'}
@@ -183,15 +183,15 @@ export function About() {
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-14">
         <div className="max-w-3xl">
           <SectionEyebrow label="Thesis" tag="System of Intelligence × x402" />
-          <p className="mt-6 text-white/70 text-base leading-[1.8]">{t.thesis1 as string}</p>
-          <p className="mt-5 text-white/70 text-base leading-[1.8]">{t.thesis2 as string}</p>
+          <p className="mt-6 text-fg/70 text-base leading-[1.8]">{t.thesis1 as string}</p>
+          <p className="mt-5 text-fg/70 text-base leading-[1.8]">{t.thesis2 as string}</p>
         </div>
         <div className="mt-8 liquid-glass rounded-2xl p-6 max-w-3xl">
-          <p className="text-sm font-semibold text-white">{t.condTitle as string}</p>
+          <p className="text-sm font-semibold text-fg">{t.condTitle as string}</p>
           <ul className="mt-4 space-y-3">
             {(t.conditions as string[]).map((c) => (
-              <li key={c} className="flex items-start gap-3 text-sm text-white/70">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#E8C338] flex-shrink-0" />
+              <li key={c} className="flex items-start gap-3 text-sm text-fg/70">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
                 {c}
               </li>
             ))}
@@ -212,10 +212,10 @@ export function About() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 3) * 0.06 }}
               className="liquid-glass rounded-2xl p-5"
             >
-              <p className="text-sm font-semibold text-[#E8C338]">{group.cat[lang]}</p>
+              <p className="text-sm font-semibold text-gold">{group.cat[lang]}</p>
               <ul className="mt-3 space-y-2">
                 {group.items[lang].map((item) => (
-                  <li key={item} className="text-sm text-white/60 leading-[1.6]">
+                  <li key={item} className="text-sm text-fg/60 leading-[1.6]">
                     {item}
                   </li>
                 ))}
@@ -223,7 +223,7 @@ export function About() {
             </motion.div>
           ))}
         </div>
-        <p className="mt-8 text-sm text-white/50">{t.note as string}</p>
+        <p className="mt-8 text-sm text-fg/50">{t.note as string}</p>
       </section>
     </>
   )

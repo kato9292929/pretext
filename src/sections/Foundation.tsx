@@ -65,11 +65,11 @@ export function Foundation() {
         className="max-w-3xl"
       >
         <SectionEyebrow label="Foundation" tag="Open standard" heading />
-        <p className="mt-6 text-white/60 text-base leading-[1.7]">{t.lead}</p>
+        <p className="mt-6 text-fg/60 text-base leading-[1.7]">{t.lead}</p>
       </motion.div>
 
       <div className="mt-12">
-        <p className="text-xs uppercase tracking-widest text-white/40">{t.members}</p>
+        <p className="text-xs uppercase tracking-widest text-fg/40">{t.members}</p>
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4">
           {MEMBERS.map((member, i) => (
             <motion.span
@@ -78,7 +78,7 @@ export function Foundation() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: (i % 4) * 0.05 }}
-              className="text-sm font-medium text-white/50 hover:text-white transition-colors"
+              className="text-sm font-medium text-fg/50 hover:text-fg transition-colors"
             >
               {member}
             </motion.span>
@@ -87,8 +87,8 @@ export function Foundation() {
       </div>
 
       <div className="mt-12 liquid-glass rounded-2xl p-6 max-w-3xl">
-        <p className="text-xs uppercase tracking-widest text-white/40">Momentum</p>
-        <p className="mt-3 text-sm text-white/70 leading-[1.8]">{t.momentum}</p>
+        <p className="text-xs uppercase tracking-widest text-fg/40">Momentum</p>
+        <p className="mt-3 text-sm text-fg/70 leading-[1.8]">{t.momentum}</p>
       </div>
 
       <div className="mt-10 flex flex-wrap gap-4">
@@ -98,7 +98,7 @@ export function Foundation() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm text-white/70 px-4 py-2 rounded-full border border-white/15 hover:bg-white/5 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-fg/70 px-4 py-2 rounded-full border border-fg/15 hover:bg-fg/5 transition-colors"
           >
             {link.label}
             <ArrowUpRight className="w-3.5 h-3.5" />

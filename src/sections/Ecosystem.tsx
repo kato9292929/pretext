@@ -63,7 +63,7 @@ export function Ecosystem() {
         className="max-w-2xl"
       >
         <SectionEyebrow label="Ecosystem" tag="segmentation" heading />
-        <p className="mt-6 text-white/60 text-base leading-[1.7]">{t.intro}</p>
+        <p className="mt-6 text-fg/60 text-base leading-[1.7]">{t.intro}</p>
       </motion.div>
 
       <div className="mt-10 grid sm:grid-cols-2 gap-5">
@@ -76,13 +76,13 @@ export function Ecosystem() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.08 }}
             className="liquid-glass rounded-2xl p-6"
           >
-            <p className="font-mono text-sm text-[#E8C338]">{seg.name}</p>
-            <p className="mt-3 text-sm text-white/70 leading-[1.7]">{seg.desc[lang]}</p>
+            <p className="font-mono text-sm text-gold">{seg.name}</p>
+            <p className="mt-3 text-sm text-fg/70 leading-[1.7]">{seg.desc[lang]}</p>
           </motion.div>
         ))}
       </div>
 
-      <p className="mt-8 text-white/50 text-sm leading-[1.7] max-w-3xl">{t.closing}</p>
+      <p className="mt-8 text-fg/50 text-sm leading-[1.7] max-w-3xl">{t.closing}</p>
     </section>
   )
 }

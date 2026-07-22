@@ -1,7 +1,20 @@
 import { motion } from 'motion/react'
-import { Menu } from 'lucide-react'
+import { Menu, Moon, Sun } from 'lucide-react'
 import { CONTACT_EMAIL, NAV_LINKS, Pill, Wordmark } from '../primitives'
-import { useLang, type Lang } from '../i18n'
+import { useLang, useTheme, type Lang } from '../i18n'
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  return (
+    <button
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="flex items-center justify-center w-8 h-8 rounded-full border border-fg/15 text-fg/70 hover:text-fg transition-colors"
+      aria-label="Toggle theme"
+    >
+      {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+    </button>
+  )
+}
 
 function LangToggle() {
   const { lang, setLang } = useLang()
@@ -10,7 +23,7 @@ function LangToggle() {
       key={l}
       onClick={() => setLang(l)}
       className={`px-2.5 py-1 rounded-full transition-colors ${
-        lang === l ? 'bg-white/15 text-white' : 'text-white/50 hover:text-white/80'
+        lang === l ? 'bg-fg/15 text-fg' : 'text-fg/50 hover:text-fg/80'
       }`}
       aria-pressed={lang === l}
     >
@@ -18,7 +31,7 @@ function LangToggle() {
     </button>
   )
   return (
-    <div className="flex items-center gap-0.5 rounded-full border border-white/15 p-0.5 text-xs font-medium">
+    <div className="flex items-center gap-0.5 rounded-full border border-fg/15 p-0.5 text-xs font-medium">
       {opt('ja', 'JP')}
       {opt('en', 'EN')}
     </div>
@@ -47,7 +60,7 @@ export function Navbar() {
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 + i * 0.05 }}
-              className="text-white/70 text-sm font-medium hover:text-white transition-colors"
+              className="text-fg/70 text-sm font-medium hover:text-fg transition-colors"
             >
               {link.label[lang]}
             </motion.a>
@@ -55,6 +68,7 @@ export function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <LangToggle />
           <Pill
             label={lang === 'ja' ? 'お問い合わせ' : 'Contact'}
@@ -64,9 +78,10 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
           <LangToggle />
           <button
-            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5"
+            className="flex items-center justify-center w-10 h-10 rounded-full border border-fg/10 bg-fg/5"
             aria-label="Menu"
           >
             <Menu className="w-4 h-4" />

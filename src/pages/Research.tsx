@@ -215,7 +215,7 @@ export function Research() {
 
       {/* Featured latest articles */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-8 md:py-12">
-        <p className="text-xs uppercase tracking-widest text-white/40">{t.latest}</p>
+        <p className="text-xs uppercase tracking-widest text-fg/40">{t.latest}</p>
         <div className="mt-6 grid md:grid-cols-3 gap-5">
           {FEATURED_ARTICLES.map((article, i) => (
             <motion.a
@@ -229,14 +229,14 @@ export function Research() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
               className="liquid-glass rounded-2xl p-6 flex flex-col group"
             >
-              <span className="text-xs font-medium tracking-wide text-[#E8C338]">
+              <span className="text-xs font-medium tracking-wide text-gold">
                 {article.tag[lang]}
               </span>
-              <h3 className="mt-4 text-base font-semibold text-white leading-[1.5] flex-1">
+              <h3 className="mt-4 text-base font-semibold text-fg leading-[1.5] flex-1">
                 {article.title[lang]}
               </h3>
-              <p className="mt-3 text-sm text-white/55 leading-[1.7]">{article.blurb[lang]}</p>
-              <span className="mt-5 pt-4 border-t border-white/10 inline-flex items-center gap-1 text-xs text-white/60 group-hover:text-[#E8C338] transition-colors">
+              <p className="mt-3 text-sm text-fg/55 leading-[1.7]">{article.blurb[lang]}</p>
+              <span className="mt-5 pt-4 border-t border-fg/10 inline-flex items-center gap-1 text-xs text-fg/60 group-hover:text-gold transition-colors">
                 {t.read}
                 <ArrowUpRight className="w-3 h-3" />
               </span>
@@ -258,19 +258,19 @@ export function Research() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className={`liquid-glass rounded-2xl p-6 ${
-                item.current ? 'ring-1 ring-[#E8C338]/40' : ''
+                item.current ? 'ring-1 ring-gold/40' : ''
               }`}
             >
               <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-[#E8C338]">{item.phase}</span>
+                <span className="text-sm font-semibold text-gold">{item.phase}</span>
                 {item.current && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E8C338] text-black font-semibold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-gold text-black font-semibold">
                     NOW
                   </span>
                 )}
               </div>
-              <p className="mt-2 text-sm font-medium text-white">{item.period[lang]}</p>
-              <p className="mt-3 text-sm text-white/60 leading-[1.7]">{item.desc[lang]}</p>
+              <p className="mt-2 text-sm font-medium text-fg">{item.period[lang]}</p>
+              <p className="mt-3 text-sm text-fg/60 leading-[1.7]">{item.desc[lang]}</p>
             </motion.div>
           ))}
         </div>
@@ -282,7 +282,7 @@ export function Research() {
         <div className="mt-8 grid md:grid-cols-3 gap-8">
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wide">
+              <h3 className="text-sm font-semibold text-fg/70 uppercase tracking-wide">
                 {col.title}
               </h3>
               <div className="mt-4 grid gap-3">
@@ -294,8 +294,8 @@ export function Research() {
                     rel="noopener noreferrer"
                     className="liquid-glass rounded-xl p-4 flex flex-col gap-3 group"
                   >
-                    <p className="text-sm text-white/80 leading-[1.6] flex-1">{note.title[lang]}</p>
-                    <span className="inline-flex items-center gap-1 text-xs text-white/50 group-hover:text-[#E8C338] transition-colors">
+                    <p className="text-sm text-fg/80 leading-[1.6] flex-1">{note.title[lang]}</p>
+                    <span className="inline-flex items-center gap-1 text-xs text-fg/50 group-hover:text-gold transition-colors">
                       {t.read}
                       <ArrowUpRight className="w-3 h-3" />
                     </span>

@@ -24,7 +24,7 @@ export function Hero() {
         transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="text-4xl md:text-7xl font-semibold tracking-tight leading-[0.9]"
       >
-        <span className="block text-white">The agentic economy</span>
+        <span className="block text-fg">The agentic economy</span>
         <span className="block animate-shiny" style={gradientStyle}>
           runs on x402.
         </span>
@@ -34,7 +34,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-8 text-white/60 max-w-2xl text-sm md:text-base leading-[1.8]"
+        className="mt-8 text-fg/60 max-w-2xl text-sm md:text-base leading-[1.8]"
       >
         {t.lead}
       </motion.p>

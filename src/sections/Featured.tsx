@@ -85,7 +85,7 @@ export function Featured() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
         <SectionEyebrow label="Featured" tag="Products" heading />
-        <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
+        <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
       </motion.div>
 
       <div className="mt-12 grid md:grid-cols-2 gap-5">
@@ -99,24 +99,24 @@ export function Featured() {
             className="liquid-glass rounded-2xl p-6 flex flex-col"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium tracking-wide text-[#E8C338]">{product.tag}</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-white/10 text-white/50">
+              <span className="text-xs font-medium tracking-wide text-gold">{product.tag}</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-fg/10 text-fg/50">
                 {product.badge}
               </span>
             </div>
-            <h3 className="mt-4 text-xl font-semibold text-white">{product.name}</h3>
-            <p className="mt-3 text-sm text-white/60 leading-[1.7] flex-1">{product.desc[lang]}</p>
+            <h3 className="mt-4 text-xl font-semibold text-fg">{product.name}</h3>
+            <p className="mt-3 text-sm text-fg/60 leading-[1.7] flex-1">{product.desc[lang]}</p>
             {product.price && (
-              <p className="mt-4 text-sm text-[#E8C338] font-semibold">{product.price[lang]}</p>
+              <p className="mt-4 text-sm text-gold font-semibold">{product.price[lang]}</p>
             )}
-            <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap gap-4">
+            <div className="mt-5 pt-4 border-t border-fg/10 flex flex-wrap gap-4">
               {product.links.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-white/60 hover:text-[#E8C338] transition-colors"
+                  className="inline-flex items-center gap-1 text-xs text-fg/60 hover:text-gold transition-colors"
                 >
                   {link.label}
                   <ArrowUpRight className="w-3 h-3" />

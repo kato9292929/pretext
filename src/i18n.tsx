@@ -42,5 +42,48 @@ export function useLang() {
   return useContext(LangContext)
 }
 
+/* ── Theme (light / dark) ────────────────────────────────────── */
+export type Theme = 'dark' | 'light'
+
+const THEME_KEY = 'x402-theme'
+
+function initialTheme(): Theme {
+  try {
+    const v = localStorage.getItem(THEME_KEY)
+    if (v === 'light' || v === 'dark') return v
+  } catch {
+    /* ignore */
+  }
+  return 'dark'
+}
+
+const ThemeContext = createContext<{ theme: Theme; setTheme: (t: Theme) => void }>({
+  theme: 'dark',
+  setTheme: () => {},
+})
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setThemeState] = useState<Theme>(initialTheme)
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
+
+  const setTheme = (t: Theme) => {
+    setThemeState(t)
+    try {
+      localStorage.setItem(THEME_KEY, t)
+    } catch {
+      /* ignore */
+    }
+  }
+
+  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+}
+
+export function useTheme() {
+  return useContext(ThemeContext)
+}
+
 /** Pick a value by the current language. */
 export type Localized<T = string> = { ja: T; en: T }

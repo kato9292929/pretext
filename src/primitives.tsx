@@ -42,8 +42,8 @@ export function Pill({
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className={`group inline-flex items-center justify-center gap-2 rounded-full font-medium text-sm px-5 py-3 transition-all active:scale-[0.98] ${
         gold
-          ? 'liquid-glass text-white hover:brightness-125'
-          : 'bg-white text-black hover:bg-white/90'
+          ? 'liquid-glass text-fg hover:brightness-125'
+          : 'bg-white text-black hover:bg-fg/90'
       } ${full ? 'w-full' : ''}`}
     >
       {label}
@@ -63,14 +63,14 @@ export function SectionEyebrow({
   heading?: boolean
 }) {
   const tagStyle = {
-    color: '#E8C338',
-    borderColor: 'rgba(232, 195, 56, 0.45)',
-    backgroundColor: 'rgba(232, 195, 56, 0.08)',
+    color: 'rgb(var(--gold))',
+    borderColor: 'rgb(var(--gold) / 0.45)',
+    backgroundColor: 'rgb(var(--gold) / 0.08)',
   }
   if (heading) {
     return (
       <div className="inline-flex items-center gap-3">
-        <span className="text-2xl md:text-3xl font-semibold tracking-tight text-white">
+        <span className="text-2xl md:text-3xl font-semibold tracking-tight text-fg">
           {label}
         </span>
         {tag && (
@@ -85,7 +85,7 @@ export function SectionEyebrow({
     )
   }
   return (
-    <div className="inline-flex items-center gap-2 text-sm text-white/70">
+    <div className="inline-flex items-center gap-2 text-sm text-fg/70">
       <span>{label}</span>
       {tag && (
         <span className="px-2 py-0.5 rounded-full border text-xs" style={tagStyle}>
@@ -115,7 +115,7 @@ export function Wordmark({ className = 'text-xl' }: { className?: string }) {
       className={`font-bold tracking-tight ${className}`}
       style={{ fontFamily: 'Outfit, Inter, sans-serif' }}
     >
-      <span style={{ color: '#fff' }}>x402</span>
+      <span style={{ color: 'rgb(var(--fg))' }}>x402</span>
       <span
         style={{
           backgroundImage: GOLD_GRADIENT,
@@ -160,7 +160,7 @@ export function PageHero({
         {title}
       </h1>
       {intro && (
-        <p className="mt-6 text-white/60 max-w-2xl text-base leading-[1.7]">{intro}</p>
+        <p className="mt-6 text-fg/60 max-w-2xl text-base leading-[1.7]">{intro}</p>
       )}
     </section>
   )

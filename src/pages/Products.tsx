@@ -388,23 +388,23 @@ function ProductCard({ product, lang }: { product: Product; lang: Lang }) {
       className="liquid-glass rounded-2xl p-5 flex flex-col"
     >
       <div className="flex items-start justify-between gap-3">
-        <h3 className="text-base font-semibold text-white">{product.name}</h3>
-        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-white/10 text-white/50 whitespace-nowrap">
+        <h3 className="text-base font-semibold text-fg">{product.name}</h3>
+        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-fg/10 text-fg/50 whitespace-nowrap">
           {product.badge}
         </span>
       </div>
-      <p className="mt-3 text-sm text-white/60 leading-[1.7] flex-1">{product.desc[lang]}</p>
+      <p className="mt-3 text-sm text-fg/60 leading-[1.7] flex-1">{product.desc[lang]}</p>
       {product.price && (
-        <p className="mt-3 text-sm text-[#E8C338] font-semibold">{product.price[lang]}</p>
+        <p className="mt-3 text-sm text-gold font-semibold">{product.price[lang]}</p>
       )}
-      <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap gap-4">
+      <div className="mt-4 pt-3 border-t border-fg/10 flex flex-wrap gap-4">
         {product.links.map((link) => (
           <a
             key={link.label}
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs text-white/60 hover:text-[#E8C338] transition-colors"
+            className="inline-flex items-center gap-1 text-xs text-fg/60 hover:text-gold transition-colors"
           >
             {link.label}
             <ArrowUpRight className="w-3 h-3" />
@@ -425,17 +425,17 @@ export function Products() {
       {PHASES.map((phase) => (
         <section key={phase.phase} className="relative z-10 max-w-6xl mx-auto px-6 py-8 md:py-12">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-[#E8C338] text-black font-semibold">
+            <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-gold text-black font-semibold">
               {phase.phase}
             </span>
-            <span className="text-lg font-semibold tracking-tight text-white">
+            <span className="text-lg font-semibold tracking-tight text-fg">
               {phase.phaseTitle[lang]}
             </span>
           </div>
 
           {phase.categories.map((cat, ci) => (
             <div key={cat.title ?? ci} className="mt-6">
-              {cat.title && <p className="text-sm font-medium text-white/50 mb-4">{cat.title}</p>}
+              {cat.title && <p className="text-sm font-medium text-fg/50 mb-4">{cat.title}</p>}
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {cat.items.map((product) => (
                   <ProductCard key={product.name} product={product} lang={lang} />

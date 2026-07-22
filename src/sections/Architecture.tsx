@@ -65,12 +65,12 @@ export function Architecture() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <SectionEyebrow label="Architecture" tag="instruments" heading />
-          <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-md">{INTRO[lang]}</p>
+          <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-md">{INTRO[lang]}</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {CHIPS[lang].map((chip) => (
               <span
                 key={chip}
-                className="text-xs text-white/70 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03]"
+                className="text-xs text-fg/70 px-3 py-1.5 rounded-full border border-fg/10 bg-fg/[0.03]"
               >
                 {chip}
               </span>
@@ -80,19 +80,19 @@ export function Architecture() {
 
         {/* Right column */}
         <div className="liquid-glass rounded-2xl p-5">
-          <p className="text-xs text-white/50">{LOOP_LABEL[lang]}</p>
+          <p className="text-xs text-fg/50">{LOOP_LABEL[lang]}</p>
           <div className="mt-4 grid gap-3">
             {LAYERS.map((layer) => (
               <div key={layer.key} className="liquid-glass rounded-lg p-4">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full" style={{ background: layer.color }} />
-                  <span className="text-sm font-semibold text-white">{layer.key}</span>
-                  <span className="text-xs text-white/40">（{layer.label[lang]}）</span>
+                  <span className="text-sm font-semibold text-fg">{layer.key}</span>
+                  <span className="text-xs text-fg/40">（{layer.label[lang]}）</span>
                 </div>
-                <p className="mt-2 text-sm text-white/80">{layer.title[lang]}</p>
+                <p className="mt-2 text-sm text-fg/80">{layer.title[lang]}</p>
                 <div className="mt-2 space-y-1">
                   {layer.items[lang].map((item) => (
-                    <p key={item} className="text-xs text-white/50">
+                    <p key={item} className="text-xs text-fg/50">
                       {item}
                     </p>
                   ))}

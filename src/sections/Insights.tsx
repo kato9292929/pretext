@@ -33,11 +33,11 @@ export function Insights() {
       >
         <div>
           <SectionEyebrow label="Insights" tag="Research" heading />
-          <p className="mt-4 text-white/60 text-base leading-[1.7] max-w-xl">{t.subtext}</p>
+          <p className="mt-4 text-fg/60 text-base leading-[1.7] max-w-xl">{t.subtext}</p>
         </div>
         <a
           href="/research.html"
-          className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-[#E8C338] transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-fg/70 hover:text-gold transition-colors"
         >
           {t.seeAll}
           <ArrowUpRight className="w-4 h-4" />
@@ -57,14 +57,14 @@ export function Insights() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
             className="liquid-glass rounded-2xl p-6 flex flex-col group"
           >
-            <span className="text-xs font-medium tracking-wide text-[#E8C338]">
+            <span className="text-xs font-medium tracking-wide text-gold">
               {article.tag[lang]}
             </span>
-            <h3 className="mt-4 text-base font-semibold text-white leading-[1.5] flex-1">
+            <h3 className="mt-4 text-base font-semibold text-fg leading-[1.5] flex-1">
               {article.title[lang]}
             </h3>
-            <p className="mt-3 text-sm text-white/55 leading-[1.7]">{article.blurb[lang]}</p>
-            <span className="mt-5 pt-4 border-t border-white/10 inline-flex items-center gap-1 text-xs text-white/60 group-hover:text-[#E8C338] transition-colors">
+            <p className="mt-3 text-sm text-fg/55 leading-[1.7]">{article.blurb[lang]}</p>
+            <span className="mt-5 pt-4 border-t border-fg/10 inline-flex items-center gap-1 text-xs text-fg/60 group-hover:text-gold transition-colors">
               {t.read}
               <ArrowUpRight className="w-3 h-3" />
             </span>

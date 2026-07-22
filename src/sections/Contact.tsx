@@ -32,7 +32,7 @@ export function Contact() {
           }}
         />
         <div className="relative">
-          <p className="text-white/60 max-w-lg mx-auto text-sm leading-[1.7]">{t.body}</p>
+          <p className="text-fg/60 max-w-lg mx-auto text-sm leading-[1.7]">{t.body}</p>
           <div className="mt-8 flex justify-center">
             <Pill label={CONTACT_EMAIL} href={`mailto:${CONTACT_EMAIL}`} gold />
           </div>
