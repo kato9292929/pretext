@@ -21,10 +21,8 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
-      {/* Soft flowing color wash shown only in light theme (video is hidden then) */}
-      <div className="bg-light fixed inset-0 z-0 pointer-events-none" />
-
-      {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon */}
+      {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon
+          (light theme inverts it to a colored ribbon on a light background) */}
       <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
         <video
           autoPlay
