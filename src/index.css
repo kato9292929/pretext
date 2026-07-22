@@ -55,18 +55,21 @@ body {
   );
   filter: blur(55px);
   z-index: 0;
-  animation: light-ribbon 20s ease-in-out infinite;
+  animation: light-ribbon 11s ease-in-out infinite;
 }
 
 @keyframes light-ribbon {
   0% {
-    transform: rotate(-15deg) translate(-3%, 2%);
+    transform: rotate(-24deg) translate(-7%, 4%) scale(1.05);
   }
-  50% {
-    transform: rotate(-12deg) translate(3%, -2%);
+  33% {
+    transform: rotate(-2deg) translate(6%, -5%) scale(1.14);
+  }
+  66% {
+    transform: rotate(-18deg) translate(3%, 6%) scale(1.08);
   }
   100% {
-    transform: rotate(-15deg) translate(-3%, 2%);
+    transform: rotate(-24deg) translate(-7%, 4%) scale(1.05);
   }
 }
 
