@@ -37,29 +37,41 @@ body {
 
 .bg-light {
   display: none;
+  position: fixed;
+  left: -20%;
+  top: 20%;
+  width: 140%;
+  height: 48%;
+  transform: rotate(-15deg);
+  transform-origin: center;
   background: linear-gradient(
-    105deg,
-    #5ac99c 0%,
-    #38c6c6 22%,
-    #55b7ea 45%,
-    #8ea9ea 66%,
-    #c3a4e6 84%,
-    #ecb6d8 100%
+    90deg,
+    #6ad0a6 0%,
+    #3ac6c6 22%,
+    #57b8ea 44%,
+    #8fabee 64%,
+    #c1a3e6 82%,
+    #edb8da 100%
   );
-  background-size: 200% 100%;
-  animation: light-flow 22s ease-in-out infinite;
+  filter: blur(55px);
+  z-index: 0;
+  animation: light-ribbon 20s ease-in-out infinite;
 }
 
-@keyframes light-flow {
+@keyframes light-ribbon {
   0% {
-    background-position: 0% 50%;
+    transform: rotate(-15deg) translate(-3%, 2%);
   }
   50% {
-    background-position: 100% 50%;
+    transform: rotate(-12deg) translate(3%, -2%);
   }
   100% {
-    background-position: 0% 50%;
+    transform: rotate(-15deg) translate(-3%, 2%);
   }
+}
+
+:root[data-theme='light'] .bg-light {
+  display: block;
 }
 
 :root[data-theme='light'] .bg-light {

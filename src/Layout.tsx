@@ -21,8 +21,8 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
-      {/* Light-theme background: a smooth flowing pastel gradient (video is hidden then) */}
-      <div className="bg-light fixed inset-0 z-0 pointer-events-none" />
+      {/* Light-theme background: a soft pastel gradient ribbon on white (video hidden then) */}
+      <div className="bg-light pointer-events-none" />
 
       {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon (dark theme) */}
       <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
