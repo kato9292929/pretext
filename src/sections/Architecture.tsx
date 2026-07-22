@@ -3,18 +3,18 @@ import { SectionEyebrow } from '../primitives'
 import { useLang, type Lang, type Localized } from '../i18n'
 
 const CHIPS: Localized<string[]> = {
-  ja: ['委任付き自律決済', 'per-call 自律決済', 'HTTP 402', 'Base / Solana', 'ERC-8004 identity', 'REST + MCP'],
-  en: ['Delegated payments', 'Per-call payments', 'HTTP 402', 'Base / Solana', 'ERC-8004 identity', 'REST + MCP'],
+  ja: ['per-callオンチェーン決済', '検証可能な実績', 'HTTP 402', 'Base / Solana', 'ERC-8004 identity', 'REST + MCP'],
+  en: ['Per-call on-chain settlement', 'Verifiable track record', 'HTTP 402', 'Base / Solana', 'ERC-8004 identity', 'REST + MCP'],
 }
 
 const INTRO: Localized = {
-  ja: '発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)。人間の委任による「委任付き自律決済」から、エージェントが都度支払う per-call 自律決済へ。HTTP 402を共通の決済レールに、Base/Solana上のオンチェーン決済とエージェントidentityを土台として、需要と観測の往復を検証し続けています。',
-  en: 'Discovery (MAP), autonomous consumption (CONSUME), data production (PRODUCE). From human-delegated “delegated autonomous payment” to per-call autonomous payment where the agent pays each time. With HTTP 402 as the shared rail and on-chain settlement on Base/Solana plus agent identity as the foundation, we keep validating the loop between demand and observation.',
+  ja: '事業は発見(MAP)・消費(CONSUME)・データ生成(PRODUCE)の3層の instruments で構成されます。いずれも、エコシステムを外から論じるためでなく、内側から観測・検証するために動かしています。',
+  en: 'The business is made up of three layers of instruments — discovery (MAP), consumption (CONSUME) and data production (PRODUCE). We run all of them not to comment on the ecosystem from outside, but to observe and verify it from within.',
 }
 
 const LOOP_LABEL: Localized = {
-  ja: 'MAP → CONSUME → PRODUCE の自己完結ループ',
-  en: 'The self-contained MAP → CONSUME → PRODUCE loop',
+  ja: 'MAP → CONSUME → PRODUCE の instruments',
+  en: 'MAP → CONSUME → PRODUCE instruments',
 }
 
 type Layer = { key: string; label: Localized; color: string; title: Localized; items: Localized<string[]> }
@@ -24,30 +24,30 @@ const LAYERS: Layer[] = [
     key: 'MAP',
     label: { ja: '発見', en: 'Discovery' },
     color: '#E8C338',
-    title: { ja: 'エンドポイントを集約・正規化', en: 'Aggregate & normalize endpoints' },
+    title: { ja: 'エンドポイントを日次で収集・正規化', en: 'Collect & normalize endpoints daily' },
     items: {
-      ja: ['約19,000件超を日次記録', 'REST と MCP で配信'],
-      en: ['~19,000+ recorded daily', 'Served over REST and MCP'],
+      ja: ['x402対応エンドポイントのカタログ', '何が・いくらで買えるかを観測する'],
+      en: ['A catalog of x402-compatible endpoints', 'Observes what can be bought and at what price'],
     },
   },
   {
     key: 'CONSUME',
-    label: { ja: '自律消費', en: 'Autonomous use' },
+    label: { ja: '消費', en: 'Consumption' },
     color: '#F5D84E',
-    title: { ja: 'エージェントがper-callで購入', en: 'Agents buy per-call' },
+    title: { ja: 'per-callでオンチェーン決済し記録する', en: 'Settle per-call on-chain and record' },
     items: {
-      ja: ['オンチェーンidentity (ERC-8004)', 'Base mainnet USDC決済'],
-      en: ['On-chain identity (ERC-8004)', 'USDC settlement on Base mainnet'],
+      ja: ['ERC-8004 identity を持つエージェント', '取引の形式を検証する instrument'],
+      en: ['An agent with an ERC-8004 identity', 'An instrument to verify the form of a transaction'],
     },
   },
   {
     key: 'PRODUCE',
     label: { ja: 'データ生成', en: 'Data production' },
     color: '#B8901A',
-    title: { ja: '独自データを生成し販売', en: 'Generate & sell proprietary data' },
+    title: { ja: '独自データと検証可能な実績を作る', en: 'Produce proprietary data & verifiable records' },
     items: {
-      ja: ['株価予想・物価指数など', 'gitに残すtrack recordがmoat'],
-      en: ['Stock forecasts, price indices, etc.', 'Track record kept in git is the moat'],
+      ja: ['エージェント向けのデータ', '叩かれる側を観測する'],
+      en: ['Data built for agents', 'Observes the side being called'],
     },
   },
 ]
@@ -64,7 +64,7 @@ export function Architecture() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <SectionEyebrow label="Architecture" tag="3-layer" heading />
+          <SectionEyebrow label="Architecture" tag="instruments" heading />
           <p className="mt-6 text-white/60 text-base leading-[1.7] max-w-md">{INTRO[lang]}</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {CHIPS[lang].map((chip) => (

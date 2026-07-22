@@ -15,8 +15,8 @@ type Product = {
 }
 
 const INTRO: Localized = {
-  ja: 'x402 Inc.は、x402規格に対応したエンドポイントと独自データを作り、それを使う自律エージェントを動かしています。HTTP 402を共通の決済レールに、Base/Solana上のオンチェーン決済とERC-8004のエージェントidentityを土台にしています。事業は発見(MAP)・自律消費(CONSUME)・データ生成(PRODUCE)の3層で構成されます。',
-  en: 'x402 Inc. builds x402-compatible endpoints and proprietary data, and runs the autonomous agents that use them. With HTTP 402 as the shared payment rail, we build on on-chain settlement across Base/Solana and ERC-8004 agent identity. The business spans three layers: discovery (MAP), autonomous consumption (CONSUME), and data production (PRODUCE).',
+  ja: 'エコシステムを内側から観測・検証するための instruments。x402対応エンドポイント、独自データ、それを叩くエージェントを自ら作り、per-callのオンチェーン決済レールと検証可能な実績を積み上げています。',
+  en: 'The instruments we run to observe and verify the ecosystem from within — x402-compatible endpoints, proprietary data and the agents that call them — built in-house to accumulate a per-call on-chain payment rail and a verifiable track record.',
 }
 
 const PRODUCTS: Product[] = [

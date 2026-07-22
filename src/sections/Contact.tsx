@@ -4,10 +4,10 @@ import { useLang } from '../i18n'
 
 const COPY = {
   ja: {
-    body: '委任付き自律決済から per-call 自律決済まで——実装・検証のご相談、事業連携やデータ提供のお問い合わせは、お気軽にご連絡ください。',
+    body: 'エージェント決済エコシステムの分析、実装・検証のご相談、事業連携やデータ提供のお問い合わせは、お気軽にご連絡ください。',
   },
   en: {
-    body: 'From delegated autonomous payments to per-call autonomous payments — for implementation, validation, partnerships, or data access, feel free to reach out.',
+    body: 'For analysis of the agent-payments ecosystem, implementation and verification inquiries, partnerships, or data access, feel free to reach out.',
   },
 }
 

@@ -9,26 +9,20 @@ const COPY = {
     title: 'x402とは',
     intro:
       'HTTP 402 “Payment Required” ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。',
-    body: 'x402はこの未使用のHTTPステータスコードを再活性化し、AIエージェントや自律システムがHTTPネイティブに支払いを行えるようにするプロトコルです。サーバーが402を返すと、クライアントは支払いを完了してリクエストを再試行します。',
+    body: 'x402はこの未使用のHTTPステータスコードを再活性化し、AIエージェントや自動化されたシステムがHTTPネイティブに支払いを行えるようにするプロトコルです。サーバーが402を返すと、クライアントは支払いを完了してリクエストを再試行します。',
     readSpec: '仕様を読む',
-    oldBadge: '現在の主流',
-    oldTitle: '「人間の代わりに注文」',
-    oldDesc: ['クレカ × AIエージェント', 'EC・小売・代行購入'],
-    oldExample: 'GAP × Gemini × Google Pay など',
-    newBadge: '新しいレイヤー',
-    newTitle: '「自律的な購入」',
-    newDesc: ['x402 × MCP × Agent Wallet', 'APIリソースの自律調達'],
-    newExample: 'AIが仕事に必要なリソースを自ら買う',
-    thesisBody:
-      'AIエージェントが営業担当者の代わりに毎朝「優先順位付きフィード」を生成する時代が到来した場合、そのフィードには外部データが必要です——業界ニュース・競合動向・規制情報・リアルタイムデータ。月額制では粒度が粗すぎます。System of Intelligenceは固有のデータをAPIレイヤーで消費します——エージェントが自律的に選び、その場で決済するAPIが求められます。',
-    condTitle: '「エージェントが毎回自律的に選ぶAPI」の条件',
+    thesis1:
+      'AIエージェントが毎朝「優先順位付きフィード」を生成する時代では、そのフィードに外部データが要ります——業界ニュース・競合動向・規制情報・リアルタイムデータ。月額制では粒度が粗すぎ、人間の都度承認では回りません。求められるのは、エージェントがAPIリソースをper-callで、エージェントどうしで、その場でオンチェーン決済できる形です。',
+    thesis2:
+      'ただしこれは単一のユースケースではありません。commerce、data procurement、agent-to-agent の labor、委任予算——用途ごとに異なる経済が並行して立ち上がります。私たちは、その細分化をAIとのリサーチで分析し、x402の決済レールと検証可能なデータ・実績を instruments として作りながら検証します。',
+    condTitle: 'エージェントがその場で選び、per-callで決済するAPIの条件',
     conditions: [
       '固有のデータを持つ（汎用データはAIが再現できる）',
       'エージェント向けスキーマで提供される',
       '使われるほど蓄積されるトランザクションデータがある',
       '実行フローに接続されている（データ提供→アクション→フィードバック）',
     ],
-    useTag: 'AIエージェントがx402で買えるもの',
+    useTag: 'エージェントがx402で買えるもの',
     note: '月額契約もAPIキーも不要。ウォレット残高があれば即アクセス。',
   },
   en: {
@@ -36,19 +30,13 @@ const COPY = {
     title: 'What is x402?',
     intro:
       'The HTTP 402 “Payment Required” status code has been reserved since 1997, yet sat unused for nearly 30 years.',
-    body: 'x402 revives this unused HTTP status code so AI agents and autonomous systems can pay HTTP-natively. When a server returns 402, the client completes payment and retries the request.',
+    body: 'x402 revives this unused HTTP status code so AI agents and automated systems can pay HTTP-natively. When a server returns 402, the client completes payment and retries the request.',
     readSpec: 'Read the spec',
-    oldBadge: 'Today’s mainstream',
-    oldTitle: '“Ordering on behalf of humans”',
-    oldDesc: ['Credit card × AI agent', 'E-commerce, retail, proxy purchasing'],
-    oldExample: 'e.g. GAP × Gemini × Google Pay',
-    newBadge: 'A new layer',
-    newTitle: '“Autonomous purchasing”',
-    newDesc: ['x402 × MCP × Agent Wallet', 'Autonomous procurement of API resources'],
-    newExample: 'AI buys the resources it needs for the job',
-    thesisBody:
-      'When AI agents generate a “prioritized feed” every morning in place of a sales rep, that feed needs external data — industry news, competitor moves, regulatory information, real-time data. Monthly subscriptions are too coarse-grained. A System of Intelligence consumes proprietary data at the API layer — it needs APIs that agents choose autonomously and settle on the spot.',
-    condTitle: 'What it takes to be an API agents choose autonomously every time',
+    thesis1:
+      'In an era where AI agents generate a “prioritized feed” every morning, that feed needs external data — industry news, competitor moves, regulatory information, real-time data. Monthly subscriptions are too coarse-grained, and per-transaction human approval doesn’t scale. What’s needed is a form where agents can settle on-chain per-call, agent-to-agent, on the spot.',
+    thesis2:
+      'But this is not a single use case. Commerce, data procurement, agent-to-agent labor, delegated budgets — different economies stand up in parallel by use case. We analyze that segmentation through research with AI, and verify it while building x402’s payment rail and verifiable data and records as instruments.',
+    condTitle: 'What it takes to be an API agents pick on the spot and settle per-call',
     conditions: [
       'Has proprietary data (generic data can be reproduced by AI)',
       'Provided with an agent-friendly schema',
@@ -191,38 +179,12 @@ export function About() {
         </div>
       </section>
 
-      {/* Paradigm shift */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-14">
-        <div className="grid md:grid-cols-[1fr_auto_1fr] gap-6 items-center">
-          <div className="liquid-glass rounded-2xl p-6">
-            <p className="text-xs uppercase tracking-widest text-white/40">{t.oldBadge as string}</p>
-            <h3 className="mt-3 text-xl font-semibold text-white">{t.oldTitle as string}</h3>
-            <p className="mt-2 text-sm text-white/60 leading-[1.7]">
-              {(t.oldDesc as string[])[0]}
-              <br />
-              {(t.oldDesc as string[])[1]}
-            </p>
-            <p className="mt-4 text-xs text-white/40">{t.oldExample as string}</p>
-          </div>
-          <div className="text-2xl text-[#E8C338] text-center rotate-90 md:rotate-0">→</div>
-          <div className="liquid-glass rounded-2xl p-6">
-            <p className="text-xs uppercase tracking-widest text-[#E8C338]">{t.newBadge as string}</p>
-            <h3 className="mt-3 text-xl font-semibold text-white">{t.newTitle as string}</h3>
-            <p className="mt-2 text-sm text-white/60 leading-[1.7]">
-              {(t.newDesc as string[])[0]}
-              <br />
-              {(t.newDesc as string[])[1]}
-            </p>
-            <p className="mt-4 text-xs text-white/40">{t.newExample as string}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* System of Intelligence × x402 */}
+      {/* Thesis: System of Intelligence × x402 */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-14">
         <div className="max-w-3xl">
           <SectionEyebrow label="Thesis" tag="System of Intelligence × x402" />
-          <p className="mt-6 text-white/70 text-base leading-[1.8]">{t.thesisBody as string}</p>
+          <p className="mt-6 text-white/70 text-base leading-[1.8]">{t.thesis1 as string}</p>
+          <p className="mt-5 text-white/70 text-base leading-[1.8]">{t.thesis2 as string}</p>
         </div>
         <div className="mt-8 liquid-glass rounded-2xl p-6 max-w-3xl">
           <p className="text-sm font-semibold text-white">{t.condTitle as string}</p>

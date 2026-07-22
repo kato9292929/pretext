@@ -100,8 +100,8 @@ const PHASES: Phase[] = [
             name: 'APAC Compliance Agent',
             badge: HTTP402,
             desc: {
-              ja: 'World AgentKit × x402でAPAC5カ国のKYB・AMLスクリーニングを実装。執行前のコンプライアンス確認をエージェントが自律実行。',
-              en: 'KYB/AML screening across 5 APAC countries via World AgentKit × x402. Agents run pre-execution compliance checks autonomously.',
+              ja: 'World AgentKit × x402でAPAC5カ国のKYB・AMLスクリーニングを実装。執行前のコンプライアンス確認をエージェントがその場で実行。',
+              en: 'KYB/AML screening across 5 APAC countries via World AgentKit × x402. Agents run pre-execution compliance checks per-call.',
             },
             price: { ja: '$1〜$3/審査', en: '$1–$3/review' },
             links: [
@@ -236,8 +236,8 @@ const PHASES: Phase[] = [
             name: 'Japan x402 APIs',
             badge: HTTP402,
             desc: {
-              ja: '日本のデータAPIにAIエージェント向け自律決済を実装。18本のエンドポイント（気象・地震・不動産・法人・人口統計等）をx402対応で提供。',
-              en: 'Adds agent-native autonomous payments to Japanese data APIs. Provides 18 x402-enabled endpoints (weather, earthquakes, real estate, corporate, demographics, etc.).',
+              ja: '日本のデータAPIにAIエージェント向けのper-callオンチェーン決済を実装。18本のエンドポイント（気象・地震・不動産・法人・人口統計等）をx402対応で提供。',
+              en: 'Adds agent-native per-call on-chain payments to Japanese data APIs. Provides 18 x402-enabled endpoints (weather, earthquakes, real estate, corporate, demographics, etc.).',
             },
             links: [
               { label: 'note', href: 'https://note.com/x402inc/n/ncf3a3c9aed6f' },

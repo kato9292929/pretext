@@ -9,7 +9,7 @@ const COPY = {
     pageTag: '考察・調査',
     title: '考察・調査',
     intro:
-      'エージェント決済の「現在地」を、一次情報から読み解く。委任付き自律決済から market の拡大まで、x402 Inc. の視点で継続的に分析しています。',
+      'エージェント決済の「現在地」を、一次情報から読み解く。用途別の細分化から market の拡大まで、x402 Inc. の視点で継続的に分析しています。',
     latest: 'Education',
     read: 'note で読む',
     thesisTag: 'x402 成長性分析',
@@ -45,13 +45,13 @@ const TIMELINE: TimelineItem[] = [
     phase: 'Phase 2',
     period: { ja: 'AI ↔ AI 企業間（2027〜2029年）', en: 'AI ↔ AI, enterprise (2027–2029)' },
     desc: {
-      ja: '「エージェントが他のエージェントと条件交渉・決済まで自律完結（B2B）」。Google A2A・Stripe MPPがエージェント間の取引フレームワークを整備中。B2B意思決定者の53%が AI ↔ AI を許可すると回答済み。x402が決済レールとして採用されるシナリオが最も現実的です。',
-      en: '“Agents negotiate terms and settle autonomously with other agents (B2B).” Google A2A and Stripe MPP are building agent-to-agent transaction frameworks. 53% of B2B decision-makers say they’d allow AI ↔ AI. x402 being adopted as the settlement rail is the most realistic scenario.',
+      ja: '「エージェントが他のエージェントと条件交渉し、決済まで完結する（B2B）」。Google A2A・Stripe MPPがエージェント間の取引フレームワークを整備中。B2B意思決定者の53%が AI ↔ AI を許可すると回答済み。x402が決済レールとして採用されるシナリオが最も現実的です。',
+      en: '“Agents negotiate terms with other agents and settle end-to-end (B2B).” Google A2A and Stripe MPP are building agent-to-agent transaction frameworks. 53% of B2B decision-makers say they’d allow AI ↔ AI. x402 being adopted as the settlement rail is the most realistic scenario.',
     },
   },
   {
     phase: 'Phase 3',
-    period: { ja: 'AI ↔ AI 完全自律（2029年以降）', en: 'AI ↔ AI, fully autonomous (2029+)' },
+    period: { ja: 'AI ↔ AI 成熟（2029年以降）', en: 'AI ↔ AI, mature (2029+)' },
     desc: {
       ja: '「エージェントが独立した経済主体として市場に参加する」。信頼スコアリング・規制フレームワーク・エージェントIDの整備が条件。技術基盤はすでに今のx402の上に立っています。',
       en: '“Agents participate in the market as independent economic actors.” Conditional on trust scoring, regulatory frameworks and agent identity. The technical foundation already stands on today’s x402.',

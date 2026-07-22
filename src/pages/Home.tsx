@@ -2,6 +2,7 @@ import { Hero } from '../sections/Hero'
 import { Insights } from '../sections/Insights'
 import { Featured } from '../sections/Featured'
 import { Architecture } from '../sections/Architecture'
+import { Ecosystem } from '../sections/Ecosystem'
 import { Foundation } from '../sections/Foundation'
 
 export function Home() {
@@ -11,6 +12,7 @@ export function Home() {
       <Insights />
       <Featured />
       <Architecture />
+      <Ecosystem />
       <Foundation />
     </>
   )

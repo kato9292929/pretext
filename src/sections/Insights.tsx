@@ -7,13 +7,13 @@ import { useLang } from '../i18n'
 const COPY = {
   ja: {
     subtext:
-      'エージェント決済の「現在地」を、一次情報から読み解く。委任付き自律決済から market の拡大まで、直近のトピックを深掘りしています。',
+      'エージェント決済の「現在地」を、一次情報から読み解く。用途別の細分化から market の拡大まで、直近のトピックを深掘りしています。',
     seeAll: '考察・調査をすべて見る',
     read: 'note で読む',
   },
   en: {
     subtext:
-      'Reading the current state of agent payments from primary sources — from delegated autonomous payments to market expansion, we dig into the latest topics.',
+      'Reading the current state of agent payments from primary sources — from use-case segmentation to market expansion, we dig into the latest topics.',
     seeAll: 'See all research',
     read: 'Read on note',
   },
