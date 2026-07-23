@@ -1,6 +1,5 @@
 import { Hero } from '../sections/Hero'
 import { Ecosystem } from '../sections/Ecosystem'
-import { HowToPay } from '../sections/HowToPay'
 import { Insights } from '../sections/Insights'
 import { Featured } from '../sections/Featured'
 import { Architecture } from '../sections/Architecture'
@@ -11,7 +10,6 @@ export function Home() {
     <>
       <Hero />
       <Ecosystem />
-      <HowToPay />
       <Insights />
       <Featured />
       <Architecture />
