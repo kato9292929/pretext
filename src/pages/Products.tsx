@@ -37,6 +37,7 @@ const COPY = {
     catalogHead: 'プロダクト',
     catalogIntro:
       'x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。',
+    catalogListHead: 'プロダクト一覧',
   },
   en: {
     payHead: 'How to Pay',
@@ -62,6 +63,7 @@ const COPY = {
     catalogHead: 'Products',
     catalogIntro:
       'Every x402 Inc. product exists to validate the market while building it. Designed in three phases: Phase 1 (data infrastructure) → Phase 2 (ecosystem) → Phase 3 (privacy & payment exit).',
+    catalogListHead: 'Product catalog',
   },
 } satisfies Record<Lang, Record<string, unknown>>
 
@@ -558,9 +560,15 @@ export function Products() {
   const t = COPY[lang] as (typeof COPY)['ja']
   return (
     <>
-      {/* How to Pay — top of the page */}
-      <section className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-32 pb-8 md:pb-12">
-        <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-fg">{t.payHead}</h1>
+      {/* Products intro — top of the page */}
+      <section className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-32 pb-2">
+        <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-fg">{t.catalogHead}</h1>
+        <p className="mt-6 text-sm md:text-base text-fg/70 leading-[1.8] max-w-3xl">{t.catalogIntro}</p>
+      </section>
+
+      {/* How to Pay */}
+      <section className="relative z-10 max-w-4xl mx-auto px-6 py-8 md:py-12">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-fg">{t.payHead}</h2>
         <p className="mt-6 text-sm text-fg/70 leading-[1.7]">{t.payFreeLabel}</p>
         <pre className="mt-3 liquid-glass rounded-xl p-4 text-xs md:text-sm font-mono text-fg/80 overflow-x-auto">
           <span className="text-fg/40">$ </span>curl https://jin-orcin-pi.vercel.app/api/jin/latest
@@ -627,8 +635,7 @@ export function Products() {
 
       {/* Product catalog (Phase 0–3) */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20 border-t border-fg/10">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-fg">{t.catalogHead}</h2>
-        <p className="mt-4 text-sm text-fg/60 leading-[1.7] max-w-3xl">{t.catalogIntro}</p>
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-fg">{t.catalogListHead}</h2>
 
         {PHASES.map((phase) => (
           <div key={phase.phase} className="mt-10">
