@@ -10,7 +10,7 @@ export type Article = {
 /* Latest featured insights — surfaced on the home page and the research page */
 export const FEATURED_ARTICLES: Article[] = [
   {
-    tag: { ja: '委任付き自律決済', en: 'Delegated payments' },
+    tag: { ja: 'Credit Card / H to A', en: 'Credit Card / H to A' },
     title: {
       ja: 'x402 per call自律決済の前に来る委任付き自律決済——エージェントへの委任が解いている三つの問題',
       en: 'Delegated autonomous payments come before x402 per-call payments — the three problems delegation to agents solves',
@@ -22,7 +22,7 @@ export const FEATURED_ARTICLES: Article[] = [
     href: 'https://note.com/x402inc/n/n3940b09a8d77',
   },
   {
-    tag: { ja: 'Stripe · Foundation', en: 'Stripe · Foundation' },
+    tag: { ja: 'x402 / MPP', en: 'x402 / MPP' },
     title: {
       ja: 'MPP経由の受け入れとx402：StripeがA to Aで両方を担ぐ構造と7月14日のx402 Foundation発足',
       en: 'MPP acceptance and x402: how Stripe carries both in an A-to-A structure, and the July 14 launch of the x402 Foundation',
@@ -34,7 +34,7 @@ export const FEATURED_ARTICLES: Article[] = [
     href: 'https://note.com/x402inc/n/nd740252230f2',
   },
   {
-    tag: { ja: 'AWS · Cloudflare', en: 'AWS · Cloudflare' },
+    tag: { ja: 'Next Future', en: 'Next Future' },
     title: {
       ja: 'AWSとCloudflareのx402対応と市場拡大：x402を知っている開発者からCloudFront/Cloudflareを使っている全事業者の参入へ',
       en: 'AWS and Cloudflare adopt x402 and the market expands: from developers who know x402 to every business on CloudFront/Cloudflare',

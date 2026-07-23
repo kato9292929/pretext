@@ -3,8 +3,8 @@ import { SectionEyebrow } from '../primitives'
 import { useLang, type Lang, type Localized } from '../i18n'
 
 const CHIPS: Localized<string[]> = {
-  ja: ['per-callオンチェーン決済', '検証可能な実績', 'HTTP 402', 'Base / Solana', 'ERC-8004 identity', 'REST + MCP'],
-  en: ['Per-call on-chain settlement', 'Verifiable track record', 'HTTP 402', 'Base / Solana', 'ERC-8004 identity', 'REST + MCP'],
+  ja: ['per-callオンチェーン決済', '検証可能な実績', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
+  en: ['Per-call on-chain settlement', 'Verifiable track record', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
 }
 
 const INTRO: Localized = {
