@@ -27,17 +27,17 @@ const COPY = {
     ],
     payNote:
       '金額・チェーン・手数料支払い者は決め打ちにせず、402が提示する値を使う。複数チェーンを提示する場合はクライアント側で選ぶ。x402対応クライアント（@x402/fetch など）を使えば往復は自動。機械可読な定義は各ホストの /.well-known/x402.json にある。',
-    endpointsHead: 'エンドポイント一覧',
+    endpointsHead: 'Endpoints',
     agentHead: 'これらを毎日叩いているエージェント',
     agentDesc:
       '当社の自律エージェント（AA）は、Base mainnet上のオンチェーンidentity（ERC-8004、agentId 55560）を持ち、毎日06:00 JSTに上記のエンドポイントを叩いて、1コールずつUSDCで決済している。決済の署名は Circle Developer-Controlled Wallet が行う。',
     agentRunHead: '直近の稼働（2026年7月23日 06:00 JST）',
     agentVerify:
       '支払いはすべてオンチェーンに記録され、Basescan / Solscan で検証できる。同じエンドポイントは、誰でも同じ手順で叩ける。',
-    catalogHead: 'プロダクト',
+    catalogHead: 'Products',
     catalogIntro:
       'x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。',
-    catalogListHead: 'プロダクト一覧',
+    catalogListHead: 'Product catalog',
   },
   en: {
     payHead: 'How to Pay',
@@ -634,7 +634,7 @@ export function Products() {
       </section>
 
       {/* Product catalog (Phase 0–3) */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20 border-t border-fg/10">
+      <section className="relative z-10 max-w-4xl mx-auto px-6 py-14 md:py-20 border-t border-fg/10">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-fg">{t.catalogListHead}</h2>
 
         {PHASES.map((phase) => (
