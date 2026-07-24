@@ -48,8 +48,8 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  filter: blur(46px);
-  opacity: 0.9;
+  filter: blur(26px);
+  opacity: 0.92;
 }
 
 :root[data-theme='light'] .bg-light {

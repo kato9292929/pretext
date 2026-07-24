@@ -21,18 +21,17 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
-      {/* Light-theme background: an undulating ribbon that mirrors the dark
-          video's flowing curve — gold on the two sides, pastel in the middle. */}
+      {/* Light-theme background: two ribbons crossing into an X (on-brand for
+          x402). One sweeps in from the left at 45°, then one from the right;
+          each carries a flowing gold→pastel gradient. */}
       <div className="bg-light pointer-events-none">
         <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <defs>
-            {/* Runs down the ribbon (top → bottom): gold at both ends, pastel
-                through the middle, echoing the dark overlay's palette. The
-                whole gradient slides so the colours visibly flow. */}
+            {/* Flows up-right along arm A. */}
             <linearGradient
-              id="ribbonGrad"
-              x1="0.5"
-              y1="0"
+              id="ribbonGradA"
+              x1="0"
+              y1="1"
               x2="0.5"
               y2="0.5"
               spreadMethod="reflect"
@@ -48,29 +47,85 @@ export function Layout({ children }: { children: ReactNode }) {
               <animateTransform
                 attributeName="gradientTransform"
                 type="translate"
-                values="0 0;0 0.5"
+                values="0 0;0.5 -0.5"
+                dur="5s"
+                calcMode="linear"
+                repeatCount="indefinite"
+              />
+            </linearGradient>
+            {/* Flows up-left along arm B. */}
+            <linearGradient
+              id="ribbonGradB"
+              x1="1"
+              y1="1"
+              x2="0.5"
+              y2="0.5"
+              spreadMethod="reflect"
+              gradientTransform="translate(0 0)"
+            >
+              <stop offset="0" stopColor="#b98d28" />
+              <stop offset="0.16" stopColor="#e4cd80" />
+              <stop offset="0.34" stopColor="#8fd0a8" />
+              <stop offset="0.5" stopColor="#3ac6c6" />
+              <stop offset="0.66" stopColor="#57b8ea" />
+              <stop offset="0.84" stopColor="#9aa9ec" />
+              <stop offset="1" stopColor="#e4cd80" />
+              <animateTransform
+                attributeName="gradientTransform"
+                type="translate"
+                values="0 0;-0.5 -0.5"
                 dur="5s"
                 calcMode="linear"
                 repeatCount="indefinite"
               />
             </linearGradient>
           </defs>
+
+          {/* Arm A: bottom-left → top-right (draws in first). */}
           <path
-            className="ribbon-path"
             fill="none"
-            stroke="url(#ribbonGrad)"
-            strokeWidth="340"
+            stroke="url(#ribbonGradA)"
+            strokeWidth="220"
             strokeLinecap="round"
-            d="M 820,-180 C 600,180 1140,380 940,640 C 820,800 900,1000 1040,1180"
+            pathLength="1"
+            strokeDasharray="1 1"
+            strokeDashoffset="1"
+            d="M -160,1080 C 350,720 1080,300 1760,-140"
           >
             <animate
-              attributeName="d"
-              dur="18s"
-              repeatCount="indefinite"
+              attributeName="stroke-dashoffset"
+              from="1"
+              to="0"
+              dur="1.3s"
+              begin="0s"
+              fill="freeze"
               calcMode="spline"
-              keyTimes="0;0.5;1"
-              keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
-              values="M 820,-180 C 600,180 1140,380 940,640 C 820,800 900,1000 1040,1180;M 900,-180 C 1160,220 620,420 980,680 C 1120,840 880,1020 960,1180;M 820,-180 C 600,180 1140,380 940,640 C 820,800 900,1000 1040,1180"
+              keyTimes="0;1"
+              keySplines="0.4 0 0.2 1"
+            />
+          </path>
+
+          {/* Arm B: bottom-right → top-left (draws in after A). */}
+          <path
+            fill="none"
+            stroke="url(#ribbonGradB)"
+            strokeWidth="220"
+            strokeLinecap="round"
+            pathLength="1"
+            strokeDasharray="1 1"
+            strokeDashoffset="1"
+            d="M 1760,1080 C 1250,720 520,300 -160,-140"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              from="1"
+              to="0"
+              dur="1.3s"
+              begin="0.9s"
+              fill="freeze"
+              calcMode="spline"
+              keyTimes="0;1"
+              keySplines="0.4 0 0.2 1"
             />
           </path>
         </svg>
