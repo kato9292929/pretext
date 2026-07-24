@@ -27,16 +27,32 @@ export function Layout({ children }: { children: ReactNode }) {
         <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <defs>
             {/* Runs down the ribbon (top → bottom): gold at both ends, pastel
-                through the middle, echoing the dark overlay's palette. */}
-            <linearGradient id="ribbonGrad" x1="0.35" y1="0" x2="0.65" y2="1">
+                through the middle, echoing the dark overlay's palette. The
+                whole gradient slides so the colours visibly flow. */}
+            <linearGradient
+              id="ribbonGrad"
+              x1="0.5"
+              y1="0"
+              x2="0.5"
+              y2="0.5"
+              spreadMethod="reflect"
+              gradientTransform="translate(0 0)"
+            >
               <stop offset="0" stopColor="#b98d28" />
-              <stop offset="0.13" stopColor="#e4cd80" />
-              <stop offset="0.3" stopColor="#8fd0a8" />
-              <stop offset="0.46" stopColor="#3ac6c6" />
-              <stop offset="0.6" stopColor="#57b8ea" />
-              <stop offset="0.74" stopColor="#9aa9ec" />
-              <stop offset="0.88" stopColor="#e4cd80" />
-              <stop offset="1" stopColor="#b98d28" />
+              <stop offset="0.16" stopColor="#e4cd80" />
+              <stop offset="0.34" stopColor="#8fd0a8" />
+              <stop offset="0.5" stopColor="#3ac6c6" />
+              <stop offset="0.66" stopColor="#57b8ea" />
+              <stop offset="0.84" stopColor="#9aa9ec" />
+              <stop offset="1" stopColor="#e4cd80" />
+              <animateTransform
+                attributeName="gradientTransform"
+                type="translate"
+                values="0 0;0 0.5"
+                dur="5s"
+                calcMode="linear"
+                repeatCount="indefinite"
+              />
             </linearGradient>
           </defs>
           <path
