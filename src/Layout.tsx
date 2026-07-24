@@ -21,8 +21,42 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
-      {/* Light-theme background: a soft pastel gradient ribbon on white (video hidden then) */}
-      <div className="bg-light pointer-events-none" />
+      {/* Light-theme background: an undulating ribbon that mirrors the dark
+          video's flowing curve — gold on the two sides, pastel in the middle. */}
+      <div className="bg-light pointer-events-none">
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="0.12">
+              <stop offset="0" stopColor="#b98d28" />
+              <stop offset="0.14" stopColor="#e4cd80" />
+              <stop offset="0.32" stopColor="#6ad0a6" />
+              <stop offset="0.48" stopColor="#3ac6c6" />
+              <stop offset="0.6" stopColor="#57b8ea" />
+              <stop offset="0.76" stopColor="#8fabee" />
+              <stop offset="0.88" stopColor="#e4cd80" />
+              <stop offset="1" stopColor="#b98d28" />
+            </linearGradient>
+          </defs>
+          <path
+            className="ribbon-path"
+            fill="none"
+            stroke="url(#ribbonGrad)"
+            strokeWidth="300"
+            strokeLinecap="round"
+            d="M -220,260 C 240,640 560,600 880,340 C 1160,120 1420,140 1860,440"
+          >
+            <animate
+              attributeName="d"
+              dur="18s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keyTimes="0;0.5;1"
+              keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
+              values="M -220,260 C 240,640 560,600 880,340 C 1160,120 1420,140 1860,440;M -220,340 C 240,540 560,700 880,300 C 1160,180 1420,80 1860,500;M -220,260 C 240,640 560,600 880,340 C 1160,120 1420,140 1860,440"
+            />
+          </path>
+        </svg>
+      </div>
 
       {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon (dark theme) */}
       <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>

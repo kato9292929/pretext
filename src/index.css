@@ -30,8 +30,8 @@ body {
   background-color: rgba(61, 129, 227, 0.3);
 }
 
-/* Light theme: hide the dark video and recreate its flowing diagonal ribbon
-   in CSS — gold gradient on the sides, soft pastel through the middle. */
+/* Light theme: hide the dark video and paint an undulating ribbon instead
+   (SVG in Layout) — gold on the two sides, soft pastel through the middle. */
 :root[data-theme='light'] .bg-media {
   display: none;
 }
@@ -39,41 +39,17 @@ body {
 .bg-light {
   display: none;
   position: fixed;
-  left: -25%;
-  top: 19%;
-  width: 150%;
-  height: 50%;
-  transform-origin: center;
-  background: linear-gradient(
-    100deg,
-    #b98d28 6%,
-    #e4cd80 17%,
-    #6ad0a6 33%,
-    #3ac6c6 44%,
-    #57b8ea 55%,
-    #8fabee 66%,
-    #c1a3e6 74%,
-    #e4cd80 83%,
-    #b98d28 94%
-  );
-  filter: blur(58px);
-  opacity: 0.9;
+  inset: 0;
   z-index: 0;
-  animation: light-ribbon 20s ease-in-out infinite;
+  pointer-events: none;
 }
 
-/* Flow like the dark ribbon: the band gently sways and breathes rather than
-   spinning, so the gold ends stay anchored to the two sides. */
-@keyframes light-ribbon {
-  0% {
-    transform: rotate(-13deg) scale(1.05);
-  }
-  50% {
-    transform: rotate(-9deg) scale(1.12);
-  }
-  100% {
-    transform: rotate(-13deg) scale(1.05);
-  }
+.bg-light svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: blur(46px);
+  opacity: 0.9;
 }
 
 :root[data-theme='light'] .bg-light {
