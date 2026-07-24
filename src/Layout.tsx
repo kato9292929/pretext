@@ -26,13 +26,15 @@ export function Layout({ children }: { children: ReactNode }) {
       <div className="bg-light pointer-events-none">
         <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <defs>
-            <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="0.12">
+            {/* Runs down the ribbon (top → bottom): gold at both ends, pastel
+                through the middle, echoing the dark overlay's palette. */}
+            <linearGradient id="ribbonGrad" x1="0.35" y1="0" x2="0.65" y2="1">
               <stop offset="0" stopColor="#b98d28" />
-              <stop offset="0.14" stopColor="#e4cd80" />
-              <stop offset="0.32" stopColor="#6ad0a6" />
-              <stop offset="0.48" stopColor="#3ac6c6" />
+              <stop offset="0.13" stopColor="#e4cd80" />
+              <stop offset="0.3" stopColor="#8fd0a8" />
+              <stop offset="0.46" stopColor="#3ac6c6" />
               <stop offset="0.6" stopColor="#57b8ea" />
-              <stop offset="0.76" stopColor="#8fabee" />
+              <stop offset="0.74" stopColor="#9aa9ec" />
               <stop offset="0.88" stopColor="#e4cd80" />
               <stop offset="1" stopColor="#b98d28" />
             </linearGradient>
@@ -41,9 +43,9 @@ export function Layout({ children }: { children: ReactNode }) {
             className="ribbon-path"
             fill="none"
             stroke="url(#ribbonGrad)"
-            strokeWidth="300"
+            strokeWidth="340"
             strokeLinecap="round"
-            d="M -220,260 C 240,640 560,600 880,340 C 1160,120 1420,140 1860,440"
+            d="M 820,-180 C 600,180 1140,380 940,640 C 820,800 900,1000 1040,1180"
           >
             <animate
               attributeName="d"
@@ -52,7 +54,7 @@ export function Layout({ children }: { children: ReactNode }) {
               calcMode="spline"
               keyTimes="0;0.5;1"
               keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
-              values="M -220,260 C 240,640 560,600 880,340 C 1160,120 1420,140 1860,440;M -220,340 C 240,540 560,700 880,300 C 1160,180 1420,80 1860,500;M -220,260 C 240,640 560,600 880,340 C 1160,120 1420,140 1860,440"
+              values="M 820,-180 C 600,180 1140,380 940,640 C 820,800 900,1000 1040,1180;M 900,-180 C 1160,220 620,420 980,680 C 1120,840 880,1020 960,1180;M 820,-180 C 600,180 1140,380 940,640 C 820,800 900,1000 1040,1180"
             />
           </path>
         </svg>
