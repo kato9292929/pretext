@@ -30,7 +30,8 @@ body {
   background-color: rgba(61, 129, 227, 0.3);
 }
 
-/* Light theme: hide the dark video, use a clean flowing pastel gradient */
+/* Light theme: hide the dark video and recreate its flowing diagonal ribbon
+   in CSS — gold gradient on the sides, soft pastel through the middle. */
 :root[data-theme='light'] .bg-media {
   display: none;
 }
@@ -38,40 +39,41 @@ body {
 .bg-light {
   display: none;
   position: fixed;
-  left: -20%;
-  top: 20%;
-  width: 140%;
-  height: 48%;
-  transform: rotate(-15deg);
+  left: -25%;
+  top: 19%;
+  width: 150%;
+  height: 50%;
   transform-origin: center;
   background: linear-gradient(
-    90deg,
-    #6ad0a6 0%,
-    #3ac6c6 22%,
-    #57b8ea 44%,
-    #8fabee 64%,
-    #c1a3e6 82%,
-    #edb8da 100%
+    100deg,
+    #b98d28 6%,
+    #e4cd80 17%,
+    #6ad0a6 33%,
+    #3ac6c6 44%,
+    #57b8ea 55%,
+    #8fabee 66%,
+    #c1a3e6 74%,
+    #e4cd80 83%,
+    #b98d28 94%
   );
-  filter: blur(55px);
+  filter: blur(58px);
+  opacity: 0.9;
   z-index: 0;
-  animation: light-ribbon 16s linear infinite;
+  animation: light-ribbon 20s ease-in-out infinite;
 }
 
+/* Flow like the dark ribbon: the band gently sways and breathes rather than
+   spinning, so the gold ends stay anchored to the two sides. */
 @keyframes light-ribbon {
   0% {
-    transform: rotate(0deg) scale(1.06);
+    transform: rotate(-13deg) scale(1.05);
   }
   50% {
-    transform: rotate(180deg) scale(1.2);
+    transform: rotate(-9deg) scale(1.12);
   }
   100% {
-    transform: rotate(360deg) scale(1.06);
+    transform: rotate(-13deg) scale(1.05);
   }
-}
-
-:root[data-theme='light'] .bg-light {
-  display: block;
 }
 
 :root[data-theme='light'] .bg-light {
