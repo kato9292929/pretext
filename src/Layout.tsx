@@ -37,13 +37,13 @@ export function Layout({ children }: { children: ReactNode }) {
               spreadMethod="reflect"
               gradientTransform="translate(0 0)"
             >
-              <stop offset="0" stopColor="#b98d28" />
-              <stop offset="0.16" stopColor="#e4cd80" />
-              <stop offset="0.34" stopColor="#8fd0a8" />
-              <stop offset="0.5" stopColor="#3ac6c6" />
-              <stop offset="0.66" stopColor="#57b8ea" />
-              <stop offset="0.84" stopColor="#9aa9ec" />
-              <stop offset="1" stopColor="#e4cd80" />
+              <stop offset="0" stopColor="#dcdee5" />
+              <stop offset="0.16" stopColor="#f2c6db" />
+              <stop offset="0.34" stopColor="#ecb2d2" />
+              <stop offset="0.5" stopColor="#cdb8e8" />
+              <stop offset="0.66" stopColor="#b0c6ee" />
+              <stop offset="0.84" stopColor="#dfe1e8" />
+              <stop offset="1" stopColor="#f2c6db" />
               <animateTransform
                 attributeName="gradientTransform"
                 type="translate"
@@ -53,27 +53,27 @@ export function Layout({ children }: { children: ReactNode }) {
                 repeatCount="indefinite"
               />
             </linearGradient>
-            {/* Flows up-left along arm B. */}
+            {/* Flows down-right along arm B. */}
             <linearGradient
               id="ribbonGradB"
-              x1="1"
-              y1="1"
+              x1="0"
+              y1="0"
               x2="0.5"
               y2="0.5"
               spreadMethod="reflect"
               gradientTransform="translate(0 0)"
             >
-              <stop offset="0" stopColor="#b98d28" />
-              <stop offset="0.16" stopColor="#e4cd80" />
-              <stop offset="0.34" stopColor="#8fd0a8" />
-              <stop offset="0.5" stopColor="#3ac6c6" />
-              <stop offset="0.66" stopColor="#57b8ea" />
-              <stop offset="0.84" stopColor="#9aa9ec" />
-              <stop offset="1" stopColor="#e4cd80" />
+              <stop offset="0" stopColor="#dcdee5" />
+              <stop offset="0.16" stopColor="#f2c6db" />
+              <stop offset="0.34" stopColor="#ecb2d2" />
+              <stop offset="0.5" stopColor="#cdb8e8" />
+              <stop offset="0.66" stopColor="#b0c6ee" />
+              <stop offset="0.84" stopColor="#dfe1e8" />
+              <stop offset="1" stopColor="#f2c6db" />
               <animateTransform
                 attributeName="gradientTransform"
                 type="translate"
-                values="0 0;-0.5 -0.5"
+                values="0 0;0.5 0.5"
                 dur="5s"
                 calcMode="linear"
                 repeatCount="indefinite"
@@ -105,7 +105,7 @@ export function Layout({ children }: { children: ReactNode }) {
             />
           </path>
 
-          {/* Arm B: bottom-right → top-left (draws in after A). */}
+          {/* Arm B: top-left → bottom-right (descends, draws in after A). */}
           <path
             fill="none"
             stroke="url(#ribbonGradB)"
@@ -114,7 +114,7 @@ export function Layout({ children }: { children: ReactNode }) {
             pathLength="1"
             strokeDasharray="1 1"
             strokeDashoffset="1"
-            d="M 1760,1080 C 1250,720 520,300 -160,-140"
+            d="M -160,-140 C 520,300 1250,720 1760,1080"
           >
             <animate
               attributeName="stroke-dashoffset"
