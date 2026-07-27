@@ -30,29 +30,24 @@ body {
   background-color: rgba(61, 129, 227, 0.3);
 }
 
-/* Light theme: hide the dark video and paint an undulating ribbon instead
-   (SVG in Layout) — gold on the two sides, soft pastel through the middle. */
+/* Light theme: hide the dark video; a canvas of streaming colourful digits
+   (see NumberRain) is the background instead. */
 :root[data-theme='light'] .bg-media {
   display: none;
 }
 
-.bg-light {
+.bg-light-canvas {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.bg-light svg {
-  display: block;
   width: 100%;
   height: 100%;
-  filter: blur(26px);
-  opacity: 0.92;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.62;
 }
 
-:root[data-theme='light'] .bg-light {
+:root[data-theme='light'] .bg-light-canvas {
   display: block;
 }
 

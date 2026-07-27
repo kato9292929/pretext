@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { LanguageProvider, ThemeProvider } from './i18n'
 import { Navbar } from './sections/Navbar'
 import { Contact } from './sections/Contact'
+import { NumberRain } from './sections/NumberRain'
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -21,115 +22,9 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
-      {/* Light-theme background: two ribbons crossing into an X (on-brand for
-          x402). One sweeps in from the left at 45°, then one from the right;
-          each carries a flowing gold→pastel gradient. */}
-      <div className="bg-light pointer-events-none">
-        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs>
-            {/* Flows up-right along arm A. */}
-            <linearGradient
-              id="ribbonGradA"
-              x1="0"
-              y1="1"
-              x2="0.5"
-              y2="0.5"
-              spreadMethod="reflect"
-              gradientTransform="translate(0 0)"
-            >
-              <stop offset="0" stopColor="#dcdee5" />
-              <stop offset="0.16" stopColor="#f2c6db" />
-              <stop offset="0.34" stopColor="#ecb2d2" />
-              <stop offset="0.5" stopColor="#cdb8e8" />
-              <stop offset="0.66" stopColor="#b0c6ee" />
-              <stop offset="0.84" stopColor="#dfe1e8" />
-              <stop offset="1" stopColor="#f2c6db" />
-              <animateTransform
-                attributeName="gradientTransform"
-                type="translate"
-                values="0 0;0.5 -0.5"
-                dur="5s"
-                calcMode="linear"
-                repeatCount="indefinite"
-              />
-            </linearGradient>
-            {/* Flows down-right along arm B. */}
-            <linearGradient
-              id="ribbonGradB"
-              x1="0"
-              y1="0"
-              x2="0.5"
-              y2="0.5"
-              spreadMethod="reflect"
-              gradientTransform="translate(0 0)"
-            >
-              <stop offset="0" stopColor="#dcdee5" />
-              <stop offset="0.16" stopColor="#f2c6db" />
-              <stop offset="0.34" stopColor="#ecb2d2" />
-              <stop offset="0.5" stopColor="#cdb8e8" />
-              <stop offset="0.66" stopColor="#b0c6ee" />
-              <stop offset="0.84" stopColor="#dfe1e8" />
-              <stop offset="1" stopColor="#f2c6db" />
-              <animateTransform
-                attributeName="gradientTransform"
-                type="translate"
-                values="0 0;0.5 0.5"
-                dur="5s"
-                calcMode="linear"
-                repeatCount="indefinite"
-              />
-            </linearGradient>
-          </defs>
-
-          {/* Arm A: bottom-left → top-right (draws in first). */}
-          <path
-            fill="none"
-            stroke="url(#ribbonGradA)"
-            strokeWidth="220"
-            strokeLinecap="round"
-            pathLength="1"
-            strokeDasharray="1 1"
-            strokeDashoffset="1"
-            d="M -160,1080 C 350,720 1080,300 1760,-140"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="1"
-              to="0"
-              dur="1.3s"
-              begin="0s"
-              fill="freeze"
-              calcMode="spline"
-              keyTimes="0;1"
-              keySplines="0.4 0 0.2 1"
-            />
-          </path>
-
-          {/* Arm B: top-left → bottom-right (descends, draws in after A). */}
-          <path
-            fill="none"
-            stroke="url(#ribbonGradB)"
-            strokeWidth="220"
-            strokeLinecap="round"
-            pathLength="1"
-            strokeDasharray="1 1"
-            strokeDashoffset="1"
-            d="M -160,-140 C 520,300 1250,720 1760,1080"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="1"
-              to="0"
-              dur="1.3s"
-              begin="0.9s"
-              fill="freeze"
-              calcMode="spline"
-              keyTimes="0;1"
-              keySplines="0.4 0 0.2 1"
-            />
-          </path>
-        </svg>
-      </div>
+      {/* Light-theme background: colourful digits streaming down (Matrix-style
+          rain). Shown only in the light theme. */}
+      <NumberRain />
 
       {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon (dark theme) */}
       <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
