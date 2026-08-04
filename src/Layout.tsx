@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { LanguageProvider, ThemeProvider } from './i18n'
 import { Navbar } from './sections/Navbar'
 import { Contact } from './sections/Contact'
+import { Footer } from './sections/Footer'
 import { NumberRain } from './sections/NumberRain'
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -68,6 +69,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <Navbar />
           {children}
           <Contact />
+          <Footer />
         </LanguageProvider>
       </ThemeProvider>
     </div>
