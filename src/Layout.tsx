@@ -1,10 +1,20 @@
 import type { ReactNode } from 'react'
+import { LanguageProvider, ThemeProvider } from './i18n'
 import { Navbar } from './sections/Navbar'
 import { Contact } from './sections/Contact'
+import { Footer } from './sections/Footer'
+import { NumberRain } from './sections/NumberRain'
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout({
+  children,
+  preFooter,
+}: {
+  children: ReactNode
+  /** Optional section rendered directly above the footer (e.g. home Services). */
+  preFooter?: ReactNode
+}) {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#0c0c0c] text-white">
+    <div className="relative min-h-screen overflow-x-hidden bg-bg text-fg">
       {/* Root SVG noise filter (subtle grain, multiply blend) for the shiny headline */}
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <filter id="c3-noise">
@@ -20,8 +30,12 @@ export function Layout({ children }: { children: ReactNode }) {
         </filter>
       </svg>
 
-      {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon */}
-      <div className="fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
+      {/* Light-theme background: colourful digits streaming down (Matrix-style
+          rain). Shown only in the light theme. */}
+      <NumberRain />
+
+      {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon (dark theme) */}
+      <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
         <video
           autoPlay
           loop
@@ -29,37 +43,43 @@ export function Layout({ children }: { children: ReactNode }) {
           playsInline
           className="w-full h-full object-cover pointer-events-none"
           style={{
-            // Grayscale keeps only the flowing shape/motion; the gradient below paints the color.
-            filter: 'grayscale(1) brightness(1.08) contrast(1.18) blur(14px)',
-            transform: 'scale(1.1)',
+            // Grayscale keeps only the flowing shape; heavy blur + low contrast make it soft & airy.
+            filter: 'grayscale(1) brightness(1.04) contrast(0.9) blur(22px)',
+            transform: 'scale(1.12)',
           }}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
         />
-        {/* Paint the reference palette onto the moving ribbon (warm-led, gold center, blue minority) */}
+        {/* Soft, translucent pastel iridescence painted onto the ribbon */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(100deg, #C85AA8 0%, #E8632E 20%, #F2A63C 35%, #F4D24A 50%, #7FC96B 64%, #34B9C2 80%, #3B82E6 100%)',
+              'linear-gradient(100deg, #E7A6C8 0%, #F3C08A 20%, #F7E39C 38%, #B9E6B0 56%, #A9DCEC 74%, #B7B4EC 100%)',
             mixBlendMode: 'color',
-            opacity: 0.95,
+            opacity: 0.85,
           }}
         />
-        {/* Gentle gold sheen to keep gold prominent and luminous */}
+        {/* Airy white sheen for a frosted, see-through glow */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(1100px circle at 55% 45%, rgba(253, 246, 208, 0.22), transparent 62%)',
+              'radial-gradient(1200px circle at 60% 42%, rgba(255, 255, 255, 0.14), transparent 60%)',
             mixBlendMode: 'soft-light',
-            opacity: 0.85,
+            opacity: 0.9,
           }}
         />
       </div>
 
-      <Navbar />
-      {children}
-      <Contact />
+      <ThemeProvider>
+        <LanguageProvider>
+          <Navbar />
+          {children}
+          <Contact />
+          {preFooter}
+          <Footer />
+        </LanguageProvider>
+      </ThemeProvider>
     </div>
   )
 }

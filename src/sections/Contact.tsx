@@ -1,7 +1,19 @@
 import { motion } from 'motion/react'
 import { CONTACT_EMAIL, Pill } from '../primitives'
+import { useLang } from '../i18n'
+
+const COPY = {
+  ja: {
+    body: 'エージェント決済エコシステムの分析、実装・検証のご相談、事業連携やデータ提供のお問い合わせは、お気軽にご連絡ください。',
+  },
+  en: {
+    body: 'For analysis of the agent-payments ecosystem, implementation and verification inquiries, partnerships, or data access, feel free to reach out.',
+  },
+}
 
 export function Contact() {
+  const { lang } = useLang()
+  const t = COPY[lang]
   return (
     <section id="contact" className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
       <motion.div
@@ -20,13 +32,7 @@ export function Contact() {
           }}
         />
         <div className="relative">
-          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-[1.2]">
-            AIエージェント × 決済市場の発展に向けて
-          </h2>
-          <p className="mt-6 text-white/60 max-w-lg mx-auto text-sm leading-[1.7]">
-            委任付き自律決済から per-call
-            自律決済まで——実装・検証のご相談、事業連携やデータ提供のお問い合わせは、お気軽にご連絡ください。
-          </p>
+          <p className="text-fg/60 max-w-lg mx-auto text-sm leading-[1.7]">{t.body}</p>
           <div className="mt-8 flex justify-center">
             <Pill label={CONTACT_EMAIL} href={`mailto:${CONTACT_EMAIL}`} gold />
           </div>
