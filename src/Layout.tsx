@@ -5,7 +5,14 @@ import { Contact } from './sections/Contact'
 import { Footer } from './sections/Footer'
 import { NumberRain } from './sections/NumberRain'
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout({
+  children,
+  preFooter,
+}: {
+  children: ReactNode
+  /** Optional section rendered directly above the footer (e.g. home Services). */
+  preFooter?: ReactNode
+}) {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-bg text-fg">
       {/* Root SVG noise filter (subtle grain, multiply blend) for the shiny headline */}
@@ -69,6 +76,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <Navbar />
           {children}
           <Contact />
+          {preFooter}
           <Footer />
         </LanguageProvider>
       </ThemeProvider>
