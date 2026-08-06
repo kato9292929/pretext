@@ -19,13 +19,14 @@ const COPY = {
   },
 }
 
-const RANKED: { title: Localized; href: string }[] = [
+const RANKED: { title: Localized; href: string; tag: Localized }[] = [
   {
     title: {
       ja: '社内AIエージェントの3つの提供形態：実行費用の出どころと統制の置き場所（Class 1〜3）',
       en: 'Three deployment models for in-house AI agents: where run costs come from and where control sits (Class 1–3)',
     },
     href: 'https://note.com/x402inc/n/n8b1822d72ed2',
+    tag: { ja: 'Agent Ops / Class', en: 'Agent Ops / Class' },
   },
   {
     title: {
@@ -33,6 +34,7 @@ const RANKED: { title: Localized; href: string }[] = [
       en: 'Back office × AI agents: separating drafting from approval with Y Combinator’s qm and Stripe Approvals — an implementation log',
     },
     href: 'https://note.com/x402inc/n/n15fbfb8b90a6',
+    tag: { ja: 'Back Office / Approvals', en: 'Back Office / Approvals' },
   },
   {
     title: {
@@ -40,6 +42,7 @@ const RANKED: { title: Localized; href: string }[] = [
       en: 'Agent Economy Classes | Summary: payment occurs in only 2 of the 5, and what stays unverified in each Class',
     },
     href: 'https://note.com/x402inc/n/n7114e5139b4c',
+    tag: { ja: 'Agent Economy / Classes', en: 'Agent Economy / Classes' },
   },
   {
     title: {
@@ -47,6 +50,7 @@ const RANKED: { title: Localized; href: string }[] = [
       en: 'Mapping the payment paths of six Agentic Commerce cases: expanding the H-to-A market with x402 as an option',
     },
     href: 'https://note.com/x402inc/n/n75db170cdf58',
+    tag: { ja: 'Agentic Commerce / H to A', en: 'Agentic Commerce / H to A' },
   },
   {
     title: {
@@ -54,6 +58,7 @@ const RANKED: { title: Localized; href: string }[] = [
       en: 'x402 × The Agentic Economy (Part 8): the current state of agent-to-agent labor',
     },
     href: 'https://note.com/x402inc/n/n3832d071a4ee',
+    tag: { ja: 'A to A / Labor', en: 'A to A / Labor' },
   },
   {
     title: {
@@ -61,10 +66,11 @@ const RANKED: { title: Localized; href: string }[] = [
       en: 'The sameness of the agent economy and the on-chain economy — x402 Inc.’s MAP / CONSUME / PRODUCE',
     },
     href: 'https://note.com/x402inc/n/n2c3c515b750a',
+    tag: { ja: 'Agent × Onchain', en: 'Agent × Onchain' },
   },
 ]
 
-type Item = { title: Localized; href: string; tag?: Localized; blurb?: Localized }
+type Item = { title: Localized; href: string; tag: Localized }
 
 // 1–6 above, plus the existing featured articles as 7–9.
 const ITEMS: Item[] = [
@@ -73,7 +79,6 @@ const ITEMS: Item[] = [
     title: a.title,
     href: a.href,
     tag: a.tag,
-    blurb: a.blurb,
   })),
 ]
 
@@ -117,15 +122,10 @@ export function Insights() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 3) * 0.08 }}
             className="liquid-glass rounded-2xl p-6 flex flex-col group"
           >
-            {a.tag && (
-              <span className="text-xs font-medium tracking-wide text-gold">{a.tag[lang]}</span>
-            )}
-            <h3
-              className={`${a.tag ? 'mt-4' : ''} text-base font-semibold text-fg leading-[1.5] flex-1`}
-            >
+            <span className="text-xs font-medium tracking-wide text-gold">{a.tag[lang]}</span>
+            <h3 className="mt-4 text-base font-semibold text-fg leading-[1.5] flex-1">
               {a.title[lang]}
             </h3>
-            {a.blurb && <p className="mt-3 text-sm text-fg/55 leading-[1.7]">{a.blurb[lang]}</p>}
             <span className="mt-5 pt-4 border-t border-fg/10 inline-flex items-center gap-1 text-xs text-fg/60 group-hover:text-gold transition-colors">
               {t.read}
               <ArrowUpRight className="w-3 h-3" />
