@@ -8,16 +8,12 @@ const COPY = {
   ja: {
     subtext:
       'エージェント決済の「現在地」を、一次情報から読み解く。用途別の細分化から market の拡大まで、直近のトピックを深掘りしています。',
-    picks: 'ピックアップ',
     seeAll: '考察・調査をすべて見る',
-    read: 'note で読む',
   },
   en: {
     subtext:
       'Reading the current state of agent payments from primary sources — from use-case segmentation to market expansion, we dig into the latest topics.',
-    picks: 'Selected',
     seeAll: 'See all research',
-    read: 'Read on note',
   },
 }
 
@@ -66,6 +62,12 @@ const RANKED: { title: Localized; href: string }[] = [
   },
 ]
 
+// 1–6 above, plus the existing featured articles as 7–9.
+const ITEMS: { title: Localized; href: string }[] = [
+  ...RANKED,
+  ...FEATURED_ARTICLES.map((a) => ({ title: a.title, href: a.href })),
+]
+
 export function Insights() {
   const { lang } = useLang()
   const t = COPY[lang]
@@ -91,7 +93,7 @@ export function Insights() {
         </a>
       </motion.div>
 
-      {/* Ranked picks (above the three cards) */}
+      {/* Ranked reading list: 1–6 selected + 7–9 existing */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -99,9 +101,8 @@ export function Insights() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="mt-8"
       >
-        <p className="text-xs uppercase tracking-widest text-fg/40">{t.picks}</p>
-        <ol className="mt-3 liquid-glass rounded-2xl px-1.5 py-1 sm:px-2">
-          {RANKED.map((a, i) => (
+        <ol className="liquid-glass rounded-2xl px-1.5 py-1 sm:px-2">
+          {ITEMS.map((a, i) => (
             <li key={a.href}>
               <a
                 href={a.href}
@@ -121,34 +122,6 @@ export function Insights() {
           ))}
         </ol>
       </motion.div>
-
-      <div className="mt-10 grid md:grid-cols-3 gap-5">
-        {FEATURED_ARTICLES.map((article, i) => (
-          <motion.a
-            key={article.href}
-            href={article.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
-            className="liquid-glass rounded-2xl p-6 flex flex-col group"
-          >
-            <span className="text-xs font-medium tracking-wide text-gold">
-              {article.tag[lang]}
-            </span>
-            <h3 className="mt-4 text-base font-semibold text-fg leading-[1.5] flex-1">
-              {article.title[lang]}
-            </h3>
-            <p className="mt-3 text-sm text-fg/55 leading-[1.7]">{article.blurb[lang]}</p>
-            <span className="mt-5 pt-4 border-t border-fg/10 inline-flex items-center gap-1 text-xs text-fg/60 group-hover:text-gold transition-colors">
-              {t.read}
-              <ArrowUpRight className="w-3 h-3" />
-            </span>
-          </motion.a>
-        ))}
-      </div>
     </section>
   )
 }
