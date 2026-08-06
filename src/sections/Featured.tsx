@@ -77,14 +77,14 @@ const PRODUCTS: Product[] = [
 export function Featured() {
   const { lang } = useLang()
   return (
-    <section id="products" className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <section id="products" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <SectionEyebrow label="Featured" tag="Products" heading />
+        <SectionEyebrow label="Products" tag="Automatic" heading />
         <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
       </motion.div>
 

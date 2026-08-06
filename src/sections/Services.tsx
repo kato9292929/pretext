@@ -117,7 +117,7 @@ export function Services() {
   const { lang } = useLang()
   const t = COPY[lang]
   return (
-    <section id="services" className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <section id="services" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -125,7 +125,7 @@ export function Services() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="max-w-2xl"
       >
-        <SectionEyebrow label="Services" heading />
+        <SectionEyebrow label="Services" tag="For Enterprise" heading />
         <p className="mt-6 text-fg/60 text-base leading-[1.7]">{t.lead}</p>
       </motion.div>
 

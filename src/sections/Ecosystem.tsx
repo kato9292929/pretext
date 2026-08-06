@@ -63,7 +63,7 @@ export function Ecosystem() {
   const { lang } = useLang()
   const t = COPY[lang]
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <section className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
