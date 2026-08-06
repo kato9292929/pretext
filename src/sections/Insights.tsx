@@ -9,11 +9,13 @@ const COPY = {
     subtext:
       'エージェント決済の「現在地」を、一次情報から読み解く。用途別の細分化から market の拡大まで、直近のトピックを深掘りしています。',
     seeAll: '考察・調査をすべて見る',
+    read: 'note で読む',
   },
   en: {
     subtext:
       'Reading the current state of agent payments from primary sources — from use-case segmentation to market expansion, we dig into the latest topics.',
     seeAll: 'See all research',
+    read: 'Read on note',
   },
 }
 
@@ -62,10 +64,17 @@ const RANKED: { title: Localized; href: string }[] = [
   },
 ]
 
+type Item = { title: Localized; href: string; tag?: Localized; blurb?: Localized }
+
 // 1–6 above, plus the existing featured articles as 7–9.
-const ITEMS: { title: Localized; href: string }[] = [
+const ITEMS: Item[] = [
   ...RANKED,
-  ...FEATURED_ARTICLES.map((a) => ({ title: a.title, href: a.href })),
+  ...FEATURED_ARTICLES.map((a) => ({
+    title: a.title,
+    href: a.href,
+    tag: a.tag,
+    blurb: a.blurb,
+  })),
 ]
 
 export function Insights() {
@@ -95,35 +104,35 @@ export function Insights() {
         </a>
       </motion.div>
 
-      {/* Ranked reading list: 1–6 selected + 7–9 existing */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-8"
-      >
-        <ol className="liquid-glass rounded-2xl px-1.5 py-1 sm:px-2">
-          {ITEMS.map((a, i) => (
-            <li key={a.href}>
-              <a
-                href={a.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-baseline gap-4 border-b border-fg/10 px-3 py-3 last:border-0 rounded-lg hover:bg-fg/[0.03] transition-colors"
-              >
-                <span className="w-5 shrink-0 font-mono text-sm tabular-nums text-gold">
-                  {i + 1}
-                </span>
-                <span className="flex-1 text-sm text-fg/80 leading-[1.55] group-hover:text-fg transition-colors">
-                  {a.title[lang]}
-                </span>
-                <ArrowUpRight className="w-3.5 h-3.5 shrink-0 translate-y-0.5 text-fg/30 group-hover:text-gold transition-colors" />
-              </a>
-            </li>
-          ))}
-        </ol>
-      </motion.div>
+      <div className="mt-8 grid md:grid-cols-3 gap-5">
+        {ITEMS.map((a, i) => (
+          <motion.a
+            key={a.href}
+            href={a.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 3) * 0.08 }}
+            className="liquid-glass rounded-2xl p-6 flex flex-col group"
+          >
+            {a.tag && (
+              <span className="text-xs font-medium tracking-wide text-gold">{a.tag[lang]}</span>
+            )}
+            <h3
+              className={`${a.tag ? 'mt-4' : ''} text-base font-semibold text-fg leading-[1.5] flex-1`}
+            >
+              {a.title[lang]}
+            </h3>
+            {a.blurb && <p className="mt-3 text-sm text-fg/55 leading-[1.7]">{a.blurb[lang]}</p>}
+            <span className="mt-5 pt-4 border-t border-fg/10 inline-flex items-center gap-1 text-xs text-fg/60 group-hover:text-gold transition-colors">
+              {t.read}
+              <ArrowUpRight className="w-3 h-3" />
+            </span>
+          </motion.a>
+        ))}
+      </div>
     </section>
   )
 }

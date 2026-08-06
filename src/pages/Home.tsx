@@ -10,9 +10,9 @@ export function Home() {
     <>
       <Hero />
       <Ecosystem />
-      <Insights />
       <Featured />
       <Architecture />
+      <Insights />
       <Foundation />
     </>
   )
