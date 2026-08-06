@@ -85,7 +85,9 @@ export function Insights() {
           <p className="mt-4 text-fg/60 text-base leading-[1.7] max-w-xl">{t.subtext}</p>
         </div>
         <a
-          href="/research.html"
+          href="https://note.com/x402inc"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-sm text-fg/70 hover:text-gold transition-colors"
         >
           {t.seeAll}
