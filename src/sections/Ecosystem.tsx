@@ -131,7 +131,8 @@ export function Ecosystem() {
             className="liquid-glass rounded-2xl p-6"
           >
             <p className="font-mono text-sm text-gold">{seg.name}</p>
-            <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1.5">
+            <p className="mt-3 text-sm text-fg/70 leading-[1.7]">{seg.desc[lang]}</p>
+            <div className="mt-4 flex flex-wrap gap-x-2 gap-y-1.5">
               {seg.links.map((l) => (
                 <a
                   key={l.label}
@@ -145,7 +146,6 @@ export function Ecosystem() {
                 </a>
               ))}
             </div>
-            <p className="mt-4 text-sm text-fg/70 leading-[1.7]">{seg.desc[lang]}</p>
           </motion.div>
         ))}
       </div>
