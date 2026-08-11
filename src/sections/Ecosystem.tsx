@@ -26,7 +26,8 @@ const COPY = {
   },
 }
 
-type Segment = { name: string; desc: Localized }
+type Link = { label: string; href: string }
+type Segment = { name: string; desc: Localized; links: Link[] }
 
 const SEGMENTS: Segment[] = [
   {
@@ -35,6 +36,16 @@ const SEGMENTS: Segment[] = [
       ja: '人間の委任でエージェントが代わりに買う（クレカ × AIエージェント、EC・小売・代行購入）。',
       en: 'An agent buys on a human’s behalf via delegation (credit card × AI agent; e-commerce, retail, proxy purchasing).',
     },
+    links: [
+      { label: 'Visa', href: 'https://note.com/x402inc/n/n56e14388db20' },
+      { label: 'Mastercard', href: 'https://note.com/x402inc/n/n471143ea5674' },
+      { label: 'Lobster.cash', href: 'https://note.com/x402inc/n/n471143ea5674' },
+      { label: 'American Express', href: 'https://note.com/x402inc/n/n4e44009a2987' },
+      { label: 'Crossmint', href: 'https://note.com/x402inc/n/n7c2b66d48d4e' },
+      { label: 'Oobit', href: 'https://note.com/x402inc/n/na798062b2b1a' },
+      { label: 'Stripe Issuing', href: 'https://note.com/x402inc/n/na798062b2b1a' },
+      { label: 'Robinhood', href: 'https://note.com/x402inc/n/nbd206694bc41' },
+    ],
   },
   {
     name: 'data procurement',
@@ -42,6 +53,23 @@ const SEGMENTS: Segment[] = [
       ja: 'エージェントがAPIリソースをper-callで調達する。',
       en: 'Agents procure API resources per-call.',
     },
+    links: [
+      {
+        label: 'Glassnode',
+        href: 'https://research.glassnode.com/agentic-payments-glassnode-data-for-your-ai-agent/',
+      },
+      {
+        label: 'You.com',
+        href: 'https://you.com/resources/your-trading-agent-should-read-before-it-buys-accessing-ydc-over-x402-on-base',
+      },
+      { label: 'AgentCash', href: 'https://note.com/x402inc/n/nd3c05cc59104' },
+      { label: 'Nevermined', href: 'https://note.com/x402inc/n/nd3c05cc59104' },
+      {
+        label: 'Cloudflare Monetization Gateway',
+        href: 'https://blog.cloudflare.com/monetization-gateway/',
+      },
+      { label: 'Agentic.market', href: 'https://note.com/x402inc/n/n5f1f1c6ae0cf' },
+    ],
   },
   {
     name: 'agent-to-agent labor',
@@ -49,6 +77,14 @@ const SEGMENTS: Segment[] = [
       ja: 'エージェントがエージェントに、仕事の単位ごとに支払う。',
       en: 'Agents pay other agents per unit of work.',
     },
+    links: [
+      {
+        label: 'Virtuals Protocol ACP',
+        href: 'https://whitepaper.virtuals.io/about-virtuals/agent-commerce-protocol-acp',
+      },
+      { label: 'OKX AI', href: 'https://www.okx.com/en-us/learn/okx-ai' },
+      { label: 'AgenC', href: 'https://agenc.ag/' },
+    ],
   },
   {
     name: 'delegated budget',
@@ -56,6 +92,15 @@ const SEGMENTS: Segment[] = [
       ja: '委任された予算枠が、委任の連鎖を下っていく。',
       en: 'A delegated budget flows down a chain of delegation.',
     },
+    links: [
+      { label: 'Meow', href: 'https://note.com/x402inc/n/nd3c05cc59104' },
+      { label: 'Cloudflare Wallets', href: 'https://blog.cloudflare.com/wallets/' },
+      { label: 'Cloudflare OS', href: 'https://note.com/x402inc/n/naab6a0b3e1e2' },
+      { label: 'Hermes Agent', href: 'https://note.com/x402inc/n/nb69d33331327' },
+      { label: 'qm', href: 'https://note.com/x402inc/n/naab6a0b3e1e2' },
+      { label: 'Stripe Approvals', href: 'https://docs.stripe.com/account/approvals' },
+      { label: 'WalletConnect agent-sdk', href: 'https://github.com/WalletConnect/agent-sdk' },
+    ],
   },
 ]
 
@@ -86,7 +131,21 @@ export function Ecosystem() {
             className="liquid-glass rounded-2xl p-6"
           >
             <p className="font-mono text-sm text-gold">{seg.name}</p>
-            <p className="mt-3 text-sm text-fg/70 leading-[1.7]">{seg.desc[lang]}</p>
+            <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1.5">
+              {seg.links.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 rounded-full border border-fg/10 px-2.5 py-1 text-xs text-fg/70 hover:text-gold hover:border-gold/40 transition-colors"
+                >
+                  {l.label}
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
+              ))}
+            </div>
+            <p className="mt-4 text-sm text-fg/70 leading-[1.7]">{seg.desc[lang]}</p>
           </motion.div>
         ))}
       </div>
