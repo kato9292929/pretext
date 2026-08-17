@@ -69,6 +69,15 @@ body {
   );
 }
 
+/* Hide scrollbar (horizontal product slider) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* ── Shiny headline ──────────────────────────────────────────── */
 @keyframes shiny {
   0% {

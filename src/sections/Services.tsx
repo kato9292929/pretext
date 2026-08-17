@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
+import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow, Pill, CONTACT_EMAIL } from '../primitives'
 import { useLang, type Localized } from '../i18n'
 
 type Tool = { name: string; src?: string; alt: string; href?: string }
+type Case = { label: string; href: string }
 
 /**
  * Tools actually used, defined in one place. Drop a file into public/logos/
@@ -18,12 +20,18 @@ const TOOLS = {
   higgsfield: { name: 'Higgsfield', src: '/logos/higgsfield.svg', alt: 'Higgsfield' },
 } satisfies Record<string, Tool>
 
-type Card = { name: string; desc: string; scope: string; tools: Tool[] }
+type Card = { name: string; desc: string; scope: string; tools: Tool[]; cases?: Case[] }
+
+const CASES: Case[] = [
+  { label: 'x402 Endpoint', href: 'https://endpoint.x402jp.com/' },
+  { label: 'Onchain Stock Data', href: 'https://osd.x402jp.com/' },
+]
 
 const COPY: Localized<{
   lead: string
   scopeLabel: string
   toolsLabel: string
+  caseLabel: string
   contact: string
   cards: Card[]
 }> = {
@@ -31,6 +39,7 @@ const COPY: Localized<{
     lead: '自社サイトと各プロダクトを制作・運用している体制を、外部向けにも提供します。',
     scopeLabel: '対応範囲',
     toolsLabel: '使用ツール',
+    caseLabel: '事例',
     contact: 'お問い合わせ',
     cards: [
       {
@@ -38,6 +47,7 @@ const COPY: Localized<{
         desc: 'Claude Code を用いた Web サイト・LP・ドキュメントサイトの実装。自社サイトおよび各プロダクトのフロントエンドを同じ体制で構築・運用している。',
         scope: '設計 / 実装 / デプロイ / 公開後の更新',
         tools: [TOOLS.claudeCode, TOOLS.vercel],
+        cases: CASES,
       },
       {
         name: '動画制作',
@@ -57,6 +67,7 @@ const COPY: Localized<{
     lead: 'The same setup we use to build and run our own site and products, offered externally.',
     scopeLabel: 'Scope',
     toolsLabel: 'Tools',
+    caseLabel: 'Case studies',
     contact: 'Contact',
     cards: [
       {
@@ -64,6 +75,7 @@ const COPY: Localized<{
         desc: 'Implementation of websites, landing pages, and documentation sites with Claude Code. We build and run our own site and each product’s frontend with the same setup.',
         scope: 'Design / Implementation / Deployment / Post-launch updates',
         tools: [TOOLS.claudeCode, TOOLS.vercel],
+        cases: CASES,
       },
       {
         name: 'Video production',
@@ -146,6 +158,26 @@ export function Services() {
               <p className="text-xs uppercase tracking-widest text-fg/40">{t.scopeLabel}</p>
               <p className="mt-1.5 text-sm text-fg/70 leading-[1.6]">{card.scope}</p>
             </div>
+
+            {card.cases && card.cases.length > 0 && (
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-widest text-fg/40">{t.caseLabel}</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {card.cases.map((c) => (
+                    <a
+                      key={c.label}
+                      href={c.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-full border border-fg/10 px-2.5 py-1 text-xs text-fg/70 hover:text-gold hover:border-gold/40 transition-colors"
+                    >
+                      {c.label}
+                      <ArrowUpRight className="w-3 h-3" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {card.tools.length > 0 && (
               <div className="mt-5 pt-4 border-t border-fg/10">
