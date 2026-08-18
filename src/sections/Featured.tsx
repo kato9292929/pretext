@@ -82,7 +82,7 @@ const PRODUCTS: Product[] = [
       en: 'A proprietary price index built from daily in-store prices at a Tokyo supermarket. Indexed daily as an equal-weighted Jevons geometric mean across 10 categories, also incorporating upstream CGPI (corporate goods prices) to connect upstream to the shelf. Served as an x402 endpoint and purchasable per-call.',
     },
     image: '/products/jin.png',
-    live: 'https://jin-orcin-pi.vercel.app/',
+    live: 'https://jin.x402jp.com/',
     links: [],
   },
 ]
