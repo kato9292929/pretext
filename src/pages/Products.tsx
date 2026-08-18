@@ -80,15 +80,17 @@ const GROUPS: Group[] = [
   },
   {
     name: 'Onchain Stock Data',
-    host: 'osd-coral.vercel.app',
-    note: { ja: '決済は Base または Solana USDC。402が両方のチェーンを提示するので、クライアントがどちらかを選ぶ。', en: 'Payment in Base or Solana USDC. The 402 offers both chains, so the client picks one.' },
+    host: 'osd.x402jp.com',
+    note: { ja: '決済は Base または Solana USDC（dual）。402が両方のチェーンを提示するので、クライアントがどちらかを選ぶ。discovery は /.well-known/x402.json。', en: 'Payment in Base or Solana USDC (dual). The 402 offers both chains, so the client picks one. Discovery at /.well-known/x402.json.' },
     eps: [
+      { method: 'GET', path: '/api/alpha/catalysts/physical-ai', free: true, desc: { ja: 'Physical-AI スコアボード。実データ。', en: 'Physical-AI scoreboard. Real data.' } },
       { method: 'GET', path: '/api/alpha/portfolio/current', price: '$0.01', desc: { ja: '米国ポートフォリオ。現在の10銘柄と各社のthesis・判定期日。', en: 'US portfolio. Current 10 names with each thesis and decision date.' } },
       { method: 'GET', path: '/api/alpha/portfolio/scorecard', price: '$0.01', desc: { ja: '米国の的中実績。hit / partial / miss と SPY・QQQ 比。', en: 'US hit record. hit / partial / miss vs SPY / QQQ.' } },
       { method: 'GET', path: '/api/alpha/jp/portfolio/current', price: '$0.01', desc: { ja: '日本ポートフォリオ。現在の10銘柄。', en: 'Japan portfolio. Current 10 names.' } },
       { method: 'GET', path: '/api/alpha/jp/scorecard', price: '$0.01', desc: { ja: '日本の的中実績。ベンチマーク比。', en: 'Japan hit record vs benchmark.' } },
       { method: 'GET', path: '/api/alpha/jp/catalysts', price: '$0.01', desc: { ja: '日本株のカタリスト一覧。期日到来後に判定。', en: 'Catalysts for Japanese stocks. Scored after the date passes.' } },
-      { method: 'GET', path: '/api/stocks/:ticker', price: '$0.01', desc: { ja: '銘柄データ。ticker指定。', en: 'Per-name data. Specify a ticker.' } },
+      { method: 'GET', path: '/api/alpha/catalyst/:id/score', price: '$0.01', desc: { ja: 'カタリスト判定の個別照会。', en: 'Individual catalyst score lookup.' } },
+      { method: 'POST', path: '/api/alpha/catalyst/submit', price: '$0.01', desc: { ja: '外部カタリストの投稿。', en: 'Submit an external catalyst.' } },
     ],
   },
   {
