@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
 import { FEATURED_ARTICLES } from '../articles'
-import { useLang } from '../i18n'
+import { useLang, type Localized } from '../i18n'
 
 const COPY = {
   ja: {
@@ -19,11 +19,74 @@ const COPY = {
   },
 }
 
+const RANKED: { title: Localized; href: string; tag: Localized }[] = [
+  {
+    title: {
+      ja: '社内AIエージェントの3つの提供形態：実行費用の出どころと統制の置き場所（Class 1〜3）',
+      en: 'Three deployment models for in-house AI agents: where run costs come from and where control sits (Class 1–3)',
+    },
+    href: 'https://note.com/x402inc/n/n8b1822d72ed2',
+    tag: { ja: 'Agent Ops / Class', en: 'Agent Ops / Class' },
+  },
+  {
+    title: {
+      ja: 'バックオフィス × AIエージェント：Y CombinatorのqmとStripe Approvalsで起案と承認を分ける実装記録',
+      en: 'Back office × AI agents: separating drafting from approval with Y Combinator’s qm and Stripe Approvals — an implementation log',
+    },
+    href: 'https://note.com/x402inc/n/n15fbfb8b90a6',
+    tag: { ja: 'Back Office / Approvals', en: 'Back Office / Approvals' },
+  },
+  {
+    title: {
+      ja: 'Agent Economy Classes｜サマリー：決済が発生するのは5つのうち2つだけという結論と、各Classに残る未確認',
+      en: 'Agent Economy Classes | Summary: payment occurs in only 2 of the 5, and what stays unverified in each Class',
+    },
+    href: 'https://note.com/x402inc/n/n7114e5139b4c',
+    tag: { ja: 'Agent Economy / Classes', en: 'Agent Economy / Classes' },
+  },
+  {
+    title: {
+      ja: 'Agentic Commerce 6事例の決済経路整理：選択肢としてのx402によるH to A市場の拡大',
+      en: 'Mapping the payment paths of six Agentic Commerce cases: expanding the H-to-A market with x402 as an option',
+    },
+    href: 'https://note.com/x402inc/n/n75db170cdf58',
+    tag: { ja: 'Agentic Commerce / H to A', en: 'Agentic Commerce / H to A' },
+  },
+  {
+    title: {
+      ja: 'x402 × The Agentic Economy（第8回）agent-to-agent laborの現在地',
+      en: 'x402 × The Agentic Economy (Part 8): the current state of agent-to-agent labor',
+    },
+    href: 'https://note.com/x402inc/n/n3832d071a4ee',
+    tag: { ja: 'A to A / Labor', en: 'A to A / Labor' },
+  },
+  {
+    title: {
+      ja: 'エージェント経済とオンチェーン経済の同一性——x402 Inc.のMAP・CONSUME・PRODUCE',
+      en: 'The sameness of the agent economy and the on-chain economy — x402 Inc.’s MAP / CONSUME / PRODUCE',
+    },
+    href: 'https://note.com/x402inc/n/n2c3c515b750a',
+    tag: { ja: 'Agent × Onchain', en: 'Agent × Onchain' },
+  },
+]
+
+type Item = { title: Localized; href: string; tag: Localized }
+
+// 1–6 above, plus the existing featured articles as 7–9.
+const ITEMS: Item[] = [
+  ...RANKED,
+  ...FEATURED_ARTICLES.map((a) => ({
+    title: a.title,
+    href: a.href,
+    tag: a.tag,
+  })),
+]
+
 export function Insights() {
   const { lang } = useLang()
   const t = COPY[lang]
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <section className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +99,9 @@ export function Insights() {
           <p className="mt-4 text-fg/60 text-base leading-[1.7] max-w-xl">{t.subtext}</p>
         </div>
         <a
-          href="/research.html"
+          href="https://note.com/x402inc"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-sm text-fg/70 hover:text-gold transition-colors"
         >
           {t.seeAll}
@@ -44,26 +109,23 @@ export function Insights() {
         </a>
       </motion.div>
 
-      <div className="mt-12 grid md:grid-cols-3 gap-5">
-        {FEATURED_ARTICLES.map((article, i) => (
+      <div className="mt-8 grid md:grid-cols-3 gap-5">
+        {ITEMS.map((a, i) => (
           <motion.a
-            key={article.href}
-            href={article.href}
+            key={a.href}
+            href={a.href}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 3) * 0.08 }}
             className="liquid-glass rounded-2xl p-6 flex flex-col group"
           >
-            <span className="text-xs font-medium tracking-wide text-gold">
-              {article.tag[lang]}
-            </span>
+            <span className="text-xs font-medium tracking-wide text-gold">{a.tag[lang]}</span>
             <h3 className="mt-4 text-base font-semibold text-fg leading-[1.5] flex-1">
-              {article.title[lang]}
+              {a.title[lang]}
             </h3>
-            <p className="mt-3 text-sm text-fg/55 leading-[1.7]">{article.blurb[lang]}</p>
             <span className="mt-5 pt-4 border-t border-fg/10 inline-flex items-center gap-1 text-xs text-fg/60 group-hover:text-gold transition-colors">
               {t.read}
               <ArrowUpRight className="w-3 h-3" />

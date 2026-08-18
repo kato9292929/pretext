@@ -15,13 +15,13 @@ export function Contact() {
   const { lang } = useLang()
   const t = COPY[lang]
   return (
-    <section id="contact" className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <section id="contact" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="liquid-glass relative overflow-hidden rounded-3xl px-8 py-16 md:py-20 text-center"
+        className="liquid-glass relative overflow-hidden rounded-3xl px-8 py-12 md:py-16 text-center"
       >
         <div
           className="pointer-events-none absolute inset-0"

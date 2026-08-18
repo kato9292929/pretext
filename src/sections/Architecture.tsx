@@ -55,7 +55,7 @@ const LAYERS: Layer[] = [
 export function Architecture() {
   const { lang }: { lang: Lang } = useLang()
   return (
-    <section id="architecture" className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <section id="architecture" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
         {/* Left column */}
         <motion.div
