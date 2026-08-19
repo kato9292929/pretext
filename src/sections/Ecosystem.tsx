@@ -217,7 +217,7 @@ export function Ecosystem() {
         <p className="text-xs uppercase tracking-widest text-gold">{t.payLabel}</p>
         <p className="mt-3 text-fg/60 text-base leading-[1.7] max-w-2xl">{t.payIntro}</p>
         <pre className="mt-5 liquid-glass rounded-xl p-4 text-xs md:text-sm font-mono text-fg/80 overflow-x-auto max-w-2xl">
-          <span className="text-fg/40">$ </span>curl https://jin-orcin-pi.vercel.app/api/jin/latest
+          <span className="text-fg/40">$ </span>curl https://jin.x402jp.com/api/jin/latest
         </pre>
         <a
           href="/products.html"
