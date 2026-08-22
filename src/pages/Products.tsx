@@ -70,25 +70,27 @@ const COPY = {
 const GROUPS: Group[] = [
   {
     name: 'Japan Inflation Nowcast',
-    host: 'jin-orcin-pi.vercel.app',
-    note: { ja: '決済は Solana USDC。discovery は /.well-known/x402.json。', en: 'Payment in Solana USDC. Discovery at /.well-known/x402.json.' },
+    host: 'jin.x402jp.com',
+    note: { ja: '決済は Solana USDC（x402 v2）。discovery は /.well-known/x402.json。', en: 'Payment in Solana USDC (x402 v2). Discovery at /.well-known/x402.json.' },
     eps: [
-      { method: 'GET', path: '/api/jin/latest', free: true, desc: { ja: '最新観測日の指数。観測値 + matched + 方法論。', en: 'Index for the latest observation date. Value + matched + methodology.' } },
-      { method: 'GET', path: '/api/jin/series', price: '$0.01', desc: { ja: '指数の時系列。機械向け。', en: 'Time series of the index. For machines.' } },
-      { method: 'GET', path: '/api/jin/movers', price: '$0.02', desc: { ja: 'その日動いた品目。特売タグ付き。機械向け。', en: 'Items that moved that day, with sale tags. For machines.' } },
+      { method: 'GET', path: '/api/jin/latest', free: true, desc: { ja: '最新観測日の指数（excl_promo / incl_promo・matched・base_date・coverage・passthrough_gap）。', en: 'Index for the latest observation date (excl_promo / incl_promo, matched, base_date, coverage, passthrough_gap).' } },
+      { method: 'GET', path: '/api/jin/series', price: '$0.01', desc: { ja: '指数の時系列（from / to は任意）。', en: 'Time series of the index (from / to optional).' } },
+      { method: 'GET', path: '/api/jin/movers', price: '$0.02', desc: { ja: 'その日動いた品目（特売タグ付き。date は任意）。', en: 'Items that moved that day (with sale tags; date optional).' } },
     ],
   },
   {
     name: 'Onchain Stock Data',
-    host: 'osd-coral.vercel.app',
-    note: { ja: '決済は Base または Solana USDC。402が両方のチェーンを提示するので、クライアントがどちらかを選ぶ。', en: 'Payment in Base or Solana USDC. The 402 offers both chains, so the client picks one.' },
+    host: 'osd.x402jp.com',
+    note: { ja: '決済は Base または Solana USDC（dual）。402が両方のチェーンを提示するので、クライアントがどちらかを選ぶ。discovery は /.well-known/x402.json。', en: 'Payment in Base or Solana USDC (dual). The 402 offers both chains, so the client picks one. Discovery at /.well-known/x402.json.' },
     eps: [
-      { method: 'GET', path: '/api/alpha/portfolio/current', price: '$0.01', desc: { ja: '米国ポートフォリオ。現在の10銘柄と各社のthesis・判定期日。', en: 'US portfolio. Current 10 names with each thesis and decision date.' } },
-      { method: 'GET', path: '/api/alpha/portfolio/scorecard', price: '$0.01', desc: { ja: '米国の的中実績。hit / partial / miss と SPY・QQQ 比。', en: 'US hit record. hit / partial / miss vs SPY / QQQ.' } },
-      { method: 'GET', path: '/api/alpha/jp/portfolio/current', price: '$0.01', desc: { ja: '日本ポートフォリオ。現在の10銘柄。', en: 'Japan portfolio. Current 10 names.' } },
-      { method: 'GET', path: '/api/alpha/jp/scorecard', price: '$0.01', desc: { ja: '日本の的中実績。ベンチマーク比。', en: 'Japan hit record vs benchmark.' } },
-      { method: 'GET', path: '/api/alpha/jp/catalysts', price: '$0.01', desc: { ja: '日本株のカタリスト一覧。期日到来後に判定。', en: 'Catalysts for Japanese stocks. Scored after the date passes.' } },
-      { method: 'GET', path: '/api/stocks/:ticker', price: '$0.01', desc: { ja: '銘柄データ。ticker指定。', en: 'Per-name data. Specify a ticker.' } },
+      { method: 'GET', path: '/api/alpha/catalysts/physical-ai', free: true, desc: { ja: 'Physical-AI スコアボード（hit-rate・全86条件・記事別、機械可読 JSON）。', en: 'Physical-AI scoreboard (hit-rate, all 86 conditions, per article; machine-readable JSON).' } },
+      { method: 'GET', path: '/api/alpha/portfolio/current', price: '$0.01', desc: { ja: '米ポートフォリオ 現在10銘柄（ticker / weight / thesis）。', en: 'US portfolio, current 10 names (ticker / weight / thesis).' } },
+      { method: 'GET', path: '/api/alpha/portfolio/scorecard', price: '$0.01', desc: { ja: '米 catalyst hit-rate ＋ SPY / QQQ 累積リターン。', en: 'US catalyst hit-rate + SPY / QQQ cumulative return.' } },
+      { method: 'GET', path: '/api/alpha/jp/portfolio/current', price: '$0.01', desc: { ja: '日本ポートフォリオ 現在10銘柄。', en: 'Japan portfolio, current 10 names.' } },
+      { method: 'GET', path: '/api/alpha/jp/scorecard', price: '$0.01', desc: { ja: '日本 hit-rate（ベンチ指数なし）。', en: 'Japan hit-rate (no benchmark index).' } },
+      { method: 'GET', path: '/api/alpha/jp/catalysts', price: '$0.01', desc: { ja: '日本 dated catalysts 一覧。', en: 'Japanese dated catalysts.' } },
+      { method: 'POST', path: '/api/alpha/catalyst/submit', price: '$0.01', desc: { ja: '外部 catalyst 投稿（→ id ＋ score_lookup）。', en: 'Submit an external catalyst (→ id + score_lookup).' } },
+      { method: 'GET', path: '/api/alpha/catalyst/:catalyst_id/score', price: '$0.01', desc: { ja: '投稿 catalyst の Claude 判定（pending / hit / partial / miss / na）。', en: 'Claude verdict for a submitted catalyst (pending / hit / partial / miss / na).' } },
     ],
   },
   {
@@ -571,7 +573,7 @@ export function Products() {
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-fg">{t.payHead}</h2>
         <p className="mt-6 text-sm text-fg/70 leading-[1.7]">{t.payFreeLabel}</p>
         <pre className="mt-3 liquid-glass rounded-xl p-4 text-xs md:text-sm font-mono text-fg/80 overflow-x-auto">
-          <span className="text-fg/40">$ </span>curl https://jin-orcin-pi.vercel.app/api/jin/latest
+          <span className="text-fg/40">$ </span>curl https://jin.x402jp.com/api/jin/latest
         </pre>
         <p className="mt-6 text-sm text-fg/70 leading-[1.7]">{t.payPaidLabel}</p>
         <ol className="mt-4 space-y-3">

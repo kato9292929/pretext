@@ -16,7 +16,8 @@ error, no layout shift). Recommended ratio **16:10** (e.g. 1200×750).
 
 - **No preview images are placed yet** — all cards render the placeholder.
   Drop the files above in to enable previews.
-- Live sites: **x402 Endpoint → https://endpoint.x402jp.com/** and
-  **Onchain Stock Data → https://osd.x402jp.com/** (linked as "Visit site").
-  **x402 Autonomous Agent** and **Japan Inflation Nowcast** are marked
-  "Coming soon" (no external link) until their public sites are ready.
+- Live sites ("Visit site"): **x402 Endpoint → https://endpoint.x402jp.com/**,
+  **Onchain Stock Data → https://osd.x402jp.com/**, and **Japan Inflation
+  Nowcast → https://jin.x402jp.com/**. Only **x402 Autonomous Agent** is marked
+  "Coming soon" (no external link). Note: JIN's *site* is on jin.x402jp.com but
+  its API *endpoints* still resolve on jin-orcin-pi.vercel.app (not migrated).

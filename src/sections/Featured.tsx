@@ -82,7 +82,7 @@ const PRODUCTS: Product[] = [
       en: 'A proprietary price index built from daily in-store prices at a Tokyo supermarket. Indexed daily as an equal-weighted Jevons geometric mean across 10 categories, also incorporating upstream CGPI (corporate goods prices) to connect upstream to the shelf. Served as an x402 endpoint and purchasable per-call.',
     },
     image: '/products/jin.png',
-    comingSoon: true,
+    live: 'https://jin.x402jp.com/',
     links: [],
   },
 ]
@@ -130,22 +130,16 @@ export function Featured() {
         <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
       </motion.div>
 
-      <div className="mt-4 flex items-center gap-1.5 text-xs text-fg/40">
-        <span>{lab.hint}</span>
-        <ArrowUpRight className="w-3 h-3 rotate-45" />
-      </div>
-
-      <div className="mt-4 -mx-6 overflow-x-auto no-scrollbar snap-x snap-mandatory">
-        <div className="flex w-max gap-5 px-6">
-          {PRODUCTS.map((product, i) => (
-            <motion.article
-              key={product.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.06 }}
-              className="snap-start shrink-0 w-[86vw] sm:w-[400px] liquid-glass rounded-2xl overflow-hidden flex flex-col"
-            >
+      <div className="mt-10 grid sm:grid-cols-2 gap-5">
+        {PRODUCTS.map((product, i) => (
+          <motion.article
+            key={product.name}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.08 }}
+            className="liquid-glass rounded-2xl overflow-hidden flex flex-col"
+          >
               <Preview src={product.image} name={product.name} />
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center justify-between">
@@ -188,9 +182,8 @@ export function Featured() {
                   ))}
                 </div>
               </div>
-            </motion.article>
-          ))}
-        </div>
+          </motion.article>
+        ))}
       </div>
     </section>
   )
