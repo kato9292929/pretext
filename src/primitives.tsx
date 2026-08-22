@@ -134,9 +134,9 @@ export function Wordmark({ className = 'text-xl' }: { className?: string }) {
 
 /* ── Shared navigation ───────────────────────────────────────── */
 export const NAV_LINKS = [
-  { label: { ja: 'x402とは', en: 'About' }, href: '/about.html' },
-  { label: { ja: 'プロダクト', en: 'Products' }, href: '/products.html' },
-  { label: { ja: '考察・調査', en: 'Research' }, href: '/research.html' },
+  { label: { ja: 'About', en: 'About' }, href: '/about.html' },
+  { label: { ja: 'Endpoint', en: 'Endpoint' }, href: '/products.html' },
+  { label: { ja: 'Journal', en: 'Journal' }, href: '/research.html' },
 ]
 
 export const CONTACT_EMAIL = 'hello@x402jp.com'
