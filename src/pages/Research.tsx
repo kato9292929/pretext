@@ -1,7 +1,8 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { PageHero, SectionEyebrow } from '../primitives'
-import { FEATURED_ARTICLES } from '../articles'
+import { Updates } from '../sections/Updates'
+import { Insights } from '../sections/Insights'
 import { useLang, type Lang, type Localized } from '../i18n'
 
 const COPY = {
@@ -9,7 +10,7 @@ const COPY = {
     pageTag: '考察・調査',
     title: '考察・調査',
     intro:
-      'エージェント決済の「現在地」を、一次情報から読み解く。用途別の細分化から market の拡大まで、x402 Inc. の視点で継続的に分析しています。',
+      '最新のUpdate、Insights、マーケットの見立て、そして note 記事ライブラリ——x402 Inc. のリサーチをここに集約しています。',
     latest: 'Education',
     read: 'note で読む',
     thesisTag: 'x402 成長性分析',
@@ -20,7 +21,7 @@ const COPY = {
     pageTag: 'Research',
     title: 'Research & Analysis',
     intro:
-      'Reading the current state of agent payments from primary sources. From delegated autonomous payments to market expansion, we analyze continuously from x402 Inc.’s point of view.',
+      'Latest updates, insights, our market thesis, and the full note library — all of x402 Inc.’s research, consolidated here.',
     latest: 'Education',
     read: 'Read on note',
     thesisTag: 'Growth analysis',
@@ -213,37 +214,9 @@ export function Research() {
     <>
       <PageHero eyebrow="Vision & Research" tag={t.pageTag} title={t.title} intro={t.intro} />
 
-      {/* Featured latest articles */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-8 md:py-12">
-        <p className="text-xs uppercase tracking-widest text-fg/40">{t.latest}</p>
-        <div className="mt-6 grid md:grid-cols-3 gap-5">
-          {FEATURED_ARTICLES.map((article, i) => (
-            <motion.a
-              key={article.href}
-              href={article.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
-              className="liquid-glass rounded-2xl p-6 flex flex-col group"
-            >
-              <span className="text-xs font-medium tracking-wide text-gold">
-                {article.tag[lang]}
-              </span>
-              <h3 className="mt-4 text-base font-semibold text-fg leading-[1.5] flex-1">
-                {article.title[lang]}
-              </h3>
-              <p className="mt-3 text-sm text-fg/55 leading-[1.7]">{article.blurb[lang]}</p>
-              <span className="mt-5 pt-4 border-t border-fg/10 inline-flex items-center gap-1 text-xs text-fg/60 group-hover:text-gold transition-colors">
-                {t.read}
-                <ArrowUpRight className="w-3 h-3" />
-              </span>
-            </motion.a>
-          ))}
-        </div>
-      </section>
+      {/* Latest updates + insights, consolidated at the top of the Journal */}
+      <Updates />
+      <Insights />
 
       {/* Market thesis timeline */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">

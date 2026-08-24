@@ -125,23 +125,19 @@ export function Updates() {
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <SectionEyebrow label="Update" tag="最新情報" heading dim />
+        <SectionEyebrow label="Update" tag="最新情報" heading />
       </motion.div>
 
-      {/* Two-row horizontal-scroll rail of clickable article cards */}
+      {/* Single-row horizontal-scroll rail of clickable article cards */}
       <div className="mt-8 -mx-6 px-6 overflow-x-auto no-scrollbar">
-        <div className="grid grid-rows-2 grid-flow-col auto-cols-[260px] sm:auto-cols-[300px] gap-4 pb-2">
-          {UPDATES.map((u, i) => (
-            <motion.a
+        <div className="flex gap-4 pb-2 w-max">
+          {UPDATES.map((u) => (
+            <a
               key={u.id}
               href={`https://note.com/x402inc/n/${u.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: Math.min(i, 6) * 0.04 }}
-              className="group liquid-glass rounded-2xl p-5 h-full flex flex-col hover:border-gold/40 transition-colors"
+              className="group liquid-glass rounded-2xl p-5 w-[260px] sm:w-[300px] shrink-0 flex flex-col hover:border-gold/40 transition-colors"
             >
               <span
                 className="self-start text-[11px] font-mono px-2 py-0.5 rounded-full border"
@@ -149,14 +145,14 @@ export function Updates() {
               >
                 {u.tag}
               </span>
-              <p className="mt-4 text-sm font-semibold text-fg leading-[1.6] flex-1 line-clamp-4">
+              <p className="mt-4 text-sm font-semibold text-fg leading-[1.6] flex-1 line-clamp-5">
                 {u.title[lang]}
               </p>
               <span className="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-gold group-hover:brightness-110 transition">
                 {t.read}
                 <ArrowUpRight className="w-3 h-3" />
               </span>
-            </motion.a>
+            </a>
           ))}
         </div>
       </div>
