@@ -5,12 +5,10 @@ import { useLang, type Lang, type Localized } from '../i18n'
 
 const COPY = {
   ja: {
-    pageTag: 'x402とは',
-    title: 'x402とは',
+    pageTag: '分析',
+    title: 'エージェンティック・コマースの信頼設計',
     intro:
-      'HTTP 402 “Payment Required” ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。x402はこれを再活性化し、AIエージェントがHTTPネイティブに支払えるようにするプロトコルです。',
-    body: 'サーバーが402を返すと、クライアントは支払いを完了して同じリクエストを再試行します。ここから先は、x402をエージェンティック・コマースの「信頼レイヤー」の中に位置づけて、いま何が標準化され、どこが空白なのかを細かく見ていきます。',
-    readSpec: '仕様を読む',
+      'x402で決済レールが整ったいま、競争は「未知の相手とどう安全に取引するか」という信頼の設計へ移りました。ここでは、いま何が標準化され、どこが空白なのかを分解します。（x402の基礎は Endpoint ページに移しました）',
 
     s1tag: 'エージェンティック・コマースの現在地',
     s1: [
@@ -72,20 +70,12 @@ const COPY = {
     ],
     s5close:
       'AIが「財布を持つ」時代は、経済活動が「検索と判断」から「委任と検証」へ再定義される過程の始まりです。プロトコルがコモディティ化する世界で最大の資産は「技術」ではなく、その上に積み上げた「検証可能な来歴（Provenance）」です。x402 Inc. は、この来歴を作る装置として、自社のエンドポイント・データ・エージェントを置いています。',
-
-    stanceTag: 'x402 Inc. の立ち位置',
-    stance: [
-      'x402 Inc. はリサーチ会社です。x402対応のエンドポイント、独自データ、それを叩くエージェントを自ら作り、観測と検証の instruments として使います。',
-      '固有データを外部有料フィードとしてper-callで売っても価値を捕まえる回路がない——だから Onchain Stock Data や Japan Inflation Nowcast は「データ供給事業」ではなく、リサーチ・観測の装置として置きます。自社の閉域で回すものは「内部経済」であり、検証できるのは形式と記録であって実需ではありません。',
-    ],
   },
   en: {
-    pageTag: 'About',
-    title: 'What is x402?',
+    pageTag: 'Analysis',
+    title: 'Designing trust for agentic commerce',
     intro:
-      'The HTTP 402 “Payment Required” status code has been reserved since 1997, yet sat unused for nearly 30 years. x402 revives it so AI agents can pay HTTP-natively.',
-    body: 'When a server returns 402, the client completes payment and retries the same request. From here we place x402 inside the agentic-commerce “trust layer” and look, in detail, at what is standardized and where the gaps are.',
-    readSpec: 'Read the spec',
+      'With x402, the payment rail exists — so competition has shifted to trust design: how to transact safely with an unknown counterparty. Here we break down what is standardized today and where the gaps remain. (The x402 basics now live on the Endpoint page.)',
 
     s1tag: 'The state of agentic commerce',
     s1: [
@@ -147,12 +137,6 @@ const COPY = {
     ],
     s5close:
       'The age of AI “holding a wallet” is the start of economic activity being redefined from “search and judgment” to “delegation and verification.” In a world where protocols commoditize, the largest asset is not technology but the verifiable provenance built on top of it. x402 Inc. places its own endpoints, data, and agents as the instrument that produces that provenance.',
-
-    stanceTag: 'x402 Inc.',
-    stance: [
-      'x402 Inc. is a research company. We build x402-enabled endpoints, proprietary data, and the agents that call them, and use them as instruments for observation and verification.',
-      'Selling proprietary data as an external paid feed per-call has no circuit to capture value — so Onchain Stock Data and Japan Inflation Nowcast are placed as instruments for research and observation, not a “data supply business.” What we run in our own closed loop is an internal economy; what can be verified is the form and the records, not real demand.',
-    ],
   },
 } satisfies Record<Lang, Record<string, unknown>>
 
@@ -332,56 +316,7 @@ export function About() {
   const A = (k: keyof typeof t) => t[k] as string[]
   return (
     <>
-      <PageHero eyebrow="Protocol" tag={S('pageTag')} title={S('title')} intro={S('intro')} />
-
-      {/* Intro + HTTP flow */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-14">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="text-fg/70 text-base leading-[1.8]">{S('body')}</p>
-            <a
-              href="https://www.x402.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-1.5 text-sm text-fg/70 px-4 py-2 rounded-full border border-fg/15 hover:bg-fg/5 transition-colors"
-            >
-              {S('readSpec')}
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            className="liquid-glass rounded-2xl overflow-hidden"
-          >
-            <div className="flex items-center gap-2 px-4 h-10 border-b border-fg/10">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-              <span className="ml-2 text-xs text-fg/50">HTTP Flow</span>
-            </div>
-            <pre className="p-4 text-[11px] md:text-xs leading-[1.7] overflow-x-auto font-mono text-fg/70">
-              <code>
-                <span className="text-fg/30">→</span> GET /api/data HTTP/1.1{'\n'}
-                {'  '}Host: api.example.com{'\n\n'}
-                <span className="text-gold">← HTTP/1.1 402 Payment Required</span>
-                {'\n'}
-                {'  '}X-Payment-Amount: 0.001{'\n'}
-                {'  '}X-Payment-Token: USDC{'\n\n'}
-                <span className="text-fg/30">→</span> GET /api/data{'  '}X-Payment: &lt;signed&gt;{'\n\n'}
-                <span className="text-[#28c840]">← HTTP/1.1 200 OK</span>
-              </code>
-            </pre>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero eyebrow="Trust layer" tag={S('pageTag')} title={S('title')} intro={S('intro')} />
 
       {/* §1 state + stranger test */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-8 md:py-12 space-y-8">
@@ -569,11 +504,6 @@ export function About() {
           </div>
           <p className="mt-6 text-fg/70 text-base leading-[1.9]">{S('s5close')}</p>
         </div>
-      </section>
-
-      {/* Our stance */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
-        <Prose tag={S('stanceTag')} paras={A('stance')} />
       </section>
     </>
   )

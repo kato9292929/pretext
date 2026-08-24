@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
+import { SectionEyebrow } from '../primitives'
 import { useLang, type Lang, type Localized } from '../i18n'
 
 type Ep = { method: string; path: string; free?: boolean; price?: string; desc: Localized }
@@ -38,6 +39,19 @@ const COPY = {
     catalogIntro:
       'x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。',
     catalogListHead: 'Product catalog（プロトタイプ）',
+    x402Eyebrow: 'Protocol',
+    x402Tag: 'x402とは',
+    x402Title: 'x402とは',
+    x402Intro:
+      'HTTP 402 “Payment Required” ステータスコードは、1997年から予約されていましたが、30年近く未使用のままでした。x402はこれを再活性化し、AIエージェントがHTTPネイティブに支払えるようにするプロトコルです。',
+    x402Body:
+      'サーバーが402を返すと、クライアントは支払いを完了して同じリクエストを再試行します。以下は、そのx402を私たち自身のプロダクトで実装したものです。',
+    readSpec: '仕様を読む',
+    stanceTag: 'x402 Inc. の立ち位置',
+    stance: [
+      'x402 Inc. はリサーチ会社です。x402対応のエンドポイント、独自データ、それを叩くエージェントを自ら作り、観測と検証の instruments として使います。',
+      '固有データを外部有料フィードとしてper-callで売っても価値を捕まえる回路がない——だから Onchain Stock Data や Japan Inflation Nowcast は「データ供給事業」ではなく、リサーチ・観測の装置として置きます。自社の閉域で回すものは「内部経済」であり、検証できるのは形式と記録であって実需ではありません。',
+    ],
   },
   en: {
     payHead: 'How to Pay',
@@ -64,6 +78,19 @@ const COPY = {
     catalogIntro:
       'Every x402 Inc. product exists to validate the market while building it. Designed in three phases: Phase 1 (data infrastructure) → Phase 2 (ecosystem) → Phase 3 (privacy & payment exit).',
     catalogListHead: 'Product catalog (prototype)',
+    x402Eyebrow: 'Protocol',
+    x402Tag: 'What is x402',
+    x402Title: 'What is x402?',
+    x402Intro:
+      'The HTTP 402 “Payment Required” status code has been reserved since 1997, yet sat unused for nearly 30 years. x402 revives it so AI agents can pay HTTP-natively.',
+    x402Body:
+      'When a server returns 402, the client completes payment and retries the same request. Below is that protocol, implemented across our own products.',
+    readSpec: 'Read the spec',
+    stanceTag: 'x402 Inc.',
+    stance: [
+      'x402 Inc. is a research company. We build x402-enabled endpoints, proprietary data, and the agents that call them, and use them as instruments for observation and verification.',
+      'Selling proprietary data as an external paid feed per-call has no circuit to capture value — so Onchain Stock Data and Japan Inflation Nowcast are placed as instruments for research and observation, not a “data supply business.” What we run in our own closed loop is an internal economy; what can be verified is the form and the records, not real demand.',
+    ],
   },
 } satisfies Record<Lang, Record<string, unknown>>
 
@@ -562,9 +589,75 @@ export function Products() {
   const t = COPY[lang] as (typeof COPY)['ja']
   return (
     <>
-      {/* Products intro — top of the page */}
-      <section className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-32 pb-2">
-        <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-fg">{t.catalogHead}</h1>
+      {/* What is x402 — the protocol, front and center on the product page */}
+      <section className="relative z-10 max-w-4xl mx-auto px-6 pt-20 md:pt-28 pb-2">
+        <SectionEyebrow label={t.x402Eyebrow} tag={t.x402Tag} />
+        <h1 className="mt-5 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.02] text-fg">
+          {t.x402Title}
+        </h1>
+        <p className="mt-6 text-fg/60 max-w-2xl text-base leading-[1.7]">{t.x402Intro}</p>
+        <div className="mt-8 grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="text-fg/70 text-base leading-[1.8]">{t.x402Body}</p>
+            <a
+              href="https://www.x402.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm text-fg/70 px-4 py-2 rounded-full border border-fg/15 hover:bg-fg/5 transition-colors"
+            >
+              {t.readSpec}
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            className="liquid-glass rounded-2xl overflow-hidden"
+          >
+            <div className="flex items-center gap-2 px-4 h-10 border-b border-fg/10">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+              <span className="ml-2 text-xs text-fg/50">HTTP Flow</span>
+            </div>
+            <pre className="p-4 text-[11px] md:text-xs leading-[1.7] overflow-x-auto font-mono text-fg/70">
+              <code>
+                <span className="text-fg/30">→</span> GET /api/data HTTP/1.1{'\n'}
+                {'  '}Host: api.example.com{'\n\n'}
+                <span className="text-gold">← HTTP/1.1 402 Payment Required</span>
+                {'\n'}
+                {'  '}X-Payment-Amount: 0.001{'\n'}
+                {'  '}X-Payment-Token: USDC{'\n\n'}
+                <span className="text-fg/30">→</span> GET /api/data{'  '}X-Payment: &lt;signed&gt;{'\n\n'}
+                <span className="text-[#28c840]">← HTTP/1.1 200 OK</span>
+              </code>
+            </pre>
+          </motion.div>
+        </div>
+
+        {/* x402 Inc. stance */}
+        <div className="mt-10 liquid-glass rounded-2xl p-6 md:p-7 max-w-3xl">
+          <p className="text-xs uppercase tracking-widest text-gold">{t.stanceTag}</p>
+          <div className="mt-4 space-y-4">
+            {t.stance.map((p) => (
+              <p key={p} className="text-sm text-fg/70 leading-[1.9]">
+                {p}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Products intro */}
+      <section className="relative z-10 max-w-4xl mx-auto px-6 pt-10 md:pt-14 pb-2 border-t border-fg/10">
+        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-fg">{t.catalogHead}</h2>
         <p className="mt-6 text-sm md:text-base text-fg/70 leading-[1.8] max-w-3xl">{t.catalogIntro}</p>
       </section>
 
