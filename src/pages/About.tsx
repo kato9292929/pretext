@@ -41,6 +41,15 @@ const COPY = {
       '今後の Moat はプロトコル層ではなく、この「履行の検証」データと独自の実績（Reputation）の蓄積に宿ります。コモディティ化した世界では、過去のバリデーションデータこそが企業の真のバランスシートです。',
     ],
 
+    classesTag: 'Agent Economy Classes：局面と経済形の二軸分解',
+    classes: [
+      'エージェント決済は単一の方向へ移行しません。私たちは Class を「支払い相手との間柄」で分け、そこに二つの軸を重ねて整理しています。',
+      '第一の軸は局面——誰が起案し、誰が承認するか。第二の軸は経済形——カード網に載るか、アカウントのない相手へ per-call で抜ける A to A か。この二軸なら、境界に立つ複合ケース（型α・型β・型P）も同じ座標に収容できます。',
+    ],
+    classesNote:
+      'これは4段の分岐による整理であり、実証された分類ではありません。実装マップの全体はホームの Ecosystem と、再設計ノートに。',
+    classesLink: '再設計ノートを読む',
+
     s4tag: '実装指針とガードレール設計',
     s4: [
       '現実的な解は、人間名義の代理購買である Class 3 です。実装では AWS「AgentCore Payments」の「モデルの外部で管理する」思想を徹底します。責任を三つに分離し、残る与信（D）が未解決のフロンティアです。',
@@ -106,6 +115,15 @@ const COPY = {
       'But that only assures the buyer’s legitimacy. The seller’s credibility — whether fulfillment was correct — remains a blank space. Against the three registries ERC-8004 defines, today’s AP2 solves only Identity.',
       'The future moat sits not in the protocol layer but in this fulfillment-verification data and the accumulation of proprietary track record (Reputation). In a commoditized world, past validation data is a company’s real balance sheet.',
     ],
+
+    classesTag: 'Agent Economy Classes: a two-axis split of context × economy',
+    classes: [
+      'Agent payments do not migrate in a single direction. We split classes by the relationship with the counterparty, then overlay two axes.',
+      'The first axis is context — who proposes and who approves. The second is economic form — riding card networks, or per-call A-to-A to parties without accounts. On these two axes even boundary cases (types α, β, P) sit on the same coordinates.',
+    ],
+    classesNote:
+      'This is an organization by four splits, not an empirically validated taxonomy. The full implementation map lives in the Ecosystem on the home page and in the redesign note.',
+    classesLink: 'Read the redesign note',
 
     s4tag: 'Implementation guidance & guardrail design',
     s4: [
@@ -269,6 +287,23 @@ const DELEGATION: { id: string; label: Localized; note: Localized; open: boolean
   },
 ]
 
+const AXES: { k: Localized; v: Localized }[] = [
+  {
+    k: { ja: '軸①｜局面', en: 'Axis 1 | context' },
+    v: {
+      ja: '誰が起案し、誰が承認するか。社内の承認分離から、委任枠内の自律まで。',
+      en: 'Who proposes and who approves — from internal approval separation to autonomy within a delegated limit.',
+    },
+  },
+  {
+    k: { ja: '軸②｜経済形', en: 'Axis 2 | economy' },
+    v: {
+      ja: 'カード網（Class 3）か、per-call の A to A（Class 4・5）か。信頼のアンカーが変わる。',
+      en: 'Card networks (Class 3) or per-call A-to-A (Class 4 / 5) — the trust anchor changes.',
+    },
+  },
+]
+
 function Prose({ tag, paras }: { tag: string; paras: string[] }) {
   return (
     <motion.div
@@ -419,6 +454,36 @@ export function About() {
             </motion.div>
           ))}
         </div>
+      </section>
+
+      {/* Agent Economy Classes — two-axis split */}
+      <section className="relative z-10 max-w-6xl mx-auto px-6 py-8 md:py-12">
+        <Prose tag={S('classesTag')} paras={A('classes')} />
+        <div className="mt-8 grid sm:grid-cols-2 gap-5 max-w-3xl">
+          {AXES.map((ax) => (
+            <motion.div
+              key={ax.k.en}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="liquid-glass rounded-2xl p-6"
+            >
+              <p className="font-mono text-sm text-gold">{ax.k[lang]}</p>
+              <p className="mt-3 text-sm text-fg/70 leading-[1.8]">{ax.v[lang]}</p>
+            </motion.div>
+          ))}
+        </div>
+        <p className="mt-6 text-fg/50 text-sm leading-[1.8] max-w-3xl">{S('classesNote')}</p>
+        <a
+          href="https://note.com/x402inc/n/n7beb8aba2e6a"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-1.5 text-sm text-fg/70 hover:text-gold transition-colors"
+        >
+          {S('classesLink')}
+          <ArrowUpRight className="w-3.5 h-3.5" />
+        </a>
       </section>
 
       {/* §4 guardrails */}
