@@ -128,16 +128,16 @@ export function Updates() {
         <SectionEyebrow label="Update" tag="最新情報" heading />
       </motion.div>
 
-      {/* Single-row horizontal-scroll rail of clickable article cards */}
+      {/* Two-row horizontal-scroll rail of clickable article cards (no vertical motion) */}
       <div className="mt-8 -mx-6 px-6 overflow-x-auto no-scrollbar">
-        <div className="flex gap-4 pb-2 w-max">
+        <div className="grid grid-rows-2 grid-flow-col auto-cols-[260px] sm:auto-cols-[300px] gap-4 pb-2">
           {UPDATES.map((u) => (
             <a
               key={u.id}
               href={`https://note.com/x402inc/n/${u.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group liquid-glass rounded-2xl p-5 w-[260px] sm:w-[300px] shrink-0 flex flex-col hover:border-gold/40 transition-colors"
+              className="group liquid-glass rounded-2xl p-5 h-full flex flex-col hover:border-gold/40 transition-colors"
             >
               <span
                 className="self-start text-[11px] font-mono px-2 py-0.5 rounded-full border"
@@ -145,7 +145,7 @@ export function Updates() {
               >
                 {u.tag}
               </span>
-              <p className="mt-4 text-sm font-semibold text-fg leading-[1.6] flex-1 line-clamp-5">
+              <p className="mt-4 text-sm font-semibold text-fg leading-[1.6] flex-1 line-clamp-4">
                 {u.title[lang]}
               </p>
               <span className="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-gold group-hover:brightness-110 transition">
