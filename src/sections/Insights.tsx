@@ -95,7 +95,7 @@ export function Insights() {
         className="flex flex-wrap items-end justify-between gap-4"
       >
         <div>
-          <SectionEyebrow label="Insights" tag="Research" heading />
+          <SectionEyebrow label="Insights" tag="Research" heading dim />
           <p className="mt-4 text-fg/60 text-base leading-[1.7] max-w-xl">{t.subtext}</p>
         </div>
         <a

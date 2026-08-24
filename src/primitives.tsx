@@ -57,10 +57,13 @@ export function SectionEyebrow({
   label,
   tag,
   heading = false,
+  dim = false,
 }: {
   label: string
   tag?: string
   heading?: boolean
+  /** Render the heading label in a lighter (dimmed) weight/color. */
+  dim?: boolean
 }) {
   const tagStyle = {
     color: 'rgb(var(--gold))',
@@ -70,7 +73,11 @@ export function SectionEyebrow({
   if (heading) {
     return (
       <div className="inline-flex items-center gap-3">
-        <span className="text-2xl md:text-3xl font-semibold tracking-tight text-fg">
+        <span
+          className={`text-2xl md:text-3xl tracking-tight ${
+            dim ? 'font-medium text-fg/40' : 'font-semibold text-fg'
+          }`}
+        >
           {label}
         </span>
         {tag && (

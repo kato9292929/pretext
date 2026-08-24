@@ -37,7 +37,7 @@ const COPY = {
     catalogHead: 'Products',
     catalogIntro:
       'x402 Inc.のプロダクトはすべて、実装しながら市場を検証するためにあります。Phase 1（データインフラ）→ Phase 2（エコシステム）→ Phase 3（プライバシー・決済出口）の3フェーズで設計されています。',
-    catalogListHead: 'Product catalog',
+    catalogListHead: 'Product catalog（プロトタイプ）',
   },
   en: {
     payHead: 'How to Pay',
@@ -63,7 +63,7 @@ const COPY = {
     catalogHead: 'Products',
     catalogIntro:
       'Every x402 Inc. product exists to validate the market while building it. Designed in three phases: Phase 1 (data infrastructure) → Phase 2 (ecosystem) → Phase 3 (privacy & payment exit).',
-    catalogListHead: 'Product catalog',
+    catalogListHead: 'Product catalog (prototype)',
   },
 } satisfies Record<Lang, Record<string, unknown>>
 

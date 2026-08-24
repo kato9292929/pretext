@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Menu, Moon, Sun } from 'lucide-react'
-import { CONTACT_EMAIL, NAV_LINKS, Pill, Wordmark } from '../primitives'
+import { NAV_LINKS, Wordmark } from '../primitives'
 import { useLang, useTheme, type Lang } from '../i18n'
 
 function ThemeToggle() {
@@ -47,12 +47,13 @@ export function Navbar() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="relative z-10 max-w-6xl mx-auto px-6"
     >
-      <div className="flex items-center justify-between py-5">
+      <div className="relative flex items-center justify-between py-5">
         <a href="/" className="flex items-center">
           <Wordmark className="text-xl" />
         </a>
 
-        <div className="hidden md:flex gap-8">
+        {/* Centered nav links */}
+        <div className="hidden md:flex gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           {NAV_LINKS.map((link, i) => (
             <motion.a
               key={link.href}
@@ -70,11 +71,6 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <LangToggle />
-          <Pill
-            label={lang === 'ja' ? 'お問い合わせ' : 'Contact'}
-            href={`mailto:${CONTACT_EMAIL}`}
-            gold
-          />
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
