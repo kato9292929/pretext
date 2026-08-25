@@ -5,7 +5,7 @@
   :root{--gold:#E8C338;--fg:#ffffff;--muted:rgba(255,255,255,.62);--faint:rgba(255,255,255,.4);--line:rgba(255,255,255,.1);--card:rgba(255,255,255,.03)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:#000;color:var(--fg);font-family:'Outfit',-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
-  .board{width:1920px;height:1080px;background:#000;padding:88px 96px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .board{width:1920px;height:1080px;background:#000;padding:72px 96px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
   .board + .board{border-top:1px solid #111}
   .eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
   .eyebrow h2{font-size:40px;font-weight:700;letter-spacing:-.02em}
@@ -22,14 +22,14 @@
   .hero .strip{margin-top:56px;display:flex;gap:16px}
   .hero .strip .chip{font-size:20px;padding:10px 22px;color:#fff;border-color:rgba(232,195,56,.35)}
   /* PRODUCTS */
-  .prow4{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;flex:1}
+  .prow4{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
   .pcard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;display:flex;flex-direction:column}
   .pimg{border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:#111;margin-bottom:16px}
   .pimg img{width:100%;height:100%;object-fit:cover;display:block}
   .prow{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
   .ptag{color:var(--gold);font-size:16px;letter-spacing:.04em}
   .pcard h3{font-size:26px;font-weight:700;margin-bottom:10px}
-  .pdesc{color:var(--muted);font-size:17px;line-height:1.6;flex:1}
+  .pdesc{color:var(--muted);font-size:17px;line-height:1.6}
   .plinks{margin-top:16px;display:flex;gap:16px;color:var(--gold);font-size:16px;font-weight:600}
   /* ECOSYSTEM */
   .eco4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
@@ -45,7 +45,7 @@
   .compcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
   .comp-h{color:var(--gold);font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin:26px 0 4px}
   /* ENDPOINTS */
-  .ebody{display:grid;grid-template-columns:1.1fr 2.4fr;gap:34px;flex:1}
+  .ebody{display:grid;grid-template-columns:1.1fr 2.4fr;gap:34px}
   .pay{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px}
   .pay h3{font-size:26px;margin-bottom:14px}
   .curl{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:14px;font-family:monospace;font-size:16px;color:#ddd;margin-bottom:18px}
