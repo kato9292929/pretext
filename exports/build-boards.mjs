@@ -110,7 +110,7 @@ const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8">
   :root{--gold:#E8C338;--fg:#ffffff;--muted:rgba(255,255,255,.64);--faint:rgba(255,255,255,.42);--line:rgba(255,255,255,.1);--card:rgba(255,255,255,.03)}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:#000;color:var(--fg);font-family:'Outfit',-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
-  .board{width:1920px;min-height:1080px;background:#000;padding:72px 96px 108px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .board{width:1920px;min-height:1080px;background:#000;padding:72px 96px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
   .board + .board{border-top:1px solid #111}
   .eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
   .eyebrow h2{font-size:40px;font-weight:700;letter-spacing:-.02em}
@@ -184,7 +184,6 @@ const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8">
   <section class="board hero">
     <h1><span class="l1">The agentic economy</span><br><span class="l2">runs on x402.</span></h1>
     <div class="strip"><span class="chip">HTTP 402</span><span class="chip">Agentic Commerce</span><span class="chip">A to A</span><span class="chip">Research</span></div>
-    ${brandbar}
   </section>
 
   <!-- BOARD 2: PRODUCTS (three-layer model) -->
@@ -192,7 +191,6 @@ const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8">
     <div class="eyebrow"><h2>Products</h2><span class="pill">三層モデル</span></div>
     <p class="lead">${introProducts}</p>
     <div class="prow4">${products.map(productCard).join('')}</div>
-    ${brandbar}
   </section>
 
   <!-- BOARD 3: ECOSYSTEM (5 classes) -->
@@ -202,7 +200,6 @@ const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8">
     <div class="eco4">${classes.map(classCard).join('')}</div>
     <div class="comp-h"><span class="nbadge alt">5</span>複合型</div>
     <div class="comp3">${composite.map(compCard).join('')}</div>
-    ${brandbar}
   </section>
 
   <!-- BOARD 4: ENDPOINTS -->
@@ -216,7 +213,6 @@ const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8">
       </div>
       <div class="grps">${groups.map(groupCol).join('')}</div>
     </div>
-    ${brandbar}
   </section>
 
 </body></html>`
