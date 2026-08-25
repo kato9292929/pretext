@@ -24,7 +24,7 @@ const products = [
   { layer: 'PRODUCE（データ生成）', badge: 'HTTP/1.1 402', name: 'Onchain Stock Data', img: IMG.osd,
     desc: 'Claude が毎週、米国株・日本株を10銘柄ずつ選定し「判定日付きの数値カタリスト」を添えて予想。判定日経過後に決算・適時開示など一次情報と突き合わせ hit / partial / miss を採点し scorecard に記録。上書き・削除せず git に追記し、積み上がる track record そのものが価値。配信は REST（x402 都度払い）、MCP は計画中。※投資助言ではなく AI 予測精度の検証記録。',
     links: ['サイトを見る', 'note', 'GitHub'] },
-  { layer: 'PRODUCE（データ生成）', badge: 'HTTP/1.1 402', name: 'Japan Inflation Nowcast', img: IMG.jin,
+  { layer: 'PRODUCE（データ生成）', badge: 'HTTP/1.1 402', name: 'Japan Inflation Nowcall', img: IMG.jin,
     desc: '東京のあるスーパーの店頭価格を人手で記録してつくる独自の食品物価指数。固定基準日=100 に対し同一SKUの価格相対を Jevons 幾何平均で集計し、10カテゴリ等加重で指数化（販促除外／込みの2系列・観測日ベース）。x402 で配信し、latest は無料、series / movers は per-call で購入できる。',
     links: ['サイトを見る'] },
 ]
@@ -55,7 +55,7 @@ const payload = [
   '200 OK とデータ（PAYMENT-RESPONSE に決済トランザクション）',
 ]
 const groups = [
-  { name: 'Japan Inflation Nowcast', host: 'jin.x402jp.com', eps: [
+  { name: 'Japan Inflation Nowcall', host: 'jin.x402jp.com', eps: [
     ['GET', '/api/jin/latest', '200', 'free'], ['GET', '/api/jin/series', '402', '$0.01'], ['GET', '/api/jin/movers', '402', '$0.02'] ] },
   { name: 'Onchain Stock Data', host: 'osd.x402jp.com', eps: [
     ['GET', '/api/alpha/catalysts/physical-ai', '200', 'free'], ['GET', '/api/alpha/portfolio/current', '402', '$0.01'],
