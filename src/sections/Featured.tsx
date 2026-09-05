@@ -18,8 +18,8 @@ type Product = {
 }
 
 const INTRO: Localized = {
-  ja: 'x402 Inc.は、エージェント経済とエージェント決済のエコシステムを、AIとの詳細なリサーチで分析するリサーチ会社です。x402対応のエンドポイント、独自データ、それを叩くエージェントを自ら作り、観測と検証の instruments として使います。HTTP 402を共通の決済レールに、Base/Solana上のper-callオンチェーン決済とERC-8004のエージェントidentityを土台にしています。',
-  en: 'x402 Inc. is a research company that analyzes the agent economy and the agent-payments ecosystem through detailed research with AI. We build x402-compatible endpoints, proprietary data and the agents that call them, and use them as instruments for observation and verification. With HTTP 402 as the shared payment rail, we build on per-call on-chain settlement across Base/Solana and ERC-8004 agent identity.',
+  ja: 'x402 Inc.は、エージェント決済に関するリサーチと関連インフラ・データの開発提供を行う会社です。x402対応エンドポイントのデータカタログ、自律エージェントによるステーブルコイン決済、オルタナティブデータ生成の3事業を展開。クレジットカードやステーブルコインなど各市場セグメントにおける市場調査を日次で公開し、エージェンティックコマース市場の形成に貢献することを目指しています。',
+  en: 'x402 Inc. researches agent payments and develops the related infrastructure and data. We run three businesses: a data catalog of x402-enabled endpoints, stablecoin settlement by autonomous agents, and alternative-data generation. We publish daily market research across segments — credit cards, stablecoins and more — aiming to help form the agentic-commerce market.',
 }
 
 const LABELS = {
@@ -75,7 +75,7 @@ const PRODUCTS: Product[] = [
   },
   {
     tag: '03 · PRODUCE',
-    name: 'Japan Inflation Nowcast',
+    name: 'Japan Inflation Nowcall',
     badge: 'HTTP/1.1 402 ✓',
     desc: {
       ja: '東京のあるスーパーの店頭価格を毎日記録して作る独自の物価指数。10カテゴリ等加重のJevons幾何平均で日次指数化し、上流のCGPI(企業物価)も取り込み、上流から店頭までを接続して観測。x402エンドポイントとして配信し、per-callで購入できる。',
@@ -142,12 +142,7 @@ export function Featured() {
           >
               <Preview src={product.image} name={product.name} />
               <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium tracking-wide text-gold">{product.tag}</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-fg/10 text-fg/50">
-                    {product.badge}
-                  </span>
-                </div>
+                <span className="text-xs font-medium tracking-wide text-gold">{product.tag}</span>
                 <h3 className="mt-4 text-xl font-semibold text-fg">{product.name}</h3>
                 <p className="mt-3 text-sm text-fg/60 leading-[1.7] flex-1 line-clamp-4">
                   {product.desc[lang]}

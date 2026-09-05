@@ -50,7 +50,7 @@ const COPY = {
     stanceTag: 'x402 Inc. の立ち位置',
     stance: [
       'x402 Inc. はリサーチ会社です。x402対応のエンドポイント、独自データ、それを叩くエージェントを自ら作り、観測と検証の instruments として使います。',
-      '固有データを外部有料フィードとしてper-callで売っても価値を捕まえる回路がない——だから Onchain Stock Data や Japan Inflation Nowcast は「データ供給事業」ではなく、リサーチ・観測の装置として置きます。自社の閉域で回すものは「内部経済」であり、検証できるのは形式と記録であって実需ではありません。',
+      '固有データを外部有料フィードとしてper-callで売っても価値を捕まえる回路がない——だから Onchain Stock Data や Japan Inflation Nowcall は「データ供給事業」ではなく、リサーチ・観測の装置として置きます。自社の閉域で回すものは「内部経済」であり、検証できるのは形式と記録であって実需ではありません。',
     ],
   },
   en: {
@@ -89,14 +89,14 @@ const COPY = {
     stanceTag: 'x402 Inc.',
     stance: [
       'x402 Inc. is a research company. We build x402-enabled endpoints, proprietary data, and the agents that call them, and use them as instruments for observation and verification.',
-      'Selling proprietary data as an external paid feed per-call has no circuit to capture value — so Onchain Stock Data and Japan Inflation Nowcast are placed as instruments for research and observation, not a “data supply business.” What we run in our own closed loop is an internal economy; what can be verified is the form and the records, not real demand.',
+      'Selling proprietary data as an external paid feed per-call has no circuit to capture value — so Onchain Stock Data and Japan Inflation Nowcall are placed as instruments for research and observation, not a “data supply business.” What we run in our own closed loop is an internal economy; what can be verified is the form and the records, not real demand.',
     ],
   },
 } satisfies Record<Lang, Record<string, unknown>>
 
 const GROUPS: Group[] = [
   {
-    name: 'Japan Inflation Nowcast',
+    name: 'Japan Inflation Nowcall',
     host: 'jin.x402jp.com',
     note: { ja: '決済は Solana USDC（x402 v2）。discovery は /.well-known/x402.json。', en: 'Payment in Solana USDC (x402 v2). Discovery at /.well-known/x402.json.' },
     eps: [
@@ -556,12 +556,7 @@ function ProductCard({ product, lang }: { product: Product; lang: Lang }) {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="liquid-glass rounded-2xl p-5 flex flex-col"
     >
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-base font-semibold text-fg">{product.name}</h3>
-        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-fg/10 text-fg/50 whitespace-nowrap">
-          {product.badge}
-        </span>
-      </div>
+      <h3 className="text-base font-semibold text-fg">{product.name}</h3>
       <p className="mt-3 text-sm text-fg/60 leading-[1.7] flex-1">{product.desc[lang]}</p>
       {product.price && (
         <p className="mt-3 text-sm text-gold font-semibold">{product.price[lang]}</p>
