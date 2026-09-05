@@ -152,7 +152,7 @@ export function Insights() {
               </span>
               <ArrowUpRight className="w-3.5 h-3.5 flex-none text-fg/30 group-hover:text-gold transition-colors" />
             </div>
-            <h3 className="mt-2.5 text-[13px] font-semibold text-fg leading-[1.5] line-clamp-4">
+            <h3 className="mt-2.5 text-[13px] font-medium text-fg/60 leading-[1.6] line-clamp-4">
               {a.title[lang]}
             </h3>
           </motion.a>
