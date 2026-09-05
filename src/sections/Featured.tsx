@@ -52,7 +52,7 @@ const PRODUCTS: Product[] = [
       en: 'An agent with an on-chain identity (ERC-8004, agentId 55560) buys data per-call every morning and records its daily decisions. It settles per-call in real USDC on Base mainnet — a self-contained validation loop where our own agent consumes our own x402 endpoints. Before important decisions it verifies personhood with World ID, with a human in the approval loop.',
     },
     image: '/products/aa.png',
-    comingSoon: true,
+    live: 'https://aa.x402jp.com/',
     links: [
       { label: 'note', href: 'https://note.com/x402inc/n/nfe50d4acfcd8' },
       { label: 'GitHub', href: 'https://github.com/kato9292929/x402-Autonomous-Agent-' },

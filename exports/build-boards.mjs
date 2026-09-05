@@ -20,7 +20,7 @@ const products = [
     links: ['サイトを見る', 'note', 'GitHub'] },
   { layer: 'CONSUME（消費）', badge: 'Railway', name: 'x402 Autonomous Agent', img: IMG.aa,
     desc: 'オンチェーンID（ERC-8004）を持つ自律エージェント。毎朝 06:00 JST にデータを per-call で購入し、その日の判断を追記専用で記録。決済は Base / Solana の USDC で1コールごとにオンチェーン完結、署名は Circle の Developer-Controlled Wallet。売買執行は接続せず記録のみ。週次の高額購入（5本・$10.50）前には World ID による人間の承認を必須とし、委任範囲を人間が管理する。',
-    links: ['準備中', 'note', 'GitHub'] },
+    links: ['サイトを見る', 'note', 'GitHub'] },
   { layer: 'PRODUCE（データ生成）', badge: 'HTTP/1.1 402', name: 'Onchain Stock Data', img: IMG.osd,
     desc: 'Claude が毎週、米国株・日本株を10銘柄ずつ選定し「判定日付きの数値カタリスト」を添えて予想。判定日経過後に決算・適時開示など一次情報と突き合わせ hit / partial / miss を採点し scorecard に記録。上書き・削除せず git に追記し、積み上がる track record そのものが価値。配信は REST（x402 都度払い）、MCP は計画中。※投資助言ではなく AI 予測精度の検証記録。',
     links: ['サイトを見る', 'note', 'GitHub'] },
