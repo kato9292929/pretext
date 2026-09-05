@@ -265,13 +265,10 @@ export function Research() {
                     href={note.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="liquid-glass rounded-xl p-4 flex flex-col gap-3 group"
+                    className="liquid-glass rounded-xl p-4 flex items-start justify-between gap-3 group"
                   >
-                    <p className="text-sm text-fg/80 leading-[1.6] flex-1">{note.title[lang]}</p>
-                    <span className="inline-flex items-center gap-1 text-xs text-fg/50 group-hover:text-gold transition-colors">
-                      {t.read}
-                      <ArrowUpRight className="w-3 h-3" />
-                    </span>
+                    <p className="text-sm text-fg/80 leading-[1.6]">{note.title[lang]}</p>
+                    <ArrowUpRight className="w-3.5 h-3.5 flex-none text-fg/30 group-hover:text-gold transition-colors" />
                   </a>
                 ))}
               </div>

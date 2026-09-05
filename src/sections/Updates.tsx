@@ -3,120 +3,114 @@ import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
 import { useLang, type Localized } from '../i18n'
 
-const COPY = {
-  ja: { read: '記事を読む' },
-  en: { read: 'Read' },
-}
-
 type Update = {
-  id: string // note article id (https://note.com/x402inc/n/<id>)
+  href: string // full article URL
   tag: string // English label, shown in both languages
   title: Localized
 }
 
-// Newest first. `tag` is a short topical label; `title` mirrors the note headline.
+// Newest first. `tag` is a short topical label; `title` mirrors the headline.
 const UPDATES: Update[] = [
   {
-    id: 'n7beb8aba2e6a',
-    tag: 'Agent Economy Classes',
+    href: 'https://prtimes.jp/main/html/rd/p/000000002.000188987.html',
+    tag: 'Press',
     title: {
-      ja: 'Agent Economy Classes 再設計：局面と経済形の二軸分解、複合ケースの収容、実装の横断評価',
-      en: 'Agent Economy Classes, redesigned: a two-axis split of context and economy, composite cases, and cross-cutting implementation review',
+      ja: 'x402株式会社、一般社団法人日本暗号資産ビジネス協会（JCBA）に準会員として入会',
+      en: 'x402 Inc. joins the Japan Cryptoasset Business Association (JCBA) as an associate member',
     },
   },
   {
-    id: 'n5142c1686d71',
-    tag: 'Strategy',
+    href: 'https://note.com/x402inc/n/na007bd544702',
+    tag: 'Monthly',
     title: {
-      ja: 'AIエージェント決済導入戦略指針：プロトコル選定と信頼構築の要諦',
-      en: 'A strategy guide for adopting agent payments: protocol selection and building trust',
+      ja: '【月次報告 2026年8月】エージェント決済市場：クレカ領域の実利用、A to A側のテーゼとユースケースの供給元',
+      en: 'Monthly report (Aug 2026): agent payments — real card usage, and the A-to-A thesis and use-case suppliers',
     },
   },
   {
-    id: 'n5ce42fabd415',
-    tag: 'Endpoints',
+    href: 'https://note.com/x402inc/n/n726d00e29555',
+    tag: 'OSD',
     title: {
-      ja: 'x402 上位エンドポイント プロファイル（2026-08時点）：決済層・データ層・トレード層の内訳',
-      en: 'Top x402 endpoints, profiled (as of 2026-08): the payment, data and trade layers',
+      ja: 'Onchain Stock Data 開発進捗：約200社のx402対応、MCPからの無料read、決算データ自動生成への布石',
+      en: 'Onchain Stock Data progress: ~200 firms x402-enabled, free MCP reads, groundwork for auto-generated earnings data',
     },
   },
   {
-    id: 'n097adac30ebc',
-    tag: 'Market',
+    href: 'https://note.com/x402inc/n/nc9779d59bc9f',
+    tag: 'Physical AI',
     title: {
-      ja: 'x402 Endpoint市場動向（2026-08-07→08-24）：1日15万〜122万call、BlockRunに最大96%が集中',
-      en: 'x402 endpoint market trend (2026-08-07→08-24): 150k–1.22M calls/day, up to 96% concentrated on BlockRun',
+      ja: '米国フィジカルAI 採点実績アップデート：半導体61%・ロボティクス70%と9/30に出る最初の答え',
+      en: 'US Physical AI scoring update: semis 61%, robotics 70%, and the first answers due 9/30',
     },
   },
   {
-    id: 'nc28fdc36b3dc',
-    tag: 'Ledger',
+    href: 'https://note.com/x402inc/n/n5468ee860649',
+    tag: 'Physical AI',
     title: {
-      ja: 'x402 × Ramp 会計台帳｜自律型エージェントの支出統制PoCについて',
-      en: 'x402 × Ramp accounting ledger: a PoC for spend controls on autonomous agents',
+      ja: '日本フィジカルAI 装置・材料層：IRフェア出展10社のdated catalystと採点実績77%',
+      en: 'Japan Physical AI (equipment/materials): dated catalysts for 10 IR-fair exhibitors, 77% hit rate',
     },
   },
   {
-    id: 'n7a6ae178fba2',
-    tag: 'Buyer harness',
+    href: 'https://note.com/x402inc/n/nc3cc50a8d048',
+    tag: 'Card / Grok',
     title: {
-      ja: 'AWS AgentCore Payments で買い手ハーネスを組む——動いた8シナリオと、次に回す実払い一周',
-      en: 'Building a buyer harness on AWS AgentCore Payments — 8 scenarios that worked, and the next live settlement loop',
+      ja: 'Grok BotによるStripe Link決済：ブラウザ操作での購入と、単回利用カード・都度承認による人間の統制',
+      en: 'Grok Bot paying via Stripe Link: browser-driven purchase, single-use cards and per-transaction human approval',
     },
   },
   {
-    id: 'na4b6acb98907',
-    tag: 'Internal agents',
+    href: 'https://note.com/x402inc/n/nfc13b5ee0655',
+    tag: 'Harness / Class 1',
     title: {
-      ja: '社内エージェントへのMPP決済の実装：mpp-agentでmpp.devにtestnet実払い（Class 1 + 4）',
-      en: 'Implementing MPP payments for internal agents: testnet settlement to mpp.dev with mpp-agent (Class 1 + 4)',
+      ja: 'エージェントハーネスの所有：Grok BotとHermes Botで分かれる機構と判断基準（Class 1）',
+      en: 'Owning the agent harness: how Grok Bot and Hermes Bot diverge, and the criteria (Class 1)',
     },
   },
   {
-    id: 'nd78e3bcc229f',
-    tag: 'Approvals',
+    href: 'https://note.com/x402inc/n/n0154d999c989',
+    tag: 'Hermes / Class 1+4',
     title: {
-      ja: 'Stripe Approvalsのactor condition：agent-tagged keyによる起案と人間の承認の分離',
-      en: 'Stripe Approvals actor conditions: separating agent-tagged proposal from human approval',
+      ja: 'Hermes エージェント決済の境界：内側のdelegate_taskと外側のmpp-agent、律速としての評価コスト（Class 1 + 4）',
+      en: 'Boundaries of Hermes agent payments: internal delegate_task vs external mpp-agent, evaluation cost as the bottleneck (Class 1 + 4)',
     },
   },
   {
-    id: 'n1e8046342f2a',
-    tag: 'Digital ID',
+    href: 'https://note.com/x402inc/n/n2624a2ee4e61',
+    tag: 'Agentic Card',
     title: {
-      ja: 'エージェント経済のデジタルIDとは？ERC-8004 reputation・validation検証と World ID/外部評価制度に向けて',
-      en: 'Digital identity for the agent economy: verifying ERC-8004 reputation & validation, toward World ID and external reputation',
+      ja: 'x402 Agentic Card：発行体オーソリと委任トークンの接続',
+      en: 'x402 Agentic Card: connecting issuer authorization and delegation tokens',
     },
   },
   {
-    id: 'nc4a1b2152072',
-    tag: 'Nowcast',
+    href: 'https://note.com/x402inc/n/n1e69fb831e16',
+    tag: 'Anthropic',
     title: {
-      ja: 'Japan Inflation Nowcast 2026-08-18：観測再開と盛夏の野菜高による指数の上振れ',
-      en: 'Japan Inflation Nowcast 2026-08-18: observation resumes and a midsummer vegetable spike lifts the index',
+      ja: 'AnthropicのClaude Commerce Agents：買い物・店舗運営エージェントの雛形と、決済のホストへの受け渡し',
+      en: 'Anthropic’s Claude Commerce Agents: templates for shopping / store-ops agents, and handing settlement to the host',
     },
   },
   {
-    id: 'n1bed42fdb779',
-    tag: 'Trust Layer',
+    href: 'https://note.com/x402inc/n/n5d27d7344d40',
+    tag: 'A to A / Class 4',
     title: {
-      ja: 'エージェンティックコマースの普及経路：カード網・承認制決済と決済オプションとしてのx402（サマリー2）',
-      en: 'Adoption paths for agentic commerce: card networks, approval-based payment, and x402 as an option (summary 2)',
+      ja: 'Massiveの米国株式データのx402対応：リクエスト単位のUSDC課金と、既存API事業への追加経路（A to A Use Cases Class 4）',
+      en: 'Massive brings US equity data to x402: per-request USDC billing and an add-on path for an existing API business (A-to-A, Class 4)',
     },
   },
   {
-    id: 'n472538977c86',
-    tag: 'Trust Layer',
+    href: 'https://note.com/x402inc/n/n0b81556a919b',
+    tag: 'OSD / IR Fair',
     title: {
-      ja: 'エージェント決済の信頼層：カード網が担保する範囲とx402のA to A領域（サマリー1）',
-      en: 'The trust layer of agent payments: what card networks guarantee and x402’s A-to-A domain (summary 1)',
+      ja: '日経・東証IRフェア2026 出展企業 テーマ別カタリスト・マップ｜Onchain Stock Data',
+      en: 'Nikkei / TSE IR Fair 2026 exhibitors: a themed catalyst map | Onchain Stock Data',
     },
   },
 ]
 
 export function Updates() {
   const { lang } = useLang()
-  const t = COPY[lang]
   return (
     <section id="updates" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
@@ -128,30 +122,29 @@ export function Updates() {
         <SectionEyebrow label="Update" tag="最新情報" heading />
       </motion.div>
 
-      {/* Two-row horizontal-scroll rail of clickable article cards (no vertical motion) */}
+      {/* Two-row horizontal-scroll rail; the whole card is the link */}
       <div className="mt-8 -mx-6 px-6 overflow-x-auto no-scrollbar">
         <div className="grid grid-rows-2 grid-flow-col auto-cols-[260px] sm:auto-cols-[300px] gap-4 pb-2">
           {UPDATES.map((u) => (
             <a
-              key={u.id}
-              href={`https://note.com/x402inc/n/${u.id}`}
+              key={u.href}
+              href={u.href}
               target="_blank"
               rel="noopener noreferrer"
               className="group liquid-glass rounded-2xl p-5 h-full flex flex-col hover:border-gold/40 transition-colors"
             >
-              <span
-                className="self-start text-[11px] font-mono px-2 py-0.5 rounded-full border"
-                style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
-              >
-                {u.tag}
-              </span>
-              <p className="mt-4 text-sm font-semibold text-fg leading-[1.6] flex-1 line-clamp-4">
+              <div className="flex items-start justify-between gap-2">
+                <span
+                  className="text-[11px] font-mono px-2 py-0.5 rounded-full border"
+                  style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
+                >
+                  {u.tag}
+                </span>
+                <ArrowUpRight className="w-4 h-4 text-fg/35 group-hover:text-gold transition-colors" />
+              </div>
+              <p className="mt-4 text-sm font-semibold text-fg leading-[1.6] line-clamp-4">
                 {u.title[lang]}
               </p>
-              <span className="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-gold group-hover:brightness-110 transition">
-                {t.read}
-                <ArrowUpRight className="w-3 h-3" />
-              </span>
             </a>
           ))}
         </div>
