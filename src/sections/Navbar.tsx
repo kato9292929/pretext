@@ -1,6 +1,7 @@
-import { motion } from 'motion/react'
-import { Menu, Moon, Sun } from 'lucide-react'
-import { NAV_LINKS, Wordmark } from '../primitives'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
+import { Menu, Moon, Sun, X, ArrowUpRight } from 'lucide-react'
+import { CONTACT_EMAIL, NAV_LINKS, Wordmark } from '../primitives'
 import { useLang, useTheme, type Lang } from '../i18n'
 
 function ThemeToggle() {
@@ -40,19 +41,20 @@ function LangToggle() {
 
 export function Navbar() {
   const { lang } = useLang()
+  const [open, setOpen] = useState(false)
   return (
     <motion.nav
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="relative z-10 max-w-6xl mx-auto px-6"
+      className="relative z-30 max-w-6xl mx-auto px-6"
     >
       <div className="relative flex items-center justify-between py-5">
         <a href="/" className="flex items-center">
           <Wordmark className="text-xl" />
         </a>
 
-        {/* Centered nav links */}
+        {/* Centered nav links (desktop) */}
         <div className="hidden md:flex gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           {NAV_LINKS.map((link, i) => (
             <motion.a
@@ -77,13 +79,47 @@ export function Navbar() {
           <ThemeToggle />
           <LangToggle />
           <button
-            className="flex items-center justify-center w-10 h-10 rounded-full border border-fg/10 bg-fg/5"
-            aria-label="Menu"
+            onClick={() => setOpen((v) => !v)}
+            className="flex items-center justify-center w-10 h-10 rounded-full border border-fg/10 bg-fg/5 text-fg"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
           >
-            <Menu className="w-4 h-4" />
+            {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>
+
+      {/* Mobile menu panel */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="md:hidden absolute left-6 right-6 top-full origin-top liquid-glass rounded-2xl p-2 shadow-xl"
+          >
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="block px-4 py-3 rounded-xl text-fg/80 text-base font-medium hover:bg-fg/5 hover:text-fg transition-colors"
+              >
+                {link.label[lang]}
+              </a>
+            ))}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between px-4 py-3 rounded-xl text-gold text-base font-semibold hover:bg-fg/5 transition-colors"
+            >
+              {lang === 'ja' ? 'お問い合わせ' : 'Contact'}
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   )
 }
