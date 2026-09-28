@@ -1,7 +1,15 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
 import { useLang, type Localized } from '../i18n'
+import { EcosystemTrade } from './EcosystemTrade'
+
+type Tab = 'payment' | 'trade'
+const TABS: { key: Tab; label: string }[] = [
+  { key: 'payment', label: 'Payment' },
+  { key: 'trade', label: 'Trade' },
+]
 
 const COPY = {
   ja: {
@@ -142,6 +150,7 @@ const SEGMENTS: Segment[] = [
 export function Ecosystem() {
   const { lang } = useLang()
   const t = COPY[lang]
+  const [tab, setTab] = useState<Tab>('payment')
   return (
     <section className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
@@ -152,81 +161,104 @@ export function Ecosystem() {
         className="max-w-2xl"
       >
         <SectionEyebrow label="Ecosystem" tag="segmentation" heading />
-        <p className="mt-6 text-fg/60 text-base leading-[1.7]">{t.intro}</p>
+        <div role="tablist" className="mt-6 inline-flex rounded-full border border-fg/15 p-1">
+          {TABS.map((tb) => (
+            <button
+              key={tb.key}
+              type="button"
+              role="tab"
+              aria-selected={tab === tb.key}
+              onClick={() => setTab(tb.key)}
+              className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+                tab === tb.key ? 'bg-gold text-black font-semibold' : 'text-fg/60 hover:text-fg'
+              }`}
+            >
+              {tb.label}
+            </button>
+          ))}
+        </div>
       </motion.div>
 
-      <div className="mt-10 grid sm:grid-cols-2 gap-5">
-        {SEGMENTS.map((seg, i) => (
-          <motion.div
-            key={seg.name}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.08 }}
-            className="liquid-glass rounded-2xl p-6"
-          >
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-              <p className="font-mono text-sm text-gold">{seg.name}</p>
-              <span
-                className="text-[11px] font-mono px-2 py-0.5 rounded-full border"
-                style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
+      {tab === 'trade' ? (
+        <EcosystemTrade />
+      ) : (
+        <>
+          <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-2xl">{t.intro}</p>
+
+          <div className="mt-10 grid sm:grid-cols-2 gap-5">
+            {SEGMENTS.map((seg, i) => (
+              <motion.div
+                key={seg.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.08 }}
+                className="liquid-glass rounded-2xl p-6"
               >
-                {seg.cls}
-              </span>
-            </div>
-            <p className="mt-3 text-sm text-fg/70 leading-[1.7]">{seg.desc[lang]}</p>
-            {seg.groups.map((g, gi) => (
-              <div key={g.sub ?? gi} className="mt-4">
-                {g.sub && (
-                  <p className="mb-1.5 text-[11px] uppercase tracking-widest text-fg/40">{g.sub}</p>
-                )}
-                <div className="flex flex-wrap gap-x-2 gap-y-1.5">
-                  {g.links.map((l) => (
-                    <a
-                      key={l.label}
-                      href={l.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 rounded-full border border-fg/10 px-2.5 py-1 text-xs text-fg/70 hover:text-gold hover:border-gold/40 transition-colors"
-                    >
-                      {l.label}
-                      <ArrowUpRight className="w-3 h-3" />
-                    </a>
-                  ))}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                  <p className="font-mono text-sm text-gold">{seg.name}</p>
+                  <span
+                    className="text-[11px] font-mono px-2 py-0.5 rounded-full border"
+                    style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
+                  >
+                    {seg.cls}
+                  </span>
                 </div>
-              </div>
+                <p className="mt-3 text-sm text-fg/70 leading-[1.7]">{seg.desc[lang]}</p>
+                {seg.groups.map((g, gi) => (
+                  <div key={g.sub ?? gi} className="mt-4">
+                    {g.sub && (
+                      <p className="mb-1.5 text-[11px] uppercase tracking-widest text-fg/40">{g.sub}</p>
+                    )}
+                    <div className="flex flex-wrap gap-x-2 gap-y-1.5">
+                      {g.links.map((l) => (
+                        <a
+                          key={l.label}
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 rounded-full border border-fg/10 px-2.5 py-1 text-xs text-fg/70 hover:text-gold hover:border-gold/40 transition-colors"
+                        >
+                          {l.label}
+                          <ArrowUpRight className="w-3 h-3" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
             ))}
-          </motion.div>
-        ))}
-      </div>
+          </div>
 
-      <a
-        href="https://note.com/x402inc/n/n7114e5139b4c"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-6 inline-flex items-center gap-1.5 text-xs text-fg/45 hover:text-gold transition-colors"
-      >
-        {t.taxNote}
-        <ArrowUpRight className="w-3 h-3" />
-      </a>
+          <a
+            href="https://note.com/x402inc/n/n7114e5139b4c"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-1.5 text-xs text-fg/45 hover:text-gold transition-colors"
+          >
+            {t.taxNote}
+            <ArrowUpRight className="w-3 h-3" />
+          </a>
 
-      <p className="mt-6 text-fg/50 text-sm leading-[1.7] max-w-3xl">{t.closing}</p>
+          <p className="mt-6 text-fg/50 text-sm leading-[1.7] max-w-3xl">{t.closing}</p>
 
-      {/* How to pay on x402 — integrated here */}
-      <div className="mt-12 pt-10 border-t border-fg/10">
-        <p className="text-xs uppercase tracking-widest text-gold">{t.payLabel}</p>
-        <p className="mt-3 text-fg/60 text-base leading-[1.7] max-w-2xl">{t.payIntro}</p>
-        <pre className="mt-5 liquid-glass rounded-xl p-4 text-xs md:text-sm font-mono text-fg/80 overflow-x-auto max-w-2xl">
-          <span className="text-fg/40">$ </span>curl https://jin.x402jp.com/api/jin/latest
-        </pre>
-        <a
-          href="/products.html"
-          className="mt-5 inline-flex items-center gap-1.5 text-sm text-fg/70 hover:text-gold transition-colors"
-        >
-          {t.payLink}
-          <ArrowUpRight className="w-4 h-4" />
-        </a>
-      </div>
+          {/* How to pay on x402 — integrated here */}
+          <div className="mt-12 pt-10 border-t border-fg/10">
+            <p className="text-xs uppercase tracking-widest text-gold">{t.payLabel}</p>
+            <p className="mt-3 text-fg/60 text-base leading-[1.7] max-w-2xl">{t.payIntro}</p>
+            <pre className="mt-5 liquid-glass rounded-xl p-4 text-xs md:text-sm font-mono text-fg/80 overflow-x-auto max-w-2xl">
+              <span className="text-fg/40">$ </span>curl https://jin.x402jp.com/api/jin/latest
+            </pre>
+            <a
+              href="/products.html"
+              className="mt-5 inline-flex items-center gap-1.5 text-sm text-fg/70 hover:text-gold transition-colors"
+            >
+              {t.payLink}
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
+        </>
+      )}
     </section>
   )
 }
