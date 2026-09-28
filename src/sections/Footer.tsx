@@ -11,7 +11,6 @@ const COPY = {
     corpLabel: '法人番号',
     corp: '7010401194879',
     siteLabel: 'Pages',
-    legalLabel: 'Legal',
     contact: 'Contact',
     rights: '© 2026 x402株式会社',
   },
@@ -24,7 +23,6 @@ const COPY = {
     corpLabel: 'Corporate Number',
     corp: '7010401194879',
     siteLabel: 'Pages',
-    legalLabel: 'Legal',
     contact: 'Contact',
     rights: '© 2026 x402 Inc.',
   },
@@ -42,7 +40,7 @@ export function Footer() {
   return (
     <footer className="relative z-10 border-t border-fg/10">
       <div className="max-w-6xl mx-auto px-6 py-12 md:py-16">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr]">
           {/* Brand + registration */}
           <div>
             <Wordmark />
@@ -73,20 +71,6 @@ export function Footer() {
                   {t.contact}
                 </a>
               </li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <p className="text-xs uppercase tracking-widest text-fg/40">{t.legalLabel}</p>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {LEGAL.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} className="text-fg/70 hover:text-gold transition-colors">
-                    {l.label[lang]}
-                  </a>
-                </li>
-              ))}
             </ul>
           </div>
         </div>
