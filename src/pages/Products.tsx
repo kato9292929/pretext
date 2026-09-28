@@ -69,7 +69,7 @@ const COPY = {
 
 const GROUPS: Group[] = [
   {
-    name: 'Japan Inflation Nowcast',
+    name: 'Japan Inflation Nowcall',
     host: 'jin.x402jp.com',
     note: { ja: '決済は Solana USDC（x402 v2）。discovery は /.well-known/x402.json。', en: 'Payment in Solana USDC (x402 v2). Discovery at /.well-known/x402.json.' },
     eps: [
