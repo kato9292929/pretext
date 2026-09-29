@@ -187,17 +187,17 @@ export function News() {
               href={n.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-3 py-4 first:pt-0"
+              className="group flex items-start gap-2 py-2.5 first:pt-0"
             >
               <span className="flex-1">
-                <span className="text-[11px] font-mono" style={{ color: 'rgb(var(--gold))' }}>
+                <span className="text-[10px] font-mono" style={{ color: 'rgb(var(--gold))' }}>
                   {n.tag}
                 </span>
-                <span className="mt-1 block text-sm text-fg/80 leading-[1.7] group-hover:text-gold transition-colors">
+                <span className="mt-0.5 block text-xs text-fg/80 leading-[1.6] line-clamp-2 group-hover:text-gold transition-colors">
                   {n.title[lang]}
                 </span>
               </span>
-              <ArrowUpRight className="mt-1 w-4 h-4 shrink-0 text-fg/35 group-hover:text-gold transition-colors" />
+              <ArrowUpRight className="mt-0.5 w-3 h-3 shrink-0 text-fg/35 group-hover:text-gold transition-colors" />
             </a>
           ))}
         </div>
