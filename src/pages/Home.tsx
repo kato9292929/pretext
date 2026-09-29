@@ -10,8 +10,8 @@ export function Home() {
   return (
     <>
       <Hero />
-      <Featured />
       <News />
+      <Featured />
       <Ecosystem />
       <Architecture />
       <Foundation />
