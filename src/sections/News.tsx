@@ -34,6 +34,52 @@ const NEWS: NewsItem[] = [
   },
 ]
 
+// Text-only articles listed below the image articles. Newest first.
+type TextItem = { href: string; tag: string; title: Localized }
+
+const TEXT_ITEMS: TextItem[] = [
+  {
+    href: 'https://note.com/x402inc/n/n724349b09132',
+    tag: 'Stripe / Card',
+    title: {
+      ja: 'Stripe Crypto × Link単回利用カード：クリプトカードを通じたエージェント決済におけるステーブルコインの利活用',
+      en: 'Stripe Crypto × Link single-use cards: using stablecoins for agent payments through crypto cards',
+    },
+  },
+  {
+    href: 'https://note.com/x402inc/n/n7599f46ae293',
+    tag: 'Market',
+    title: {
+      ja: 'AIエージェントは「使う」から「何を買わせるか」へ——2026年の経営論点から見える次の調達市場',
+      en: 'AI agents shift from “using them” to “what to let them buy” — the next procurement market seen through 2026 management issues',
+    },
+  },
+  {
+    href: 'https://note.com/x402inc/n/nef92962033bc',
+    tag: 'Class 3 / 4',
+    title: {
+      ja: 'カードはエージェントを自律化しない——委任を安全に設計するClass 3と、x402が入るClass 4の境界',
+      en: 'Cards don’t make agents autonomous — the boundary between Class 3 (safe delegation) and Class 4 (where x402 enters)',
+    },
+  },
+  {
+    href: 'https://note.com/x402inc/n/nfe72adaf9b89',
+    tag: 'x402 Data',
+    title: {
+      ja: 'x402の出来高52.7Mの分解：スクリーニング後の商取引25.62Mとエージェント由来0.6〜7.5%（TRM Labs, 2026-09）',
+      en: 'Breaking down x402’s 52.7M volume: 25.62M in commerce after screening, 0.6–7.5% agent-originated (TRM Labs, 2026-09)',
+    },
+  },
+  {
+    href: 'https://note.com/x402inc/n/n3fb3ec112b4d',
+    tag: 'OSD / Japan',
+    title: {
+      ja: '日本株 Weekly Selection：Q2決算に集中する半導体サプライチェーン10銘柄のdated catalyst',
+      en: 'Japan stocks Weekly Selection: dated catalysts for 10 semiconductor supply-chain names reporting Q2',
+    },
+  },
+]
+
 const MAX_ITEMS = 5
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -137,6 +183,35 @@ export function News() {
           ))}
         </div>
       </div>
+
+      {/* Text-only articles */}
+      {TEXT_ITEMS.length > 0 && (
+        <ul className="mt-12 grid md:grid-cols-2 gap-x-10 border-t border-fg/10">
+          {TEXT_ITEMS.map((n) => (
+            <li key={n.href} className="border-b border-fg/10">
+              <a
+                href={n.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3 py-4"
+              >
+                <span className="flex-1">
+                  <span
+                    className="text-[11px] font-mono"
+                    style={{ color: 'rgb(var(--gold))' }}
+                  >
+                    {n.tag}
+                  </span>
+                  <span className="mt-1 block text-sm text-fg/80 leading-[1.7] group-hover:text-gold transition-colors">
+                    {n.title[lang]}
+                  </span>
+                </span>
+                <ArrowUpRight className="mt-1 w-4 h-4 shrink-0 text-fg/35 group-hover:text-gold transition-colors" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   )
 }
