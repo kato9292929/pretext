@@ -60,14 +60,14 @@ export function News() {
   const [lead, ...rest] = NEWS.slice(0, MAX_ITEMS)
   if (!lead) return null
   return (
-    <section id="news" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <section id="updates" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease }}
       >
-        <SectionEyebrow label="News" tag={lang === 'ja' ? 'お知らせ' : 'Announcements'} heading />
+        <SectionEyebrow label="Update" tag={lang === 'ja' ? '最新情報' : 'Latest'} heading />
       </motion.div>
 
       <div className="mt-10 grid gap-10 md:grid-cols-[1.15fr_1fr]">
