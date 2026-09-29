@@ -34,7 +34,7 @@ const NEWS: NewsItem[] = [
   },
 ]
 
-// Text-only articles listed below the image articles. Newest first.
+// Text-only articles, listed in the right column under the image articles. Newest first.
 type TextItem = { href: string; tag: string; title: Localized }
 
 const TEXT_ITEMS: TextItem[] = [
@@ -181,37 +181,27 @@ export function News() {
               </div>
             </motion.a>
           ))}
+          {TEXT_ITEMS.map((n) => (
+            <a
+              key={n.href}
+              href={n.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start gap-3 py-4 first:pt-0"
+            >
+              <span className="flex-1">
+                <span className="text-[11px] font-mono" style={{ color: 'rgb(var(--gold))' }}>
+                  {n.tag}
+                </span>
+                <span className="mt-1 block text-sm text-fg/80 leading-[1.7] group-hover:text-gold transition-colors">
+                  {n.title[lang]}
+                </span>
+              </span>
+              <ArrowUpRight className="mt-1 w-4 h-4 shrink-0 text-fg/35 group-hover:text-gold transition-colors" />
+            </a>
+          ))}
         </div>
       </div>
-
-      {/* Text-only articles */}
-      {TEXT_ITEMS.length > 0 && (
-        <ul className="mt-12 grid md:grid-cols-2 gap-x-10 border-t border-fg/10">
-          {TEXT_ITEMS.map((n) => (
-            <li key={n.href} className="border-b border-fg/10">
-              <a
-                href={n.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-start gap-3 py-4"
-              >
-                <span className="flex-1">
-                  <span
-                    className="text-[11px] font-mono"
-                    style={{ color: 'rgb(var(--gold))' }}
-                  >
-                    {n.tag}
-                  </span>
-                  <span className="mt-1 block text-sm text-fg/80 leading-[1.7] group-hover:text-gold transition-colors">
-                    {n.title[lang]}
-                  </span>
-                </span>
-                <ArrowUpRight className="mt-1 w-4 h-4 shrink-0 text-fg/35 group-hover:text-gold transition-colors" />
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
     </section>
   )
 }
