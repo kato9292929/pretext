@@ -138,15 +138,15 @@ function Preview({ src, name }: { src?: string; name: string }) {
 /* Flow diagram: sellers and our data products feed the RFQ market; the agent buys through it. */
 type Node = { key: Key; x: number; y: number; w: number; h: number }
 const W = 600
-const H = 380
-const BOX_H = 64
+const H = 300
+const BOX_H = 44
 
 function FlowDiagram({
   active,
   onSelect,
   lang,
 }: {
-  active: Key
+  active: Key | null
   onSelect: (k: Key) => void
   lang: 'ja' | 'en'
 }) {
@@ -170,21 +170,21 @@ function FlowDiagram({
           y={n.y}
           width={n.w}
           height={n.h}
-          rx={10}
-          className={`transition-colors ${on ? 'fill-gold/10' : 'fill-bg/60'}`}
-          stroke={opts.strong ? 'url(#rfq-grad)' : on ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.75)'}
-          strokeWidth={opts.strong ? 2.5 : on ? 2 : 1.25}
+          rx={8}
+          className={`transition-colors ${on ? 'fill-gold/10' : 'fill-transparent'}`}
+          stroke={opts.strong ? 'url(#rfq-grad)' : on ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.3)'}
+          strokeWidth={opts.strong ? 1.5 : 1}
         />
         {lines.map((t, i) => (
           <text
             key={t}
             x={n.x + n.w / 2}
-            y={n.y + n.h / 2 + (i - (lines.length - 1) / 2) * 20}
+            y={n.y + n.h / 2 + (i - (lines.length - 1) / 2) * 16}
             textAnchor="middle"
             dominantBaseline="central"
             className={`transition-colors ${on ? 'fill-gold' : 'fill-fg'}`}
-            fontSize={opts.strong ? 19 : 14}
-            fontWeight={opts.strong ? 700 : 600}
+            fontSize={opts.strong ? 14 : 12}
+            fontWeight={opts.strong ? 600 : 500}
           >
             {t}
           </text>
@@ -195,7 +195,7 @@ function FlowDiagram({
 
   // The OSD / JIN box holds two products; each line is its own hover target.
   const pair = () => {
-    const x = 340, y = 20, w = 250, h = BOX_H
+    const x = 355, y = 16, w = 200, h = BOX_H
     const onAny = active === 'osd' || active === 'jin'
     const half = (key: Key, label: string, i: 0 | 1) => {
       const on = active === key
@@ -214,11 +214,11 @@ function FlowDiagram({
           <rect x={x} y={y + (h / 2) * i} width={w} height={h / 2} fill="transparent" />
           <text
             x={x + w / 2}
-            y={y + h / 2 + (i === 0 ? -10 : 10)}
+            y={y + h / 2 + (i === 0 ? -8 : 8)}
             textAnchor="middle"
             dominantBaseline="central"
-            fontSize={14}
-            fontWeight={600}
+            fontSize={12}
+            fontWeight={500}
             className={`transition-colors ${on ? 'fill-gold' : 'fill-fg'}`}
           >
             {label}
@@ -233,10 +233,10 @@ function FlowDiagram({
           y={y}
           width={w}
           height={h}
-          rx={10}
-          className={`transition-colors ${onAny ? 'fill-gold/10' : 'fill-bg/60'}`}
-          stroke={onAny ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.75)'}
-          strokeWidth={onAny ? 2 : 1.25}
+          rx={8}
+          className={`transition-colors ${onAny ? 'fill-gold/10' : 'fill-transparent'}`}
+          stroke={onAny ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.3)'}
+          strokeWidth={1}
         />
         {half('osd', 'Onchain Stock Data', 0)}
         {half('jin', 'Japan Inflation Nowcall', 1)}
@@ -245,7 +245,7 @@ function FlowDiagram({
   }
 
   return (
-    <div className="liquid-glass rounded-2xl p-4 md:p-6 lg:sticky lg:top-24">
+    <div className="max-w-2xl mx-auto">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto select-none" role="group" aria-label="x402 RFQ Market">
         <defs>
           <linearGradient id="rfq-grad" x1="0" y1="0" x2="1" y2="0">
@@ -254,21 +254,21 @@ function FlowDiagram({
             <stop offset="70%" stopColor="#E9B8C8" />
             <stop offset="100%" stopColor="#B7B4EC" />
           </linearGradient>
-          <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10 z" fill="rgb(var(--fg) / 0.85)" />
+          <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="rgb(var(--fg) / 0.45)" />
           </marker>
         </defs>
 
-        <g fill="none" stroke="rgb(var(--fg) / 0.6)" strokeWidth={1.25} markerEnd="url(#flow-arrow)">
-          <path d="M135 84 C135 134, 200 142, 240 158" />
-          <path d="M465 84 C465 134, 400 142, 360 158" />
-          <path d="M300 290 L300 228" />
+        <g fill="none" stroke="rgb(var(--fg) / 0.3)" strokeWidth={1} markerEnd="url(#flow-arrow)">
+          <path d="M145 60 C145 100, 215 108, 252 126" />
+          <path d="M455 60 C455 100, 385 108, 348 126" />
+          <path d="M300 236 L300 176" />
         </g>
 
-        {node('endpoint', 'Sellers in x402 Endpoint', { key: 'endpoint', x: 10, y: 20, w: 250, h: BOX_H })}
+        {node('endpoint', 'Sellers in x402 Endpoint', { key: 'endpoint', x: 45, y: 16, w: 200, h: BOX_H })}
         {pair()}
-        {node('rfq', 'x402 RFQ Market', { key: 'rfq', x: 160, y: 160, w: 280, h: 66 }, { strong: true })}
-        {node('aa', 'x402 Autonomous Agent (buyer)', { key: 'aa', x: 140, y: 292, w: 320, h: BOX_H })}
+        {node('rfq', 'x402 RFQ Market', { key: 'rfq', x: 205, y: 128, w: 190, h: 46 }, { strong: true })}
+        {node('aa', 'x402 Autonomous Agent (buyer)', { key: 'aa', x: 185, y: 238, w: 230, h: BOX_H })}
       </svg>
       <p className="mt-3 text-center text-[11px] text-fg/40">{LABELS[lang].hint}</p>
     </div>
@@ -278,7 +278,7 @@ function FlowDiagram({
 export function Featured() {
   const { lang } = useLang()
   const lab = LABELS[lang]
-  const [active, setActive] = useState<Key>('rfq')
+  const [active, setActive] = useState<Key | null>(null)
   return (
     <section id="products" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
@@ -291,11 +291,13 @@ export function Featured() {
         <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
       </motion.div>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-start">
+      {/* Only the diagram by default; hovering / tapping a product reveals its card below. */}
+      <div className="mt-10" onMouseLeave={() => setActive(null)}>
         <FlowDiagram active={active} onSelect={setActive} lang={lang} />
 
         {(() => {
-          const product = PRODUCTS.find((p) => p.key === active) ?? PRODUCTS[0]
+          const product = PRODUCTS.find((p) => p.key === active)
+          if (!product) return null
           return (
             <motion.article
               key={product.key}
@@ -303,7 +305,7 @@ export function Featured() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               aria-live="polite"
-              className="liquid-glass rounded-2xl overflow-hidden flex flex-col"
+              className="mt-6 max-w-5xl mx-auto liquid-glass rounded-2xl overflow-hidden grid md:grid-cols-[1fr_1.15fr]"
             >
               <Preview src={product.image} name={product.name} />
               <div className="p-6 flex flex-col flex-1">
