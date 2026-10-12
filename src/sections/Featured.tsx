@@ -6,7 +6,10 @@ import { useLang, type Localized } from '../i18n'
 
 type ProductLink = { label: string; href: string }
 
+type Key = 'endpoint' | 'osd' | 'jin' | 'rfq' | 'aa'
+
 type Product = {
+  key: Key
   tag: Localized
   name: string
   badge: string
@@ -23,12 +26,26 @@ const INTRO: Localized = {
 }
 
 const LABELS = {
-  ja: { visit: 'サイトを見る', soon: '準備中', hint: '横にスライド' },
-  en: { visit: 'Visit site', soon: 'Coming soon', hint: 'Slide' },
+  ja: { visit: 'サイトを見る', soon: '準備中', hint: '各プロダクトにカーソルを合わせると詳細が表示されます' },
+  en: { visit: 'Visit site', soon: 'Coming soon', hint: 'Hover a product to see its details' },
 }
 
 const PRODUCTS: Product[] = [
   {
+    key: 'rfq',
+    tag: { ja: 'MARKET（取引の場）', en: 'MARKET' },
+    name: 'x402 RFQ Market',
+    badge: 'Solana devnet',
+    desc: {
+      ja: '1つのエージェントが依頼し、複数の売り手が見積もりを返し、最適な1社が選ばれる見積もり依頼（RFQ）市場です。x402 Endpoint の売り手、自社データ商品、x402 Autonomous Agent の間に置き、買い手が売り手を比べて選べるようにします。\n\n買い手は欲しいデータ・上限価格・必要な速さを提示し、売り手が価格を返します。十分に速い中で最も安い売り手が落札し、Solana上のUSDCで支払われます。結果は「配信済み」か「何が失敗したか」としてSolana上に記録され、その記録が売り手を選ぶ基準になります。手数料は落札価格の1%です。現在はSolana devnetで稼働しており、参加者はすべて当社のエージェントです。',
+      en: 'A request-for-quote (RFQ) market: one agent asks, many sellers answer, and the best one wins. It sits between the sellers in x402 Endpoint, our own data products and x402 Autonomous Agent, so buyers can compare sellers instead of paying whatever price is listed.\n\nThe buyer posts what data it wants, the most it will pay and how fast it needs it; sellers quote a price. The cheapest seller that is fast enough wins and is paid in USDC on Solana. The result — delivered, or what went wrong — is recorded on Solana, and that record is how agents choose who to buy from. The market takes 1% of the winning price. It runs on Solana devnet today, and every buyer and seller is one of our own agents.',
+    },
+    image: '/products/rfq.jpg',
+    live: 'https://rfq.x402jp.com/',
+    links: [{ label: 'GitHub', href: 'https://github.com/kato9292929/RFQ' }],
+  },
+  {
+    key: 'endpoint',
     tag: { ja: '01 · MAP（発見）', en: '01 · MAP (Discovery)' },
     name: 'x402 Endpoint',
     badge: 'HTTP/1.1 402 ✓',
@@ -44,6 +61,7 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
+    key: 'aa',
     tag: { ja: '02 · CONSUME（消費）', en: '02 · CONSUME (Consumption)' },
     name: 'x402 Autonomous Agent',
     badge: 'Railway ✓',
@@ -59,6 +77,7 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
+    key: 'osd',
     tag: { ja: '03 · PRODUCE（データ生成）', en: '03 · PRODUCE (Data production)' },
     name: 'Onchain Stock Data',
     badge: 'HTTP/1.1 402 ✓',
@@ -74,6 +93,7 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
+    key: 'jin',
     tag: { ja: '03 · PRODUCE（データ生成）', en: '03 · PRODUCE (Data production)' },
     name: 'Japan Inflation Nowcall',
     badge: 'HTTP/1.1 402 ✓',
@@ -115,9 +135,150 @@ function Preview({ src, name }: { src?: string; name: string }) {
   )
 }
 
+/* Flow diagram: sellers and our data products feed the RFQ market; the agent buys through it. */
+type Node = { key: Key; x: number; y: number; w: number; h: number }
+const W = 600
+const H = 380
+const BOX_H = 64
+
+function FlowDiagram({
+  active,
+  onSelect,
+  lang,
+}: {
+  active: Key
+  onSelect: (k: Key) => void
+  lang: 'ja' | 'en'
+}) {
+  const node = (key: Key, label: string, n: Node, opts: { lines?: string[]; strong?: boolean } = {}) => {
+    const on = active === key
+    const lines = opts.lines ?? [label]
+    return (
+      <g
+        key={key}
+        role="button"
+        tabIndex={0}
+        aria-label={label}
+        aria-pressed={on}
+        onMouseEnter={() => onSelect(key)}
+        onFocus={() => onSelect(key)}
+        onClick={() => onSelect(key)}
+        className="cursor-pointer outline-none"
+      >
+        <rect
+          x={n.x}
+          y={n.y}
+          width={n.w}
+          height={n.h}
+          rx={10}
+          className={`transition-colors ${on ? 'fill-gold/10' : 'fill-bg/60'}`}
+          stroke={opts.strong ? 'url(#rfq-grad)' : on ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.75)'}
+          strokeWidth={opts.strong ? 2.5 : on ? 2 : 1.25}
+        />
+        {lines.map((t, i) => (
+          <text
+            key={t}
+            x={n.x + n.w / 2}
+            y={n.y + n.h / 2 + (i - (lines.length - 1) / 2) * 20}
+            textAnchor="middle"
+            dominantBaseline="central"
+            className={`transition-colors ${on ? 'fill-gold' : 'fill-fg'}`}
+            fontSize={opts.strong ? 19 : 14}
+            fontWeight={opts.strong ? 700 : 600}
+          >
+            {t}
+          </text>
+        ))}
+      </g>
+    )
+  }
+
+  // The OSD / JIN box holds two products; each line is its own hover target.
+  const pair = () => {
+    const x = 340, y = 20, w = 250, h = BOX_H
+    const onAny = active === 'osd' || active === 'jin'
+    const half = (key: Key, label: string, i: 0 | 1) => {
+      const on = active === key
+      return (
+        <g
+          key={key}
+          role="button"
+          tabIndex={0}
+          aria-label={label}
+          aria-pressed={on}
+          onMouseEnter={() => onSelect(key)}
+          onFocus={() => onSelect(key)}
+          onClick={() => onSelect(key)}
+          className="cursor-pointer outline-none"
+        >
+          <rect x={x} y={y + (h / 2) * i} width={w} height={h / 2} fill="transparent" />
+          <text
+            x={x + w / 2}
+            y={y + h / 2 + (i === 0 ? -10 : 10)}
+            textAnchor="middle"
+            dominantBaseline="central"
+            fontSize={14}
+            fontWeight={600}
+            className={`transition-colors ${on ? 'fill-gold' : 'fill-fg'}`}
+          >
+            {label}
+          </text>
+        </g>
+      )
+    }
+    return (
+      <g>
+        <rect
+          x={x}
+          y={y}
+          width={w}
+          height={h}
+          rx={10}
+          className={`transition-colors ${onAny ? 'fill-gold/10' : 'fill-bg/60'}`}
+          stroke={onAny ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.75)'}
+          strokeWidth={onAny ? 2 : 1.25}
+        />
+        {half('osd', 'Onchain Stock Data', 0)}
+        {half('jin', 'Japan Inflation Nowcall', 1)}
+      </g>
+    )
+  }
+
+  return (
+    <div className="liquid-glass rounded-2xl p-4 md:p-6 lg:sticky lg:top-24">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto select-none" role="group" aria-label="x402 RFQ Market">
+        <defs>
+          <linearGradient id="rfq-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#B9E6A0" />
+            <stop offset="40%" stopColor="#E8C86A" />
+            <stop offset="70%" stopColor="#E9B8C8" />
+            <stop offset="100%" stopColor="#B7B4EC" />
+          </linearGradient>
+          <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="rgb(var(--fg) / 0.85)" />
+          </marker>
+        </defs>
+
+        <g fill="none" stroke="rgb(var(--fg) / 0.6)" strokeWidth={1.25} markerEnd="url(#flow-arrow)">
+          <path d="M135 84 C135 134, 200 142, 240 158" />
+          <path d="M465 84 C465 134, 400 142, 360 158" />
+          <path d="M300 290 L300 228" />
+        </g>
+
+        {node('endpoint', 'Sellers in x402 Endpoint', { key: 'endpoint', x: 10, y: 20, w: 250, h: BOX_H })}
+        {pair()}
+        {node('rfq', 'x402 RFQ Market', { key: 'rfq', x: 160, y: 160, w: 280, h: 66 }, { strong: true })}
+        {node('aa', 'x402 Autonomous Agent (buyer)', { key: 'aa', x: 140, y: 292, w: 320, h: BOX_H })}
+      </svg>
+      <p className="mt-3 text-center text-[11px] text-fg/40">{LABELS[lang].hint}</p>
+    </div>
+  )
+}
+
 export function Featured() {
   const { lang } = useLang()
   const lab = LABELS[lang]
+  const [active, setActive] = useState<Key>('rfq')
   return (
     <section id="products" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
@@ -130,16 +291,20 @@ export function Featured() {
         <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
       </motion.div>
 
-      <div className="mt-10 grid sm:grid-cols-2 gap-5">
-        {PRODUCTS.map((product, i) => (
-          <motion.article
-            key={product.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.08 }}
-            className="liquid-glass rounded-2xl overflow-hidden flex flex-col"
-          >
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-start">
+        <FlowDiagram active={active} onSelect={setActive} lang={lang} />
+
+        {(() => {
+          const product = PRODUCTS.find((p) => p.key === active) ?? PRODUCTS[0]
+          return (
+            <motion.article
+              key={product.key}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              aria-live="polite"
+              className="liquid-glass rounded-2xl overflow-hidden flex flex-col"
+            >
               <Preview src={product.image} name={product.name} />
               <div className="p-6 flex flex-col flex-1">
                 <span className="text-xs font-medium tracking-wide text-gold">{product.tag[lang]}</span>
@@ -177,8 +342,9 @@ export function Featured() {
                   ))}
                 </div>
               </div>
-          </motion.article>
-        ))}
+            </motion.article>
+          )
+        })()}
       </div>
     </section>
   )
