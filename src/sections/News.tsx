@@ -15,8 +15,19 @@ type NewsItem = {
 // Newest first. The first item is the large lead; the rest (up to 4) list on the right.
 const NEWS: NewsItem[] = [
   {
+    href: 'https://prtimes.jp/main/html/rd/p/000000005.000188987.html',
+    image: '/news/fintech.jpg',
+    tag: { ja: 'プレスリリース', en: 'Press release' },
+    title: {
+      ja: 'x402株式会社、一般社団法人Fintech協会にベンチャー会員として入会',
+      en: 'x402 Inc. joins the Fintech Association of Japan as a venture member',
+    },
+    date: '2026-10-14',
+  },
+  {
     href: 'https://prtimes.jp/main/html/rd/p/000000004.000188987.html',
     image: '/news/jba.jpg',
+    date: '2026-09-25',
     tag: { ja: 'プレスリリース', en: 'Press release' },
     title: {
       ja: 'x402株式会社、一般社団法人日本ブロックチェーン協会（JBA）にシルバー会員として入会',
@@ -26,6 +37,7 @@ const NEWS: NewsItem[] = [
   {
     href: 'https://prtimes.jp/main/html/rd/p/000000002.000188987.html',
     image: '/news/jcba.jpg',
+    date: '2026-09-04',
     tag: { ja: 'プレスリリース', en: 'Press release' },
     title: {
       ja: 'x402株式会社、一般社団法人日本暗号資産ビジネス協会（JCBA）に準会員として入会',
@@ -94,11 +106,12 @@ function Tag({ label }: { label: string }) {
   )
 }
 
+// Dates are plain calendar dates (JST); format from the string so the viewer's time zone can't shift the day.
 function formatDate(date: string, lang: 'ja' | 'en') {
-  const d = new Date(`${date}T00:00:00+09:00`)
-  return lang === 'ja'
-    ? `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
-    : d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  const [y, m, d] = date.split('-').map(Number)
+  if (lang === 'ja') return `${y}年${m}月${d}日`
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  return `${months[m - 1]} ${d}, ${y}`
 }
 
 export function News() {
@@ -116,7 +129,7 @@ export function News() {
         <SectionEyebrow label="Update" tag={lang === 'ja' ? '最新情報' : 'Latest'} heading />
       </motion.div>
 
-      <div className="mt-10 grid gap-10 md:grid-cols-[1.15fr_1fr]">
+      <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr]">
         {/* Lead article */}
         <motion.a
           href={lead.href}
@@ -132,7 +145,7 @@ export function News() {
             <img
               src={lead.image}
               alt=""
-              className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
             />
           </div>
           <div className="mt-5">
@@ -163,7 +176,7 @@ export function News() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease, delay: i * 0.06 }}
-              className="group grid grid-cols-[120px_1fr] sm:grid-cols-[160px_1fr] gap-4 py-5 first:pt-0"
+              className="group grid grid-cols-[104px_1fr] sm:grid-cols-[112px_1fr] gap-3 py-3 first:pt-0"
             >
               <div className="self-start overflow-hidden rounded-lg border border-fg/10">
                 <img
@@ -187,13 +200,13 @@ export function News() {
               href={n.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-2 py-2.5 first:pt-0"
+              className="group flex items-start gap-2 py-2 first:pt-0"
             >
               <span className="flex-1">
                 <span className="text-[10px] font-mono" style={{ color: 'rgb(var(--gold))' }}>
                   {n.tag}
                 </span>
-                <span className="mt-0.5 block text-xs text-fg/80 leading-[1.6] line-clamp-2 group-hover:text-gold transition-colors">
+                <span title={n.title[lang]} className="mt-0.5 text-xs text-fg/80 leading-[1.6] line-clamp-1 group-hover:text-gold transition-colors">
                   {n.title[lang]}
                 </span>
               </span>
