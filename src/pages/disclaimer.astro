@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro'
+import { LegalApp } from '../apps'
+---
+<Base>
+  <Fragment slot="head">
+      <meta name="description" content="免責事項 — x402 Inc.">
+      <title>免責事項 — x402 Inc.</title>
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+      <meta name="robots" content="noindex">
+  </Fragment>
+  <div id="root">
+    <LegalApp client:load doc="disclaimer" />
+  </div>
+</Base>

@@ -1,10 +1,14 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useLayoutEffect, useState, type ReactNode } from 'react'
+
+// Pages are rendered to HTML at build time in the defaults (ja / dark) and then
+// hydrated. Saved preferences are applied right after hydration, before paint.
+const useClientLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 export type Lang = 'ja' | 'en'
 
 const KEY = 'x402-lang'
 
-function initialLang(): Lang {
+function storedLang(): Lang {
   try {
     const v = localStorage.getItem(KEY)
     if (v === 'en' || v === 'ja') return v
@@ -20,7 +24,11 @@ const LangContext = createContext<{ lang: Lang; setLang: (l: Lang) => void }>({
 })
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(initialLang)
+  const [lang, setLangState] = useState<Lang>('ja')
+
+  useClientLayoutEffect(() => {
+    setLangState(storedLang())
+  }, [])
 
   useEffect(() => {
     document.documentElement.lang = lang
@@ -47,7 +55,7 @@ export type Theme = 'dark' | 'light'
 
 const THEME_KEY = 'x402-theme'
 
-function initialTheme(): Theme {
+function storedTheme(): Theme {
   try {
     const v = localStorage.getItem(THEME_KEY)
     if (v === 'light' || v === 'dark') return v
@@ -63,7 +71,11 @@ const ThemeContext = createContext<{ theme: Theme; setTheme: (t: Theme) => void 
 })
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(initialTheme)
+  const [theme, setThemeState] = useState<Theme>('dark')
+
+  useClientLayoutEffect(() => {
+    setThemeState(storedTheme())
+  }, [])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
