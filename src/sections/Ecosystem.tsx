@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
 import { useLang, type Localized } from '../i18n'
 import { EcosystemTrade } from './EcosystemTrade'
+import { EcosystemProducts } from './EcosystemProducts'
 
 type Tab = 'payment' | 'trade'
 const TABS: { key: Tab; label: string }[] = [
@@ -424,6 +425,9 @@ export function Ecosystem() {
           </div>
         </>
       )}
+
+      {/* Products (4 layers), ecosystem map and proofs of concept — shown under both tabs */}
+      <EcosystemProducts />
     </section>
   )
 }

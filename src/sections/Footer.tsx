@@ -10,6 +10,12 @@ const COPY = {
     ceo: '加藤雅人',
     corpLabel: '法人番号',
     corp: '7010401194879',
+    memberLabel: '加盟団体',
+    members: [
+      '一般社団法人日本ブロックチェーン協会（JBA）シルバー会員（2026年9月25日）',
+      '一般社団法人日本暗号資産ビジネス協会（JCBA）賛助会員',
+      '一般社団法人Fintech協会 ベンチャー会員（2026年10月1日公表）',
+    ],
     siteLabel: 'Pages',
     contact: 'Contact',
     rights: '© 2026 x402株式会社',
@@ -22,6 +28,12 @@ const COPY = {
     ceo: 'Masato Kato',
     corpLabel: 'Corporate Number',
     corp: '7010401194879',
+    memberLabel: 'Memberships',
+    members: [
+      'Japan Blockchain Association (JBA), silver member (Sep 25, 2026)',
+      'Japan Cryptoasset Business Association (JCBA), supporting member',
+      'Fintech Association of Japan, venture member (announced Oct 1, 2026)',
+    ],
     siteLabel: 'Pages',
     contact: 'Contact',
     rights: '© 2026 x402 Inc.',
@@ -52,6 +64,14 @@ export function Footer() {
               <dd className="text-fg/70">{t.ceo}</dd>
               <dt className="mt-1 text-fg/40 sm:mt-0">{t.corpLabel}</dt>
               <dd className="font-mono text-fg/70">{t.corp}</dd>
+              <dt className="mt-1 text-fg/40 sm:mt-0">{t.memberLabel}</dt>
+              <dd className="text-fg/70 leading-[1.7]">
+                <ul className="space-y-0.5">
+                  {t.members.map((m) => (
+                    <li key={m}>{m}</li>
+                  ))}
+                </ul>
+              </dd>
             </dl>
           </div>
 
