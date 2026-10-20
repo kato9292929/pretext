@@ -1,0 +1,23 @@
+---
+import '../index.css'
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Apply the saved theme before first paint (the HTML is built in the dark default). -->
+    <script is:inline>
+      try {
+        var t = localStorage.getItem('x402-theme')
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark')
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      }
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

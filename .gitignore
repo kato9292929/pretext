@@ -4,3 +4,6 @@ dist/
 .env.local
 worker/node_modules/
 worker/.wrangler/
+
+# Astro
+.astro/

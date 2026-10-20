@@ -6,8 +6,11 @@ import { useLang, type Localized } from '../i18n'
 
 type ProductLink = { label: string; href: string }
 
+type Key = 'endpoint' | 'osd' | 'jin' | 'rfq' | 'aa'
+
 type Product = {
-  tag: string
+  key: Key
+  tag: Localized
   name: string
   badge: string
   desc: Localized
@@ -18,23 +21,37 @@ type Product = {
 }
 
 const INTRO: Localized = {
-  ja: 'x402 Inc.は、エージェント経済とエージェント決済のエコシステムを、AIとの詳細なリサーチで分析するリサーチ会社です。x402対応のエンドポイント、独自データ、それを叩くエージェントを自ら作り、観測と検証の instruments として使います。HTTP 402を共通の決済レールに、Base/Solana上のper-callオンチェーン決済とERC-8004のエージェントidentityを土台にしています。',
-  en: 'x402 Inc. is a research company that analyzes the agent economy and the agent-payments ecosystem through detailed research with AI. We build x402-compatible endpoints, proprietary data and the agents that call them, and use them as instruments for observation and verification. With HTTP 402 as the shared payment rail, we build on per-call on-chain settlement across Base/Solana and ERC-8004 agent identity.',
+  ja: 'x402 Inc.は、エージェント決済に関するリサーチと関連インフラ・データの開発提供を行う会社です。x402対応エンドポイントのデータカタログ、自律エージェントによるステーブルコイン決済、オルタナティブデータ生成の3事業を展開。クレジットカードやステーブルコインなど各市場セグメントにおける市場調査を日次で公開し、エージェンティックコマース市場の形成に貢献することを目指しています。',
+  en: 'x402 Inc. researches agent payments and develops the related infrastructure and data. We run three businesses: a data catalog of x402-enabled endpoints, stablecoin settlement by autonomous agents, and alternative-data generation. We publish daily market research across segments — credit cards, stablecoins and more — aiming to help form the agentic-commerce market.',
 }
 
 const LABELS = {
-  ja: { visit: 'サイトを見る', soon: '準備中', hint: '横にスライド' },
-  en: { visit: 'Visit site', soon: 'Coming soon', hint: 'Slide' },
+  ja: { visit: 'サイトを見る', soon: '準備中', hint: '各プロダクトにカーソルを合わせると詳細が表示されます' },
+  en: { visit: 'Visit site', soon: 'Coming soon', hint: 'Hover a product to see its details' },
 }
 
 const PRODUCTS: Product[] = [
   {
-    tag: '01 · MAP',
+    key: 'rfq',
+    tag: { ja: '04 · MARKET（E5）', en: '04 · MARKET (E5)' },
+    name: 'x402 RFQ Market',
+    badge: 'Solana devnet',
+    desc: {
+      ja: '1つのエージェントが依頼し、複数の売り手が見積もりを返し、最適な1社が選ばれる見積もり依頼（RFQ）市場です。x402 Endpoint の売り手、自社データ商品、x402 Autonomous Agent の間に置き、買い手が売り手を比べて選べるようにします。\n\n買い手は欲しいデータ・上限価格・必要な速さを提示し、売り手が価格を返します。十分に速い中で最も安い売り手が落札し、Solana上のUSDCで支払われます。結果は「配信済み」か「何が失敗したか」としてSolana上に記録され、その記録が売り手を選ぶ基準になります。手数料は落札価格の1%です。現在はSolana devnetで稼働しており、参加者はすべて当社のエージェントです。mainnet 公開は Solana の rent 引き下げ（Agave 4.4）後の2026年11月です。',
+      en: 'A request-for-quote (RFQ) market: one agent asks, many sellers answer, and the best one wins. It sits between the sellers in x402 Endpoint, our own data products and x402 Autonomous Agent, so buyers can compare sellers instead of paying whatever price is listed.\n\nThe buyer posts what data it wants, the most it will pay and how fast it needs it; sellers quote a price. The cheapest seller that is fast enough wins and is paid in USDC on Solana. The result — delivered, or what went wrong — is recorded on Solana, and that record is how agents choose who to buy from. The market takes 1% of the winning price. It runs on Solana devnet today, and every buyer and seller is one of our own agents. Mainnet launch is in November 2026, after Solana’s rent reduction (Agave 4.4).',
+    },
+    image: '/products/rfq.jpg',
+    live: 'https://rfq.x402jp.com/',
+    links: [{ label: 'GitHub', href: 'https://github.com/kato9292929/RFQ' }],
+  },
+  {
+    key: 'endpoint',
+    tag: { ja: '01 · MAP（発見）', en: '01 · MAP (Discovery)' },
     name: 'x402 Endpoint',
     badge: 'HTTP/1.1 402 ✓',
     desc: {
-      ja: 'x402対応の課金エンドポイントを集めた一覧。約19,000件超を毎日記録し、推移を時系列で追える。複数ソースを毎日cronで集約・正規化し、日次スナップショットとして保存。REST と MCP の両方で配信するのでエージェントが直接読める。',
-      en: 'A directory of x402-enabled paid endpoints. Over ~19,000 are recorded daily so you can track the trend over time. Multiple sources are aggregated and normalized by a daily cron and stored as daily snapshots. Served over both REST and MCP so agents can read it directly.',
+      ja: 'x402 Endpoint は、x402エコシステムに関連した公開カタログを毎日取得し、エンドポイント・ホスト・カテゴリ・価格帯・取引ランキングを日次スナップショットとして保存しています。2026年10月19日時点で161,826エンドポイント・13,701ホストを対象としており、最近ではホスト名が企業の管理ドメイン配下にあるかを判定し、その企業自身の出品と、他社名を掲げた再販・ラッパーを区別しています。\n\n毎週、出品側（カタログ）と利用側（取引・ランキング）の両方から推移を分析し、数値の出所、取得方法、インサイトを発信。2026年6月上旬からの件数、カテゴリ、ホスト構成の推移を時系列で確認できるほか、REST APIとMCPサーバーを通じて配信しており、AIエージェントが直接データを読み取れます。',
+      en: 'x402 Endpoint pulls the public catalogs of the x402 ecosystem every day and stores endpoints, hosts, categories, price ranges and transaction rankings as daily snapshots. As of Oct 19, 2026 it covers 161,826 endpoints across 13,701 hosts. Recently it has started checking whether a hostname sits under a company’s own managed domain, separating a company’s own listings from resellers and wrappers that carry another company’s name.\n\nEvery week we analyze the trends from both the supply side (catalog) and the demand side (transactions and rankings), and publish where the numbers come from, how they were collected, and what they show. You can follow counts, categories and host composition as a time series from early June 2026, and the data is served over a REST API and an MCP server so AI agents can read it directly.',
     },
     image: '/products/endpoint.png',
     live: 'https://endpoint.x402jp.com/',
@@ -44,27 +61,29 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
-    tag: '02 · CONSUME',
+    key: 'aa',
+    tag: { ja: '02 · CONSUME（消費）', en: '02 · CONSUME (Consumption)' },
     name: 'x402 Autonomous Agent',
     badge: 'Railway ✓',
     desc: {
-      ja: 'オンチェーンの身元(ERC-8004, agentId 55560)を持つエージェントが、毎朝データをper-callで購入し日次の判断を記録。Base mainnetのUSDCで実際にper-call決済し、自社のx402エンドポイントを自社エージェントが消費する自己完結の検証ループ。重要な判断の前にはWorld IDで本人性を確認し、人間が承認を挟む。',
-      en: 'An agent with an on-chain identity (ERC-8004, agentId 55560) buys data per-call every morning and records its daily decisions. It settles per-call in real USDC on Base mainnet — a self-contained validation loop where our own agent consumes our own x402 endpoints. Before important decisions it verifies personhood with World ID, with a human in the approval loop.',
+      ja: 'オンチェーンID（ERC-8004 agentId：55560 on Base／845265 on Arc Testnet）を持つ自律エージェントです。毎朝06:00 JSTにデータをper-callで購入し、その日の判断を追記専用の記録として残しています。決済はSolanaおよびBase上のUSDCで1コールごとにオンチェーン完結し、署名は両チェーンともCircle Developer-Controlled Walletsが行います。\n\n自社エンドポイントの日次購入に加え、週次で外部売り手にも実払いしており、現在の支払い先は外部6先です。前者は決済スタックが日次でend-to-endに稼働することの実証であり、後者は境界をまたいで実際に買えることの確認です。いずれも当社が買い手であり、外部需要の観測ではありません。売買執行には接続せず、週次の高額データ購入前にはWorld IDによる人間の承認を必須とするなど、エージェントへの委任範囲を人間が管理する設計も実装しています。Arc Testnetでは、ERC-8004のReputationとValidationも記録済みです。',
+      en: 'An autonomous agent with an on-chain identity (ERC-8004 agentId: 55560 on Base / 845265 on Arc Testnet). Every morning at 06:00 JST it buys data per-call and records the day’s decision as an append-only log. Each call settles on-chain in USDC on Solana and Base, and Circle Developer-Controlled Wallets sign on both chains.\n\nOn top of daily purchases from our own endpoints, it also makes real weekly payments to external sellers — currently 6 of them. The former shows the payment stack running end-to-end every day; the latter confirms it can actually buy across the boundary. In both cases we are the buyer, so this is not a measure of external demand. It is not connected to trade execution, and humans control the scope delegated to the agent — for example, a World ID human approval is required before weekly high-value data purchases. On Arc Testnet, ERC-8004 Reputation and Validation have also been recorded.',
     },
     image: '/products/aa.png',
-    comingSoon: true,
+    live: 'https://aa.x402jp.com/',
     links: [
       { label: 'note', href: 'https://note.com/x402inc/n/nfe50d4acfcd8' },
       { label: 'GitHub', href: 'https://github.com/kato9292929/x402-Autonomous-Agent-' },
     ],
   },
   {
-    tag: '03 · PRODUCE',
+    key: 'osd',
+    tag: { ja: '03 · PRODUCE（データ生成）', en: '03 · PRODUCE (Data production)' },
     name: 'Onchain Stock Data',
     badge: 'HTTP/1.1 402 ✓',
     desc: {
-      ja: 'Claude(Opus)が毎週、米国株と日本株を10銘柄ずつ選んで予想。各銘柄に判定日付きの数値カタリストを付け、判定日後に決算・適時開示と突き合わせてscorecardに採点を残す。記録は消さずにgitへ残す設計で、このtrack recordがmoat。配信は REST と MCP。',
-      en: 'Each week Claude (Opus) picks 10 US and 10 Japanese stocks and forecasts them. Each gets a numeric catalyst with a decision date; after the date, results are checked against earnings and disclosures and scored on a scorecard. Records are never deleted — kept in git — and this track record is the moat. Served over REST and MCP.',
+      ja: 'Claudeを用いて毎週、米国株・日本株を10銘柄ずつ選定し、各銘柄に期限を定めた1か月のカタリスト（検証可能な予測条件）を付与しています。期限到来後には、決算・適時開示などの一次情報と突き合わせ、hit / partial / miss を機械的に採点します。現在までに83件の判定が確定しており、内訳は hit 39 / partial 28 / miss 16 です。記録は上書き・削除せずGitに追記し、積み上がるtrack recordそのものが希少性の高いデータとなるよう設計しています。\n\n日本株では、EDINETで開示を行う企業約4,000社を母集団に197社を選定しました。このうち13社には日付と成立条件を確定させたカタリストを付与済みで、per-callで取得できる形で提供しています。MCP経由ではClaudeやChatGPTから自然言語で参照でき、x402のper-call決済ではエージェントが自律的にデータを購入できます。\n\n本サービスはファンドではなく、リサーチおよびセレクションのためのデータサービスです。本データはAIの予測精度を検証する記録であり、投資助言を目的とするものではありません。投資判断は利用者自身の責任で行ってください。',
+      en: 'Each week we use Claude to select 10 US and 10 Japanese stocks and attach a one-month, time-boxed catalyst (a verifiable forecast condition) to each. Once the deadline passes, the catalyst is checked against primary sources such as earnings and timely disclosures and mechanically scored hit / partial / miss. 83 verdicts have been finalized so far: hit 39 / partial 28 / miss 16. Records are never overwritten or deleted but appended to Git, so the growing track record itself becomes scarce, high-value data.\n\nFor Japanese stocks, we selected 197 companies from a universe of roughly 4,000 that file on EDINET. 13 of them already carry catalysts with a fixed date and success condition, available per-call. Via MCP, Claude and ChatGPT can query it in natural language, and with x402 per-call payments agents can buy the data autonomously.\n\nThis service is not a fund; it is a data service for research and selection. The data is a record for verifying AI forecast accuracy and is not investment advice. Investment decisions are your own responsibility.',
     },
     image: '/products/osd.png',
     live: 'https://osd.x402jp.com/',
@@ -74,12 +93,13 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
-    tag: '03 · PRODUCE',
-    name: 'Japan Inflation Nowcast',
+    key: 'jin',
+    tag: { ja: '03 · PRODUCE（データ生成）', en: '03 · PRODUCE (Data production)' },
+    name: 'Japan Inflation Nowcall',
     badge: 'HTTP/1.1 402 ✓',
     desc: {
-      ja: '東京のあるスーパーの店頭価格を毎日記録して作る独自の物価指数。10カテゴリ等加重のJevons幾何平均で日次指数化し、上流のCGPI(企業物価)も取り込み、上流から店頭までを接続して観測。x402エンドポイントとして配信し、per-callで購入できる。',
-      en: 'A proprietary price index built from daily in-store prices at a Tokyo supermarket. Indexed daily as an equal-weighted Jevons geometric mean across 10 categories, also incorporating upstream CGPI (corporate goods prices) to connect upstream to the shelf. Served as an x402 endpoint and purchasable per-call.',
+      ja: '東京の中堅スーパーマーケット1店舗の店頭価格を定点で記録し、独自の食品物価指数として提供するサービスです。指数は固定基準日（2026-06-04 = 100）に対する同一SKUの価格相対を取り、中分類ごとにJevons幾何平均で基礎集計したうえで、10カテゴリを等加重して上位集計します。価格はパックサイズや単位の違いを吸収した正準単価（¥/100g・¥/100ml・¥/個）に揃えてから比較するため、内容量の変更は値上げとして正しく拾われます。\n\n特売の扱いは2系列に分けており、基調となる excl_promo は基準日または当日に特売フラグの付いたSKUを除外し、incl_promo は特売を含めたまま集計します。配信はx402（Solana / USDC）です。latest は無料で、指数値・matched数・カバレッジ注記・方法論を返します。series は全履歴、movers はその日に動いた品目の内訳で、いずれも per-call で購入できます。価格は series が $0.01、movers が $0.02 です。',
+      en: 'A proprietary food price index built from fixed-point records of shelf prices at one mid-sized Tokyo supermarket. The index takes same-SKU price relatives against a fixed base date (2026-06-04 = 100), aggregates them per sub-category with a Jevons geometric mean, then combines 10 categories with equal weights. Prices are first normalized to canonical unit prices (¥/100g, ¥/100ml, ¥/item) that absorb differences in pack size and unit, so shrinkflation is correctly captured as a price increase.\n\nSales are handled as two series: the core excl_promo excludes SKUs flagged as on sale on the base date or the current day, while incl_promo keeps sales in. Delivery is via x402 (Solana / USDC). latest is free and returns the index value, matched count, coverage notes and methodology. series (full history) and movers (the items that moved that day) are purchasable per-call at $0.01 and $0.02 respectively.',
     },
     image: '/products/jin.png',
     live: 'https://jin.x402jp.com/',
@@ -115,9 +135,150 @@ function Preview({ src, name }: { src?: string; name: string }) {
   )
 }
 
+/* Flow diagram: sellers and our data products feed the RFQ market; the agent buys through it. */
+type Node = { key: Key; x: number; y: number; w: number; h: number }
+const W = 600
+const H = 300
+const BOX_H = 44
+
+function FlowDiagram({
+  active,
+  onSelect,
+  lang,
+}: {
+  active: Key | null
+  onSelect: (k: Key) => void
+  lang: 'ja' | 'en'
+}) {
+  const node = (key: Key, label: string, n: Node, opts: { lines?: string[]; strong?: boolean } = {}) => {
+    const on = active === key
+    const lines = opts.lines ?? [label]
+    return (
+      <g
+        key={key}
+        role="button"
+        tabIndex={0}
+        aria-label={label}
+        aria-pressed={on}
+        onMouseEnter={() => onSelect(key)}
+        onFocus={() => onSelect(key)}
+        onClick={() => onSelect(key)}
+        className="cursor-pointer outline-none"
+      >
+        <rect
+          x={n.x}
+          y={n.y}
+          width={n.w}
+          height={n.h}
+          rx={8}
+          className={`transition-colors ${on ? 'fill-gold/10' : 'fill-transparent'}`}
+          stroke={opts.strong ? 'url(#rfq-grad)' : on ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.3)'}
+          strokeWidth={opts.strong ? 1.5 : 1}
+        />
+        {lines.map((t, i) => (
+          <text
+            key={t}
+            x={n.x + n.w / 2}
+            y={n.y + n.h / 2 + (i - (lines.length - 1) / 2) * 16}
+            textAnchor="middle"
+            dominantBaseline="central"
+            className={`transition-colors ${on ? 'fill-gold' : 'fill-fg'}`}
+            fontSize={opts.strong ? 14 : 12}
+            fontWeight={opts.strong ? 600 : 500}
+          >
+            {t}
+          </text>
+        ))}
+      </g>
+    )
+  }
+
+  // The OSD / JIN box holds two products; each line is its own hover target.
+  const pair = () => {
+    const x = 355, y = 16, w = 200, h = BOX_H
+    const onAny = active === 'osd' || active === 'jin'
+    const half = (key: Key, label: string, i: 0 | 1) => {
+      const on = active === key
+      return (
+        <g
+          key={key}
+          role="button"
+          tabIndex={0}
+          aria-label={label}
+          aria-pressed={on}
+          onMouseEnter={() => onSelect(key)}
+          onFocus={() => onSelect(key)}
+          onClick={() => onSelect(key)}
+          className="cursor-pointer outline-none"
+        >
+          <rect x={x} y={y + (h / 2) * i} width={w} height={h / 2} fill="transparent" />
+          <text
+            x={x + w / 2}
+            y={y + h / 2 + (i === 0 ? -8 : 8)}
+            textAnchor="middle"
+            dominantBaseline="central"
+            fontSize={12}
+            fontWeight={500}
+            className={`transition-colors ${on ? 'fill-gold' : 'fill-fg'}`}
+          >
+            {label}
+          </text>
+        </g>
+      )
+    }
+    return (
+      <g>
+        <rect
+          x={x}
+          y={y}
+          width={w}
+          height={h}
+          rx={8}
+          className={`transition-colors ${onAny ? 'fill-gold/10' : 'fill-transparent'}`}
+          stroke={onAny ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.3)'}
+          strokeWidth={1}
+        />
+        {half('osd', 'Onchain Stock Data', 0)}
+        {half('jin', 'Japan Inflation Nowcall', 1)}
+      </g>
+    )
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto select-none" role="group" aria-label="x402 RFQ Market">
+        <defs>
+          <linearGradient id="rfq-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#B9E6A0" />
+            <stop offset="40%" stopColor="#E8C86A" />
+            <stop offset="70%" stopColor="#E9B8C8" />
+            <stop offset="100%" stopColor="#B7B4EC" />
+          </linearGradient>
+          <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="rgb(var(--fg) / 0.45)" />
+          </marker>
+        </defs>
+
+        <g fill="none" stroke="rgb(var(--fg) / 0.3)" strokeWidth={1} markerEnd="url(#flow-arrow)">
+          <path d="M145 60 C145 100, 215 108, 252 126" />
+          <path d="M455 60 C455 100, 385 108, 348 126" />
+          <path d="M300 236 L300 176" />
+        </g>
+
+        {node('endpoint', 'Sellers in x402 Endpoint', { key: 'endpoint', x: 45, y: 16, w: 200, h: BOX_H })}
+        {pair()}
+        {node('rfq', 'x402 RFQ Market', { key: 'rfq', x: 205, y: 128, w: 190, h: 46 }, { strong: true })}
+        {node('aa', 'x402 Autonomous Agent (buyer)', { key: 'aa', x: 185, y: 238, w: 230, h: BOX_H })}
+      </svg>
+      <p className="mt-3 text-center text-[11px] text-fg/40">{LABELS[lang].hint}</p>
+    </div>
+  )
+}
+
 export function Featured() {
   const { lang } = useLang()
   const lab = LABELS[lang]
+  const [active, setActive] = useState<Key | null>(null)
   return (
     <section id="products" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
@@ -130,26 +291,27 @@ export function Featured() {
         <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
       </motion.div>
 
-      <div className="mt-10 grid sm:grid-cols-2 gap-5">
-        {PRODUCTS.map((product, i) => (
-          <motion.article
-            key={product.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.08 }}
-            className="liquid-glass rounded-2xl overflow-hidden flex flex-col"
-          >
+      {/* Only the diagram by default; hovering / tapping a product reveals its card below. */}
+      <div className="mt-10" onMouseLeave={() => setActive(null)}>
+        <FlowDiagram active={active} onSelect={setActive} lang={lang} />
+
+        {(() => {
+          const product = PRODUCTS.find((p) => p.key === active)
+          if (!product) return null
+          return (
+            <motion.article
+              key={product.key}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              aria-live="polite"
+              className="mt-6 max-w-5xl mx-auto liquid-glass rounded-2xl overflow-hidden grid md:grid-cols-[1fr_1.15fr]"
+            >
               <Preview src={product.image} name={product.name} />
               <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium tracking-wide text-gold">{product.tag}</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-fg/10 text-fg/50">
-                    {product.badge}
-                  </span>
-                </div>
+                <span className="text-xs font-medium tracking-wide text-gold">{product.tag[lang]}</span>
                 <h3 className="mt-4 text-xl font-semibold text-fg">{product.name}</h3>
-                <p className="mt-3 text-sm text-fg/60 leading-[1.7] flex-1 line-clamp-4">
+                <p className="mt-3 text-sm text-fg/60 leading-[1.7] flex-1 whitespace-pre-line">
                   {product.desc[lang]}
                 </p>
                 <div className="mt-5 pt-4 border-t border-fg/10 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -182,8 +344,9 @@ export function Featured() {
                   ))}
                 </div>
               </div>
-          </motion.article>
-        ))}
+            </motion.article>
+          )
+        })()}
       </div>
     </section>
   )
