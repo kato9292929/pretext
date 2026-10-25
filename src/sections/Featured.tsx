@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
-import { useLang, type Localized } from '../i18n'
+import { useLang, type Lang, type Localized } from '../i18n'
+import { DNode, DiagramProvider, PLACED, place } from '../components/Diagram'
 
 type ProductLink = { label: string; href: string }
 
-type Key = 'endpoint' | 'osd' | 'jin' | 'rfq' | 'aa'
+type Key = 'endpoint' | 'osd' | 'jin' | 'rfq' | 'aa' | 'probe'
 
 type Product = {
   key: Key
@@ -53,7 +54,7 @@ const PRODUCTS: Product[] = [
       ja: 'x402 Endpoint は、x402エコシステムに関連した公開カタログを毎日取得し、エンドポイント・ホスト・カテゴリ・価格帯・取引ランキングを日次スナップショットとして保存しています。2026年10月19日時点で161,826エンドポイント・13,701ホストを対象としており、最近ではホスト名が企業の管理ドメイン配下にあるかを判定し、その企業自身の出品と、他社名を掲げた再販・ラッパーを区別しています。\n\n毎週、出品側（カタログ）と利用側（取引・ランキング）の両方から推移を分析し、数値の出所、取得方法、インサイトを発信。2026年6月上旬からの件数、カテゴリ、ホスト構成の推移を時系列で確認できるほか、REST APIとMCPサーバーを通じて配信しており、AIエージェントが直接データを読み取れます。',
       en: 'x402 Endpoint pulls the public catalogs of the x402 ecosystem every day and stores endpoints, hosts, categories, price ranges and transaction rankings as daily snapshots. As of Oct 19, 2026 it covers 161,826 endpoints across 13,701 hosts. Recently it has started checking whether a hostname sits under a company’s own managed domain, separating a company’s own listings from resellers and wrappers that carry another company’s name.\n\nEvery week we analyze the trends from both the supply side (catalog) and the demand side (transactions and rankings), and publish where the numbers come from, how they were collected, and what they show. You can follow counts, categories and host composition as a time series from early June 2026, and the data is served over a REST API and an MCP server so AI agents can read it directly.',
     },
-    image: '/products/endpoint.png',
+    image: '/products/endpoint.jpg',
     live: 'https://endpoint.x402jp.com/',
     links: [
       { label: 'note', href: 'https://note.com/x402inc/n/nb30efb0e7e92' },
@@ -105,182 +106,376 @@ const PRODUCTS: Product[] = [
     live: 'https://jin.x402jp.com/',
     links: [],
   },
+  {
+    key: 'probe',
+    tag: { ja: '04 · MARKET（E4）', en: '04 · MARKET (E4)' },
+    name: 'x402 Seller Probe',
+    badge: 'probe.x402jp.com',
+    desc: {
+      ja: 'x402 の売り手が本当に動くかを、当社のエージェントが毎日外から測っています。402 の形式から決済、納品まで。結果はホストごとのスコアとして、算出式ごと公開します。スコアは x402 RFQ Market で売り手を比べる材料になります。',
+      en: 'Our agents measure, every day and from the outside, whether x402 sellers actually work — from the shape of the 402 to payment and delivery. Results are published as a per-host score, together with the formula. The score feeds into comparing sellers on x402 RFQ Market.',
+    },
+    image: '/products/probe.jpg',
+    live: 'https://probe.x402jp.com/',
+    links: [{ label: 'GitHub', href: 'https://github.com/kato9292929/seller-probe' }],
+  },
+]
+/* ── Node faces (short lines shown inside the diagram boxes) ─────────────── */
+
+const FACE: Record<Key, { sub: Localized[] }> = {
+  endpoint: { sub: [{ ja: '161,826 エンドポイント・13,701 ホスト', en: '161,826 endpoints · 13,701 hosts' }] },
+  aa: { sub: [{ ja: '毎朝 06:00 JST に per-call で購入する買い手', en: 'A buyer that pays per-call every morning at 06:00 JST' }] },
+  osd: { sub: [{ ja: 'x402 で売る自社データ：カタリスト採点', en: 'Our data on x402: catalyst scoring' }] },
+  jin: { sub: [{ ja: 'x402 で売る自社データ：食品物価指数', en: 'Our data on x402: food price index' }] },
+  rfq: {
+    sub: [
+      { ja: '買い手が条件を出し売り手が競う市場（E5）', en: 'Buyers post conditions, sellers compete (E5)' },
+      { ja: 'devnet 稼働中・2026 年 11 月 mainnet', en: 'Live on devnet · mainnet Nov 2026' },
+    ],
+  },
+  probe: {
+    sub: [
+      { ja: '売り手の 402・決済・納品を外から測る（E4）', en: 'Measures sellers’ 402, payment and delivery from outside (E4)' },
+      { ja: 'probe.x402jp.com 公開・本番測定開始', en: 'probe.x402jp.com live · production measurement started' },
+    ],
+  },
+}
+
+/* ── Proofs of concept (dashed boxes) ─────────────────────────────────────── */
+
+// Status words are fixed to this set.
+type Status = '完了' | '稼働中' | '準備完了' | '計測準備' | '計測設計' | '実証案' | '基準案' | '整理' | '導入中'
+const STATUS_EN: Record<Status, string> = {
+  完了: 'Done',
+  稼働中: 'Running',
+  準備完了: 'Ready',
+  計測準備: 'Preparing measurement',
+  計測設計: 'Designing measurement',
+  実証案: 'Proposed',
+  基準案: 'Draft criteria',
+  整理: 'Mapped',
+  導入中: 'Rolling out',
+}
+
+type Poc = {
+  id: string
+  name: Localized
+  sub: Localized // line shown in the diagram box
+  status: Status
+  note: Localized // one-liner from the PoC list
+  links: ProductLink[]
+}
+type PocGroup = { title: Localized; align: 'left' | 'center' | 'right'; rows: Poc[] }
+
+const note = (href: string): ProductLink => ({ label: 'note', href })
+const gh = (repo: string): ProductLink => ({ label: `GitHub · ${repo}`, href: `https://github.com/kato9292929/${repo}` })
+
+const POCS: PocGroup[] = [
+  {
+    title: { ja: 'x402 Autonomous Agent に組み込む実証', en: 'Built into x402 Autonomous Agent' },
+    align: 'left',
+    rows: [
+      {
+        id: 'sweep',
+        name: { ja: '外部売り手への週次 sweep', en: 'Weekly sweep of external sellers' },
+        sub: { ja: '外部6先・第43週 $0.014', en: '6 external sellers · week 43: $0.014' },
+        status: '稼働中',
+        note: { ja: '外部6先・第43週 $0.014', en: '6 external sellers · week 43: $0.014' },
+        links: [note('https://note.com/x402inc/n/n35a9a3fd25de')],
+      },
+      {
+        id: 'hermes',
+        name: { ja: 'Hermes mpp-agent × Exa（MPP）', en: 'Hermes mpp-agent × Exa (MPP)' },
+        sub: { ja: '$0.007 の支払いに4つの上限判定位置', en: 'Four limit-check points on a $0.007 payment' },
+        status: '準備完了',
+        note: { ja: '$0.007 の支払いに4つの上限判定', en: 'Four limit checks on a $0.007 payment' },
+        links: [note('https://note.com/x402inc/n/n9bf4a3157b21'), gh('mpp-budget-guard'), gh('Hermes-Agent')],
+      },
+      {
+        id: 'agentcore',
+        name: { ja: 'AWS AgentCore Payments ハーネス', en: 'AWS AgentCore Payments harness' },
+        sub: { ja: 'AC-1〜AC-4・実証案', en: 'AC-1 to AC-4 · proposed' },
+        status: '実証案',
+        note: { ja: 'AC-1〜AC-4', en: 'AC-1 to AC-4' },
+        links: [note('https://note.com/x402inc/n/n1593a2538d4a')],
+      },
+      {
+        id: 'arcium',
+        name: { ja: 'Arcium MXE 秘匿取引', en: 'Arcium MXE confidential trades' },
+        sub: { ja: '5種類の秘匿取引・計測設計', en: '5 kinds of confidential trades · designing measurement' },
+        status: '計測設計',
+        note: { ja: '5種類の秘匿取引', en: '5 kinds of confidential trades' },
+        links: [note('https://note.com/x402inc/n/na418a03844e9')],
+      },
+    ],
+  },
+  {
+    title: { ja: '横断（統制・確認基準・開発体制）', en: 'Cross-cutting (controls, criteria, development)' },
+    align: 'center',
+    rows: [
+      {
+        id: 'stripe',
+        name: { ja: 'Stripe Approvals デモ', en: 'Stripe Approvals demo' },
+        sub: { ja: '起案と承認の分離（E0）', en: 'Separating proposal and approval (E0)' },
+        status: '整理',
+        note: { ja: '支出統制9方式の中の位置', en: 'Where it sits among 9 spend-control methods' },
+        links: [note('https://note.com/x402inc/n/na18368ec5f8c'), gh('ai_backoffice')],
+      },
+      {
+        id: 'wallet',
+        name: { ja: 'ウォレット間決済の確認基準案', en: 'Draft criteria for wallet-to-wallet payments' },
+        sub: { ja: '7製品・8項目', en: '7 products · 8 items' },
+        status: '基準案',
+        note: { ja: '7製品・8項目', en: '7 products · 8 items' },
+        links: [note('https://note.com/x402inc/n/n07bd1b08bccf')],
+      },
+      {
+        id: 'security',
+        name: { ja: '開発セキュリティ体制', en: 'Development security setup' },
+        sub: { ja: 'Claude Security スキャン〜段階リリース', en: 'Claude Security scans to staged releases' },
+        status: '導入中',
+        note: { ja: 'Claude Security〜段階リリース', en: 'From Claude Security to staged releases' },
+        links: [note('https://note.com/x402inc/n/nfd0e6d606ddf')],
+      },
+    ],
+  },
+  {
+    title: { ja: 'OSD・JIN の販売経路の実証', en: 'Sales channels for OSD and JIN' },
+    align: 'right',
+    rows: [
+      {
+        id: 'nevermined',
+        name: { ja: 'Nevermined カード払い 実証1・2', en: 'Nevermined card payments, PoC 1 & 2' },
+        sub: { ja: 'USDC・カードの併売、$0.01 の商品別集計', en: 'USDC and card side by side, $0.01 per-product tally' },
+        status: '計測準備',
+        note: { ja: 'USDC・カードの併売', en: 'Selling with both USDC and card' },
+        links: [note('https://note.com/x402inc/n/n183c24390c12'), gh('poc-dual-checkout'), gh('poc-card-credits')],
+      },
+      {
+        id: 'jpyc',
+        name: { ja: 'JPYC × x402（Polygon）', en: 'JPYC × x402 (Polygon)' },
+        sub: { ja: '円建て per-call 決済', en: 'Yen-denominated per-call payments' },
+        status: '完了',
+        note: { ja: '円建て per-call 決済2件（Polygon mainnet）', en: '2 yen-denominated per-call payments (Polygon mainnet)' },
+        links: [note('https://note.com/x402inc/n/n6baddc090c6a'), gh('poc-jpyc-x402')],
+      },
+      {
+        id: 'crossmint',
+        name: { ja: 'Crossmint 2経路の購入', en: 'Crossmint purchases via 2 routes' },
+        sub: { ja: 'エージェント用ウォレットとカード・実証案', en: 'Agent wallet and card · proposed' },
+        status: '実証案',
+        note: { ja: 'ウォレットとカードの2経路', en: 'Wallet and card routes' },
+        links: [note('https://note.com/x402inc/n/n832fe623f599'), gh('poc-crossmint-buyer')],
+      },
+    ],
+  },
 ]
 
+/* ── Agent Stack (formerly the Architecture section) ──────────────────────── */
+
+const STACK_INTRO: Localized = {
+  ja: '事業は発見（MAP）・消費（CONSUME）・データ生成（PRODUCE）・市場（MARKET）の4層の instruments で構成されます。いずれも、エコシステムを外から論じるためでなく、内側から観測・検証するために動かしています。',
+  en: 'The business is made up of four layers of instruments — discovery (MAP), consumption (CONSUME), data production (PRODUCE) and market (MARKET). We run all of them not to comment on the ecosystem from outside, but to observe and verify it from within.',
+}
+
+const STACK_CHIPS: Localized<string[]> = {
+  ja: ['per-callオンチェーン決済', '検証可能な実績', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
+  en: ['Per-call on-chain settlement', 'Verifiable track record', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
+}
+
+const STACK: { key: string; label: Localized; title: Localized; items: Localized<string[]> }[] = [
+  {
+    key: 'MAP',
+    label: { ja: '発見', en: 'Discovery' },
+    title: { ja: 'エンドポイントを日次で収集・正規化', en: 'Collect & normalize endpoints daily' },
+    items: {
+      ja: ['x402対応エンドポイントのカタログ', '何が・いくらで買えるかを観測する'],
+      en: ['A catalog of x402-compatible endpoints', 'Observes what can be bought and at what price'],
+    },
+  },
+  {
+    key: 'CONSUME',
+    label: { ja: '消費', en: 'Consumption' },
+    title: { ja: 'per-callでオンチェーン決済し記録する', en: 'Settle per-call on-chain and record' },
+    items: {
+      ja: ['ERC-8004 identity を持つエージェント', '取引の形式を検証する instrument'],
+      en: ['An agent with an ERC-8004 identity', 'An instrument to verify the form of a transaction'],
+    },
+  },
+  {
+    key: 'PRODUCE',
+    label: { ja: 'データ生成', en: 'Data production' },
+    title: { ja: '独自データと検証可能な実績を作る', en: 'Produce proprietary data & verifiable records' },
+    items: {
+      ja: ['エージェント向けのデータ', '叩かれる側を観測する'],
+      en: ['Data built for agents', 'Observes the side being called'],
+    },
+  },
+  {
+    key: 'MARKET',
+    label: { ja: '市場', en: 'Market' },
+    title: { ja: '売り手を比べ、測る場を作る', en: 'Build the place where sellers are compared and measured' },
+    items: {
+      ja: ['買い手が条件を出し、売り手が競う（E5）', '売り手の402・決済・納品を外から測る（E4）'],
+      en: ['Buyers post conditions, sellers compete (E5)', 'Measures sellers’ 402, payment and delivery from outside (E4)'],
+    },
+  },
+]
+
+const COPY = {
+  ja: {
+    hint: '各プロダクト・実証にカーソルを合わせる（タップする）と詳細が表示されます',
+    score: 'スコア',
+    legend: '実線：稼働中のプロダクトの接続　点線枠：実証（PoC）',
+    pocs: '実証',
+    stack: 'Agent Stack',
+    stackTag: 'instruments',
+  },
+  en: {
+    hint: 'Hover (or tap) a product or proof of concept to see its details',
+    score: 'score',
+    legend: 'Solid lines: live product connections · Dashed boxes: proofs of concept',
+    pocs: 'Proofs of concept',
+    stack: 'Agent Stack',
+    stackTag: 'instruments',
+  },
+}
+
+/* ── Detail cards ─────────────────────────────────────────────────────────── */
+
 function Preview({ src, name }: { src?: string; name: string }) {
-  const [ok, setOk] = useState(false)
+  const [failed, setFailed] = useState(false)
+  if (!src || failed) return null
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-fg/10 bg-fg/[0.03]">
-      {src && (
-        <img
-          src={src}
-          alt={name}
-          onLoad={() => setOk(true)}
-          onError={() => setOk(false)}
-          className={`h-full w-full object-cover ${ok ? '' : 'hidden'}`}
-        />
-      )}
-      {!ok && (
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            background:
-              'radial-gradient(130% 130% at 15% 0%, rgba(232,195,56,0.14), transparent 55%)',
-          }}
-        >
-          <span className="font-mono text-sm text-fg/40">{name}</span>
-        </div>
-      )}
+    <div className="aspect-[16/10] w-full overflow-hidden border-b border-fg/10 bg-fg/[0.03]">
+      <img src={src} alt={name} loading="lazy" onError={() => setFailed(true)} className="h-full w-full object-cover" />
     </div>
   )
 }
 
-/* Flow diagram: sellers and our data products feed the RFQ market; the agent buys through it. */
-type Node = { key: Key; x: number; y: number; w: number; h: number }
-const W = 600
-const H = 300
-const BOX_H = 44
-
-function FlowDiagram({
-  active,
-  onSelect,
-  lang,
-}: {
-  active: Key | null
-  onSelect: (k: Key) => void
-  lang: 'ja' | 'en'
-}) {
-  const node = (key: Key, label: string, n: Node, opts: { lines?: string[]; strong?: boolean } = {}) => {
-    const on = active === key
-    const lines = opts.lines ?? [label]
-    return (
-      <g
-        key={key}
-        role="button"
-        tabIndex={0}
-        aria-label={label}
-        aria-pressed={on}
-        onMouseEnter={() => onSelect(key)}
-        onFocus={() => onSelect(key)}
-        onClick={() => onSelect(key)}
-        className="cursor-pointer outline-none"
-      >
-        <rect
-          x={n.x}
-          y={n.y}
-          width={n.w}
-          height={n.h}
-          rx={8}
-          className={`transition-colors ${on ? 'fill-gold/10' : 'fill-transparent'}`}
-          stroke={opts.strong ? 'url(#rfq-grad)' : on ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.3)'}
-          strokeWidth={opts.strong ? 1.5 : 1}
-        />
-        {lines.map((t, i) => (
-          <text
-            key={t}
-            x={n.x + n.w / 2}
-            y={n.y + n.h / 2 + (i - (lines.length - 1) / 2) * 16}
-            textAnchor="middle"
-            dominantBaseline="central"
-            className={`transition-colors ${on ? 'fill-gold' : 'fill-fg'}`}
-            fontSize={opts.strong ? 14 : 12}
-            fontWeight={opts.strong ? 600 : 500}
-          >
-            {t}
-          </text>
-        ))}
-      </g>
-    )
-  }
-
-  // The OSD / JIN box holds two products; each line is its own hover target.
-  const pair = () => {
-    const x = 355, y = 16, w = 200, h = BOX_H
-    const onAny = active === 'osd' || active === 'jin'
-    const half = (key: Key, label: string, i: 0 | 1) => {
-      const on = active === key
-      return (
-        <g
-          key={key}
-          role="button"
-          tabIndex={0}
-          aria-label={label}
-          aria-pressed={on}
-          onMouseEnter={() => onSelect(key)}
-          onFocus={() => onSelect(key)}
-          onClick={() => onSelect(key)}
-          className="cursor-pointer outline-none"
-        >
-          <rect x={x} y={y + (h / 2) * i} width={w} height={h / 2} fill="transparent" />
-          <text
-            x={x + w / 2}
-            y={y + h / 2 + (i === 0 ? -8 : 8)}
-            textAnchor="middle"
-            dominantBaseline="central"
-            fontSize={12}
-            fontWeight={500}
-            className={`transition-colors ${on ? 'fill-gold' : 'fill-fg'}`}
-          >
-            {label}
-          </text>
-        </g>
-      )
-    }
-    return (
-      <g>
-        <rect
-          x={x}
-          y={y}
-          width={w}
-          height={h}
-          rx={8}
-          className={`transition-colors ${onAny ? 'fill-gold/10' : 'fill-transparent'}`}
-          stroke={onAny ? 'rgb(var(--gold))' : 'rgb(var(--fg) / 0.3)'}
-          strokeWidth={1}
-        />
-        {half('osd', 'Onchain Stock Data', 0)}
-        {half('jin', 'Japan Inflation Nowcall', 1)}
-      </g>
-    )
-  }
-
+function LinkRow({ links, live, lang }: { links: ProductLink[]; live?: string; lang: Lang }) {
   return (
-    <div className="max-w-2xl mx-auto">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto select-none" role="group" aria-label="x402 RFQ Market">
-        <defs>
-          <linearGradient id="rfq-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#B9E6A0" />
-            <stop offset="40%" stopColor="#E8C86A" />
-            <stop offset="70%" stopColor="#E9B8C8" />
-            <stop offset="100%" stopColor="#B7B4EC" />
-          </linearGradient>
-          <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10 z" fill="rgb(var(--fg) / 0.45)" />
-          </marker>
-        </defs>
-
-        <g fill="none" stroke="rgb(var(--fg) / 0.3)" strokeWidth={1} markerEnd="url(#flow-arrow)">
-          <path d="M145 60 C145 100, 215 108, 252 126" />
-          <path d="M455 60 C455 100, 385 108, 348 126" />
-          <path d="M300 236 L300 176" />
-        </g>
-
-        {node('endpoint', 'Sellers in x402 Endpoint', { key: 'endpoint', x: 45, y: 16, w: 200, h: BOX_H })}
-        {pair()}
-        {node('rfq', 'x402 RFQ Market', { key: 'rfq', x: 205, y: 128, w: 190, h: 46 }, { strong: true })}
-        {node('aa', 'x402 Autonomous Agent (buyer)', { key: 'aa', x: 185, y: 238, w: 230, h: BOX_H })}
-      </svg>
-      <p className="mt-3 text-center text-[11px] text-fg/40">{LABELS[lang].hint}</p>
+    <div className="mt-4 pt-3 border-t border-fg/10 flex flex-wrap items-center gap-x-4 gap-y-2">
+      {live && (
+        <a
+          href={live}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-xs font-semibold text-gold hover:brightness-110 transition"
+        >
+          {LABELS[lang].visit}
+          <ArrowUpRight className="w-3 h-3" />
+        </a>
+      )}
+      {links.map((link) => (
+        <a
+          key={link.href}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-xs text-fg/65 hover:text-gold transition-colors"
+        >
+          {link.label}
+          <ArrowUpRight className="w-3 h-3" />
+        </a>
+      ))}
     </div>
+  )
+}
+
+function ProductDetail({ product, lang }: { product: Product; lang: Lang }) {
+  return (
+    <div>
+      <Preview src={product.image} name={product.name} />
+      <div className="p-5">
+        <span className="text-xs font-medium tracking-wide text-gold">{product.tag[lang]}</span>
+        <h3 className="mt-2 text-lg font-semibold text-fg">{product.name}</h3>
+        <p className="mt-2 text-sm text-fg/65 leading-[1.75] whitespace-pre-line">{product.desc[lang]}</p>
+        <LinkRow links={product.links} live={product.live} lang={lang} />
+      </div>
+    </div>
+  )
+}
+
+function PocDetail({ poc, lang }: { poc: Poc; lang: Lang }) {
+  return (
+    <div className="p-5">
+      <span className="inline-flex rounded-full border border-gold/40 px-2 py-0.5 text-[11px] text-gold">
+        {lang === 'ja' ? poc.status : STATUS_EN[poc.status]}
+      </span>
+      <h3 className="mt-3 text-base font-semibold text-fg">{poc.name[lang]}</h3>
+      <p className="mt-2 text-sm text-fg/65 leading-[1.7]">{poc.note[lang]}</p>
+      <LinkRow links={poc.links} lang={lang} />
+    </div>
+  )
+}
+
+/* ── Product map (lg+: positioned like the ecosystem map; below lg: stacked) ── */
+
+const W = 1100
+const H = 330
+
+const NODES: { key: Key; x: number; y: number; w: number; h: number; align: 'left' | 'right' }[] = [
+  { key: 'endpoint', x: 0, y: 30, w: 260, h: 86, align: 'left' },
+  { key: 'aa', x: 280, y: 30, w: 260, h: 86, align: 'left' },
+  { key: 'osd', x: 560, y: 30, w: 260, h: 86, align: 'left' },
+  { key: 'jin', x: 840, y: 30, w: 260, h: 86, align: 'right' },
+  { key: 'rfq', x: 110, y: 226, w: 400, h: 96, align: 'left' },
+  { key: 'probe', x: 590, y: 226, w: 400, h: 96, align: 'right' },
+]
+
+const GROUP_LABELS: { before: Key; text: Localized; x: number; y: number; w: number }[] = [
+  { before: 'endpoint', text: { ja: 'MAP（発見）', en: 'MAP (Discovery)' }, x: 0, y: 4, w: 260 },
+  { before: 'aa', text: { ja: 'CONSUME（消費）', en: 'CONSUME (Consumption)' }, x: 280, y: 4, w: 260 },
+  { before: 'osd', text: { ja: 'PRODUCE（データ生成）', en: 'PRODUCE (Data production)' }, x: 560, y: 4, w: 540 },
+  { before: 'rfq', text: { ja: 'MARKET（市場）', en: 'MARKET' }, x: 0, y: 190, w: 105 },
+]
+
+function Label({ text, style }: { text: string; style?: React.CSSProperties }) {
+  return (
+    <p
+      className={`mt-4 first:mt-0 lg:mt-0 text-[11px] font-mono tracking-widest text-gold lg:flex lg:items-center lg:justify-center ${PLACED}`}
+      style={style}
+    >
+      {text}
+    </p>
+  )
+}
+
+function Lines({ score }: { score: string }) {
+  return (
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+      aria-hidden="true"
+    >
+      <defs>
+        <marker id="pm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="rgb(var(--gold) / 0.8)" />
+        </marker>
+      </defs>
+      <g fill="none" stroke="rgb(var(--gold) / 0.55)" strokeWidth={1.25}>
+        <path d="M100 116 L230 224" markerEnd="url(#pm-arrow)" />
+        <path d="M170 116 L680 224" markerEnd="url(#pm-arrow)" />
+        <path d="M410 116 L380 224" markerEnd="url(#pm-arrow)" />
+        <path d="M690 116 L830 158 M970 116 L830 158" />
+        <path d="M830 158 L470 224" markerEnd="url(#pm-arrow)" />
+        <path d="M830 158 L800 224" markerEnd="url(#pm-arrow)" />
+        <path d="M588 274 L514 274" markerEnd="url(#pm-arrow)" />
+      </g>
+      <text x={551} y={264} textAnchor="middle" fontSize={12} fill="rgb(var(--gold))">
+        {score}
+      </text>
+    </svg>
   )
 }
 
 export function Featured() {
   const { lang } = useLang()
-  const lab = LABELS[lang]
-  const [active, setActive] = useState<Key | null>(null)
+  const t = COPY[lang]
+  const byKey = Object.fromEntries(PRODUCTS.map((p) => [p.key, p])) as Record<Key, Product>
   return (
-    <section id="products" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <section id="products" className="relative z-20 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -291,62 +486,112 @@ export function Featured() {
         <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
       </motion.div>
 
-      {/* Only the diagram by default; hovering / tapping a product reveals its card below. */}
-      <div className="mt-10" onMouseLeave={() => setActive(null)}>
-        <FlowDiagram active={active} onSelect={setActive} lang={lang} />
-
-        {(() => {
-          const product = PRODUCTS.find((p) => p.key === active)
-          if (!product) return null
-          return (
-            <motion.article
-              key={product.key}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              aria-live="polite"
-              className="mt-6 max-w-5xl mx-auto liquid-glass rounded-2xl overflow-hidden grid md:grid-cols-[1fr_1.15fr]"
-            >
-              <Preview src={product.image} name={product.name} />
-              <div className="p-6 flex flex-col flex-1">
-                <span className="text-xs font-medium tracking-wide text-gold">{product.tag[lang]}</span>
-                <h3 className="mt-4 text-xl font-semibold text-fg">{product.name}</h3>
-                <p className="mt-3 text-sm text-fg/60 leading-[1.7] flex-1 whitespace-pre-line">
-                  {product.desc[lang]}
-                </p>
-                <div className="mt-5 pt-4 border-t border-fg/10 flex flex-wrap items-center gap-x-4 gap-y-2">
-                  {product.live ? (
-                    <a
-                      href={product.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-gold hover:brightness-110 transition"
-                    >
-                      {lab.visit}
-                      <ArrowUpRight className="w-3 h-3" />
-                    </a>
-                  ) : product.comingSoon ? (
-                    <span className="inline-flex items-center rounded-full border border-fg/15 px-2.5 py-1 text-[11px] text-fg/50">
-                      {lab.soon}
+      <DiagramProvider className="mt-10">
+        {/* Products */}
+        <div className="relative flex flex-col gap-2 lg:block lg:aspect-[1100/330]">
+          <Lines score={t.score} />
+          {NODES.map((n) => {
+            const p = byKey[n.key]
+            const label = GROUP_LABELS.find((g) => g.before === n.key)
+            return (
+              <div key={n.key} className="contents">
+                {label && <Label text={label.text[lang]} style={place(label.x, label.y, label.w, 22, W, H)} />}
+                <DNode
+                  id={n.key}
+                  label={p.name}
+                  align={n.align}
+                  strong={n.key === 'rfq' || n.key === 'probe'}
+                  className={PLACED}
+                  style={place(n.x, n.y, n.w, n.h, W, H)}
+                  face={
+                    <span className="flex h-full flex-col items-center justify-center gap-1">
+                      <span className="text-sm md:text-base font-semibold text-fg">{p.name}</span>
+                      {FACE[n.key].sub.map((s) => (
+                        <span key={s.ja} className="text-[11px] leading-[1.45] text-fg/55">
+                          {s[lang]}
+                        </span>
+                      ))}
                     </span>
-                  ) : null}
-                  {product.links.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-fg/60 hover:text-gold transition-colors"
-                    >
-                      {link.label}
-                      <ArrowUpRight className="w-3 h-3" />
-                    </a>
-                  ))}
-                </div>
+                  }
+                  detail={<ProductDetail product={p} lang={lang} />}
+                />
               </div>
-            </motion.article>
-          )
-        })()}
+            )
+          })}
+        </div>
+
+        {/* Proofs of concept */}
+        <h3 className="mt-12 text-xs uppercase tracking-widest text-gold lg:sr-only">{t.pocs}</h3>
+        <div className="mt-4 lg:mt-10 grid gap-8 lg:grid-cols-3 lg:gap-5">
+          {POCS.map((g) => (
+            <div key={g.title.ja}>
+              <p className="mb-3 text-center text-[11px] font-mono tracking-wider text-gold">{g.title[lang]}</p>
+              <div className="flex flex-col gap-2">
+                {g.rows.map((poc) => (
+                  <DNode
+                    key={poc.id}
+                    id={poc.id}
+                    label={poc.name[lang]}
+                    align={g.align}
+                    dashed
+                    face={
+                      <span className="flex flex-col items-center gap-0.5">
+                        <span className="text-[13px] font-semibold text-fg">{poc.name[lang]}</span>
+                        <span className="text-[11px] leading-[1.45] text-fg/55">{poc.sub[lang]}</span>
+                      </span>
+                    }
+                    detail={<PocDetail poc={poc} lang={lang} />}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 flex flex-col items-center gap-1 text-center text-[11px] text-fg/40 lg:flex-row lg:justify-between lg:text-left">
+          <span>{t.hint}</span>
+          <span>{t.legend}</span>
+        </div>
+      </DiagramProvider>
+
+      {/* Agent Stack (formerly Architecture) */}
+      <div id="architecture" className="mt-16 pt-10 border-t border-fg/10">
+        <div className="flex items-center gap-3">
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-fg">{t.stack}</h3>
+          <span
+            className="text-xs px-2.5 py-1 rounded-full border"
+            style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.45)', backgroundColor: 'rgb(var(--gold) / 0.08)' }}
+          >
+            {t.stackTag}
+          </span>
+        </div>
+        <p className="mt-4 text-fg/60 text-sm md:text-base leading-[1.7] max-w-3xl">{STACK_INTRO[lang]}</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {STACK_CHIPS[lang].map((chip) => (
+            <span key={chip} className="text-xs text-fg/70 px-3 py-1.5 rounded-full border border-fg/10 bg-fg/[0.03]">
+              {chip}
+            </span>
+          ))}
+        </div>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {STACK.map((layer) => (
+            <div key={layer.key} className="liquid-glass rounded-xl p-4">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-gold" />
+                <span className="text-sm font-semibold text-fg">{layer.key}</span>
+                <span className="text-xs text-fg/40">（{layer.label[lang]}）</span>
+              </div>
+              <p className="mt-2 text-sm text-fg/80">{layer.title[lang]}</p>
+              <div className="mt-2 space-y-1">
+                {layer.items[lang].map((item) => (
+                  <p key={item} className="text-xs text-fg/50">
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

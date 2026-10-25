@@ -7,7 +7,7 @@ error, no layout shift). Recommended ratio **16:10** (e.g. 1200×750).
 
 | Product                | Expected file             |
 | ---------------------- | ------------------------- |
-| x402 Endpoint          | `public/products/endpoint.png` |
+| x402 Endpoint          | `public/products/endpoint.jpg` (site); `endpoint.png` kept for exports/ |
 | x402 Autonomous Agent  | `public/products/aa.png`       |
 | Onchain Stock Data     | `public/products/osd.png`      |
 | Japan Inflation Nowcall| `public/products/jin.png`      |
