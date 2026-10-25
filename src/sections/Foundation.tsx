@@ -6,46 +6,16 @@ import { useLang } from '../i18n'
 const COPY = {
   ja: {
     lead: 'x402は、Coinbaseが開発したHTTPペイメント・プロトコルで、現在はLinux Foundation傘下のx402 Foundationが中立的に管理するオープンスタンダードです。x402 Foundationは当初Coinbase・Cloudflare・Stripeの3社が立ち上げ、2026年7月14日にLinux Foundationの下で40組織を擁して正式ローンチしました。プロトコルはCoinbaseが寄贈しましたが、その進化は単一企業ではなくFoundationが統括しています。',
-    members: '創設メンバー',
-    momentum:
-      '7月14日の x402 Foundation 発足、Stripe が A to A で MPP経由の受け入れと x402 の両方を担ぐ構造、そして AWS・Cloudflare の x402対応——CloudFront/Cloudflare を使う全事業者の参入で、市場は「x402を知っている開発者」から一気に広がりつつあります。',
+    shotAlt: 'x402 Foundation 公式サイト x402.org のトップページ',
   },
   en: {
     lead: 'x402 is an HTTP payment protocol created by Coinbase, now an open standard neutrally stewarded by the x402 Foundation under the Linux Foundation. The x402 Foundation was first started by Coinbase, Cloudflare and Stripe, and formally launched on July 14, 2026 under the Linux Foundation with 40 organizations. Coinbase donated the protocol, but its evolution is governed by the Foundation rather than any single company.',
-    members: 'Founding members',
-    momentum:
-      'The July 14 launch of the x402 Foundation, Stripe carrying both MPP acceptance and x402 in an A-to-A structure, and AWS/Cloudflare support for x402 — as every business on CloudFront/Cloudflare enters, the market is rapidly expanding beyond “developers who know x402.”',
+    shotAlt: 'Top page of x402.org, the x402 Foundation’s official site',
   },
-} satisfies Record<'ja' | 'en', { lead: string; members: string; momentum: string }>
-
-const MEMBERS = [
-  'Visa',
-  'Mastercard',
-  'American Express',
-  'Coinbase',
-  'Stripe',
-  'Google',
-  'Amazon Web Services',
-  'Microsoft',
-  'Cloudflare',
-  'Circle',
-  'Base',
-  'Solana Foundation',
-  'Polygon Labs',
-  'Shopify',
-  'Ant International',
-  'Adyen',
-  'Fiserv',
-  'KakaoPay',
-  'PPRO',
-  'Sierra',
-  'Thirdweb',
-  'Merit Systems',
-  'Ampersend.ai',
-]
+} satisfies Record<'ja' | 'en', { lead: string; shotAlt: string }>
 
 const LINKS = [
-  { label: 'x402.org', href: 'https://www.x402.org/' },
+  { label: 'x402.org', href: 'https://x402.org/' },
   { label: 'GitHub (Apache 2.0)', href: 'https://github.com/x402-foundation/x402' },
 ]
 
@@ -62,48 +32,49 @@ export function Foundation() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="max-w-3xl"
       >
         <SectionEyebrow label="Foundation" tag="Open standard" heading />
-        <p className="mt-6 text-fg/60 text-base leading-[1.7]">{t.lead}</p>
       </motion.div>
 
-      <div className="mt-12">
-        <p className="text-xs uppercase tracking-widest text-fg/40">{t.members}</p>
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4">
-          {MEMBERS.map((member, i) => (
-            <motion.span
-              key={member}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: (i % 4) * 0.05 }}
-              className="text-sm font-medium text-fg/50 hover:text-fg transition-colors"
-            >
-              {member}
-            </motion.span>
-          ))}
+      {/* Same proportions as the Update lead: screenshot left, text right */}
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-10 lg:items-center">
+        <motion.a
+          href="https://x402.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="group block overflow-hidden rounded-xl border border-fg/10 bg-white"
+        >
+          <img
+            src="/foundation/x402-org.jpg"
+            alt={t.shotAlt}
+            width={1600}
+            height={874}
+            loading="lazy"
+            className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </motion.a>
+
+        <div>
+          <p className="text-fg/60 text-sm md:text-base leading-[1.8]">{t.lead}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm text-fg/70 px-4 py-2 rounded-full border border-fg/15 hover:bg-fg/5 transition-colors"
+              >
+                {link.label}
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="mt-12 liquid-glass rounded-2xl p-6 max-w-3xl">
-        <p className="text-xs uppercase tracking-widest text-fg/40">Momentum</p>
-        <p className="mt-3 text-sm text-fg/70 leading-[1.8]">{t.momentum}</p>
-      </div>
-
-      <div className="mt-10 flex flex-wrap gap-4">
-        {LINKS.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm text-fg/70 px-4 py-2 rounded-full border border-fg/15 hover:bg-fg/5 transition-colors"
-          >
-            {link.label}
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-        ))}
       </div>
     </section>
   )

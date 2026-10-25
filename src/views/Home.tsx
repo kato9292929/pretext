@@ -1,0 +1,19 @@
+import { Hero } from '../sections/Hero'
+import { Ecosystem } from '../sections/Ecosystem'
+import { Featured } from '../sections/Featured'
+import { News } from '../sections/News'
+import { Foundation } from '../sections/Foundation'
+import { Services } from '../sections/Services'
+
+export function Home() {
+  return (
+    <>
+      <Hero />
+      <News />
+      <Featured />
+      <Ecosystem />
+      <Foundation />
+      <Services />
+    </>
+  )
+}

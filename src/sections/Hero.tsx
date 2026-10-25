@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { CONTACT_EMAIL, Pill, gradientStyle } from '../primitives'
 import { useLang } from '../i18n'
+// LogoMarquee is hidden for now; logos will move into Products.
 
 export function Hero() {
   const { lang } = useLang()
