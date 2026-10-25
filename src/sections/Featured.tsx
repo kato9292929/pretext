@@ -475,7 +475,7 @@ export function Featured() {
   const t = COPY[lang]
   const byKey = Object.fromEntries(PRODUCTS.map((p) => [p.key, p])) as Record<Key, Product>
   return (
-    <section id="products" className="relative z-20 max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <section id="products" className="relative z-30 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

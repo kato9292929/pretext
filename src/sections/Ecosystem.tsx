@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
-import { useLang, type Localized } from '../i18n'
+import { useLang, type Lang, type Localized } from '../i18n'
+import { DNode, DiagramProvider, PLACED, place } from '../components/Diagram'
 import { EcosystemTrade } from './EcosystemTrade'
 
 type Tab = 'payment' | 'trade'
@@ -18,6 +19,9 @@ const COPY = {
     closing:
       'それぞれ粒度も成熟度も決済形式も違います。私たちは、この細分化を、AIとの詳細なリサーチと自社の観測を突き合わせて分析し続けます。',
     compositeLabel: '複合｜局面 × 経済形',
+    gapLabel: '残る空白',
+    cols: ['決済なし', 'カード網', 'per-call 調達', 'エージェント間市場'],
+    hint: '各 Class にカーソルを合わせる（タップする）と、詳細と事例が表示されます',
     compositeIntro:
       '単一のClassに収まらず、局面と経済形が交差するケース。境界に位置する実装をここに収容します。',
     axisLabel: '分岐の軸と残る空白',
@@ -36,6 +40,9 @@ const COPY = {
     closing:
       'Each differs in granularity, maturity and payment form. We keep analyzing this segmentation by cross-checking detailed research with AI against our own observations.',
     compositeLabel: 'Composite | context × economy',
+    gapLabel: 'Remaining gaps',
+    cols: ['No settlement', 'Card networks', 'Per-call procurement', 'Agent-to-agent market'],
+    hint: 'Hover (or tap) a class to see its details and examples',
     compositeIntro:
       'Cases that do not fit a single class, where context and economic form intersect. Implementations sitting on the boundary go here.',
     axisLabel: 'Axes of divergence & remaining gaps',
@@ -275,24 +282,16 @@ function Chip({ link, lang }: { link: Link; lang: 'ja' | 'en' }) {
   )
 }
 
-function BlockCard({ block, i }: { block: Block; i: number }) {
-  const { lang } = useLang()
+function BlockDetail({ block, lang }: { block: Block; lang: Lang }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: (i % 2) * 0.08 }}
-      className="liquid-glass rounded-2xl p-6"
-    >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+    <div className="p-5">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
         <span
           className="text-[11px] font-mono px-2 py-0.5 rounded-full"
           style={{ color: 'rgb(var(--bg))', background: 'rgb(var(--gold))' }}
         >
           {block.badge}
         </span>
-        <p className="font-mono text-sm text-gold">{block.name[lang]}</p>
         <span
           className="text-[11px] font-mono px-2 py-0.5 rounded-full border"
           style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
@@ -300,12 +299,11 @@ function BlockCard({ block, i }: { block: Block; i: number }) {
           {block.cls}
         </span>
       </div>
-      <p className="mt-3 text-sm text-fg/70 leading-[1.7]">{block.desc[lang]}</p>
+      <h3 className="mt-3 text-base font-semibold text-fg">{block.name[lang]}</h3>
+      <p className="mt-2 text-sm text-fg/70 leading-[1.7]">{block.desc[lang]}</p>
       {block.groups.map((g, gi) => (
         <div key={gi} className="mt-4">
-          {g.sub[lang] && (
-            <p className="mb-1.5 text-[11px] uppercase tracking-widest text-fg/40">{g.sub[lang]}</p>
-          )}
+          {g.sub[lang] && <p className="mb-1.5 text-[11px] uppercase tracking-widest text-fg/40">{g.sub[lang]}</p>}
           <div className="flex flex-wrap gap-x-2 gap-y-1.5">
             {g.links.map((l) => (
               <Chip key={l.label} link={l} lang={lang} />
@@ -313,7 +311,104 @@ function BlockCard({ block, i }: { block: Block; i: number }) {
           </div>
         </div>
       ))}
-    </motion.div>
+    </div>
+  )
+}
+
+function BlockFace({ block, lang }: { block: Block; lang: Lang }) {
+  return (
+    <span className="flex h-full flex-col items-center justify-center gap-1">
+      <span className="flex items-center gap-1.5">
+        <span className="text-[11px] font-mono font-semibold text-gold">{block.badge}</span>
+        <span className="text-[10px] font-mono text-fg/45">{block.cls}</span>
+      </span>
+      <span className="text-[13px] font-semibold leading-[1.4] text-fg">{block.name[lang]}</span>
+    </span>
+  )
+}
+
+/* Payment map (lg+ positions in a 1100 × 330 frame; stacked below lg). */
+const PW = 1100
+const PH = 330
+const CLASS_X = [0, 285, 570, 855]
+const COMPOSITE_POS = [
+  { x: 0, w: 200 },
+  { x: 215, w: 200 },
+  { x: 430, w: 200 },
+]
+const GAP_POS = [
+  { x: 650, w: 215 },
+  { x: 885, w: 215 },
+]
+
+function PaymentMap({ t, lang }: { t: (typeof COPY)['ja']; lang: Lang }) {
+  const label = (text: string, x: number, y: number, w: number, extra = '') => (
+    <p
+      className={`mt-4 first:mt-0 lg:mt-0 text-[11px] font-mono tracking-widest text-gold lg:flex lg:items-center lg:justify-center ${PLACED} ${extra}`}
+      style={place(x, y, w, 22, PW, PH)}
+    >
+      {text}
+    </p>
+  )
+  return (
+    <DiagramProvider className="mt-10">
+      <div className="relative flex flex-col gap-2 lg:block lg:aspect-[1100/330]">
+        <svg viewBox={`0 0 ${PW} ${PH}`} className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block" aria-hidden="true">
+          <g fill="none" stroke="rgb(var(--gold) / 0.5)" strokeWidth={1.1}>
+            {/* composites → the classes they straddle */}
+            <path d="M100 212 L122 132 M150 212 L620 132" />
+            <path d="M300 212 L390 132 M350 212 L600 132" />
+            <path d="M510 212 L450 132 M570 212 L650 132" />
+          </g>
+          <g fill="none" stroke="rgb(var(--fg) / 0.35)" strokeWidth={1} strokeDasharray="4 4">
+            {/* classes → remaining gaps */}
+            <path d="M735 132 L757 212 M985 132 L992 212" />
+          </g>
+        </svg>
+
+        {CLASSES.map((c, i) => (
+          <div key={c.badge} className="contents">
+            {label(t.cols[i], CLASS_X[i], 4, 245)}
+            <DNode
+              id={`pay-${c.badge}`}
+              label={`${c.badge} ${c.name[lang]}`}
+              align={i < 2 ? 'left' : 'right'}
+              className={PLACED}
+              style={place(CLASS_X[i], 34, 245, 98, PW, PH)}
+              face={<BlockFace block={c} lang={lang} />}
+              detail={<BlockDetail block={c} lang={lang} />}
+            />
+          </div>
+        ))}
+
+        {label(t.compositeLabel, 0, 300, 630)}
+        {COMPOSITE.map((c, i) => (
+          <DNode
+            key={c.badge}
+            id={`pay-${c.badge}`}
+            label={`${c.badge} ${c.name[lang]}`}
+            align={i === 0 ? 'left' : 'center'}
+            className={PLACED}
+            style={place(COMPOSITE_POS[i].x, 212, COMPOSITE_POS[i].w, 80, PW, PH)}
+            face={<BlockFace block={c} lang={lang} />}
+            detail={<BlockDetail block={c} lang={lang} />}
+          />
+        ))}
+
+        {label(t.gapLabel, 650, 300, 450)}
+        {GAPS.map((g, i) => (
+          <div
+            key={g.axis.ja}
+            className={`rounded-xl border border-dashed border-fg/25 px-3 py-2.5 text-center flex flex-col items-center justify-center ${PLACED}`}
+            style={place(GAP_POS[i].x, 212, GAP_POS[i].w, 80, PW, PH)}
+          >
+            <span className="font-mono text-[11px] text-fg/50">{g.axis[lang]}</span>
+            <span className="mt-1 text-xs text-fg/70 leading-[1.5]">{g.gap[lang]}</span>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-[11px] text-fg/40">{t.hint}</p>
+    </DiagramProvider>
   )
 }
 
@@ -322,7 +417,7 @@ export function Ecosystem() {
   const t = COPY[lang]
   const [tab, setTab] = useState<Tab>('payment')
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <section className="relative z-20 max-w-6xl mx-auto px-6 py-14 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -355,50 +450,13 @@ export function Ecosystem() {
         <>
           <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{t.intro}</p>
 
-          {/* Class blocks E0 / E3 / E4 / E5 */}
-          <div className="mt-10 grid sm:grid-cols-2 gap-5">
-            {CLASSES.map((b, i) => (
-              <BlockCard key={b.cls} block={b} i={i} />
-            ))}
-          </div>
-
-          {/* Composite: context × economy (型α / 型β / 型P) */}
-          <div className="mt-12 pt-10 border-t border-fg/10">
-            <p className="text-xs uppercase tracking-widest text-gold">{t.compositeLabel}</p>
-            <p className="mt-3 text-fg/60 text-sm leading-[1.7] max-w-2xl">{t.compositeIntro}</p>
-            <div className="mt-6 grid md:grid-cols-3 gap-5">
-              {COMPOSITE.map((b, i) => (
-                <BlockCard key={b.badge} block={b} i={i} />
-              ))}
-            </div>
-          </div>
-
-          {/* Axes of divergence & remaining gaps */}
-          <div className="mt-12 pt-10 border-t border-fg/10">
-            <p className="text-xs uppercase tracking-widest text-gold">{t.axisLabel}</p>
-            <p className="mt-3 text-fg/60 text-sm leading-[1.7] max-w-2xl">{t.axisIntro}</p>
-            <div className="mt-6 grid sm:grid-cols-2 gap-4">
-              {GAPS.map((g, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
-                  className="rounded-xl border border-dashed border-fg/15 p-5"
-                >
-                  <p className="font-mono text-xs text-fg/45">{g.axis[lang]}</p>
-                  <p className="mt-2 text-sm text-fg/70 leading-[1.7]">{g.gap[lang]}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          <PaymentMap t={t} lang={lang} />
 
           <a
             href="https://note.com/x402inc/n/n7beb8aba2e6a"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-1.5 text-xs text-fg/45 hover:text-gold transition-colors"
+            className="mt-6 inline-flex items-center gap-1.5 text-xs text-fg/45 hover:text-gold transition-colors"
           >
             {t.taxNote}
             <ArrowUpRight className="w-3 h-3" />

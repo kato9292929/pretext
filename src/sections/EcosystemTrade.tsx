@@ -1,6 +1,6 @@
-import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
-import { useLang, type Localized } from '../i18n'
+import { useLang, type Lang, type Localized } from '../i18n'
+import { DNode, DiagramProvider, PLACED, place } from '../components/Diagram'
 
 type Chip = { name: string; note?: Localized; href?: string; ended?: boolean }
 type Group = { sub?: Localized; chips: Chip[]; foot?: Localized }
@@ -240,6 +240,8 @@ const GAPS: { label: Localized; text: Localized }[] = [
 const COPY = {
   ja: {
     gapLabel: '分岐の軸と残る空白',
+    tierLabel: 'Tier｜誰の資金を、誰の名義で動かすか',
+    hint: '各 Tier・型にカーソルを合わせる（タップする）と、詳細と事例が表示されます',
     gapIntro: 'Tierは資金の名義で、型は検証の置き場所で切り分ける。実装の薄い空白も、同じ軸で位置づける。',
     closing:
       'Tierごとに預かる資金も、名義も、検証の強度も違う。私たちは、この細分化を、AIとの詳細なリサーチと自社の観測を突き合わせて分析し続ける。',
@@ -250,6 +252,8 @@ const COPY = {
   },
   en: {
     gapLabel: 'Axes of divergence & remaining gaps',
+    tierLabel: 'Tier | whose funds move, under whose name',
+    hint: 'Hover (or tap) a tier or type to see its details and examples',
     gapIntro:
       'Tiers split on whose name the funds are in; types split on where verification lives. Thinly implemented gaps are placed on the same axes.',
     closing:
@@ -260,8 +264,6 @@ const COPY = {
     taxPost: '',
   },
 }
-
-const ease = [0.22, 1, 0.36, 1] as const
 
 function ChipView({ chip }: { chip: Chip }) {
   const { lang } = useLang()
@@ -289,24 +291,17 @@ function ChipView({ chip }: { chip: Chip }) {
   )
 }
 
-function CardView({ card, i }: { card: Card; i: number }) {
-  const { lang } = useLang()
+function CardDetail({ card, lang }: { card: Card; lang: Lang }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, ease, delay: (i % 2) * 0.08 }}
-      className="liquid-glass rounded-2xl p-6"
-    >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+    <div className="p-5">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
         <span className="rounded-full bg-gold px-2 py-0.5 text-xs font-semibold text-black">{card.badge}</span>
-        <p className="text-base font-semibold text-gold">{card.title[lang]}</p>
         <span className="rounded-md border border-fg/15 px-2 py-0.5 text-[11px] text-fg/60">{card.tag[lang]}</span>
       </div>
-      <p className="mt-4 text-sm text-fg/75 leading-[1.8]">{card.desc[lang]}</p>
+      <h3 className="mt-3 text-base font-semibold text-gold">{card.title[lang]}</h3>
+      <p className="mt-2 text-sm text-fg/75 leading-[1.8]">{card.desc[lang]}</p>
       {card.groups.map((g, gi) => (
-        <div key={gi} className="mt-5">
+        <div key={gi} className="mt-4">
           {g.sub && <p className="mb-2 text-xs tracking-widest text-fg/40">{g.sub[lang]}</p>}
           <div className="flex flex-wrap gap-2">
             {g.chips.map((c) => (
@@ -316,47 +311,106 @@ function CardView({ card, i }: { card: Card; i: number }) {
           {g.foot && <p className="mt-3 text-xs text-fg/40 leading-[1.7]">{g.foot[lang]}</p>}
         </div>
       ))}
-    </motion.div>
+    </div>
   )
 }
+
+function CardFace({ card, lang }: { card: Card; lang: Lang }) {
+  return (
+    <span className="flex h-full flex-col items-center justify-center gap-1">
+      <span className="flex items-center gap-1.5">
+        <span className="text-[11px] font-mono font-semibold text-gold">{card.badge}</span>
+        <span className="text-[10px] text-fg/45">{card.tag[lang]}</span>
+      </span>
+      <span className="text-[13px] font-semibold leading-[1.4] text-fg">{card.title[lang]}</span>
+    </span>
+  )
+}
+
+/* Trade map (lg+ positions in a 1100 × 500 frame; stacked below lg). */
+const TW = 1100
+const TH = 500
+const COL_X = [0, 285, 570, 855]
 
 export function EcosystemTrade() {
   const { lang } = useLang()
   const t = COPY[lang]
+  const [verify, access] = BLOCKS
+  const label = (text: string, x: number, y: number, w: number) => (
+    <p
+      className={`mt-5 lg:mt-0 text-[11px] font-mono tracking-widest text-gold lg:flex lg:items-center lg:justify-center ${PLACED}`}
+      style={place(x, y, w, 22, TW, TH)}
+    >
+      {text}
+    </p>
+  )
+  const node = (card: Card, x: number, y: number, w: number, h: number, align: 'left' | 'right' | 'center') => (
+    <DNode
+      key={card.badge}
+      id={`trade-${card.badge}`}
+      label={`${card.badge} ${card.title[lang]}`}
+      align={align}
+      className={PLACED}
+      style={place(x, y, w, h, TW, TH)}
+      face={<CardFace card={card} lang={lang} />}
+      detail={<CardDetail card={card} lang={lang} />}
+    />
+  )
   return (
     <>
       <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-2xl">{INTRO[lang]}</p>
 
-      <div className="mt-10 grid sm:grid-cols-2 gap-5">
-        {TIERS.map((c, i) => (
-          <CardView key={c.badge} card={c} i={i} />
-        ))}
-      </div>
+      <DiagramProvider className="mt-10">
+        <div className="relative flex flex-col gap-2 lg:block lg:aspect-[1100/500]">
+          <svg viewBox={`0 0 ${TW} ${TH}`} className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block" aria-hidden="true">
+            <defs>
+              <marker id="tr-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="rgb(var(--gold) / 0.8)" />
+              </marker>
+            </defs>
+            {/* Tier progression */}
+            <g fill="none" stroke="rgb(var(--gold) / 0.55)" strokeWidth={1.2} markerEnd="url(#tr-arrow)">
+              <path d="M249 78 L281 78" />
+              <path d="M534 78 L566 78" />
+              <path d="M819 78 L851 78" />
+            </g>
+            {/* verification spans every tier */}
+            <path d="M0 166 L1100 166" stroke="rgb(var(--fg) / 0.15)" strokeDasharray="3 5" />
+            <path d="M0 302 L1100 302" stroke="rgb(var(--fg) / 0.15)" strokeDasharray="3 5" />
+          </svg>
 
-      {BLOCKS.map((b) => (
-        <div key={b.label.en} className="mt-12 pt-10 border-t border-fg/10">
-          <p className="text-xs tracking-widest text-gold">{b.label[lang]}</p>
-          <p className="mt-3 text-fg/60 text-base leading-[1.7] max-w-2xl">{b.intro[lang]}</p>
-          <div className="mt-6 grid sm:grid-cols-2 gap-5">
-            {b.cards.map((c, i) => (
-              <CardView key={c.badge} card={c} i={i} />
-            ))}
-          </div>
-        </div>
-      ))}
+          {label(t.tierLabel, 0, 4, 1100)}
+          {TIERS.map((c, i) => node(c, COL_X[i], 32, 245, 92, i < 2 ? 'left' : 'right'))}
 
-      <div className="mt-12 pt-10 border-t border-fg/10">
-        <p className="text-xs tracking-widest text-gold">{t.gapLabel}</p>
-        <p className="mt-3 text-fg/60 text-base leading-[1.7] max-w-2xl">{t.gapIntro}</p>
-        <div className="mt-6 grid sm:grid-cols-2 gap-5">
-          {GAPS.map((g) => (
-            <div key={g.label.en} className="rounded-2xl border border-fg/10 p-6">
-              <p className="text-xs text-fg/45">{g.label[lang]}</p>
-              <p className="mt-3 text-sm text-fg/85">{g.text[lang]}</p>
+          {label(verify.label[lang], 0, 140, 1100)}
+          {verify.cards.map((c, i) => node(c, COL_X[i], 174, 245, 84, i < 2 ? 'left' : 'right'))}
+
+          {label(access.label[lang], 0, 276, 1100)}
+          {access.cards.map((c, i) => node(c, i === 0 ? 0 : 570, 310, 530, 72, i === 0 ? 'left' : 'right'))}
+
+          {label(t.gapLabel, 0, 404, 1100)}
+          {GAPS.map((g, i) => (
+            <div
+              key={g.label.en}
+              className={`rounded-xl border border-dashed border-fg/25 px-3 py-2.5 text-center flex flex-col items-center justify-center ${PLACED}`}
+              style={place(i === 0 ? 570 : 285, 432, 245, 64, TW, TH)}
+            >
+              <span className="text-[11px] text-fg/50">{g.label[lang]}</span>
+              <span className="mt-1 text-xs text-fg/75 leading-[1.5]">{g.text[lang]}</span>
             </div>
           ))}
         </div>
+        <p className="mt-4 text-center text-[11px] text-fg/40">{t.hint}</p>
+      </DiagramProvider>
+
+      <div className="mt-8 grid gap-3 md:grid-cols-2 max-w-4xl">
+        {BLOCKS.map((b) => (
+          <p key={b.label.en} className="text-xs text-fg/55 leading-[1.7]">
+            <span className="text-gold/80">{b.label[lang]}</span>　{b.intro[lang]}
+          </p>
+        ))}
       </div>
+      <p className="mt-4 text-xs text-fg/55 leading-[1.7] max-w-4xl">{t.gapIntro}</p>
 
       <p className="mt-10 text-fg/60 text-sm leading-[1.8] max-w-2xl">{t.closing}</p>
       <p className="mt-4 text-fg/40 text-xs leading-[1.8] max-w-2xl">{t.note}</p>
