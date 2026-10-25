@@ -32,46 +32,49 @@ export function Foundation() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="max-w-3xl"
       >
         <SectionEyebrow label="Foundation" tag="Open standard" heading />
-        <p className="mt-6 text-fg/60 text-base leading-[1.7]">{t.lead}</p>
       </motion.div>
 
-      {/* Official site screenshot, linked */}
-      <motion.a
-        href="https://x402.org/"
-        target="_blank"
-        rel="noopener noreferrer"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="group mt-10 block overflow-hidden rounded-2xl border border-fg/15 bg-white"
-      >
-        <img
-          src="/foundation/x402-org.jpg"
-          alt={t.shotAlt}
-          width={1600}
-          height={874}
-          loading="lazy"
-          className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.01]"
-        />
-      </motion.a>
+      {/* Same proportions as the Update lead: screenshot left, text right */}
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-10 lg:items-center">
+        <motion.a
+          href="https://x402.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="group block overflow-hidden rounded-xl border border-fg/10 bg-white"
+        >
+          <img
+            src="/foundation/x402-org.jpg"
+            alt={t.shotAlt}
+            width={1600}
+            height={874}
+            loading="lazy"
+            className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </motion.a>
 
-      <div className="mt-10 flex flex-wrap gap-4">
-        {LINKS.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm text-fg/70 px-4 py-2 rounded-full border border-fg/15 hover:bg-fg/5 transition-colors"
-          >
-            {link.label}
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-        ))}
+        <div>
+          <p className="text-fg/60 text-sm md:text-base leading-[1.8]">{t.lead}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm text-fg/70 px-4 py-2 rounded-full border border-fg/15 hover:bg-fg/5 transition-colors"
+              >
+                {link.label}
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
