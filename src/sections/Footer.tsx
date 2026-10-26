@@ -12,9 +12,10 @@ const COPY = {
     corp: '7010401194879',
     memberLabel: '加盟団体',
     members: [
+      // In joining order; dates are the PR TIMES announcements.
+      '一般社団法人日本暗号資産ビジネス協会（JCBA）準会員（2026年9月4日）',
       '一般社団法人日本ブロックチェーン協会（JBA）シルバー会員（2026年9月25日）',
-      '一般社団法人日本暗号資産ビジネス協会（JCBA）賛助会員',
-      '一般社団法人Fintech協会 ベンチャー会員（2026年10月1日公表）',
+      '一般社団法人Fintech協会 ベンチャー会員（2026年10月14日）',
     ],
     siteLabel: 'Pages',
     contact: 'Contact',
@@ -30,9 +31,9 @@ const COPY = {
     corp: '7010401194879',
     memberLabel: 'Memberships',
     members: [
+      'Japan Cryptoasset Business Association (JCBA), associate member (Sep 4, 2026)',
       'Japan Blockchain Association (JBA), silver member (Sep 25, 2026)',
-      'Japan Cryptoasset Business Association (JCBA), supporting member',
-      'Fintech Association of Japan, venture member (announced Oct 1, 2026)',
+      'Fintech Association of Japan, venture member (Oct 14, 2026)',
     ],
     siteLabel: 'Pages',
     contact: 'Contact',
