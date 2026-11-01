@@ -54,8 +54,7 @@ export function Layout({
           className="absolute inset-0"
           style={{
             background:
-              // periwinkle → violet → magenta → cyan → mint → yellow → peach (2026-11 palette)
-              'linear-gradient(100deg, #7E8BF0 0%, #9B7BF2 17%, #F57CE6 33%, #5EE3EC 54%, #7EF0A8 68%, #F2D57A 84%, #F5A98E 100%)',
+              'linear-gradient(100deg, #E7A6C8 0%, #F3C08A 20%, #F7E39C 38%, #B9E6B0 56%, #A9DCEC 74%, #B7B4EC 100%)',
             mixBlendMode: 'color',
             opacity: 0.85,
           }}

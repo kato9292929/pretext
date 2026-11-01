@@ -559,8 +559,8 @@ export function Featured() {
         <div className="flex items-center gap-3">
           <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-fg">{t.stack}</h3>
           <span
-            className="text-xs px-2.5 py-1 rounded-full border text-gold"
-            style={{ borderColor: 'rgb(var(--gold) / 0.45)', backgroundColor: 'rgb(var(--gold) / 0.08)' }}
+            className="text-xs px-2.5 py-1 rounded-full border"
+            style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.45)', backgroundColor: 'rgb(var(--gold) / 0.08)' }}
           >
             {t.stackTag}
           </span>

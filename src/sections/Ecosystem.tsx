@@ -287,14 +287,14 @@ function BlockDetail({ block, lang }: { block: Block; lang: Lang }) {
     <div className="p-5">
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
         <span
-          className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-gold"
-          style={{ color: 'rgb(var(--bg))' }}
+          className="text-[11px] font-mono px-2 py-0.5 rounded-full"
+          style={{ color: 'rgb(var(--bg))', background: 'rgb(var(--gold))' }}
         >
           {block.badge}
         </span>
         <span
-          className="text-[11px] font-mono px-2 py-0.5 rounded-full border text-gold"
-          style={{ borderColor: 'rgb(var(--gold) / 0.4)' }}
+          className="text-[11px] font-mono px-2 py-0.5 rounded-full border"
+          style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
         >
           {block.cls}
         </span>

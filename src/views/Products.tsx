@@ -534,9 +534,9 @@ function EndpointRow({ ep, lang }: { ep: Ep; lang: Lang }) {
         </code>
         <span
           className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${
-            ep.free ? 'border-[#28c840]/40 text-[#28c840]' : 'border-fg/15 text-gold'
+            ep.free ? 'border-[#28c840]/40 text-[#28c840]' : 'border-fg/15'
           }`}
-          style={ep.free ? undefined : { borderColor: 'rgb(var(--gold) / 0.4)' }}
+          style={ep.free ? undefined : { color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
         >
           {ep.free ? '200 ✓' : '402 ✓'}
         </span>

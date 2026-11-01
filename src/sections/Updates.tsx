@@ -135,8 +135,8 @@ export function Updates() {
             >
               <div className="flex items-start justify-between gap-2">
                 <span
-                  className="text-[11px] font-mono px-2 py-0.5 rounded-full border text-gold"
-                  style={{ borderColor: 'rgb(var(--gold) / 0.4)' }}
+                  className="text-[11px] font-mono px-2 py-0.5 rounded-full border"
+                  style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
                 >
                   {u.tag}
                 </span>
