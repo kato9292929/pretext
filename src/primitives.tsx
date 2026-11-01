@@ -66,7 +66,6 @@ export function SectionEyebrow({
   dim?: boolean
 }) {
   const tagStyle = {
-    color: 'rgb(var(--gold))',
     borderColor: 'rgb(var(--gold) / 0.45)',
     backgroundColor: 'rgb(var(--gold) / 0.08)',
   }
@@ -82,7 +81,7 @@ export function SectionEyebrow({
         </span>
         {tag && (
           <span
-            className="text-xs md:text-sm px-2.5 py-1 rounded-full border"
+            className="text-xs md:text-sm px-2.5 py-1 rounded-full border text-gold"
             style={tagStyle}
           >
             {tag}
@@ -95,7 +94,7 @@ export function SectionEyebrow({
     <div className="inline-flex items-center gap-2 text-sm text-fg/70">
       <span>{label}</span>
       {tag && (
-        <span className="px-2 py-0.5 rounded-full border text-xs" style={tagStyle}>
+        <span className="px-2 py-0.5 rounded-full border text-xs text-gold" style={tagStyle}>
           {tag}
         </span>
       )}
@@ -105,8 +104,8 @@ export function SectionEyebrow({
 
 /* ── Shared shiny-gradient style ─────────────────────────────── */
 export const gradientStyle: CSSProperties = {
-  backgroundImage:
-    'linear-gradient(to right, #6B5310 0%, #A67C10 12.5%, #FDF6D0 32.5%, #E8C338 50%, #A67C10 67.5%, #6B5310 87.5%, #6B5310 100%)',
+  // Gold in the light theme, the aurora palette in the dark theme (see --shine in index.css)
+  backgroundImage: 'var(--shine)',
   backgroundSize: '200% auto',
   WebkitBackgroundClip: 'text',
   backgroundClip: 'text',

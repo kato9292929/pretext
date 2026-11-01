@@ -33,8 +33,6 @@ export function Layout({
       {/* Light-theme background: colourful digits streaming down (Matrix-style
           rain). Shown only in the light theme. */}
       <NumberRain />
-      {/* Light theme: pastel aurora (same palette as the dark ribbon) multiplied over the digits, with grain */}
-      <div className="bg-light-aurora" aria-hidden="true" />
 
       {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon (dark theme) */}
       <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>

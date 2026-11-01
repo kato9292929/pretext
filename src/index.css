@@ -10,12 +10,28 @@
   --fg: 255 255 255;
   --bg: 12 12 12; /* #0c0c0c */
   --gold: 232 195 56; /* #E8C338 */
+  /* Accent gradient (dark theme only): periwinkle → violet → magenta → cyan → mint → yellow → peach */
+  --accent: linear-gradient(90deg, #7e8bf0, #9b7bf2, #f57ce6, #5ee3ec, #7ef0a8, #f2d57a, #f5a98e);
+  /* Hero shine; loops seamlessly at background-size 200% */
+  --shine: linear-gradient(to right, #7e8bf0 0%, #9b7bf2 12%, #f57ce6 26%, #5ee3ec 42%, #7ef0a8 56%, #f2d57a 70%, #f5a98e 84%, #7e8bf0 100%);
 }
 
 :root[data-theme='light'] {
   --fg: 26 22 15; /* warm near-black */
   --bg: 245 242 236; /* warm off-white */
   --gold: 154 123 18; /* #9A7B12 */
+  --shine: linear-gradient(to right, #6b5310 0%, #a67c10 12.5%, #fdf6d0 32.5%, #e8c338 50%, #a67c10 67.5%, #6b5310 87.5%, #6b5310 100%);
+}
+
+/* Dark theme: gold accents become the aurora gradient. Light theme keeps gold. */
+:root:not([data-theme='light']) .text-gold {
+  background-image: var(--accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+:root:not([data-theme='light']) .bg-gold {
+  background-image: var(--accent);
 }
 
 html,
@@ -48,36 +64,6 @@ body {
 }
 
 :root[data-theme='light'] .bg-light-canvas {
-  display: block;
-}
-
-/* Light theme aurora: soft blobs in the 2026-11 palette, multiplied over the
-   cream background and the digit rain, plus a fine grain. */
-.bg-light-aurora {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-  opacity: 0.55;
-  background:
-    radial-gradient(55% 70% at 6% 45%, #7e8bf0 0%, transparent 70%),
-    radial-gradient(35% 50% at 24% 62%, #9b7bf2 0%, transparent 70%),
-    radial-gradient(26% 42% at 31% 60%, #f57ce6 0%, transparent 70%),
-    radial-gradient(34% 40% at 74% 24%, #5ee3ec 0%, transparent 70%),
-    radial-gradient(24% 34% at 86% 20%, #7ef0a8 0%, transparent 70%),
-    radial-gradient(30% 34% at 90% 70%, #f5a98e 0%, transparent 70%),
-    radial-gradient(26% 30% at 70% 94%, #f2d57a 0%, transparent 70%);
-}
-.bg-light-aurora::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.18;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-:root[data-theme='light'] .bg-light-aurora {
   display: block;
 }
 

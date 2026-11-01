@@ -108,8 +108,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 function Tag({ label }: { label: string }) {
   return (
     <span
-      className="inline-block text-[11px] px-2 py-0.5 rounded border"
-      style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
+      className="inline-block text-[11px] px-2 py-0.5 rounded border text-gold"
+      style={{ borderColor: 'rgb(var(--gold) / 0.4)' }}
     >
       {label}
     </span>
@@ -212,7 +212,7 @@ export function News() {
               className="group flex items-start gap-2 py-1.5 first:pt-0"
             >
               <span className="flex-1">
-                <span className="text-[10px] font-mono" style={{ color: 'rgb(var(--gold))' }}>
+                <span className="text-[10px] font-mono text-gold">
                   {n.tag}
                 </span>
                 <span title={n.title[lang]} className="mt-0.5 text-xs text-fg/80 leading-[1.6] line-clamp-1 group-hover:text-gold transition-colors">
