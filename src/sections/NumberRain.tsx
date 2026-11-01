@@ -20,10 +20,11 @@ const BITS = '01111000001101000011000000110010' // 32 bits, order must be preser
 const NOISE = '0123456789'
 const TRIPLE = '402'
 
-// Muted noise palette — gold is reserved for the 402 accent, so noise/binary
-// stay in soft teal/blue/green/grey and never "float".
-const NOISE_COLORS = ['#8fbfa0', '#4bb6b6', '#5aa6d8', '#8f9fd0', '#9aa2ae']
-const BINARY_COLOR = '#3fb2c0'
+// Noise palette follows the 2026-11 aurora (periwinkle, violet, magenta, cyan,
+// mint, peach), a shade deeper so digits read on the light background. Gold
+// stays reserved for the 402 accent.
+const NOISE_COLORS = ['#6f7ce8', '#8f6fe8', '#e06ad6', '#3fc4d2', '#4cc98d', '#e88c70']
+const BINARY_COLOR = '#3fc4d2'
 const GOLD = '#b8912f'
 const FADE = 'rgba(245, 242, 236, 0.12)' // cream light bg, for the fade trail
 

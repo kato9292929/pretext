@@ -51,6 +51,36 @@ body {
   display: block;
 }
 
+/* Light theme aurora: soft blobs in the 2026-11 palette, multiplied over the
+   cream background and the digit rain, plus a fine grain. */
+.bg-light-aurora {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+  background:
+    radial-gradient(55% 70% at 6% 45%, #7e8bf0 0%, transparent 70%),
+    radial-gradient(35% 50% at 24% 62%, #9b7bf2 0%, transparent 70%),
+    radial-gradient(26% 42% at 31% 60%, #f57ce6 0%, transparent 70%),
+    radial-gradient(34% 40% at 74% 24%, #5ee3ec 0%, transparent 70%),
+    radial-gradient(24% 34% at 86% 20%, #7ef0a8 0%, transparent 70%),
+    radial-gradient(30% 34% at 90% 70%, #f5a98e 0%, transparent 70%),
+    radial-gradient(26% 30% at 70% 94%, #f2d57a 0%, transparent 70%);
+}
+.bg-light-aurora::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-theme='light'] .bg-light-aurora {
+  display: block;
+}
+
 /* Liquid-glass reads inverted on a light background */
 :root[data-theme='light'] .liquid-glass {
   background: rgba(0, 0, 0, 0.015);

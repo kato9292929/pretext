@@ -15,6 +15,16 @@ type NewsItem = {
 // Newest first. The first item is the large lead; the rest (up to 4) list on the right.
 const NEWS: NewsItem[] = [
   {
+    href: 'https://prtimes.jp/main/html/rd/p/000000006.000188987.html',
+    image: '/news/bccc.jpg',
+    tag: { ja: 'プレスリリース', en: 'Press release' },
+    title: {
+      ja: 'x402株式会社、一般社団法人ブロックチェーン推進協会（BCCC）に入会',
+      en: 'x402 Inc. joins the Blockchain Collaborative Consortium (BCCC)',
+    },
+    date: '2026-10-30',
+  },
+  {
     href: 'https://prtimes.jp/main/html/rd/p/000000005.000188987.html',
     image: '/news/fintech.jpg',
     tag: { ja: 'プレスリリース', en: 'Press release' },
@@ -176,7 +186,7 @@ export function News() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease, delay: i * 0.06 }}
-              className="group grid grid-cols-[104px_1fr] sm:grid-cols-[112px_1fr] gap-3 py-3 first:pt-0"
+              className="group grid grid-cols-[88px_1fr] sm:grid-cols-[96px_1fr] gap-3 py-2.5 first:pt-0"
             >
               <div className="self-start overflow-hidden rounded-lg border border-fg/10">
                 <img
@@ -186,11 +196,10 @@ export function News() {
                 />
               </div>
               <div>
-                <Tag label={n.tag[lang]} />
-                <p className="mt-2 border-l-2 border-gold/70 pl-3 text-sm font-semibold leading-[1.6] text-fg group-hover:text-gold transition-colors">
+                <p className="border-l-2 border-gold/70 pl-3 text-[13px] font-semibold leading-[1.55] text-fg line-clamp-2 group-hover:text-gold transition-colors">
                   {n.title[lang]}
                 </p>
-                {n.date && <p className="mt-2 text-xs text-fg/45">{formatDate(n.date, lang)}</p>}
+                {n.date && <p className="mt-1 pl-3 text-[11px] text-fg/45">{formatDate(n.date, lang)}</p>}
               </div>
             </motion.a>
           ))}
@@ -200,7 +209,7 @@ export function News() {
               href={n.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-2 py-2 first:pt-0"
+              className="group flex items-start gap-2 py-1.5 first:pt-0"
             >
               <span className="flex-1">
                 <span className="text-[10px] font-mono" style={{ color: 'rgb(var(--gold))' }}>

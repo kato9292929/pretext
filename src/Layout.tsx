@@ -33,6 +33,8 @@ export function Layout({
       {/* Light-theme background: colourful digits streaming down (Matrix-style
           rain). Shown only in the light theme. */}
       <NumberRain />
+      {/* Light theme: pastel aurora (same palette as the dark ribbon) multiplied over the digits, with grain */}
+      <div className="bg-light-aurora" aria-hidden="true" />
 
       {/* Fixed fullscreen background video, recolored into a multicolor aurora ribbon (dark theme) */}
       <div className="bg-media fixed inset-0 z-0 pointer-events-none" style={{ isolation: 'isolate' }}>
@@ -54,7 +56,8 @@ export function Layout({
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(100deg, #E7A6C8 0%, #F3C08A 20%, #F7E39C 38%, #B9E6B0 56%, #A9DCEC 74%, #B7B4EC 100%)',
+              // periwinkle → violet → magenta → cyan → mint → yellow → peach (2026-11 palette)
+              'linear-gradient(100deg, #7E8BF0 0%, #9B7BF2 17%, #F57CE6 33%, #5EE3EC 54%, #7EF0A8 68%, #F2D57A 84%, #F5A98E 100%)',
             mixBlendMode: 'color',
             opacity: 0.85,
           }}
