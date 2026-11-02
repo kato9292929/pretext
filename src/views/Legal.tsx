@@ -11,7 +11,7 @@ const COMPANY = 'x402株式会社'
 const DOCS: Record<LegalDocKey, Doc> = {
   privacy: {
     title: { ja: 'プライバシーポリシー', en: 'Privacy Policy' },
-    updated: '2026-08-20',
+    updated: '2026-11-02',
     intro: {
       ja: `${COMPANY}（以下「当社」）は、本ウェブサイト（x402jp.com）における個人情報の取扱いについて、以下のとおり定めます。`,
       en: `${COMPANY} ("we") sets out how personal information is handled on this website (x402jp.com) as follows.`,
@@ -27,6 +27,27 @@ const DOCS: Record<LegalDocKey, Doc> = {
           {
             ja: 'サイトの運用・改善のため、アクセスログ（IPアドレス、ブラウザ情報、参照元等）を取得する場合があります。',
             en: 'We may collect access logs (IP address, browser information, referrer, etc.) to operate and improve the site.',
+          },
+        ],
+      },
+      {
+        heading: { ja: 'アクセス解析ツール', en: 'Analytics tools' },
+        body: [
+          {
+            ja: '本サイトは、利用状況の把握とサイトの改善のため、Google LLC が提供する Google アナリティクスと、Vercel Inc. が提供する Vercel Web Analytics を利用しています。',
+            en: 'To understand how the site is used and to improve it, we use Google Analytics, provided by Google LLC, and Vercel Web Analytics, provided by Vercel Inc.',
+          },
+          {
+            ja: 'Google アナリティクスは Cookie を使って、閲覧したページ、滞在時間、参照元、端末やブラウザの種類などを匿名で収集します。個人を特定する情報は含まれません。収集されたデータは Google のプライバシーポリシー（https://policies.google.com/privacy）に基づいて管理されます。',
+            en: 'Google Analytics uses cookies to collect, anonymously, the pages viewed, time on page, referrer, and device and browser type. It does not include personally identifying information. The data is handled under Google’s Privacy Policy (https://policies.google.com/privacy).',
+          },
+          {
+            ja: 'Google アナリティクスによる収集は、ブラウザの Cookie を無効にするか、Google アナリティクス オプトアウト アドオン（https://tools.google.com/dlpage/gaoptout）を使うことで止められます。',
+            en: 'You can stop collection by Google Analytics by disabling cookies in your browser or by using the Google Analytics Opt-out Browser Add-on (https://tools.google.com/dlpage/gaoptout).',
+          },
+          {
+            ja: 'Vercel Web Analytics は Cookie を使わず、閲覧数や参照元などを集計した統計として扱います。',
+            en: 'Vercel Web Analytics does not use cookies and handles page views, referrers and similar data as aggregated statistics.',
           },
         ],
       },
