@@ -6,18 +6,13 @@ import { AgentDuo } from './AgentShowcase'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-const LEAD = {
-  ja: 'パーソナルエージェントは Stripe Link で人の代わりに払い、API には x402 で1コールずつ払う。x402 Inc. は、その支払い先を探せるカタログと、買い手・売り手・市場を自社で動かしています。',
-  en: 'Personal agents pay for people with Stripe Link, and pay APIs one call at a time over x402. x402 Inc. runs the catalog to find who to pay, and runs the buyer, the sellers and the market itself.',
-}
-
-/* Stripe-like balance: a large left-aligned headline, a lead and CTAs on the
-   left; the agent payment panel on the right, cut off by the window's edge. */
+/* Stripe-like balance: a large left-aligned headline and CTAs on the left;
+   the phone and PC window on the right, cut off by the browser's edge (xl). */
 export function Hero() {
   const { lang } = useLang()
   return (
-    <section className="relative z-10 overflow-hidden pt-28 pb-16 md:pt-32 lg:min-h-[86vh] lg:flex lg:items-center">
-      <div className="w-full grid items-center gap-12 px-6 lg:grid-cols-[26rem_minmax(0,1fr)] xl:grid-cols-[30rem_minmax(0,1fr)] lg:gap-14 lg:pr-0 lg:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
+    <section className="relative z-10 overflow-hidden pt-28 pb-16 md:pt-32 xl:min-h-[86vh] xl:flex xl:items-center">
+      <div className="w-full grid items-center gap-12 px-6 xl:grid-cols-[32rem_minmax(0,1fr)] xl:gap-12 xl:pr-0 xl:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
         <div className="flex flex-col items-start text-left">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -32,20 +27,11 @@ export function Hero() {
             </span>
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45, ease }}
-            className="mt-8 max-w-xl text-base md:text-lg text-fg/65 leading-[1.8]"
-          >
-            {LEAD[lang]}
-          </motion.p>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease }}
-            className="mt-9 flex flex-wrap items-center gap-3"
+            className="mt-10 flex flex-wrap items-center gap-3"
           >
             <Pill label={lang === 'ja' ? 'お問い合わせ' : 'Contact'} href={`mailto:${CONTACT_EMAIL}`} />
             <Pill label={lang === 'ja' ? 'エンドポイントを探す' : 'Find endpoints'} href="https://endpoint.x402jp.com/" gold />
@@ -57,7 +43,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease }}
-          className="lg:w-[calc(100%+4rem)]"
+          className="mx-auto w-full max-w-4xl xl:mx-0 xl:max-w-none xl:w-[calc(100%+4rem)]"
         >
           <AgentDuo bleed />
         </motion.div>

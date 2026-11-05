@@ -38,7 +38,6 @@ const METHODS: Method[] = [
       [L('支払い方法', 'Pay with'), L('Stripe Link', 'Stripe Link')],
       [L('カード', 'Card'), L('単回利用カード', 'Single-use card')],
       [L('承認', 'Approval'), L('支払いのたびに人が承認', 'A person approves each payment')],
-      [L('主なエージェント', 'Agents'), L('Muse・Grok など', 'Muse, Grok and others')],
     ],
     log: [
       ['·', L('依頼：イベントのチケットを2枚', 'task: two tickets for the event'), 'dim'],
@@ -70,7 +69,7 @@ const METHODS: Method[] = [
       ['→', L('GET …/api/jin/movers  + X-PAYMENT', 'GET …/api/jin/movers  + X-PAYMENT')],
       ['←', L('200 OK  その日に動いた品目', '200 OK  items that moved today'), 'ok'],
     ],
-    done: L('200 OK・データ受け取り', '200 OK · data received'),
+    done: L('200 OK・受け取り完了', '200 OK · received'),
   },
 ]
 
@@ -96,32 +95,70 @@ function useRotation(n: number) {
   return { i, pick }
 }
 
-/* The phone: the person's chat with the agent (no notch, flat frame). */
+/* The phone: a messaging app where the person asks the agent. Thin
+   titanium-like frame, small island, header with the agent, a payment card
+   in the thread and an input bar, so the screen is full top to bottom. */
+const PAY_CARD: Record<Method['key'], { title: Localized; meta: Localized }> = {
+  link: { title: L('Stripe Link で支払い', 'Paid with Stripe Link'), meta: L('単回利用カード・承認済み', 'Single-use card · approved') },
+  x402: { title: L('x402 で支払い', 'Paid over x402'), meta: L('$0.02・Solana・USDC', '$0.02 · Solana · USDC') },
+}
+
 function Phone({ m, lang }: { m: Method; lang: Lang }) {
+  const card = PAY_CARD[m.key]
   return (
-    <div className="rounded-[40px] border border-white/25 bg-[#0b0d12] p-2.5 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.75)]">
-      <div className="relative overflow-hidden rounded-[32px] bg-[#f4f5f8] text-[#0b1a33]" style={{ height: 500 }}>
-        <div className="flex items-center justify-between px-5 pt-3.5 text-[11px] font-semibold">
-          <span>9:41</span>
-          <span className="tracking-widest">•••</span>
-        </div>
-        <div key={m.key} className="panel-fade px-3.5">
-          <div className="mt-3 flex flex-col items-center">
-            <img src="/about/agent-avatar.jpg" alt="" width={44} height={44} className="h-11 w-11 rounded-2xl object-cover" />
-            <div className="mt-2 rounded-2xl bg-white px-4 py-1.5 text-center shadow-sm">
-              <p className="text-[13px] font-semibold">{m.tab}</p>
-              <p className="text-[10px] text-[#5b6b85]">{m.budget[lang]}</p>
+    <div className="rounded-[2.6rem] bg-gradient-to-b from-[#9aa0aa] via-[#4a4f58] to-[#2a2d33] p-[3px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
+      <div className="rounded-[2.45rem] bg-black p-[6px]">
+        <div className="relative flex h-[27rem] flex-col overflow-hidden rounded-[2.1rem] bg-white text-[#0b1a33]">
+          {/* status bar + island */}
+          <div className="relative flex h-10 shrink-0 items-center justify-between px-6 text-[11px] font-semibold">
+            <span>9:41</span>
+            <span aria-hidden="true" className="absolute left-1/2 top-2 h-[22px] w-[74px] -translate-x-1/2 rounded-full bg-black" />
+            <span aria-hidden="true" className="flex items-end gap-[2px]">
+              <span className="h-[4px] w-[3px] rounded-[1px] bg-[#0b1a33]" />
+              <span className="h-[6px] w-[3px] rounded-[1px] bg-[#0b1a33]" />
+              <span className="h-[8px] w-[3px] rounded-[1px] bg-[#0b1a33]" />
+              <span className="ml-1 h-[9px] w-[18px] rounded-[3px] border border-[#0b1a33] p-[1px]">
+                <span className="block h-full w-3/4 rounded-[1px] bg-[#0b1a33]" />
+              </span>
+            </span>
+          </div>
+
+          {/* app header */}
+          <div className="flex shrink-0 items-center gap-2.5 border-b border-[#eef1f6] px-4 pb-2.5 pt-1">
+            <img src="/about/agent-avatar.jpg" alt="" width={30} height={30} className="h-[30px] w-[30px] rounded-full object-cover" />
+            <div className="min-w-0">
+              <p className="truncate text-[12.5px] font-semibold leading-tight">{m.tab}</p>
+              <p className="truncate text-[10px] text-[#7a879b]">{m.budget[lang]}</p>
             </div>
           </div>
-          <div className="mt-4 ml-6 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-3.5 py-2.5 text-[12.5px] leading-[1.5] text-white">{m.ask[lang]}</div>
-          <div className="mt-2.5 mr-6 rounded-2xl rounded-tl-md bg-white px-3.5 py-2.5 text-[12px] leading-[1.55] shadow-sm">{m.found[lang]}</div>
-          <div className="mt-2 mr-6 rounded-2xl bg-white px-3.5 py-2.5 text-[12px] leading-[1.55] shadow-sm">{m.answer[lang]}</div>
-          <p className="mt-3 flex items-center gap-1.5 px-1 text-[11px] text-[#5b6b85]">
-            <Check className="h-3.5 w-3.5 shrink-0 text-[#1a9b5b]" />
-            {m.done[lang]}
-          </p>
+
+          {/* thread */}
+          <div key={m.key} className="panel-fade flex-1 space-y-2 bg-[#f6f7f9] px-3 py-3">
+            <div className="ml-auto max-w-[82%] rounded-[18px] rounded-br-[6px] bg-[#0b2a5c] px-3 py-2 text-[11.5px] leading-[1.45] text-white">{m.ask[lang]}</div>
+            <div className="max-w-[86%] rounded-[18px] rounded-bl-[6px] bg-white px-3 py-2 text-[11.5px] leading-[1.45] shadow-[0_1px_2px_rgba(11,26,51,0.08)]">{m.found[lang]}</div>
+            <div className="max-w-[86%] rounded-[14px] border border-[#e3e8f0] bg-white p-2.5 shadow-[0_1px_2px_rgba(11,26,51,0.08)]">
+              <div className="flex items-center gap-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#e8f6ee] text-[#1a9b5b]">
+                  <Check className="h-3.5 w-3.5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-semibold leading-tight">{card.title[lang]}</p>
+                  <p className="text-[10px] text-[#7a879b]">{card.meta[lang]}</p>
+                </div>
+              </div>
+            </div>
+            <div className="max-w-[86%] rounded-[18px] rounded-bl-[6px] bg-white px-3 py-2 text-[11.5px] leading-[1.45] shadow-[0_1px_2px_rgba(11,26,51,0.08)]">{m.answer[lang]}</div>
+          </div>
+
+          {/* input bar + home indicator */}
+          <div className="shrink-0 border-t border-[#eef1f6] bg-white px-3 pb-2 pt-2">
+            <div className="flex items-center gap-2">
+              <div className="h-8 flex-1 rounded-full border border-[#e3e8f0] px-3 text-[11px] leading-8 text-[#a3adbd]">{lang === 'ja' ? 'メッセージ' : 'Message'}</div>
+              <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b2a5c] text-[13px] text-white">↑</span>
+            </div>
+            <div aria-hidden="true" className="mx-auto mt-2 h-1 w-24 rounded-full bg-[#0b1a33]" />
+          </div>
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#f4f5f8] to-transparent" />
       </div>
     </div>
   )
@@ -134,7 +171,7 @@ function Window({ m, lang, i, pick, bleed, inset }: { m: Method; lang: Lang; i: 
   return (
     <div className="overflow-hidden rounded-2xl bg-white text-[#0b1a33] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
       {/* window header */}
-      <div className={`flex items-center justify-between border-b border-[#eef1f6] px-6 py-4 md:px-8 ${bleed ? 'lg:pr-[5.5rem]' : ''}`}>
+      <div className={`flex items-center justify-between border-b border-[#eef1f6] px-6 py-4 md:px-8 ${bleed ? 'xl:pr-[5.5rem]' : ''}`}>
         <div className="flex items-center gap-1.5" aria-hidden="true">
           <span className="h-2.5 w-2.5 rounded-full bg-[#e3e8f0]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#e3e8f0]" />
@@ -150,11 +187,11 @@ function Window({ m, lang, i, pick, bleed, inset }: { m: Method; lang: Lang; i: 
         </ol>
       </div>
 
-      <div className="grid md:grid-cols-[1.35fr_1fr]">
+      <div className="grid md:grid-cols-[1fr_1fr]">
         {/* left: tabs + request log */}
-        <div className={`px-6 py-6 md:px-8 md:py-7 ${inset ? 'lg:pl-[5.5rem]' : ''}`}>
+        <div className={`px-6 py-6 md:px-8 md:py-7 ${inset ? 'xl:pl-[6rem]' : ''}`}>
           <p className="text-[13px] font-semibold">{t.payWith}</p>
-          <div className="mt-3 flex flex-wrap gap-2" role="tablist">
+          <div className="mt-3 flex gap-2" role="tablist">
             {METHODS.map((x, k) => {
               const Icon = x.icon
               const on = k === i
@@ -165,7 +202,7 @@ function Window({ m, lang, i, pick, bleed, inset }: { m: Method; lang: Lang; i: 
                   role="tab"
                   aria-selected={on}
                   onClick={() => pick(k)}
-                  className={`flex min-w-[7.5rem] flex-col items-start gap-1 rounded-lg border px-3 py-2 text-left text-[12px] transition-colors ${
+                  className={`flex min-w-[6.5rem] flex-col whitespace-nowrap items-start gap-1 rounded-lg border px-3 py-2 text-left text-[12px] transition-colors ${
                     on ? 'border-[#0b2a5c] text-[#0b1a33] ring-1 ring-[#0b2a5c]' : 'border-[#e3e8f0] text-[#5b6b85] hover:border-[#c3cad6]'
                   }`}
                 >
@@ -187,17 +224,17 @@ function Window({ m, lang, i, pick, bleed, inset }: { m: Method; lang: Lang; i: 
         </div>
 
         {/* right: what was paid */}
-        <div className={`border-t border-[#eef1f6] bg-[#f7f8fb] px-6 py-6 md:border-l md:border-t-0 md:px-8 md:py-7 ${bleed ? 'lg:pr-[5.5rem]' : ''}`}>
+        <div className={`border-t border-[#eef1f6] bg-[#f7f8fb] px-6 py-6 md:border-l md:border-t-0 md:px-8 md:py-7 ${bleed ? 'xl:pr-[5.5rem]' : ''}`}>
           <p className="text-[13px] font-semibold">{t.summary}</p>
           <dl key={m.key} className="panel-fade mt-4 divide-y divide-[#e8ecf2] text-[12px]">
             {m.rows.map(([k, v]) => (
               <div key={k.en} className="flex items-baseline justify-between gap-4 py-2.5">
                 <dt className="shrink-0 text-[#5b6b85]">{k[lang]}</dt>
-                <dd className="break-words text-right font-medium">{v[lang]}</dd>
+                <dd className="text-right font-medium">{v[lang]}</dd>
               </div>
             ))}
           </dl>
-          <div className="mt-5 flex items-center justify-center gap-2 rounded-lg bg-[#0b2a5c] px-4 py-3 text-[13px] font-semibold text-white">
+          <div className="mt-5 flex items-center justify-center gap-2 rounded-lg bg-[#0b2a5c] px-4 py-3 text-[13px] font-semibold whitespace-nowrap text-white">
             <Check className="h-4 w-4" />
             {m.done[lang]}
           </div>
@@ -207,20 +244,20 @@ function Window({ m, lang, i, pick, bleed, inset }: { m: Method; lang: Lang; i: 
   )
 }
 
-/* Phone in front of the PC window. On lg the phone overlaps the window's
-   lower-left; below lg the phone comes first and the window follows.
-   bleed: the window runs 4rem past the browser edge (home hero). */
+/* Phone in front of the PC window. On xl the phone overlaps the window's
+   lower-left and hangs below it; below xl the phone comes first and the
+   window follows. bleed: the window runs 4rem past the browser edge. */
 export function AgentDuo({ bleed = false }: { bleed?: boolean }) {
   const { lang } = useLang()
   const { i, pick } = useRotation(METHODS.length)
   const m = METHODS[i]
   return (
-    // min-h keeps the taller phone from running into what follows
-    <div className="relative lg:min-h-[37rem]">
-      <div className="mx-auto mb-8 w-[15rem] lg:absolute lg:left-0 lg:top-14 lg:z-10 lg:mb-0">
+    // min-h keeps the phone hanging below the window clear of what follows
+    <div className="relative xl:min-h-[33rem]">
+      <div className="mx-auto mb-8 w-[15.5rem] xl:absolute xl:left-0 xl:top-20 xl:z-10 xl:mb-0">
         <Phone m={m} lang={lang} />
       </div>
-      <div className="lg:ml-[11rem]">
+      <div className="xl:ml-[10rem]">
         <Window m={m} lang={lang} i={i} pick={pick} bleed={bleed} inset />
       </div>
     </div>
