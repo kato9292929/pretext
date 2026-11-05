@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { CONTACT_EMAIL, Pill, gradientStyle } from '../primitives'
 import { useLang } from '../i18n'
-import { AgentPanel } from './AgentShowcase'
+import { AgentDuo } from './AgentShowcase'
 // LogoMarquee is hidden for now; logos will move into Products.
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -17,13 +17,13 @@ export function Hero() {
   const { lang } = useLang()
   return (
     <section className="relative z-10 overflow-hidden pt-28 pb-16 md:pt-32 lg:min-h-[86vh] lg:flex lg:items-center">
-      <div className="w-full grid items-center gap-12 px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 lg:pr-0 lg:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
+      <div className="w-full grid items-center gap-12 px-6 lg:grid-cols-[26rem_minmax(0,1fr)] xl:grid-cols-[30rem_minmax(0,1fr)] lg:gap-14 lg:pr-0 lg:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
         <div className="flex flex-col items-start text-left">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease }}
-            className="text-5xl md:text-6xl xl:text-7xl 2xl:text-[5.5rem] font-semibold tracking-tight leading-[0.95]"
+            className="text-5xl md:text-6xl xl:text-7xl font-semibold tracking-tight leading-[0.95]"
           >
             <span className="block text-fg">The agentic</span>
             <span className="block text-fg">economy</span>
@@ -52,14 +52,14 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* agent payment panel; on lg it runs past the right edge of the window */}
+        {/* phone in front of a PC window; on lg the window runs past the right edge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease }}
-          className="lg:w-[calc(100%+6rem)]"
+          className="lg:w-[calc(100%+4rem)]"
         >
-          <AgentPanel bleed />
+          <AgentDuo bleed />
         </motion.div>
       </div>
     </section>

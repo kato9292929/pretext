@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowRight, ArrowUpRight, Check, Copy, CreditCard, Gauge, Gavel, Search, Wallet, Zap } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
-import { AgentPanel } from '../sections/AgentShowcase'
+import { AgentDuo } from '../sections/AgentShowcase'
 import { ProtocolMap } from '../sections/ProtocolMap'
 
 /* about.html — agent payments.
@@ -352,7 +352,7 @@ export function About() {
         </motion.div>
         <div className="mt-14 md:mt-20">
           <div className="max-w-5xl mx-auto px-6">
-            <AgentPanel />
+            <AgentDuo />
           </div>
         </div>
         <motion.div {...fadeUp} className="relative z-10 mt-14 md:mt-16 max-w-4xl mx-auto px-6 text-center">
