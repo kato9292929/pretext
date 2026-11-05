@@ -446,15 +446,3 @@ body {
     animation: none;
   }
 }
-
-/* Agent payment panel: content fades in when the payment method changes */
-@keyframes panel-fade {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: none; }
-}
-.panel-fade {
-  animation: panel-fade 0.5s ease both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .panel-fade { animation: none; }
-}

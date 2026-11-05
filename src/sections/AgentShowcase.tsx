@@ -1,237 +1,176 @@
 import { useEffect, useState } from 'react'
-import { Check, CreditCard, Zap } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
 
-/* Agent payments shown on two screens, Stripe-style: a PC window (what
-   goes over the wire and what was paid) with a phone in front of it (the
-   person's chat with the agent). Both switch together between Agentic
-   Commerce (Stripe Link) and x402, automatically or by tab.
-   Used in the home hero (the PC window runs past the right edge) and on
-   about.html. Everything shown is the site's existing copy; no new figures. */
+/* Phone in the middle with what each payment rail does on either side.
+   Used at the top of about.html and on the home page above Update. */
 
-type Method = {
-  key: 'link' | 'x402'
-  tab: string
-  icon: typeof CreditCard
+const COPY = {
+  ja: {
+    sideLeft: 'Agentic Commerce',
+    sideRight: 'x402',
+    callouts: [
+      ['人の代わりに Stripe Link で払う', 'Muse・Grok などのパーソナルエージェントが、ブラウザやチャットから購入を済ませる。'],
+      ['単回利用カードと都度承認', '支払いのたびに人が承認し、使い捨てのカードで払う。'],
+      ['API には1コールずつ払う', 'API が 402 を返したら、USDC で署名して同じ URL に再リクエストする。'],
+      ['払える先は x402 Endpoint で探す', '161,826 のエンドポイントから、エージェントが売り手を見つける（2026年10月19日時点）。'],
+    ],
+  },
+  en: {
+    sideLeft: 'Agentic Commerce',
+    sideRight: 'x402',
+    callouts: [
+      ['Pays with Stripe Link for you', 'Personal agents such as Muse and Grok finish purchases from a browser or a chat.'],
+      ['Single-use cards, approve each time', 'A person approves every payment, and a disposable card pays.'],
+      ['Pays APIs one call at a time', 'When an API returns 402, sign in USDC and re-request the same URL.'],
+      ['Find who to pay on x402 Endpoint', 'Agents find sellers among 161,826 endpoints (as of Oct 19, 2026).'],
+    ],
+  },
+}
+
+type Slide = {
+  agent: string
   budget: Localized
   ask: Localized
   found: Localized
   answer: Localized
-  rows: [Localized, Localized][]
-  log: [string, Localized, Tone?][]
-  done: Localized
+  paid: Localized
+  rail: 'Link' | 'x402'
 }
 
-type Tone = 'warn' | 'ok' | 'dim'
-const L = (ja: string, en: string): Localized => ({ ja, en })
-
-const METHODS: Method[] = [
+const SLIDES: Slide[] = [
   {
-    key: 'link',
-    tab: 'Agentic Commerce',
-    icon: CreditCard,
-    budget: L('単回利用カード・都度承認', 'Single-use card · approve each time'),
-    ask: L('このイベントのチケットを2枚買っておいて', 'Buy two tickets for this event'),
-    found: L('ブラウザで購入ページを開き、Stripe Link で支払います', 'Opening the checkout in the browser; paying with Stripe Link'),
-    answer: L('承認をいただいたので、購入を完了しました。', 'You approved it, so the purchase is done.'),
-    rows: [
-      [L('支払い方法', 'Pay with'), L('Stripe Link', 'Stripe Link')],
-      [L('カード', 'Card'), L('単回利用カード', 'Single-use card')],
-      [L('承認', 'Approval'), L('支払いのたびに人が承認', 'A person approves each payment')],
-    ],
-    log: [
-      ['·', L('依頼：イベントのチケットを2枚', 'task: two tickets for the event'), 'dim'],
-      ['→', L('ブラウザで購入ページを開く', 'open the checkout in the browser')],
-      ['←', L('Stripe Link：承認を待っています', 'Stripe Link: waiting for approval'), 'warn'],
-      ['·', L('人が承認 → 単回利用カードを発行', 'person approves → single-use card issued'), 'dim'],
-      ['✓', L('支払い完了', 'payment complete'), 'ok'],
-    ],
-    done: L('購入完了', 'Purchase complete'),
+    agent: 'Agentic Commerce',
+    budget: { ja: '単回利用カード・都度承認', en: 'Single-use card · approve each time' },
+    ask: { ja: 'このイベントのチケットを2枚買っておいて', en: 'Buy two tickets for this event' },
+    found: { ja: 'ブラウザで購入ページを開き、Stripe Link で支払います', en: 'Opening the checkout in the browser; paying with Stripe Link' },
+    answer: { ja: '承認をいただいたので、購入を完了しました。', en: 'You approved it, so the purchase is done.' },
+    paid: { ja: 'Stripe Link で支払い（単回利用カード）', en: 'Paid with Stripe Link (single-use card)' },
+    rail: 'Link',
   },
   {
-    key: 'x402',
-    tab: 'x402',
-    icon: Zap,
-    budget: L('USDC 残高から per-call', 'Per-call from a USDC balance'),
-    ask: L('今日、東京の食品で値段が動いたのは？', 'Which food prices in Tokyo moved today?'),
-    found: L('x402 Endpoint で Japan Inflation Nowcall を見つけました', 'Found Japan Inflation Nowcall on x402 Endpoint'),
-    answer: L('movers を1コール買い、その日に動いた品目を取得しました。', 'Bought one call to movers and got the items that moved today.'),
-    rows: [
-      [L('エンドポイント', 'Endpoint'), L('/api/jin/movers', '/api/jin/movers')],
-      [L('応答', 'Response'), L('402 → 200 OK', '402 → 200 OK')],
-      [L('ネットワーク', 'Network'), L('Solana・USDC', 'Solana · USDC')],
-      [L('金額', 'Price'), L('$0.02 per call', '$0.02 per call')],
-    ],
-    log: [
-      ['→', L('GET jin.x402jp.com/api/jin/movers', 'GET jin.x402jp.com/api/jin/movers')],
-      ['←', L('402 Payment Required  $0.02 · USDC · solana', '402 Payment Required  $0.02 · USDC · solana'), 'warn'],
-      ['·', L('残高から署名（per-call）', 'sign from the balance (per call)'), 'dim'],
-      ['→', L('GET …/api/jin/movers  + X-PAYMENT', 'GET …/api/jin/movers  + X-PAYMENT')],
-      ['←', L('200 OK  その日に動いた品目', '200 OK  items that moved today'), 'ok'],
-    ],
-    done: L('200 OK・受け取り完了', '200 OK · received'),
+    agent: 'x402',
+    budget: { ja: 'USDC 残高から per-call', en: 'Per-call from a USDC balance' },
+    ask: { ja: '今日、東京の食品で値段が動いたのは？', en: 'Which food prices in Tokyo moved today?' },
+    found: { ja: 'x402 Endpoint で Japan Inflation Nowcall を見つけました', en: 'Found Japan Inflation Nowcall on x402 Endpoint' },
+    answer: { ja: 'movers を1コール買い、その日に動いた品目を取得しました。', en: 'Bought one call to movers and got the items that moved today.' },
+    paid: { ja: '$0.02 per call を残高から支払い（Solana・USDC）', en: 'Paid $0.02 per call from the balance (Solana · USDC)' },
+    rail: 'x402',
   },
 ]
 
-const COPY = {
-  ja: { steps: ['依頼', '支払い', '完了'], payWith: '支払い方法', summary: '支払いの内容', log: 'やりとり' },
-  en: { steps: ['Ask', 'Pay', 'Done'], payWith: 'Pay with', summary: 'Payment', log: 'Over the wire' },
-}
-
-const TONE: Record<Tone, string> = { warn: 'text-[#b26a00]', ok: 'text-[#1a9b5b]', dim: 'text-[#8a96aa]' }
-
-function useRotation(n: number) {
+function useSlides() {
   const [i, setI] = useState(0)
-  const [hold, setHold] = useState(false)
   useEffect(() => {
-    if (hold || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const t = setInterval(() => setI((k) => (k + 1) % n), 6000)
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const t = setInterval(() => setI((n) => (n + 1) % SLIDES.length), 5200)
     return () => clearInterval(t)
-  }, [n, hold])
-  const pick = (k: number) => {
-    setI(k)
-    setHold(true)
-  }
-  return { i, pick }
+  }, [])
+  return { i, setI }
 }
 
-/* The phone: the original about-page phone design, unchanged — glass
-   frame, island, centered agent card, chat bubbles and the paid line. */
-const PAID: Record<Method['key'], { text: Localized; rail: string }> = {
-  link: { text: L('Stripe Link で支払い（単回利用カード）', 'Paid with Stripe Link (single-use card)'), rail: 'Link' },
-  x402: { text: L('$0.02 per call を残高から支払い（Solana・USDC）', 'Paid $0.02 per call from the balance (Solana · USDC)'), rail: 'x402' },
-}
-
-function Phone({ m, lang }: { m: Method; lang: Lang }) {
-  const paid = PAID[m.key]
+function Phone({ lang, i, setI }: { lang: Lang } & ReturnType<typeof useSlides>) {
   return (
-    <div className="relative rounded-[44px] border border-fg/20 bg-fg/[0.04] p-3 shadow-2xl backdrop-blur-sm">
-      <div className="relative overflow-hidden rounded-[34px] bg-[#f4f5f8] text-[#0b1a33]" style={{ height: 560 }}>
-        {/* status bar */}
-        <div className="flex items-center justify-between px-6 pt-4 text-[12px] font-semibold">
-          <span>9:41</span>
-          <span className="h-6 w-24 rounded-full bg-[#0b1a33]" />
-          <span className="tracking-widest">•••</span>
-        </div>
-
-        <div key={m.key} className="panel-fade absolute inset-x-0 top-12 bottom-0 px-4">
-          <div className="mt-3 flex flex-col items-center">
-            <img src="/about/agent-avatar.jpg" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover" />
-            <div className="mt-2 rounded-2xl bg-white px-4 py-2 text-center shadow-sm">
-              <p className="text-sm font-semibold">{m.tab}</p>
-              <p className="text-[11px] text-[#5b6b85]">{m.budget[lang]}</p>
-            </div>
+    <div className="relative mx-auto w-full max-w-[360px]">
+      <div className="relative rounded-[44px] border border-fg/20 bg-fg/[0.04] p-3 shadow-2xl">
+        <div className="relative overflow-hidden rounded-[34px] bg-[#f4f5f8] text-[#0b1a33]" style={{ height: 560 }}>
+          {/* status bar */}
+          <div className="flex items-center justify-between px-6 pt-4 text-[12px] font-semibold">
+            <span>9:41</span>
+            <span className="h-6 w-24 rounded-full bg-[#0b1a33]" />
+            <span className="tracking-widest">•••</span>
           </div>
-          <div className="mt-5 ml-8 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-4 py-3 text-[14px] leading-[1.5] text-white">{m.ask[lang]}</div>
-          <div className="mt-3 mr-8 rounded-2xl rounded-tl-md bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">{m.found[lang]}</div>
-          <div className="mt-2 mr-8 rounded-2xl bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">{m.answer[lang]}</div>
-          <p className="mt-3 flex items-center gap-1.5 px-1 text-[12px] text-[#5b6b85]">
-            <Check className="h-3.5 w-3.5 text-[#1a9b5b]" />
-            {paid.text[lang]}
-            <span className="ml-auto rounded-md border border-[#c9d1e0] px-1.5 font-mono text-[10px]">{paid.rail}</span>
-          </p>
-        </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#f4f5f8] to-transparent" />
-      </div>
-    </div>
-  )
-}
 
-/* The PC window: method tabs and the request log on the left, what was paid
-   on the right. `inset` leaves room on the left for the phone in front. */
-function Window({ m, lang, i, pick, bleed, inset }: { m: Method; lang: Lang; i: number; pick: (k: number) => void; bleed: boolean; inset: boolean }) {
-  const t = COPY[lang]
-  return (
-    <div className="overflow-hidden rounded-2xl bg-white text-[#0b1a33] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
-      {/* window header */}
-      <div className={`flex items-center justify-between border-b border-[#eef1f6] px-6 py-4 md:px-8 ${bleed ? 'xl:pr-[5.5rem]' : ''}`}>
-        <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#e3e8f0]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#e3e8f0]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#e3e8f0]" />
-        </div>
-        <ol className="flex items-center gap-2 text-[12px]">
-          {t.steps.map((s, k) => (
-            <li key={s} className="flex items-center gap-2">
-              {k > 0 && <span className="text-[#c3cad6]">›</span>}
-              <span className={k === 2 ? 'font-semibold text-[#0b1a33]' : 'text-[#5b6b85]'}>{s}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      <div className="grid md:grid-cols-[1fr_1fr]">
-        {/* left: tabs + request log */}
-        <div className={`px-6 py-6 md:px-8 md:py-7 ${inset ? 'xl:pl-[8rem]' : ''}`}>
-          <p className="text-[13px] font-semibold">{t.payWith}</p>
-          <div className="mt-3 flex gap-2" role="tablist">
-            {METHODS.map((x, k) => {
-              const Icon = x.icon
-              const on = k === i
-              return (
-                <button
-                  key={x.key}
-                  type="button"
-                  role="tab"
-                  aria-selected={on}
-                  onClick={() => pick(k)}
-                  className={`flex min-w-[6.5rem] flex-col whitespace-nowrap items-start gap-1 rounded-lg border px-3 py-2 text-left text-[12px] transition-colors ${
-                    on ? 'border-[#0b2a5c] text-[#0b1a33] ring-1 ring-[#0b2a5c]' : 'border-[#e3e8f0] text-[#5b6b85] hover:border-[#c3cad6]'
-                  }`}
-                >
-                  <Icon className="h-4 w-4" />
-                  {x.tab}
-                </button>
-              )
-            })}
-          </div>
-          <p className="mt-6 text-[13px] font-semibold">{t.log}</p>
-          <ol key={m.key} className="panel-fade mt-3 space-y-1.5 rounded-lg border border-[#eef1f6] bg-[#fafbfd] p-3 font-mono text-[10.5px] leading-[1.6]">
-            {m.log.map(([dir, text, tone], k) => (
-              <li key={k} className={`flex gap-2 ${tone ? TONE[tone] : 'text-[#0b1a33]'}`}>
-                <span className="w-3 shrink-0 text-center">{dir}</span>
-                <span className="break-words">{text[lang]}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        {/* right: what was paid */}
-        <div className={`border-t border-[#eef1f6] bg-[#f7f8fb] px-6 py-6 md:border-l md:border-t-0 md:px-8 md:py-7 ${bleed ? 'xl:pr-[5.5rem]' : ''}`}>
-          <p className="text-[13px] font-semibold">{t.summary}</p>
-          <dl key={m.key} className="panel-fade mt-4 divide-y divide-[#e8ecf2] text-[12px]">
-            {m.rows.map(([k, v]) => (
-              <div key={k.en} className="flex items-baseline justify-between gap-4 py-2.5">
-                <dt className="shrink-0 text-[#5b6b85]">{k[lang]}</dt>
-                <dd className="text-right font-medium">{v[lang]}</dd>
+          {SLIDES.map((s, k) => (
+            <div
+              key={s.agent}
+              aria-hidden={k !== i}
+              className={`absolute inset-x-0 top-12 bottom-0 px-4 transition-all duration-700 ${
+                k === i ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-3'
+              }`}
+            >
+              <div className="mt-3 flex flex-col items-center">
+                <img src="/about/agent-avatar.jpg" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover" />
+                <div className="mt-2 rounded-2xl bg-white px-4 py-2 text-center shadow-sm">
+                  <p className="text-sm font-semibold">{s.agent}</p>
+                  <p className="text-[11px] text-[#5b6b85]">{s.budget[lang]}</p>
+                </div>
               </div>
-            ))}
-          </dl>
-          <div className="mt-5 flex items-center justify-center gap-2 rounded-lg bg-[#0b2a5c] px-4 py-3 text-[13px] font-semibold whitespace-nowrap text-white">
-            <Check className="h-4 w-4" />
-            {m.done[lang]}
-          </div>
+              <div className="mt-5 ml-8 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-4 py-3 text-[14px] leading-[1.5] text-white">
+                {s.ask[lang]}
+              </div>
+              <div className="mt-3 mr-8 rounded-2xl rounded-tl-md bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">
+                {s.found[lang]}
+              </div>
+              <div className="mt-2 mr-8 rounded-2xl bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">
+                {s.answer[lang]}
+              </div>
+              <p className="mt-3 flex items-center gap-1.5 px-1 text-[12px] text-[#5b6b85]">
+                <Check className="h-3.5 w-3.5 text-[#1a9b5b]" />
+                {s.paid[lang]}
+                <span className="ml-auto rounded-md border border-[#c9d1e0] px-1.5 font-mono text-[10px]">{s.rail}</span>
+              </p>
+            </div>
+          ))}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#f4f5f8] to-transparent" />
         </div>
+      </div>
+
+      {/* slide dots */}
+      <div className="mt-5 flex items-center justify-center gap-3">
+        {SLIDES.map((s, k) => (
+          <button
+            key={s.agent}
+            type="button"
+            aria-label={s.agent}
+            onClick={() => setI(k)}
+            className={`h-2 rounded-full transition-all ${k === i ? 'w-6 bg-fg' : 'w-2 bg-fg/30 hover:bg-fg/50'}`}
+          />
+        ))}
       </div>
     </div>
   )
 }
 
-/* Phone in front of the PC window. On xl the phone overlaps the window's
-   lower-left and hangs below it; below xl the phone comes first and the
-   window follows. bleed: the window runs 4rem past the browser edge. */
-export function AgentDuo({ bleed = false }: { bleed?: boolean }) {
-  const { lang } = useLang()
-  const { i, pick } = useRotation(METHODS.length)
-  const m = METHODS[i]
+function Callouts({ side, label, items, active }: { side: 'left' | 'right'; label: string; items: string[][]; active: boolean }) {
+  const right = side === 'right'
   return (
-    // min-h keeps the phone hanging below the window clear of what follows
-    <div className="relative xl:min-h-[42rem]">
-      <div className="mx-auto mb-8 w-full max-w-[340px] xl:absolute xl:left-0 xl:top-16 xl:z-10 xl:mb-0 xl:w-[320px]">
-        <Phone m={m} lang={lang} />
-      </div>
-      <div className="xl:ml-[12rem]">
-        <Window m={m} lang={lang} i={i} pick={pick} bleed={bleed} inset />
+    <div className={`flex flex-col items-start gap-6 ${right ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'}`}>
+      <span className={`rounded-full border px-3 py-1 font-mono text-[11px] transition-colors ${active ? 'border-gold/60 text-gold' : 'border-fg/15 text-fg/45'}`}>
+        {label}
+      </span>
+      {items.map(([title, body]) => (
+        <div key={title} className={`relative max-w-xs transition-opacity duration-500 ${active ? 'opacity-100' : 'opacity-55'}`}>
+          {/* connector toward the phone */}
+          <span
+            aria-hidden="true"
+            className={`absolute top-3 hidden h-px w-10 lg:block ${right ? '-left-12' : '-right-12'} ${active ? 'bg-gold/70' : 'bg-fg/20'}`}
+          />
+          <span
+            aria-hidden="true"
+            className={`absolute top-[9px] hidden h-2 w-2 rounded-full lg:block ${right ? '-left-[54px]' : '-right-[54px]'} ${active ? 'bg-gold' : 'bg-fg/25'}`}
+          />
+          <p className="text-base font-semibold text-fg">{title}</p>
+          <p className="mt-1.5 text-sm text-fg/55 leading-[1.7]">{body}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export function AgentShowcase() {
+  const { lang } = useLang()
+  const t = COPY[lang]
+  const slides = useSlides()
+  const rail = SLIDES[slides.i].rail
+  return (
+    <div className="relative">
+      <div className="relative max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-12">
+        <Callouts side="left" label={t.sideLeft} items={t.callouts.slice(0, 2)} active={rail === 'Link'} />
+        <div className="order-first w-full max-w-[340px] mx-auto lg:order-none lg:w-[320px]">
+          <Phone lang={lang} {...slides} />
+        </div>
+        <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} active={rail === 'x402'} />
       </div>
     </div>
   )
