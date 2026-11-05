@@ -430,3 +430,19 @@ body {
 :root[data-theme='light'] .logo-on-dark {
   display: none;
 }
+
+/* About: the "−$0.01" over the balance pill drifts up and fades, once per call */
+@keyframes balance-tick {
+  0% { opacity: 0; transform: translate(-50%, 6px); }
+  20% { opacity: 1; transform: translate(-50%, 0); }
+  70% { opacity: 1; transform: translate(-50%, -2px); }
+  100% { opacity: 0; transform: translate(-50%, -10px); }
+}
+.balance-tick {
+  animation: balance-tick 2.6s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .balance-tick {
+    animation: none;
+  }
+}
