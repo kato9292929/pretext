@@ -2,11 +2,11 @@ import { Fragment, useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowRight, ArrowUpRight, Check, Copy, CreditCard, Gauge, Gavel, Search, Wallet, Zap } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
-import { AgentShowcase } from '../sections/AgentShowcase'
+import { AgentPanel } from '../sections/AgentShowcase'
 import { ProtocolMap } from '../sections/ProtocolMap'
 
 /* about.html — agent payments.
-   1. Hero: catchphrase, phone with side callouts, lead and CTAs
+   1. Hero: catchphrase, agent payment panel, lead and CTAs
    2. Two ways agents pay: card × Stripe Link, and x402 per-call
       + standards map (UCP / AP2 / ACP / x402 / Adyen) as a diagram
    3. Five stages before an agent buys, mapped to our products
@@ -351,7 +351,9 @@ export function About() {
           </h1>
         </motion.div>
         <div className="mt-14 md:mt-20">
-          <AgentShowcase />
+          <div className="max-w-5xl mx-auto px-6">
+            <AgentPanel />
+          </div>
         </div>
         <motion.div {...fadeUp} className="relative z-10 mt-14 md:mt-16 max-w-4xl mx-auto px-6 text-center">
           <p className="mx-auto max-w-2xl text-base md:text-lg text-fg/60 leading-[1.75]">{t.lead}</p>

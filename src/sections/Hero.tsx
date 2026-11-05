@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { CONTACT_EMAIL, Pill, gradientStyle } from '../primitives'
 import { useLang } from '../i18n'
-import { ShowcaseCompact } from './AgentShowcase'
+import { AgentPanel } from './AgentShowcase'
 // LogoMarquee is hidden for now; logos will move into Products.
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -12,12 +12,12 @@ const LEAD = {
 }
 
 /* Stripe-like balance: a large left-aligned headline, a lead and CTAs on the
-   left; the phones with notes on the right, running to the window's edge. */
+   left; the agent payment panel on the right, cut off by the window's edge. */
 export function Hero() {
   const { lang } = useLang()
   return (
     <section className="relative z-10 overflow-hidden pt-28 pb-16 md:pt-32 lg:min-h-[86vh] lg:flex lg:items-center">
-      <div className="w-full grid items-center gap-12 px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-6 lg:pr-4 lg:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
+      <div className="w-full grid items-center gap-12 px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 lg:pr-0 lg:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
         <div className="flex flex-col items-start text-left">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -52,13 +52,14 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* two phones (Agentic Commerce / x402) with short notes */}
+        {/* agent payment panel; on lg it runs past the right edge of the window */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease }}
+          className="lg:w-[calc(100%+6rem)]"
         >
-          <ShowcaseCompact />
+          <AgentPanel bleed />
         </motion.div>
       </div>
     </section>

@@ -1,166 +1,168 @@
-import { useLang } from '../i18n'
+import { useEffect, useState } from 'react'
+import { Check, CreditCard, Zap } from 'lucide-react'
+import { useLang, type Lang, type Localized } from '../i18n'
 
-/* Two phones (Agentic Commerce on the left, x402 on the right) as one still
-   image, with a short note on each screen beside it. The images are built
-   from the site's own chat screens set into a phone mockup
-   (public/showcase/phones-{ja,en}.webp). Used at the top of about.html; the
-   home hero uses ShowcaseCompact. */
+/* Agent payment panel: one flat app window (no phone frame) showing an agent
+   chat on the left and what was paid on the right. Two payment methods —
+   Agentic Commerce (Stripe Link) and x402 — switch automatically or by tab.
+   Used in the home hero (bleeding off the right edge) and on about.html.
+   Everything shown is from the site's existing copy; no new figures. */
+
+type Method = {
+  key: 'link' | 'x402'
+  tab: string
+  icon: typeof CreditCard
+  budget: Localized
+  ask: Localized
+  found: Localized
+  answer: Localized
+  rows: [Localized, Localized][]
+  done: Localized
+}
+
+const L = (ja: string, en: string): Localized => ({ ja, en })
+
+const METHODS: Method[] = [
+  {
+    key: 'link',
+    tab: 'Agentic Commerce',
+    icon: CreditCard,
+    budget: L('単回利用カード・都度承認', 'Single-use card · approve each time'),
+    ask: L('このイベントのチケットを2枚買っておいて', 'Buy two tickets for this event'),
+    found: L('ブラウザで購入ページを開き、Stripe Link で支払います', 'Opening the checkout in the browser; paying with Stripe Link'),
+    answer: L('承認をいただいたので、購入を完了しました。', 'You approved it, so the purchase is done.'),
+    rows: [
+      [L('支払い方法', 'Pay with'), L('Stripe Link', 'Stripe Link')],
+      [L('カード', 'Card'), L('単回利用カード', 'Single-use card')],
+      [L('承認', 'Approval'), L('支払いのたびに人が承認', 'A person approves each payment')],
+      [L('主なエージェント', 'Agents'), L('Muse・Grok など', 'Muse, Grok and others')],
+    ],
+    done: L('購入完了', 'Purchase complete'),
+  },
+  {
+    key: 'x402',
+    tab: 'x402',
+    icon: Zap,
+    budget: L('USDC 残高から per-call', 'Per-call from a USDC balance'),
+    ask: L('今日、東京の食品で値段が動いたのは？', 'Which food prices in Tokyo moved today?'),
+    found: L('x402 Endpoint で Japan Inflation Nowcall を見つけました', 'Found Japan Inflation Nowcall on x402 Endpoint'),
+    answer: L('movers を1コール買い、その日に動いた品目を取得しました。', 'Bought one call to movers and got the items that moved today.'),
+    rows: [
+      [L('リクエスト', 'Request'), L('GET jin.x402jp.com/api/jin/movers', 'GET jin.x402jp.com/api/jin/movers')],
+      [L('応答', 'Response'), L('402 → 200 OK', '402 → 200 OK')],
+      [L('ネットワーク', 'Network'), L('Solana・USDC', 'Solana · USDC')],
+      [L('金額', 'Price'), L('$0.02 per call', '$0.02 per call')],
+    ],
+    done: L('200 OK・データ受け取り', '200 OK · data received'),
+  },
+]
 
 const COPY = {
-  ja: {
-    alt: 'Agentic Commerce と x402 で、エージェントが支払うチャット画面',
-    sideLeft: 'Agentic Commerce',
-    sideRight: 'x402',
-    callouts: [
-      ['人の代わりに Stripe Link で払う', 'Muse・Grok などのパーソナルエージェントが、ブラウザやチャットから購入を済ませる。'],
-      ['単回利用カードと都度承認', '支払いのたびに人が承認し、使い捨てのカードで払う。'],
-      ['API には1コールずつ払う', 'API が 402 を返したら、USDC で署名して同じ URL に再リクエストする。'],
-      ['払える先は x402 Endpoint で探す', '161,826 のエンドポイントから、エージェントが売り手を見つける（2026年10月19日時点）。'],
-    ],
-  },
-  en: {
-    alt: 'Chat screens of an agent paying with Agentic Commerce and with x402',
-    sideLeft: 'Agentic Commerce',
-    sideRight: 'x402',
-    callouts: [
-      ['Pays with Stripe Link for you', 'Personal agents such as Muse and Grok finish purchases from a browser or a chat.'],
-      ['Single-use cards, approve each time', 'A person approves every payment, and a disposable card pays.'],
-      ['Pays APIs one call at a time', 'When an API returns 402, sign in USDC and re-request the same URL.'],
-      ['Find who to pay on x402 Endpoint', 'Agents find sellers among 161,826 endpoints (as of Oct 19, 2026).'],
-    ],
-  },
+  ja: { steps: ['依頼', '支払い', '完了'], payWith: '支払い方法', summary: '支払いの内容' },
+  en: { steps: ['Ask', 'Pay', 'Done'], payWith: 'Pay with', summary: 'Payment' },
 }
 
-function Callouts({ side, label, items }: { side: 'left' | 'right'; label: string; items: string[][] }) {
-  const right = side === 'right'
+function useRotation(n: number) {
+  const [i, setI] = useState(0)
+  const [hold, setHold] = useState(false)
+  useEffect(() => {
+    if (hold || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const t = setInterval(() => setI((k) => (k + 1) % n), 6000)
+    return () => clearInterval(t)
+  }, [n, hold])
+  const pick = (k: number) => {
+    setI(k)
+    setHold(true)
+  }
+  return { i, pick }
+}
+
+function Chat({ m, lang }: { m: Method; lang: Lang }) {
   return (
-    <div className={`flex flex-col items-start gap-5 ${right ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'}`}>
-      <span className="rounded-full border border-fg/30 px-3 py-1 font-mono text-[11px] text-fg/80">{label}</span>
-      {items.map(([title, body]) => (
-        <div key={title} className="relative max-w-[15rem]">
-          {/* connector toward the phone */}
-          <span aria-hidden="true" className={`absolute top-2.5 hidden h-px w-8 bg-fg/30 lg:block ${right ? '-left-10' : '-right-10'}`} />
-          <span aria-hidden="true" className={`absolute top-[7px] hidden h-1.5 w-1.5 rounded-full bg-fg/60 lg:block ${right ? '-left-[43px]' : '-right-[43px]'}`} />
-          <p className="text-sm font-semibold text-fg">{title}</p>
-          <p className="mt-1 text-xs text-fg/55 leading-[1.7]">{body}</p>
-        </div>
-      ))}
+    <div className="space-y-3">
+      <div className="ml-10 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-4 py-3 text-[14px] leading-[1.5] text-white">{m.ask[lang]}</div>
+      <div className="mr-10 rounded-2xl rounded-tl-md border border-[#e3e8f0] bg-white px-4 py-3 text-[13px] leading-[1.55]">{m.found[lang]}</div>
+      <div className="mr-10 rounded-2xl border border-[#e3e8f0] bg-white px-4 py-3 text-[13px] leading-[1.55]">{m.answer[lang]}</div>
     </div>
   )
 }
 
-/* Home hero version: the notes sit around the image (top and bottom
-   corners) with thin diagonal leader lines to each phone's edge. Below
-   lg the notes fall back to two columns under the image.
-   Geometry is in % of a 10:9 box; the image fills x 6–86, y 21.3–78.7. */
-const NOTE_POS = [
-  // [box classes, line start (x, y), point on the phone's edge (x, y)]
-  { box: 'left-0 top-0 w-[36%]', from: [20, 17], to: [27.8, 36] }, // Agentic Commerce, top-left
-  { box: 'left-0 top-[85%] w-[36%]', from: [14, 83], to: [13.4, 67.3] }, // Agentic Commerce, bottom-left
-  { box: 'right-0 top-0 w-[34%]', from: [74, 17], to: [65.5, 34.9] }, // x402, top-right
-  { box: 'right-0 top-[85%] w-[34%]', from: [80, 83], to: [65.5, 65.3] }, // x402, bottom-right
-] as const
-
-function Note({ label, title, body }: { label?: string; title: string; body: string }) {
-  return (
-    <div>
-      {label && <span className="mb-2 inline-block rounded-full border border-fg/30 px-2.5 py-0.5 font-mono text-[10px] text-fg/80">{label}</span>}
-      <p className="text-xs font-semibold text-fg">{title}</p>
-      <p className="mt-0.5 text-[11px] text-fg/50 leading-[1.6]">{body}</p>
-    </div>
-  )
-}
-
-export function ShowcaseCompact() {
+/* bleed: the panel runs 6rem past the window edge (home hero), so the right
+   column keeps its content clear of the cut. */
+export function AgentPanel({ className = '', bleed = false }: { className?: string; bleed?: boolean }) {
   const { lang } = useLang()
   const t = COPY[lang]
-  // order matches NOTE_POS: left phone top, left phone bottom, right phone top, right phone bottom
-  const notes = [
-    { label: t.sideLeft, item: t.callouts[0] },
-    { item: t.callouts[1] },
-    { label: t.sideRight, item: t.callouts[2] },
-    { item: t.callouts[3] },
-  ]
-  const img = (
-    <img
-      src={`/showcase/phones-${lang}.webp`}
-      alt={t.alt}
-      width={1600}
-      height={1034}
-      className="w-full select-none"
-      draggable={false}
-      fetchPriority="high"
-    />
-  )
+  const { i, pick } = useRotation(METHODS.length)
+  const m = METHODS[i]
+
   return (
-    <>
-      {/* lg and up: notes around the image with leader lines */}
-      <div className="relative hidden aspect-[10/9] w-full lg:block">
-        <div className="absolute left-[6%] top-[21.3%] w-[80%]">{img}</div>
-        <svg aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {NOTE_POS.map((n, k) => (
-            <line
-              key={k}
-              x1={n.from[0]}
-              y1={n.from[1]}
-              x2={n.to[0]}
-              y2={n.to[1]}
-              stroke="rgb(var(--fg))"
-              strokeOpacity={0.45}
-              strokeWidth={1}
-              vectorEffect="non-scaling-stroke"
-            />
-          ))}
-        </svg>
-        {NOTE_POS.map((n, k) => (
-          <span
-            key={k}
-            aria-hidden="true"
-            className="absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0b2a5c] ring-[3px] ring-white/80 shadow-[0_0_0_6px_rgba(255,255,255,0.18)]"
-            style={{ left: `${n.to[0]}%`, top: `${n.to[1]}%` }}
-          />
-        ))}
-        {NOTE_POS.map((n, k) => (
-          <div key={k} className={`absolute ${n.box}`}>
-            <Note label={notes[k].label} title={notes[k].item[0]} body={notes[k].item[1]} />
+    <div className={`overflow-hidden rounded-2xl bg-white text-[#0b1a33] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] ${className}`}>
+      {/* window header */}
+      <div className={`flex items-center justify-between border-b border-[#eef1f6] px-6 py-4 md:px-8 md:py-5 ${bleed ? 'lg:pr-[8rem]' : ''}`}>
+        <div className="flex items-center gap-3">
+          <img src="/about/agent-avatar.jpg" alt="" width={36} height={36} className="h-9 w-9 rounded-xl object-cover" />
+          <div>
+            <p className="text-sm font-semibold leading-tight">{m.tab}</p>
+            <p className="text-[11px] text-[#5b6b85]">{m.budget[lang]}</p>
           </div>
-        ))}
+        </div>
+        <ol className="hidden items-center gap-2 text-[12px] sm:flex">
+          {t.steps.map((s, k) => (
+            <li key={s} className="flex items-center gap-2">
+              {k > 0 && <span className="text-[#c3cad6]">›</span>}
+              <span className={k === 2 ? 'font-semibold text-[#0b1a33]' : 'text-[#5b6b85]'}>{s}</span>
+            </li>
+          ))}
+        </ol>
       </div>
 
-      {/* below lg: image, then the notes in two columns */}
-      <div className="lg:hidden">
-        {img}
-        <div className="mt-4 grid grid-cols-2 gap-5 text-left">
-          {[notes.slice(0, 2), notes.slice(2, 4)].map((col, c) => (
-            <div key={c} className="space-y-3">
-              {col.map((n) => (
-                <Note key={n.item[0]} label={n.label} title={n.item[0]} body={n.item[1]} />
-              ))}
-            </div>
-          ))}
+      <div className="grid md:grid-cols-[1.15fr_1fr]">
+        {/* left: method tabs + chat */}
+        <div className="px-6 py-6 md:px-8 md:py-7">
+          <p className="text-[13px] font-semibold">{t.payWith}</p>
+          <div className="mt-3 flex gap-2" role="tablist">
+            {METHODS.map((x, k) => {
+              const Icon = x.icon
+              const on = k === i
+              return (
+                <button
+                  key={x.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={on}
+                  onClick={() => pick(k)}
+                  className={`flex min-w-[8.5rem] flex-col items-start gap-1 rounded-lg border px-3 py-2 text-left text-[12px] transition-colors ${
+                    on ? 'border-[#0b2a5c] text-[#0b1a33] ring-1 ring-[#0b2a5c]' : 'border-[#e3e8f0] text-[#5b6b85] hover:border-[#c3cad6]'
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {x.tab}
+                </button>
+              )
+            })}
+          </div>
+          <div key={m.key} className="panel-fade mt-6">
+            <Chat m={m} lang={lang} />
+          </div>
+        </div>
+
+        {/* right: what was paid */}
+        <div className={`border-t border-[#eef1f6] bg-[#f7f8fb] px-6 py-6 md:border-l md:border-t-0 md:px-8 md:py-7 ${bleed ? 'lg:pr-[8rem]' : ''}`}>
+          <p className="text-[13px] font-semibold">{t.summary}</p>
+          <dl key={m.key} className="panel-fade mt-4 divide-y divide-[#e8ecf2] text-[12px]">
+            {m.rows.map(([k, v]) => (
+              <div key={k.en} className="flex items-baseline justify-between gap-4 py-2.5">
+                <dt className="shrink-0 text-[#5b6b85]">{k[lang]}</dt>
+                <dd className="break-all text-right font-medium">{v[lang]}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-5 flex items-center justify-center gap-2 rounded-lg bg-[#0b2a5c] px-4 py-3 text-[13px] font-semibold text-white">
+            <Check className="h-4 w-4" />
+            {m.done[lang]}
+          </div>
         </div>
       </div>
-    </>
-  )
-}
-
-export function AgentShowcase() {
-  const { lang } = useLang()
-  const t = COPY[lang]
-  return (
-    <div className="relative max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_minmax(0,46rem)_1fr] lg:items-center lg:gap-10">
-      <Callouts side="left" label={t.sideLeft} items={t.callouts.slice(0, 2)} />
-      <div className="order-first lg:order-none">
-        <img
-          src={`/showcase/phones-${lang}.webp`}
-          alt={t.alt}
-          width={1600}
-          height={1034}
-          className="mx-auto w-full max-w-[46rem] select-none"
-          draggable={false}
-        />
-      </div>
-      <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} />
     </div>
   )
 }
