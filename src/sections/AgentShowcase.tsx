@@ -3,8 +3,8 @@ import { useLang } from '../i18n'
 /* Two phones (Agentic Commerce on the left, x402 on the right) as one still
    image, with a short note on each screen beside it. The images are built
    from the site's own chat screens set into a phone mockup
-   (public/showcase/phones-{ja,en}.webp). Used on the home page above Update
-   and at the top of about.html. */
+   (public/showcase/phones-{ja,en}.webp). Used at the top of about.html; the
+   home hero uses ShowcaseCompact. */
 
 const COPY = {
   ja: {
@@ -45,6 +45,43 @@ function Callouts({ side, label, items }: { side: 'left' | 'right'; label: strin
           <p className="mt-1 text-xs text-fg/55 leading-[1.7]">{body}</p>
         </div>
       ))}
+    </div>
+  )
+}
+
+/* Compact version for the home hero: the image, then the notes in two
+   columns (left phone / right phone) under it. */
+export function ShowcaseCompact() {
+  const { lang } = useLang()
+  const t = COPY[lang]
+  const cols: [string, string[][]][] = [
+    [t.sideLeft, t.callouts.slice(0, 2)],
+    [t.sideRight, t.callouts.slice(2, 4)],
+  ]
+  return (
+    <div className="w-full">
+      <img
+        src={`/showcase/phones-${lang}.webp`}
+        alt={t.alt}
+        width={1600}
+        height={1034}
+        className="mx-auto w-full select-none"
+        draggable={false}
+        fetchPriority="high"
+      />
+      <div className="mt-4 grid grid-cols-2 gap-5 text-left">
+        {cols.map(([label, items]) => (
+          <div key={label}>
+            <span className="rounded-full border border-fg/30 px-2.5 py-0.5 font-mono text-[10px] text-fg/80">{label}</span>
+            {items.map(([title, body]) => (
+              <div key={title} className="mt-3">
+                <p className="text-xs font-semibold text-fg">{title}</p>
+                <p className="mt-0.5 text-[11px] text-fg/50 leading-[1.6]">{body}</p>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
