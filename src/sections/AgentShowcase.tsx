@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react'
-import { Check } from 'lucide-react'
-import { useLang, type Lang, type Localized } from '../i18n'
+import { useLang } from '../i18n'
 
-/* Phone in the middle with what each payment rail does on either side.
-   Used at the top of about.html and on the home page above Update. */
+/* Two phones (Agentic Commerce on the left, x402 on the right) as one still
+   image, with a short note on each screen beside it. The images are built
+   from the site's own chat screens set into a phone mockup
+   (public/showcase/phones-{ja,en}.webp). Used on the home page above Update
+   and at the top of about.html. */
 
 const COPY = {
   ja: {
+    alt: 'Agentic Commerce と x402 で、エージェントが支払うチャット画面',
     sideLeft: 'Agentic Commerce',
     sideRight: 'x402',
     callouts: [
@@ -17,6 +19,7 @@ const COPY = {
     ],
   },
   en: {
+    alt: 'Chat screens of an agent paying with Agentic Commerce and with x402',
     sideLeft: 'Agentic Commerce',
     sideRight: 'x402',
     callouts: [
@@ -28,130 +31,18 @@ const COPY = {
   },
 }
 
-type Slide = {
-  agent: string
-  budget: Localized
-  ask: Localized
-  found: Localized
-  answer: Localized
-  paid: Localized
-  rail: 'Link' | 'x402'
-}
-
-const SLIDES: Slide[] = [
-  {
-    agent: 'Agentic Commerce',
-    budget: { ja: '単回利用カード・都度承認', en: 'Single-use card · approve each time' },
-    ask: { ja: 'このイベントのチケットを2枚買っておいて', en: 'Buy two tickets for this event' },
-    found: { ja: 'ブラウザで購入ページを開き、Stripe Link で支払います', en: 'Opening the checkout in the browser; paying with Stripe Link' },
-    answer: { ja: '承認をいただいたので、購入を完了しました。', en: 'You approved it, so the purchase is done.' },
-    paid: { ja: 'Stripe Link で支払い（単回利用カード）', en: 'Paid with Stripe Link (single-use card)' },
-    rail: 'Link',
-  },
-  {
-    agent: 'x402',
-    budget: { ja: 'USDC 残高から per-call', en: 'Per-call from a USDC balance' },
-    ask: { ja: '今日、東京の食品で値段が動いたのは？', en: 'Which food prices in Tokyo moved today?' },
-    found: { ja: 'x402 Endpoint で Japan Inflation Nowcall を見つけました', en: 'Found Japan Inflation Nowcall on x402 Endpoint' },
-    answer: { ja: 'movers を1コール買い、その日に動いた品目を取得しました。', en: 'Bought one call to movers and got the items that moved today.' },
-    paid: { ja: '$0.02 per call を残高から支払い（Solana・USDC）', en: 'Paid $0.02 per call from the balance (Solana · USDC)' },
-    rail: 'x402',
-  },
-]
-
-function useSlides() {
-  const [i, setI] = useState(0)
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const t = setInterval(() => setI((n) => (n + 1) % SLIDES.length), 5200)
-    return () => clearInterval(t)
-  }, [])
-  return { i, setI }
-}
-
-function Phone({ lang, i, setI }: { lang: Lang } & ReturnType<typeof useSlides>) {
-  return (
-    <div className="relative mx-auto w-full max-w-[360px]">
-      <div className="relative rounded-[44px] border border-fg/20 bg-fg/[0.04] p-3 shadow-2xl">
-        <div className="relative overflow-hidden rounded-[34px] bg-[#f4f5f8] text-[#0b1a33]" style={{ height: 560 }}>
-          {/* status bar */}
-          <div className="flex items-center justify-between px-6 pt-4 text-[12px] font-semibold">
-            <span>9:41</span>
-            <span className="h-6 w-24 rounded-full bg-[#0b1a33]" />
-            <span className="tracking-widest">•••</span>
-          </div>
-
-          {SLIDES.map((s, k) => (
-            <div
-              key={s.agent}
-              aria-hidden={k !== i}
-              className={`absolute inset-x-0 top-12 bottom-0 px-4 transition-all duration-700 ${
-                k === i ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-3'
-              }`}
-            >
-              <div className="mt-3 flex flex-col items-center">
-                <img src="/about/agent-avatar.jpg" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover" />
-                <div className="mt-2 rounded-2xl bg-white px-4 py-2 text-center shadow-sm">
-                  <p className="text-sm font-semibold">{s.agent}</p>
-                  <p className="text-[11px] text-[#5b6b85]">{s.budget[lang]}</p>
-                </div>
-              </div>
-              <div className="mt-5 ml-8 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-4 py-3 text-[14px] leading-[1.5] text-white">
-                {s.ask[lang]}
-              </div>
-              <div className="mt-3 mr-8 rounded-2xl rounded-tl-md bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">
-                {s.found[lang]}
-              </div>
-              <div className="mt-2 mr-8 rounded-2xl bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">
-                {s.answer[lang]}
-              </div>
-              <p className="mt-3 flex items-center gap-1.5 px-1 text-[12px] text-[#5b6b85]">
-                <Check className="h-3.5 w-3.5 text-[#1a9b5b]" />
-                {s.paid[lang]}
-                <span className="ml-auto rounded-md border border-[#c9d1e0] px-1.5 font-mono text-[10px]">{s.rail}</span>
-              </p>
-            </div>
-          ))}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#f4f5f8] to-transparent" />
-        </div>
-      </div>
-
-      {/* slide dots */}
-      <div className="mt-5 flex items-center justify-center gap-3">
-        {SLIDES.map((s, k) => (
-          <button
-            key={s.agent}
-            type="button"
-            aria-label={s.agent}
-            onClick={() => setI(k)}
-            className={`h-2 rounded-full transition-all ${k === i ? 'w-6 bg-fg' : 'w-2 bg-fg/30 hover:bg-fg/50'}`}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function Callouts({ side, label, items, active }: { side: 'left' | 'right'; label: string; items: string[][]; active: boolean }) {
+function Callouts({ side, label, items }: { side: 'left' | 'right'; label: string; items: string[][] }) {
   const right = side === 'right'
   return (
-    <div className={`flex flex-col items-start gap-6 ${right ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'}`}>
-      <span className={`rounded-full border px-3 py-1 font-mono text-[11px] transition-colors ${active ? 'border-gold/60 text-gold' : 'border-fg/15 text-fg/45'}`}>
-        {label}
-      </span>
+    <div className={`flex flex-col items-start gap-5 ${right ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'}`}>
+      <span className="rounded-full border border-fg/30 px-3 py-1 font-mono text-[11px] text-fg/80">{label}</span>
       {items.map(([title, body]) => (
-        <div key={title} className={`relative max-w-xs transition-opacity duration-500 ${active ? 'opacity-100' : 'opacity-55'}`}>
+        <div key={title} className="relative max-w-[15rem]">
           {/* connector toward the phone */}
-          <span
-            aria-hidden="true"
-            className={`absolute top-3 hidden h-px w-10 lg:block ${right ? '-left-12' : '-right-12'} ${active ? 'bg-gold/70' : 'bg-fg/20'}`}
-          />
-          <span
-            aria-hidden="true"
-            className={`absolute top-[9px] hidden h-2 w-2 rounded-full lg:block ${right ? '-left-[54px]' : '-right-[54px]'} ${active ? 'bg-gold' : 'bg-fg/25'}`}
-          />
-          <p className="text-base font-semibold text-fg">{title}</p>
-          <p className="mt-1.5 text-sm text-fg/55 leading-[1.7]">{body}</p>
+          <span aria-hidden="true" className={`absolute top-2.5 hidden h-px w-8 bg-fg/30 lg:block ${right ? '-left-10' : '-right-10'}`} />
+          <span aria-hidden="true" className={`absolute top-[7px] hidden h-1.5 w-1.5 rounded-full bg-fg/60 lg:block ${right ? '-left-[43px]' : '-right-[43px]'}`} />
+          <p className="text-sm font-semibold text-fg">{title}</p>
+          <p className="mt-1 text-xs text-fg/55 leading-[1.7]">{body}</p>
         </div>
       ))}
     </div>
@@ -161,17 +52,20 @@ function Callouts({ side, label, items, active }: { side: 'left' | 'right'; labe
 export function AgentShowcase() {
   const { lang } = useLang()
   const t = COPY[lang]
-  const slides = useSlides()
-  const rail = SLIDES[slides.i].rail
   return (
-    <div className="relative">
-      <div className="relative max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-12">
-        <Callouts side="left" label={t.sideLeft} items={t.callouts.slice(0, 2)} active={rail === 'Link'} />
-        <div className="order-first w-full max-w-[340px] mx-auto lg:order-none lg:w-[320px]">
-          <Phone lang={lang} {...slides} />
-        </div>
-        <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} active={rail === 'x402'} />
+    <div className="relative max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_minmax(0,46rem)_1fr] lg:items-center lg:gap-10">
+      <Callouts side="left" label={t.sideLeft} items={t.callouts.slice(0, 2)} />
+      <div className="order-first lg:order-none">
+        <img
+          src={`/showcase/phones-${lang}.webp`}
+          alt={t.alt}
+          width={1600}
+          height={1034}
+          className="mx-auto w-full max-w-[46rem] select-none"
+          draggable={false}
+        />
       </div>
+      <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} />
     </div>
   )
 }
