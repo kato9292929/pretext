@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight, Bot, Check, Copy, CreditCard, Gauge, Gavel, P
 import { useLang, type Lang, type Localized } from '../i18n'
 
 /* about.html — agent payments.
-   1. Hero with a live request log (Stripe Link path / x402 path)
+   1. Hero: phone with side callouts on top, headline and CTAs below
    2. Two ways agents pay: card × Stripe Link, and x402 per-call
    3. Five stages before an agent buys, mapped to our products
    4. Service catalog (filterable cards, real prices and URLs)
@@ -512,9 +512,26 @@ export function About() {
 
   return (
     <>
-      {/* 1. Hero — headline, then the phone in the middle with features on both sides and a big message behind */}
-      <section className="relative z-10 overflow-hidden pt-16 md:pt-24 pb-16">
-        <motion.div {...fadeUp} className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      {/* 1. Hero — the phone in the middle with features on both sides and a big message behind; headline and CTAs below */}
+      <section className="relative z-10 overflow-hidden pt-10 md:pt-16 pb-16">
+        <div className="relative">
+          {/* big message behind the phone */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-center font-black uppercase leading-[0.85] tracking-tighter text-fg/[0.08]" style={{ fontSize: 'clamp(72px, 17vw, 260px)' }}>
+            <span className="block">{t.bigMessage[0]}</span>
+            <span className="block">{t.bigMessage[1]}</span>
+          </div>
+
+          <div className="relative max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-12">
+            {/* left: Stripe Link side */}
+            <Callouts side="left" label={t.sideLeft} items={t.callouts.slice(0, 2)} active={SLIDES[slides.i].rail === 'Link'} />
+            <div className="order-first w-full max-w-[340px] mx-auto lg:order-none lg:w-[320px]">
+              <Phone lang={lang} {...slides} />
+            </div>
+            {/* right: x402 side */}
+            <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} active={SLIDES[slides.i].rail === 'x402'} />
+          </div>
+        </div>
+        <motion.div {...fadeUp} className="relative z-10 mt-16 md:mt-20 max-w-4xl mx-auto px-6 text-center">
           <p className="text-xs uppercase tracking-widest text-gold">{t.eyebrow}</p>
           <h1 className="mt-5 text-[1.7rem] sm:text-4xl md:text-6xl font-semibold tracking-tight leading-[1.15] text-fg">
             {t.title[0]}
@@ -533,23 +550,6 @@ export function About() {
           </div>
         </motion.div>
 
-        <div className="relative mt-16">
-          {/* big message behind the phone */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-center font-black uppercase leading-[0.85] tracking-tighter text-fg/[0.08]" style={{ fontSize: 'clamp(72px, 17vw, 260px)' }}>
-            <span className="block">{t.bigMessage[0]}</span>
-            <span className="block">{t.bigMessage[1]}</span>
-          </div>
-
-          <div className="relative max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-12">
-            {/* left: Stripe Link side */}
-            <Callouts side="left" label={t.sideLeft} items={t.callouts.slice(0, 2)} active={SLIDES[slides.i].rail === 'Link'} />
-            <div className="order-first w-full max-w-[340px] mx-auto lg:order-none lg:w-[320px]">
-              <Phone lang={lang} {...slides} />
-            </div>
-            {/* right: x402 side */}
-            <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} active={SLIDES[slides.i].rail === 'x402'} />
-          </div>
-        </div>
       </section>
 
       {/* 2. Two ways to pay */}
