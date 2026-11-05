@@ -44,12 +44,6 @@ const COPY = {
     x402Steps: ['API に GET すると、402 Payment Required が返る', '402 が示す金額・チェーンで、USDC の支払いに署名する', '署名を付けて同じ URL へ再リクエストし、200 OK とデータを受け取る'],
     x402Link: '支払いの手順（How to pay）',
     waysBoth: 'どちらも、エージェントが人の代わりに払う',
-    pa: {
-      title: 'パーソナルエージェントから x402 で払うには',
-      body: 'Coinbase の Payments MCP（Agentic Wallet MCP）を Claude Desktop・Claude Code・Codex CLI・Gemini CLI などにつなぐと、メールで作ったウォレットから x402 で払えます。入金は Coinbase Onramp（USDC）、上限は1回・1セッションごとに設定でき、Base・Polygon・Solana に対応しています。',
-      note: '外部サービス（Coinbase 提供）',
-      docs: 'ドキュメント',
-    },
 
     stagesEyebrow: '買うまでの5つの段階',
     stagesTitle: '探して、測って、競わせて、払って、使う',
@@ -100,12 +94,6 @@ const COPY = {
     x402Steps: ['A GET to the API returns 402 Payment Required', 'Sign a USDC payment for the amount and chain the 402 names', 'Re-request the same URL with the signature and receive 200 OK with the data'],
     x402Link: 'The payment steps (How to pay)',
     waysBoth: 'Either way, the agent pays on a person’s behalf',
-    pa: {
-      title: 'Paying over x402 from a personal agent',
-      body: 'Connect Coinbase’s Payments MCP (Agentic Wallet MCP) to Claude Desktop, Claude Code, Codex CLI, Gemini CLI and others, and the agent pays over x402 from a wallet created with your email. Fund it with Coinbase Onramp (USDC), set limits per call and per session; Base, Polygon and Solana are supported.',
-      note: 'External service (by Coinbase)',
-      docs: 'Docs',
-    },
 
     stagesEyebrow: 'Five stages before buying',
     stagesTitle: 'Find, measure, compete, pay, use',
@@ -416,24 +404,6 @@ export function About() {
                 {w.link.label}
                 <ArrowUpRight className="h-3 w-3" />
               </a>
-              {/* x402 card only: how a personal agent can pay over x402 (external, verified 2026-11-05) */}
-              {k === 1 && (
-                <div className="mt-6 rounded-xl border border-fg/10 bg-fg/[0.03] p-4">
-                  <p className="text-sm font-semibold text-fg">{t.pa.title}</p>
-                  <p className="mt-2 text-xs text-fg/60 leading-[1.8]">{t.pa.body}</p>
-                  <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
-                    <a href="https://docs.cdp.coinbase.com/payments-mcp/welcome" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-fg/70 hover:text-gold transition-colors">
-                      Payments MCP {t.pa.docs}
-                      <ArrowUpRight className="h-3 w-3" />
-                    </a>
-                    <a href="https://github.com/coinbase/payments-mcp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-fg/70 hover:text-gold transition-colors">
-                      GitHub
-                      <ArrowUpRight className="h-3 w-3" />
-                    </a>
-                    <span className="text-fg/40">{t.pa.note}</span>
-                  </div>
-                </div>
-              )}
             </motion.div>
           ))}
         </div>

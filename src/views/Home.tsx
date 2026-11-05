@@ -13,7 +13,7 @@ export function Home() {
       <Hero />
       <section className="relative z-10 overflow-hidden py-16 md:py-24">
         <AgenticIntro />
-        <AgentShowcase />
+        <AgentShowcase showPayMcp />
       </section>
       <News />
       <Featured />

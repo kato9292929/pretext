@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Check } from 'lucide-react'
+import { useEffect, useState, type ReactNode } from 'react'
+import { ArrowUpRight, Check } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
 
 /* Phone in the middle with what each payment rail does on either side.
@@ -132,7 +132,7 @@ function Phone({ lang, i, setI }: { lang: Lang } & ReturnType<typeof useSlides>)
   )
 }
 
-function Callouts({ side, label, items, active }: { side: 'left' | 'right'; label: string; items: string[][]; active: boolean }) {
+function Callouts({ side, label, items, active, extra }: { side: 'left' | 'right'; label: string; items: string[][]; active: boolean; extra?: ReactNode }) {
   const right = side === 'right'
   return (
     <div className={`flex flex-col items-start gap-6 ${right ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'}`}>
@@ -154,11 +154,51 @@ function Callouts({ side, label, items, active }: { side: 'left' | 'right'; labe
           <p className="mt-1.5 text-sm text-fg/55 leading-[1.7]">{body}</p>
         </div>
       ))}
+      {extra}
     </div>
   )
 }
 
-export function AgentShowcase() {
+/* How a personal agent can pay over x402 today: Coinbase Payments MCP
+   (external; facts checked against its docs on 2026-11-05). */
+const PAY_MCP = {
+  ja: {
+    title: 'パーソナルエージェントから x402 で払うには',
+    body: 'Coinbase の Payments MCP（Agentic Wallet MCP）を Claude Desktop・Claude Code・Codex CLI・Gemini CLI などにつなぐと、メールで作ったウォレットから x402 で払えます。入金は Coinbase Onramp（USDC）、上限は1回・1セッションごとに設定でき、Base・Polygon・Solana に対応しています。',
+    docs: 'ドキュメント',
+    note: '外部サービス（Coinbase 提供）',
+  },
+  en: {
+    title: 'Paying over x402 from a personal agent',
+    body: 'Connect Coinbase’s Payments MCP (Agentic Wallet MCP) to Claude Desktop, Claude Code, Codex CLI, Gemini CLI and others, and the agent pays over x402 from a wallet created with your email. Fund it with Coinbase Onramp (USDC), set limits per call and per session; Base, Polygon and Solana are supported.',
+    docs: 'Docs',
+    note: 'External service (by Coinbase)',
+  },
+}
+
+function PayMcpNote({ lang }: { lang: Lang }) {
+  const t = PAY_MCP[lang]
+  return (
+    <div className="max-w-xs rounded-xl border border-fg/15 bg-fg/[0.04] p-4 backdrop-blur-sm">
+      <p className="text-sm font-semibold text-fg">{t.title}</p>
+      <p className="mt-2 text-xs text-fg/60 leading-[1.8]">{t.body}</p>
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+        <a href="https://docs.cdp.coinbase.com/payments-mcp/welcome" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-fg/75 hover:text-gold transition-colors">
+          Payments MCP {t.docs}
+          <ArrowUpRight className="h-3 w-3" />
+        </a>
+        <a href="https://github.com/coinbase/payments-mcp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-fg/75 hover:text-gold transition-colors">
+          GitHub
+          <ArrowUpRight className="h-3 w-3" />
+        </a>
+      </div>
+      <p className="mt-2 text-[11px] text-fg/40">{t.note}</p>
+    </div>
+  )
+}
+
+/* showPayMcp: add the Payments MCP note under the x402 callouts (home page) */
+export function AgentShowcase({ showPayMcp = false }: { showPayMcp?: boolean }) {
   const { lang } = useLang()
   const t = COPY[lang]
   const slides = useSlides()
@@ -170,7 +210,7 @@ export function AgentShowcase() {
         <div className="order-first w-full max-w-[340px] mx-auto lg:order-none lg:w-[320px]">
           <Phone lang={lang} {...slides} />
         </div>
-        <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} active={rail === 'x402'} />
+        <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} active={rail === 'x402'} extra={showPayMcp ? <PayMcpNote lang={lang} /> : undefined} />
       </div>
     </div>
   )
