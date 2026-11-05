@@ -163,13 +163,13 @@ function Callouts({ side, label, items, active, extra }: { side: 'left' | 'right
    (external; facts checked against its docs on 2026-11-05). */
 const PAY_MCP = {
   ja: {
-    title: 'パーソナルエージェントから x402 で払うには',
+    title: 'x402 × パーソナルエージェント',
     body: 'Coinbase の Payments MCP（Agentic Wallet MCP）を Claude Desktop・Claude Code・Codex CLI・Gemini CLI などにつなぐと、メールで作ったウォレットから x402 で払えます。入金は Coinbase Onramp（USDC）、上限は1回・1セッションごとに設定でき、Base・Polygon・Solana に対応しています。',
     docs: 'ドキュメント',
     note: '外部サービス（Coinbase 提供）',
   },
   en: {
-    title: 'Paying over x402 from a personal agent',
+    title: 'x402 × personal agents',
     body: 'Connect Coinbase’s Payments MCP (Agentic Wallet MCP) to Claude Desktop, Claude Code, Codex CLI, Gemini CLI and others, and the agent pays over x402 from a wallet created with your email. Fund it with Coinbase Onramp (USDC), set limits per call and per session; Base, Polygon and Solana are supported.',
     docs: 'Docs',
     note: 'External service (by Coinbase)',
