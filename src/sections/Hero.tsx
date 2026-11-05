@@ -12,13 +12,13 @@ export function Hero() {
   const { lang } = useLang()
   return (
     <section className="relative z-10 overflow-hidden pt-28 pb-16 md:pt-32 xl:min-h-[86vh] xl:flex xl:items-center">
-      <div className="w-full grid items-center gap-12 px-6 xl:grid-cols-[32rem_minmax(0,1fr)] xl:gap-12 xl:pr-0 xl:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
+      <div className="w-full grid items-center gap-12 px-6 xl:grid-cols-[26rem_minmax(0,1fr)] 2xl:grid-cols-[32rem_minmax(0,1fr)] xl:gap-12 xl:pr-0 xl:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
         <div className="flex flex-col items-start text-left">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease }}
-            className="text-5xl md:text-6xl xl:text-7xl font-semibold tracking-tight leading-[0.95]"
+            className="text-5xl md:text-6xl 2xl:text-7xl font-semibold tracking-tight leading-[0.95]"
           >
             <span className="block text-fg">The agentic</span>
             <span className="block text-fg">economy</span>

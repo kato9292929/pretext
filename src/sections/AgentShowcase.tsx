@@ -95,70 +95,43 @@ function useRotation(n: number) {
   return { i, pick }
 }
 
-/* The phone: a messaging app where the person asks the agent. Thin
-   titanium-like frame, small island, header with the agent, a payment card
-   in the thread and an input bar, so the screen is full top to bottom. */
-const PAY_CARD: Record<Method['key'], { title: Localized; meta: Localized }> = {
-  link: { title: L('Stripe Link で支払い', 'Paid with Stripe Link'), meta: L('単回利用カード・承認済み', 'Single-use card · approved') },
-  x402: { title: L('x402 で支払い', 'Paid over x402'), meta: L('$0.02・Solana・USDC', '$0.02 · Solana · USDC') },
+/* The phone: the original about-page phone design, unchanged — glass
+   frame, island, centered agent card, chat bubbles and the paid line. */
+const PAID: Record<Method['key'], { text: Localized; rail: string }> = {
+  link: { text: L('Stripe Link で支払い（単回利用カード）', 'Paid with Stripe Link (single-use card)'), rail: 'Link' },
+  x402: { text: L('$0.02 per call を残高から支払い（Solana・USDC）', 'Paid $0.02 per call from the balance (Solana · USDC)'), rail: 'x402' },
 }
 
 function Phone({ m, lang }: { m: Method; lang: Lang }) {
-  const card = PAY_CARD[m.key]
+  const paid = PAID[m.key]
   return (
-    <div className="rounded-[2.6rem] bg-gradient-to-b from-[#9aa0aa] via-[#4a4f58] to-[#2a2d33] p-[3px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
-      <div className="rounded-[2.45rem] bg-black p-[6px]">
-        <div className="relative flex h-[27rem] flex-col overflow-hidden rounded-[2.1rem] bg-white text-[#0b1a33]">
-          {/* status bar + island */}
-          <div className="relative flex h-10 shrink-0 items-center justify-between px-6 text-[11px] font-semibold">
-            <span>9:41</span>
-            <span aria-hidden="true" className="absolute left-1/2 top-2 h-[22px] w-[74px] -translate-x-1/2 rounded-full bg-black" />
-            <span aria-hidden="true" className="flex items-end gap-[2px]">
-              <span className="h-[4px] w-[3px] rounded-[1px] bg-[#0b1a33]" />
-              <span className="h-[6px] w-[3px] rounded-[1px] bg-[#0b1a33]" />
-              <span className="h-[8px] w-[3px] rounded-[1px] bg-[#0b1a33]" />
-              <span className="ml-1 h-[9px] w-[18px] rounded-[3px] border border-[#0b1a33] p-[1px]">
-                <span className="block h-full w-3/4 rounded-[1px] bg-[#0b1a33]" />
-              </span>
-            </span>
-          </div>
-
-          {/* app header */}
-          <div className="flex shrink-0 items-center gap-2.5 border-b border-[#eef1f6] px-4 pb-2.5 pt-1">
-            <img src="/about/agent-avatar.jpg" alt="" width={30} height={30} className="h-[30px] w-[30px] rounded-full object-cover" />
-            <div className="min-w-0">
-              <p className="truncate text-[12.5px] font-semibold leading-tight">{m.tab}</p>
-              <p className="truncate text-[10px] text-[#7a879b]">{m.budget[lang]}</p>
-            </div>
-          </div>
-
-          {/* thread */}
-          <div key={m.key} className="panel-fade flex-1 space-y-2 bg-[#f6f7f9] px-3 py-3">
-            <div className="ml-auto max-w-[82%] rounded-[18px] rounded-br-[6px] bg-[#0b2a5c] px-3 py-2 text-[11.5px] leading-[1.45] text-white">{m.ask[lang]}</div>
-            <div className="max-w-[86%] rounded-[18px] rounded-bl-[6px] bg-white px-3 py-2 text-[11.5px] leading-[1.45] shadow-[0_1px_2px_rgba(11,26,51,0.08)]">{m.found[lang]}</div>
-            <div className="max-w-[86%] rounded-[14px] border border-[#e3e8f0] bg-white p-2.5 shadow-[0_1px_2px_rgba(11,26,51,0.08)]">
-              <div className="flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#e8f6ee] text-[#1a9b5b]">
-                  <Check className="h-3.5 w-3.5" />
-                </span>
-                <div className="min-w-0">
-                  <p className="text-[11px] font-semibold leading-tight">{card.title[lang]}</p>
-                  <p className="text-[10px] text-[#7a879b]">{card.meta[lang]}</p>
-                </div>
-              </div>
-            </div>
-            <div className="max-w-[86%] rounded-[18px] rounded-bl-[6px] bg-white px-3 py-2 text-[11.5px] leading-[1.45] shadow-[0_1px_2px_rgba(11,26,51,0.08)]">{m.answer[lang]}</div>
-          </div>
-
-          {/* input bar + home indicator */}
-          <div className="shrink-0 border-t border-[#eef1f6] bg-white px-3 pb-2 pt-2">
-            <div className="flex items-center gap-2">
-              <div className="h-8 flex-1 rounded-full border border-[#e3e8f0] px-3 text-[11px] leading-8 text-[#a3adbd]">{lang === 'ja' ? 'メッセージ' : 'Message'}</div>
-              <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b2a5c] text-[13px] text-white">↑</span>
-            </div>
-            <div aria-hidden="true" className="mx-auto mt-2 h-1 w-24 rounded-full bg-[#0b1a33]" />
-          </div>
+    <div className="relative rounded-[44px] border border-fg/20 bg-fg/[0.04] p-3 shadow-2xl backdrop-blur-sm">
+      <div className="relative overflow-hidden rounded-[34px] bg-[#f4f5f8] text-[#0b1a33]" style={{ height: 560 }}>
+        {/* status bar */}
+        <div className="flex items-center justify-between px-6 pt-4 text-[12px] font-semibold">
+          <span>9:41</span>
+          <span className="h-6 w-24 rounded-full bg-[#0b1a33]" />
+          <span className="tracking-widest">•••</span>
         </div>
+
+        <div key={m.key} className="panel-fade absolute inset-x-0 top-12 bottom-0 px-4">
+          <div className="mt-3 flex flex-col items-center">
+            <img src="/about/agent-avatar.jpg" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover" />
+            <div className="mt-2 rounded-2xl bg-white px-4 py-2 text-center shadow-sm">
+              <p className="text-sm font-semibold">{m.tab}</p>
+              <p className="text-[11px] text-[#5b6b85]">{m.budget[lang]}</p>
+            </div>
+          </div>
+          <div className="mt-5 ml-8 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-4 py-3 text-[14px] leading-[1.5] text-white">{m.ask[lang]}</div>
+          <div className="mt-3 mr-8 rounded-2xl rounded-tl-md bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">{m.found[lang]}</div>
+          <div className="mt-2 mr-8 rounded-2xl bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">{m.answer[lang]}</div>
+          <p className="mt-3 flex items-center gap-1.5 px-1 text-[12px] text-[#5b6b85]">
+            <Check className="h-3.5 w-3.5 text-[#1a9b5b]" />
+            {paid.text[lang]}
+            <span className="ml-auto rounded-md border border-[#c9d1e0] px-1.5 font-mono text-[10px]">{paid.rail}</span>
+          </p>
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#f4f5f8] to-transparent" />
       </div>
     </div>
   )
@@ -189,7 +162,7 @@ function Window({ m, lang, i, pick, bleed, inset }: { m: Method; lang: Lang; i: 
 
       <div className="grid md:grid-cols-[1fr_1fr]">
         {/* left: tabs + request log */}
-        <div className={`px-6 py-6 md:px-8 md:py-7 ${inset ? 'xl:pl-[6rem]' : ''}`}>
+        <div className={`px-6 py-6 md:px-8 md:py-7 ${inset ? 'xl:pl-[8rem]' : ''}`}>
           <p className="text-[13px] font-semibold">{t.payWith}</p>
           <div className="mt-3 flex gap-2" role="tablist">
             {METHODS.map((x, k) => {
@@ -253,11 +226,11 @@ export function AgentDuo({ bleed = false }: { bleed?: boolean }) {
   const m = METHODS[i]
   return (
     // min-h keeps the phone hanging below the window clear of what follows
-    <div className="relative xl:min-h-[33rem]">
-      <div className="mx-auto mb-8 w-[15.5rem] xl:absolute xl:left-0 xl:top-20 xl:z-10 xl:mb-0">
+    <div className="relative xl:min-h-[42rem]">
+      <div className="mx-auto mb-8 w-full max-w-[340px] xl:absolute xl:left-0 xl:top-16 xl:z-10 xl:mb-0 xl:w-[320px]">
         <Phone m={m} lang={lang} />
       </div>
-      <div className="xl:ml-[10rem]">
+      <div className="xl:ml-[12rem]">
         <Window m={m} lang={lang} i={i} pick={pick} bleed={bleed} inset />
       </div>
     </div>
