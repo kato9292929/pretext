@@ -3,10 +3,12 @@ import { motion } from 'motion/react'
 import { ArrowRight, ArrowUpRight, Check, Copy, CreditCard, Gauge, Gavel, Search, Wallet, Zap } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
 import { AgentShowcase } from '../sections/AgentShowcase'
+import { ProtocolMap } from '../sections/ProtocolMap'
 
 /* about.html — agent payments.
-   1. Hero: phone with side callouts on top, headline and CTAs below
+   1. Hero: catchphrase, phone with side callouts, lead and CTAs
    2. Two ways agents pay: card × Stripe Link, and x402 per-call
+      + standards map (UCP / AP2 / ACP / x402 / Adyen) as a diagram
    3. Five stages before an agent buys, mapped to our products
    4. Service catalog (filterable cards, real prices and URLs)
    5. For sellers: score / listing links and a ticker of paid calls
@@ -25,7 +27,7 @@ const fadeUp = {
 const COPY = {
   ja: {
     eyebrow: 'Agent payments',
-    title: ['エージェントが払えば、', '仕事は最後まで進む'],
+    title: ['エージェント決済による', '自律型経済の創出'],
     lead: 'Muse や Grok などのパーソナルエージェントは、Stripe Link で人の代わりに支払いを済ませはじめています。API には x402 で1コールずつ払う。x402 Inc. は、その支払い先を探せるカタログと、買い手・売り手・市場を自社で動かしています。',
     ctaPrimary: 'エンドポイントを探す',
     ctaSecondary: 'プロダクトを見る',
@@ -75,7 +77,7 @@ const COPY = {
   },
   en: {
     eyebrow: 'Agent payments',
-    title: ['When agents can pay,', 'the work gets done'],
+    title: ['Creating an autonomous economy', 'through agent payments'],
     lead: 'Personal agents such as Muse and Grok have started paying on people’s behalf with Stripe Link. APIs get paid one call at a time over x402. x402 Inc. runs the catalog to find who to pay, and runs the buyer, the sellers and the market itself.',
     ctaPrimary: 'Find endpoints',
     ctaSecondary: 'See the products',
@@ -338,19 +340,23 @@ export function About() {
 
   return (
     <>
-      {/* 1. Hero — the phone in the middle with features on both sides and a big message behind; headline and CTAs below */}
-      <section className="relative z-10 overflow-hidden pt-10 md:pt-16 pb-16">
-        <AgentShowcase />
-        <motion.div {...fadeUp} className="relative z-10 mt-16 md:mt-20 max-w-4xl mx-auto px-6 text-center">
+      {/* 1. Hero — catchphrase first, then the phone with features on both sides, then the lead and CTAs */}
+      <section className="relative z-10 overflow-hidden pt-28 md:pt-36 pb-16">
+        <motion.div {...fadeUp} className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <p className="text-xs uppercase tracking-widest text-gold">{t.eyebrow}</p>
-          <h1 className="mt-5 text-[1.7rem] sm:text-4xl md:text-6xl font-semibold tracking-tight leading-[1.15] text-fg">
+          <h1 className="mt-5 text-[1.7rem] sm:text-4xl md:text-6xl font-semibold tracking-tight leading-[1.2] text-fg">
             {t.title[0]}
             <br />
             {t.title[1]}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-fg/60 leading-[1.75]">{t.lead}</p>
+        </motion.div>
+        <div className="mt-14 md:mt-20">
+          <AgentShowcase />
+        </div>
+        <motion.div {...fadeUp} className="relative z-10 mt-14 md:mt-16 max-w-4xl mx-auto px-6 text-center">
+          <p className="mx-auto max-w-2xl text-base md:text-lg text-fg/60 leading-[1.75]">{t.lead}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href={ENDPOINT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:brightness-110 transition">
+            <a href={ENDPOINT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-bg hover:brightness-110 transition">
               {t.ctaPrimary}
               <ArrowUpRight className="h-4 w-4" />
             </a>
@@ -359,7 +365,6 @@ export function About() {
             </a>
           </div>
         </motion.div>
-
       </section>
 
       {/* 2. Two ways to pay */}
@@ -408,6 +413,9 @@ export function About() {
           <RequestLog lang={lang} />
         </motion.div>
       </section>
+
+      {/* 2b. Standards map: UCP, AP2, ACP, x402, Adyen along the purchase */}
+      <ProtocolMap lang={lang} />
 
       {/* 3. Five stages */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24">

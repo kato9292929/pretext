@@ -49,12 +49,12 @@ export function Layout({
           }}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
         />
-        {/* Soft, translucent pastel iridescence painted onto the ribbon */}
+        {/* Magenta → violet → blue → cyan painted onto the ribbon */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(100deg, #E7A6C8 0%, #F3C08A 20%, #F7E39C 38%, #B9E6B0 56%, #A9DCEC 74%, #B7B4EC 100%)',
+              'linear-gradient(100deg, #FF3EA5 0%, #E040FB 22%, #9D5CFF 44%, #5B6CFF 66%, #2FD3F0 86%, #FF5FA2 100%)',
             mixBlendMode: 'color',
             opacity: 0.85,
           }}

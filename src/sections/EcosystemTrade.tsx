@@ -295,7 +295,7 @@ function CardDetail({ card, lang }: { card: Card; lang: Lang }) {
   return (
     <div className="p-5">
       <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
-        <span className="rounded-full bg-gold px-2 py-0.5 text-xs font-semibold text-black">{card.badge}</span>
+        <span className="rounded-full bg-gold px-2 py-0.5 text-xs font-semibold text-bg">{card.badge}</span>
         <span className="rounded-md border border-fg/15 px-2 py-0.5 text-[11px] text-fg/60">{card.tag[lang]}</span>
       </div>
       <h3 className="mt-3 text-base font-semibold text-gold">{card.title[lang]}</h3>

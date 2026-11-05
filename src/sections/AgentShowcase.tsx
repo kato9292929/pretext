@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react'
 import { Check } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
 
-/* Phone in the middle with what each payment rail does on either side and a
-   big message behind. Used at the top of about.html and on the home page
-   above Update. */
+/* Phone in the middle with what each payment rail does on either side.
+   Used at the top of about.html and on the home page above Update. */
 
 const COPY = {
   ja: {
-    bigMessage: ['PAY', 'PER CALL'],
     sideLeft: 'Agentic Commerce',
     sideRight: 'x402',
     callouts: [
@@ -19,7 +17,6 @@ const COPY = {
     ],
   },
   en: {
-    bigMessage: ['PAY', 'PER CALL'],
     sideLeft: 'Agentic Commerce',
     sideRight: 'x402',
     callouts: [
@@ -168,16 +165,6 @@ export function AgentShowcase() {
   const rail = SLIDES[slides.i].rail
   return (
     <div className="relative">
-      {/* big message behind the phone */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-center font-black uppercase leading-[0.85] tracking-tighter text-fg/[0.08]"
-        style={{ fontSize: 'clamp(72px, 17vw, 260px)' }}
-      >
-        <span className="block">{t.bigMessage[0]}</span>
-        <span className="block">{t.bigMessage[1]}</span>
-      </div>
-
       <div className="relative max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-12">
         <Callouts side="left" label={t.sideLeft} items={t.callouts.slice(0, 2)} active={rail === 'Link'} />
         <div className="order-first w-full max-w-[340px] mx-auto lg:order-none lg:w-[320px]">

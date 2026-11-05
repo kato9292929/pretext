@@ -435,7 +435,7 @@ export function Ecosystem() {
               aria-selected={tab === tb.key}
               onClick={() => setTab(tb.key)}
               className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
-                tab === tb.key ? 'bg-gold text-black font-semibold' : 'text-fg/60 hover:text-fg'
+                tab === tb.key ? 'bg-gold text-bg font-semibold' : 'text-fg/60 hover:text-fg'
               }`}
             >
               {tb.label}

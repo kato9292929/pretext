@@ -237,7 +237,7 @@ export function Research() {
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold text-gold">{item.phase}</span>
                 {item.current && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-gold text-black font-semibold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-gold text-bg font-semibold">
                     NOW
                   </span>
                 )}

@@ -9,13 +9,13 @@
 :root[data-theme='dark'] {
   --fg: 255 255 255;
   --bg: 12 12 12; /* #0c0c0c */
-  --gold: 232 195 56; /* #E8C338 */
+  --gold: 255 255 255; /* accents follow the text colour */
 }
 
 :root[data-theme='light'] {
   --fg: 26 22 15; /* warm near-black */
   --bg: 245 242 236; /* warm off-white */
-  --gold: 154 123 18; /* #9A7B12 */
+  --gold: 26 22 15; /* accents follow the text colour */
 }
 
 html,

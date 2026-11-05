@@ -730,7 +730,7 @@ export function Products() {
         {PHASES.map((phase) => (
           <div key={phase.phase} className="mt-10">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-gold text-black font-semibold">
+              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-gold text-bg font-semibold">
                 {phase.phase}
               </span>
               <span className="text-lg font-semibold tracking-tight text-fg">
