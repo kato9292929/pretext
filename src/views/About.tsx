@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 import { motion } from 'motion/react'
-import { ArrowRight, ArrowUpRight, Bot, Check, Copy, CreditCard, Gauge, Gavel, Pause, Play, Search, Wallet, Zap } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Check, Copy, CreditCard, Gauge, Gavel, Pause, Play, Search, Wallet, Zap } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
 
 /* about.html — agent payments.
@@ -165,7 +165,7 @@ const SLIDES: Slide[] = [
     rail: 'Link',
   },
   {
-    agent: 'Muse',
+    agent: 'Agentic Commerce',
     budget: { ja: 'Link に登録したカード', en: 'Card saved in Link' },
     ask: { ja: 'いつもの店で来週分の買い物を頼める？', en: 'Can you order next week’s groceries from the usual shop?' },
     found: { ja: 'カートを作り、Stripe Link のチェックアウトに進みます', en: 'Building the cart and going to the Stripe Link checkout' },
@@ -174,7 +174,7 @@ const SLIDES: Slide[] = [
     rail: 'Link',
   },
   {
-    agent: 'Your agent',
+    agent: 'x402',
     budget: { ja: 'USDC 残高から per-call', en: 'Per-call from a USDC balance' },
     ask: { ja: '今日、東京の食品で値段が動いたのは？', en: 'Which food prices in Tokyo moved today?' },
     found: { ja: 'x402 Endpoint で Japan Inflation Nowcall を見つけました', en: 'Found Japan Inflation Nowcall on x402 Endpoint' },
@@ -218,9 +218,7 @@ function Phone({ lang, i, setI, playing, setPlaying }: { lang: Lang } & ReturnTy
               }`}
             >
               <div className="mt-3 flex flex-col items-center">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#b9a2f0] to-[#8b6fe0] text-white">
-                  <Bot className="h-6 w-6" />
-                </span>
+                <img src="/about/agent-avatar.jpg" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover" />
                 <div className="mt-2 rounded-2xl bg-white px-4 py-2 text-center shadow-sm">
                   <p className="text-sm font-semibold">{s.agent}</p>
                   <p className="text-[11px] text-[#5b6b85]">{s.budget[lang]}</p>
