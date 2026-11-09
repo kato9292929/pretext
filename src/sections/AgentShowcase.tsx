@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { ArrowUpRight, Check } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
-import { SERVICES, type Service } from '../data/services'
 
 /* Phone in the middle with what each payment rail does on either side.
    Used at the top of about.html and on the home page above Update. */
@@ -37,7 +36,6 @@ type Slide = {
   answer: Localized
   paid: Localized
   rail: 'Link' | 'x402'
-  catalog?: boolean // the x402 Endpoint list instead of a chat
 }
 
 const SLIDES: Slide[] = [
@@ -59,54 +57,7 @@ const SLIDES: Slide[] = [
     paid: { ja: '$0.02 per call を残高から支払い（Solana・USDC）', en: 'Paid $0.02 per call from the balance (Solana · USDC)' },
     rail: 'x402',
   },
-  {
-    agent: 'x402 Endpoint',
-    budget: { ja: 'per-call で払える API を探す', en: 'Find APIs you can pay per call' },
-    ask: { ja: '', en: '' },
-    found: { ja: '', en: '' },
-    answer: { ja: '', en: '' },
-    paid: { ja: '', en: '' },
-    rail: 'x402',
-    catalog: true,
-  },
 ]
-
-/* Rows shown in the phone's catalog screen (real prices from data/services) */
-const CATALOG_ROWS = ['Japan Inflation Nowcall', 'Onchain Stock Data', 'APAC Macro Dashboard', 'Yield Intelligence', 'Smart Money Screener', 'Divergence Analyzer']
-  .map((n) => SERVICES.find((s) => s.name === n))
-  .filter((s): s is Service => Boolean(s))
-
-function rowPrice(s: Service, lang: Lang) {
-  if (s.price.free) return lang === 'ja' ? '無料' : 'Free'
-  if (s.price.label) return s.price.label[lang]
-  return lang === 'ja' ? `${s.price.from}〜` : `From ${s.price.from}`
-}
-
-function CatalogScreen({ lang }: { lang: Lang }) {
-  return (
-    <div className="mt-4 space-y-1.5">
-      <div className="mb-3 flex items-center gap-2 rounded-full border border-[#dfe4ee] bg-white px-3 py-2 text-[11px] text-[#8a96aa]">
-        <span aria-hidden="true">⌕</span>
-        {lang === 'ja' ? '東京の食品物価を調べたい' : 'Tokyo food prices'}
-      </div>
-      {CATALOG_ROWS.map((s) => (
-        <div key={s.name} className="flex items-center gap-2.5 rounded-xl bg-white px-2.5 py-2 shadow-sm">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[13px] font-bold text-white" style={{ background: s.color }}>
-            {s.mark}
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-[12px] font-semibold leading-tight">{s.name}</p>
-            <p className="truncate text-[10px] text-[#5b6b85]">{s.desc[lang]}</p>
-          </div>
-          <div className="shrink-0 text-right leading-tight">
-            <p className="text-[11px] font-semibold">{rowPrice(s, lang)}</p>
-            <p className="text-[9px] text-[#8a96aa]">per call</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
 
 function useSlides() {
   const [i, setI] = useState(0)
@@ -153,10 +104,6 @@ function Phone({ lang, i, setI }: { lang: Lang } & ReturnType<typeof useSlides>)
                   <p className="text-[11px] text-[#5b6b85]">{s.budget[lang]}</p>
                 </div>
               </div>
-              {s.catalog ? (
-                <CatalogScreen lang={lang} />
-              ) : (
-                <>
               <div className="mt-5 ml-8 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-4 py-3 text-[14px] leading-[1.5] text-white">
                 {s.ask[lang]}
               </div>
@@ -171,8 +118,6 @@ function Phone({ lang, i, setI }: { lang: Lang } & ReturnType<typeof useSlides>)
                 {s.paid[lang]}
                 <span className="ml-auto rounded-md border border-[#c9d1e0] px-1.5 font-mono text-[10px]">{s.rail}</span>
               </p>
-                </>
-              )}
             </div>
           ))}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#f4f5f8] to-transparent" />
