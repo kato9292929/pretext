@@ -5,7 +5,7 @@ import { News } from '../sections/News'
 import { AgentShowcase } from '../sections/AgentShowcase'
 import { AgenticIntro } from '../sections/AgenticIntro'
 import { EndpointTeaser } from '../sections/EndpointTeaser'
-import { Foundation } from '../sections/Foundation'
+import { DocsLinks } from '../sections/DocsLinks'
 import { Services } from '../sections/Services'
 
 export function Home() {
@@ -16,11 +16,11 @@ export function Home() {
         <AgenticIntro />
         <AgentShowcase showPayMcp />
         <EndpointTeaser />
+        <DocsLinks />
       </section>
       <News />
       <Featured />
       <Ecosystem />
-      <Foundation />
       <Services />
     </>
   )
