@@ -26,10 +26,6 @@ const COPY = {
       '単一のClassに収まらず、局面と経済形が交差するケース。境界に位置する実装をここに収容します。',
     axisLabel: '分岐の軸と残る空白',
     axisIntro: '4段の分岐でClassを切り分けます。まだ実装の薄い空白も、同じ軸で位置づけます。',
-    payLabel: 'How to pay on x402',
-    payIntro:
-      '無料のエンドポイントは、そのまま叩ける。有料のものは最初のリクエストで402が返り、USDCで支払って同じURLへ再リクエストするだけ。',
-    payLink: 'エンドポイント一覧を見る',
     taxNote: '分類は Agent Economy Classes に基づく',
     disclaimer:
       'Classは支払い相手との間柄で分かれる。これは4段の分岐による整理であり、実証された分類ではありません。',
@@ -48,10 +44,6 @@ const COPY = {
     axisLabel: 'Axes of divergence & remaining gaps',
     axisIntro:
       'Four splits separate the classes. Thinly-implemented gaps are placed along the same axes.',
-    payLabel: 'How to pay on x402',
-    payIntro:
-      'Free endpoints can be called directly. Paid ones return 402 on the first request; pay in USDC and re-request the same URL.',
-    payLink: 'See all endpoints',
     taxNote: 'Segments follow our Agent Economy Classes taxonomy',
     disclaimer:
       'Classes split by the relationship with the counterparty. This is an organization by four splits, not an empirically validated taxonomy.',
@@ -465,21 +457,6 @@ export function Ecosystem() {
           <p className="mt-6 text-fg/50 text-sm leading-[1.7] max-w-3xl">{t.closing}</p>
           <p className="mt-3 text-fg/40 text-xs leading-[1.7] max-w-3xl">{t.disclaimer}</p>
 
-          {/* How to pay on x402 — integrated here */}
-          <div className="mt-12 pt-10 border-t border-fg/10">
-            <p className="text-xs uppercase tracking-widest text-gold">{t.payLabel}</p>
-            <p className="mt-3 text-fg/60 text-base leading-[1.7] max-w-2xl">{t.payIntro}</p>
-            <pre className="mt-5 liquid-glass rounded-xl p-4 text-xs md:text-sm font-mono text-fg/80 overflow-x-auto max-w-2xl">
-              <span className="text-fg/40">$ </span>curl https://jin.x402jp.com/api/jin/latest
-            </pre>
-            <a
-              href="/products.html"
-              className="mt-5 inline-flex items-center gap-1.5 text-sm text-fg/70 hover:text-gold transition-colors"
-            >
-              {t.payLink}
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
         </>
       )}
     </section>

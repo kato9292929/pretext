@@ -6,6 +6,7 @@ import { AgentShowcase } from '../sections/AgentShowcase'
 import { AgenticIntro } from '../sections/AgenticIntro'
 import { EndpointTeaser } from '../sections/EndpointTeaser'
 import { DocsLinks } from '../sections/DocsLinks'
+import { HowToPay } from '../sections/HowToPay'
 import { Services } from '../sections/Services'
 
 export function Home() {
@@ -16,6 +17,7 @@ export function Home() {
         <AgenticIntro />
         <AgentShowcase showPayMcp />
         <EndpointTeaser />
+        <HowToPay />
         <DocsLinks />
       </section>
       <News />
