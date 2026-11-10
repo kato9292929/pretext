@@ -8,6 +8,7 @@ import { EndpointTeaser } from '../sections/EndpointTeaser'
 import { DocsLinks } from '../sections/DocsLinks'
 import { HowToPay } from '../sections/HowToPay'
 import { Services } from '../sections/Services'
+import { Team } from '../sections/Team'
 
 export function Home() {
   return (
@@ -23,6 +24,7 @@ export function Home() {
       <News />
       <Featured />
       <Ecosystem />
+      <Team />
       <Services />
     </>
   )

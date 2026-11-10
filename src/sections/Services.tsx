@@ -7,8 +7,8 @@ import { useLang, type Localized } from '../i18n'
 // mark: a square icon shown next to the name (rather than a wordmark that replaces it)
 type Tool = { name: string; src?: string; alt: string; href?: string; mark?: boolean }
 type Case = { label: string; href: string }
-// Video case: a YouTube thumbnail with links to the video and the note write-up
-type VideoCase = { title: Localized; thumb: string; youtube: string; note: string }
+// Video case: links to the video and the note write-up
+type VideoCase = { title: Localized; youtube: string; note: string }
 
 /**
  * Tools actually used, defined in one place. Drop a file into public/logos/
@@ -19,7 +19,7 @@ type VideoCase = { title: Localized; thumb: string; youtube: string; note: strin
 const TOOLS = {
   claude: { name: 'Claude', src: '/logos/claude.svg', alt: 'Claude' },
   claudeCode: { name: 'Claude Code', src: '/logos/claude-mark.svg', alt: '', mark: true },
-  muse: { name: 'Muse Spark', src: '/logos/meta-ai.png', alt: '', mark: true },
+  muse: { name: 'Muse', src: '/logos/muse.webp', alt: '', mark: true },
   vercel: { name: 'Vercel', src: '/logos/vercel.svg', alt: 'Vercel' },
   higgsfield: { name: 'Higgsfield', src: '/logos/higgsfield.svg', alt: 'Higgsfield' },
 } satisfies Record<string, Tool>
@@ -29,13 +29,11 @@ type Card = { name: string; desc: string; scope: string; tools: Tool[]; cases?: 
 const VIDEOS: VideoCase[] = [
   {
     title: { ja: 'ブランドフィルム：HTML 1枚と ffmpeg で52秒', en: 'Brand film: 52 seconds from one HTML file and ffmpeg' },
-    thumb: '/cases/yt-x9l4dw9ZImE.jpg',
     youtube: 'https://youtu.be/x9l4dw9ZImE',
     note: 'https://note.com/x402inc/n/n23b844a08d4f',
   },
   {
     title: { ja: 'Muse：海底に沈んだムー大陸の遺跡（30秒）', en: 'Muse: the sunken ruins of Mu (30 seconds)' },
-    thumb: '/cases/yt-uKkEAarwPP0.jpg',
     youtube: 'https://youtu.be/uKkEAarwPP0',
     note: 'https://note.com/x402inc/n/n10995ab7d1bc',
   },
@@ -120,7 +118,7 @@ function ToolBadge({ tool }: { tool: Tool }) {
     <>
       {tool.mark && tool.src ? (
         // square icon next to the name; shown from the static HTML (no load check)
-        <img src={tool.src} alt={tool.alt} width={16} height={16} className="h-4 w-4 rounded-sm object-contain" />
+        <img src={tool.src} alt={tool.alt} width={20} height={20} className="h-5 w-5 rounded-md object-cover" />
       ) : (
         tool.src && (
           <img
@@ -136,7 +134,7 @@ function ToolBadge({ tool }: { tool: Tool }) {
     </>
   )
   const className =
-    'inline-flex items-center gap-1.5 rounded-full border border-fg/10 px-2.5 py-1 text-xs text-fg/60'
+    'inline-flex items-center gap-1.5 rounded-full border border-fg/15 bg-fg/[0.04] py-1 pl-1.5 pr-3 text-xs text-fg/80'
   return tool.href ? (
     <a
       href={tool.href}
@@ -208,34 +206,26 @@ export function Services() {
             {card.videos && card.videos.length > 0 && (
               <div className="mt-5">
                 <p className="text-xs uppercase tracking-widest text-fg/40">{t.caseLabel}</p>
-                <div className="mt-2 space-y-3">
+                <div className="mt-2 space-y-2.5">
                   {card.videos.map((v) => (
-                    <div key={v.youtube} className="flex gap-3">
-                      <a href={v.youtube} target="_blank" rel="noopener noreferrer" className="group relative block w-28 shrink-0 overflow-hidden rounded-lg">
-                        <img src={v.thumb} alt={v.title[lang]} loading="lazy" className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                        <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
-                          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-[10px] text-white">▶</span>
-                        </span>
-                      </a>
-                      <div className="min-w-0">
-                        <p className="text-xs text-fg/80 leading-[1.5]">{v.title[lang]}</p>
-                        <div className="mt-1.5 flex flex-wrap gap-1.5">
-                          {[
-                            ['YouTube', v.youtube],
-                            ['note', v.note],
-                          ].map(([label, href]) => (
-                            <a
-                              key={label}
-                              href={href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 rounded-full border border-fg/10 px-2 py-0.5 text-[11px] text-fg/70 hover:text-gold hover:border-gold/40 transition-colors"
-                            >
-                              {label}
-                              <ArrowUpRight className="w-3 h-3" />
-                            </a>
-                          ))}
-                        </div>
+                    <div key={v.youtube}>
+                      <p className="text-xs text-fg/80 leading-[1.5]">{v.title[lang]}</p>
+                      <div className="mt-1.5 flex flex-wrap gap-1.5">
+                        {[
+                          ['YouTube', v.youtube],
+                          ['note', v.note],
+                        ].map(([label, href]) => (
+                          <a
+                            key={label}
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 rounded-full border border-fg/10 px-2.5 py-1 text-xs text-fg/70 hover:text-gold hover:border-gold/40 transition-colors"
+                          >
+                            {label}
+                            <ArrowUpRight className="w-3 h-3" />
+                          </a>
+                        ))}
                       </div>
                     </div>
                   ))}
