@@ -26,7 +26,7 @@ const ROWS: Row[] = [
 const COPY = {
   ja: {
     eyebrow: 'x402 Endpoint',
-    title: 'エージェントが払える API を、ひとつのカタログで',
+    title: 'エージェントが安全に払える API を、ひとつのカタログで',
     lead: '市場ですでに使われている 356 サービス（33,881 エンドポイント）から、上位を抜粋（2026年11月8日更新）。',
     endpoints: 'エンドポイント',
     note: '1P は自社ドメインでの提供、3P は決済ゲートウェイ経由の提供です。',
@@ -34,7 +34,7 @@ const COPY = {
   },
   en: {
     eyebrow: 'x402 Endpoint',
-    title: 'APIs your agent can pay for, in one catalog',
+    title: 'APIs your agent can pay for safely, in one catalog',
     lead: 'The top of 356 services (33,881 endpoints) the market already uses (updated Nov 8, 2026).',
     endpoints: 'endpoints',
     note: '1P is served from the company’s own domain; 3P is resold through a payment gateway.',

@@ -5,6 +5,7 @@ import { News } from '../sections/News'
 import { AgentShowcase } from '../sections/AgentShowcase'
 import { AgenticIntro } from '../sections/AgenticIntro'
 import { EndpointTeaser } from '../sections/EndpointTeaser'
+import { MarketIssues } from '../sections/MarketIssues'
 import { DocsLinks } from '../sections/DocsLinks'
 import { HowToPay } from '../sections/HowToPay'
 import { Services } from '../sections/Services'
@@ -17,6 +18,7 @@ export function Home() {
       <section className="relative z-10 overflow-hidden py-16 md:py-24">
         <AgenticIntro />
         <AgentShowcase showPayMcp />
+        <MarketIssues />
         <EndpointTeaser />
         <HowToPay />
         <DocsLinks />
