@@ -4,7 +4,7 @@ import { ArrowDown, ShieldCheck } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
 import { useLang } from '../i18n'
 
-/* Home: how x402 Inc. runs — one priority queue, a chief-of-staff agent
+/* Home: how x402 Inc. runs — a chief-of-staff agent
    (Muse), lead agents on each Agent Stack layer (ChatGPT / Claude Code),
    the "x402 Agentic Brain" learning loop, and the CEO. From the team diagram
    (x402_team.pdf); images in public/team/. */
@@ -27,12 +27,9 @@ const LAYERS = {
 const COPY = {
   ja: {
     lead: '代表1人と、Agent Stack の4層で常時稼働するエージェントで会社を動かしています。',
-    queueTitle: '一つの優先キュー',
-    queueBody: ['決めること・レビューすることのすべてがここに集まる', '各レビューには成果物（データ・分析・決済記録）が付く'],
-    queueNote: '4層ごとに散らばっていた確認事項を一つに集約し、切り替えの負担を減らす',
     cosLabel: 'チーフ・オブ・スタッフ・エージェント',
     cosBody: 'Muse：MAP・CONSUME・PRODUCE・MARKET の4層を統括する',
-    toQueue: '案件はキューへ集約',
+    cosItems: ['4層の決めること・レビューすることを、優先順位をつけて1か所にまとめる', '各レビューに成果物（データ・分析・決済記録）を付けて代表に渡す'],
     oversee: '統括する',
     leadsLabel: 'リードエージェント（Agent Stack の4層ごとに常時稼働／ChatGPT・Claude Code）',
     brainTitle: '学習ループ：「x402 Agentic Brain」',
@@ -45,12 +42,9 @@ const COPY = {
   },
   en: {
     lead: 'One founder and agents running around the clock on each of the four Agent Stack layers run the company.',
-    queueTitle: 'One priority queue',
-    queueBody: ['Everything to decide or review lands here', 'Each review comes with its output (data, analysis, payment records)'],
-    queueNote: 'Checks once scattered across four layers sit in one place, cutting the cost of switching',
     cosLabel: 'Chief-of-staff agent',
     cosBody: 'Muse: oversees the four layers — MAP, CONSUME, PRODUCE and MARKET',
-    toQueue: 'Items go to the queue',
+    cosItems: ['Gathers everything to decide or review across the four layers into one prioritized place', 'Hands each review to the founder with its output (data, analysis, payment records)'],
     oversee: 'Oversees',
     leadsLabel: 'Lead agents (always on, one per Agent Stack layer / ChatGPT · Claude Code)',
     brainTitle: 'Learning loop: “x402 Agentic Brain”',
@@ -113,11 +107,12 @@ function useBoxes(container: RefObject<HTMLDivElement>, refs: Record<string, Ref
 }
 
 /* The diagram's loops, drawn on lg screens:
-   queue ⇄ CEO (requests in batches), MAP lead → CEO (points brought back),
-   queue → learning loop → queue (the founder's judgment is learned; better
+   Muse ⇄ CEO (requests in batches), MAP lead → CEO (points brought back),
+   Muse → learning loop → Muse (the founder's judgment is learned; better
    drafts come back). */
 function Arrows({ b, t }: { b: Record<string, Box>; t: (typeof COPY)['ja'] }) {
-  const { q, m, l, brain, ceo, root } = b
+  const { m, l, brain, ceo, root } = b
+  const q = m
   const W = root.right
   const outer = 14
   const inner = 40
@@ -149,7 +144,7 @@ function Arrows({ b, t }: { b: Record<string, Box>; t: (typeof COPY)['ja'] }) {
       <div className="absolute text-[11px] leading-[1.5] text-fg/55" style={{ left: outer + 8, top: ceo.top + ceo.h * 0.68 + 8, width: ceo.left - outer - 16 }}>
         {t.arrowBack.map((x) => <p key={x}>{x}</p>)}
       </div>
-      <div className="absolute text-right text-[11px] leading-[1.5] text-[#E0A63A]" style={{ right: inner + 8, top: m.cy - 18, width: W - m.right - inner - 16 }}>
+      <div className="absolute text-right text-[11px] leading-[1.5] text-[#E0A63A]" style={{ right: inner + 8, top: m.bottom + 10, width: W - m.right - inner - 16 + 120 }}>
         {t.arrowLearn.map((x) => <p key={x}>{x}</p>)}
       </div>
     </div>
@@ -162,7 +157,6 @@ export function Team() {
   const layers = LAYERS[lang]
   const root = useRef<HTMLDivElement>(null)
   const [refs] = useState(() => ({
-    q: createRef<HTMLDivElement>(),
     m: createRef<HTMLDivElement>(),
     l: createRef<HTMLDivElement>(),
     brain: createRef<HTMLDivElement>(),
@@ -179,19 +173,6 @@ export function Team() {
       {/* lg: side padding leaves room for the loop arrows */}
       <div ref={root} className="relative mt-10 lg:px-24">
         {boxes && <Arrows b={boxes} t={t} />}
-        {/* priority queue */}
-        <motion.div ref={refs.q} {...fade()} className="liquid-glass mx-auto max-w-2xl rounded-2xl p-5 text-center">
-          <p className="text-lg font-semibold text-fg">{t.queueTitle}</p>
-          {t.queueBody.map((l) => (
-            <p key={l} className="mt-1 text-sm text-fg/60">{l}</p>
-          ))}
-        </motion.div>
-        <p className="mt-3 text-center text-xs text-fg/45">{t.queueNote}</p>
-        <div className="flex items-center justify-center gap-2 py-3 text-xs text-fg/45">
-          <ArrowDown className="h-4 w-4 rotate-180" />
-          {t.toQueue}
-        </div>
-
         {/* chief of staff */}
         <motion.div ref={refs.m} {...fade(0.05)} className="liquid-glass mx-auto flex max-w-2xl items-center gap-5 rounded-2xl p-5">
           <img src="/team/muse.webp" alt="Muse" width={88} height={88} className="h-20 w-20 shrink-0 rounded-2xl object-cover md:h-[88px] md:w-[88px]" />
@@ -199,6 +180,14 @@ export function Team() {
             <p className="text-xs tracking-widest text-gold">{t.cosLabel}</p>
             <p className="mt-1 text-lg font-semibold text-fg">Muse</p>
             <p className="mt-1 text-sm text-fg/60">{t.cosBody}</p>
+            <ul className="mt-2 space-y-1">
+              {t.cosItems.map((x) => (
+                <li key={x} className="flex gap-2 text-xs text-fg/50 leading-[1.6]">
+                  <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-fg/40" />
+                  {x}
+                </li>
+              ))}
+            </ul>
           </div>
         </motion.div>
         <Down label={t.oversee} />
@@ -238,11 +227,11 @@ export function Team() {
         <Down label="" />
 
         {/* CEO */}
-        <motion.div ref={refs.ceo} {...fade()} className="mx-auto flex max-w-md items-center gap-5 rounded-2xl bg-fg p-5 text-bg">
-          <img src="/team/ceo.webp" alt="Katomasa" width={88} height={88} className="h-20 w-20 shrink-0 rounded-2xl object-cover md:h-[88px] md:w-[88px]" />
+        <motion.div ref={refs.ceo} {...fade()} className="liquid-glass mx-auto flex max-w-xs items-center gap-4 rounded-2xl p-4">
+          <img src="/team/ceo.webp" alt="Katomasa" width={56} height={56} className="h-14 w-14 shrink-0 rounded-xl object-cover" />
           <div>
-            <p className="text-xs tracking-widest opacity-60">CEO</p>
-            <p className="text-2xl font-semibold">Katomasa</p>
+            <p className="text-xs tracking-widest text-gold">CEO</p>
+            <p className="mt-0.5 text-lg font-semibold text-fg">Katomasa</p>
           </div>
         </motion.div>
         {/* below lg the arrows are not drawn, so their meaning is spelled out */}
