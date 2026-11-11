@@ -26,7 +26,7 @@ const LAYERS = {
 
 const COPY = {
   ja: {
-    lead: '代表1人と、Agent Stack の4層で常時稼働するエージェントで会社を動かしています。',
+    lead: 'Agent Stack の4層で常時稼働するエージェントで会社を動かしています。',
     cosLabel: 'チーフ・オブ・スタッフ・エージェント',
     cosBody: 'Muse：MAP・CONSUME・PRODUCE・MARKET の4層を統括する',
     cosItems: ['4層の決めること・レビューすることを、優先順位をつけて1か所にまとめる', '各レビューに成果物（データ・分析・決済記録）を付けて代表に渡す'],
@@ -41,7 +41,7 @@ const COPY = {
     arrowLearn: ['代表の判断・好みを学習', '改善された推薦・初稿が戻る'],
   },
   en: {
-    lead: 'One founder and agents running around the clock on each of the four Agent Stack layers run the company.',
+    lead: 'Agents running around the clock on each of the four Agent Stack layers run the company.',
     cosLabel: 'Chief-of-staff agent',
     cosBody: 'Muse: oversees the four layers — MAP, CONSUME, PRODUCE and MARKET',
     cosItems: ['Gathers everything to decide or review across the four layers into one prioritized place', 'Hands each review to the founder with its output (data, analysis, payment records)'],
