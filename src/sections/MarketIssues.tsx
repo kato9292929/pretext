@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, ChevronDown } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
 import { DNode, DiagramProvider } from '../components/Diagram'
 
@@ -99,7 +100,8 @@ const COPY = {
     eyebrow: 'Market issues',
     title: '仕様が守るのは署名の再送防止まで。決済しても届かない問題は外側の4層にある',
     lead: 'x402 v2 仕様の Security Considerations が定めるのは、再送の防止（nonce・有効期限・署名の検証）と認証との組み合わせだけ。予算管理やセッションは仕様の対象外で、受領より先に決済が終わり、返金・再取得の定めもない。1回の支払い（E4 per-call 調達）を8つの段階に分け、課題が起きる段階と層に置いた。',
-    hint: '各課題にカーソルを合わせる（タップする）と、数字と該当セグメントが表示されます',
+    hint: '層をクリックすると課題が広がります。各課題にカーソルを合わせる（タップする）と、数字と該当セグメントが表示されます',
+    count: (n: number) => `課題 ${n}件`,
     layer: '層',
     legend: [
       ['issue', '報告されている問題・実購入で観測した数字'],
@@ -116,7 +118,8 @@ const COPY = {
     eyebrow: 'Market issues',
     title: 'The spec only protects against signature replay. Paid-but-not-delivered problems live in the four layers outside it',
     lead: 'The Security Considerations of the x402 v2 spec cover only replay protection (nonce, expiry, signature checks) and how it combines with authentication. Budgets and sessions are out of scope; payment settles before delivery, and there is no rule for refunds or re-fetching. We split one payment (E4 per-call procurement) into 8 steps and placed each issue at the step and layer where it happens.',
-    hint: 'Hover (or tap) an issue to see its numbers and segments',
+    hint: 'Click a layer to open its issues. Hover (or tap) an issue to see its numbers and segments',
+    count: (n: number) => `${n} issues`,
     layer: 'Layer',
     legend: [
       ['issue', 'Reported problems and numbers from real purchases'],
@@ -190,6 +193,16 @@ export function MarketIssues() {
   const { lang } = useLang()
   const t = COPY[lang]
   const cols = 'grid-cols-[7.5rem_repeat(8,minmax(0,1fr))]'
+  // Layers start folded (flow + issue codes only); clicking a layer opens it.
+  const [open, setOpen] = useState<Set<Layer>>(() => new Set())
+  const toggle = (k: Layer) =>
+    setOpen((cur) => {
+      const next = new Set(cur)
+      if (next.has(k)) next.delete(k)
+      else next.add(k)
+      return next
+    })
+  const layerName = (ly: (typeof LAYERS)[number]) => (lang === 'ja' ? ly.name : ly.key === 'chain' ? 'Chain' : ly.name)
   return (
     <div className="relative max-w-6xl mx-auto px-6 mt-16 md:mt-20">
       <motion.div
@@ -228,13 +241,26 @@ export function MarketIssues() {
           </div>
           {LAYERS.map((ly) => (
             <div key={ly.key} className={`mt-1.5 grid ${cols} gap-1.5 border-t border-fg/10 pt-1.5`}>
-              <div className="px-2 py-1.5">
-                <span className="inline-block rounded-md px-2 py-0.5 text-[11px] font-semibold text-[#0b0b0b]" style={{ background: ly.color }}>
-                  {lang === 'ja' ? ly.name : ly.key === 'chain' ? 'Chain' : ly.name}
+              <button
+                type="button"
+                aria-expanded={open.has(ly.key)}
+                onClick={() => toggle(ly.key)}
+                className="self-start rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-fg/[0.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
+              >
+                <span className="flex items-center gap-1.5">
+                  <span className="inline-block rounded-md px-2 py-0.5 text-[11px] font-semibold text-[#0b0b0b]" style={{ background: ly.color }}>
+                    {layerName(ly)}
+                  </span>
+                  <ChevronDown className={`h-3.5 w-3.5 text-fg/50 transition-transform ${open.has(ly.key) ? 'rotate-180' : ''}`} />
                 </span>
-                <p className="mt-1.5 text-[10.5px] text-fg/60">{ly.what[lang]}</p>
-                <p className="mt-0.5 text-[10px] leading-[1.5] text-fg/40">{ly.who[lang]}</p>
-              </div>
+                <span className="mt-1.5 block text-[10.5px] text-fg/60">{ly.what[lang]}</span>
+                {open.has(ly.key) && <span className="mt-0.5 block text-[10px] leading-[1.5] text-fg/40">{ly.who[lang]}</span>}
+                {!open.has(ly.key) && (
+                  <span className="mt-0.5 block text-[10px] text-fg/40">
+                    {t.count(ISSUES.filter((i) => i.layer === ly.key).length)}
+                  </span>
+                )}
+              </button>
               {STEPS.map((_, k) => {
                 const step = k + 1
                 const flow = FLOW[ly.key]?.[step]
@@ -242,7 +268,18 @@ export function MarketIssues() {
                 return (
                   <div key={k} className="min-w-0 space-y-1.5 py-1">
                     {flow && <FlowPill label={flow[lang]} color={ly.color} />}
-                    {items.map((i) => (
+                    {!open.has(ly.key) && items.length > 0 && (
+                      // folded: just the issue codes; clicking opens the layer
+                      <button type="button" onClick={() => toggle(ly.key)} className="flex flex-wrap gap-1" aria-label={`${layerName(ly)}: ${items.map((i) => i.code).join(', ')}`}>
+                        {items.map((i) => (
+                          <span key={i.code} className="inline-flex items-center gap-1 rounded-md border border-fg/15 bg-bg/40 px-1.5 py-0.5 font-mono text-[10px] text-fg/70 hover:border-fg/35">
+                            <span className={`h-1.5 w-1.5 rounded-full ${KIND_DOT[i.kind]}`} />
+                            {i.code}
+                          </span>
+                        ))}
+                      </button>
+                    )}
+                    {open.has(ly.key) && items.map((i) => (
                       <DNode
                         key={i.code}
                         id={`mi-${i.code}`}
@@ -261,16 +298,18 @@ export function MarketIssues() {
         </div>
 
         {/* below lg: grouped by layer, in step order */}
-        <div className="space-y-5 lg:hidden">
+        <div className="space-y-3 lg:hidden">
           {LAYERS.map((ly) => (
             <div key={ly.key}>
-              <p className="flex items-baseline gap-2">
+              <button type="button" aria-expanded={open.has(ly.key)} onClick={() => toggle(ly.key)} className="flex w-full items-center gap-2 rounded-lg py-1 text-left">
                 <span className="inline-block rounded-md px-2 py-0.5 text-[11px] font-semibold text-[#0b0b0b]" style={{ background: ly.color }}>
-                  {lang === 'ja' ? ly.name : ly.key === 'chain' ? 'Chain' : ly.name}
+                  {layerName(ly)}
                 </span>
                 <span className="text-[11px] text-fg/50">{ly.what[lang]}</span>
-              </p>
-              <div className="mt-2 grid grid-cols-2 gap-2">
+                <span className="ml-auto text-[10px] text-fg/40">{t.count(ISSUES.filter((i) => i.layer === ly.key).length)}</span>
+                <ChevronDown className={`h-4 w-4 shrink-0 text-fg/50 transition-transform ${open.has(ly.key) ? 'rotate-180' : ''}`} />
+              </button>
+              <div className={`mt-2 grid-cols-2 gap-2 ${open.has(ly.key) ? 'grid' : 'hidden'}`}>
                 {ISSUES.filter((i) => i.layer === ly.key).map((i) => (
                   <DNode
                     key={i.code}
