@@ -82,16 +82,26 @@ function useBoxes(container: RefObject<HTMLDivElement>, refs: Record<string, Ref
   useEffect(() => {
     const root = container.current
     if (!root) return
+    // Layout offsets (not getBoundingClientRect), so the arrows stay right
+    // under CSS zoom and transforms.
     const measure = () => {
-      const c = root.getBoundingClientRect()
       const out: Record<string, Box> = {}
       for (const [k, r] of Object.entries(refs)) {
         const el = r.current
         if (!el) return
-        const b = el.getBoundingClientRect()
-        out[k] = { left: b.left - c.left, right: b.right - c.left, top: b.top - c.top, bottom: b.bottom - c.top, cy: b.top - c.top + b.height / 2, h: b.height }
+        let x = 0
+        let y = 0
+        let n: HTMLElement | null = el
+        while (n && n !== root) {
+          x += n.offsetLeft
+          y += n.offsetTop
+          n = n.offsetParent as HTMLElement | null
+        }
+        const w = el.offsetWidth
+        const h = el.offsetHeight
+        out[k] = { left: x, right: x + w, top: y, bottom: y + h, cy: y + h / 2, h }
       }
-      out.root = { left: 0, right: c.width, top: 0, bottom: c.height, cy: c.height / 2, h: c.height }
+      out.root = { left: 0, right: root.offsetWidth, top: 0, bottom: root.offsetHeight, cy: root.offsetHeight / 2, h: root.offsetHeight }
       setBoxes(out)
     }
     measure()
