@@ -15,8 +15,9 @@ const COPY = {
     read: 'note で読む',
     thesisTag: 'x402 成長性分析',
     thesisTitle: 'Human → AI から AI ↔ AI へ——3つのフェーズ',
-    libraryTag: 'これまでの note 記事',
-    latestTag: '最新の note 記事',
+    latestTag: '2026年10–11月',
+    midTag: '2026年7–9月',
+    earlyTag: '2026年4–6月',
   },
   en: {
     pageTag: 'Research',
@@ -27,8 +28,9 @@ const COPY = {
     read: 'Read on note',
     thesisTag: 'Growth analysis',
     thesisTitle: 'From Human → AI to AI ↔ AI — three phases',
-    libraryTag: 'Earlier note articles',
-    latestTag: 'Latest on note',
+    latestTag: 'Oct–Nov 2026',
+    midTag: 'Jul–Sep 2026',
+    earlyTag: 'Apr–Jun 2026',
   },
   zh: {
     pageTag: '研究与分析',
@@ -38,8 +40,9 @@ const COPY = {
     read: '在 note 上阅读',
     thesisTag: 'x402 成长性分析',
     thesisTitle: '从 Human → AI 到 AI ↔ AI——3 个阶段',
-    libraryTag: '以往的 note 文章',
-    latestTag: '最新 note 文章',
+    latestTag: '2026年10–11月',
+    midTag: '2026年7–9月',
+    earlyTag: '2026年4–6月',
   },
 } satisfies Record<Lang, Record<string, string>>
 
@@ -286,39 +289,6 @@ export function Research() {
     <>
       <PageHero eyebrow="Vision & Research" tag={t.pageTag} title={t.title} intro={t.intro} />
 
-      {/* Latest note articles */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
-        <SectionEyebrow label="Latest" tag={t.latestTag} />
-        <div className="mt-8 grid md:grid-cols-2 gap-8">
-          {LATEST.map((g) => (
-            <div key={g.title.en}>
-              <h3 className="text-sm font-semibold text-fg/70 tracking-wide">{g.title[lang]}</h3>
-              <div className="mt-4 grid gap-3">
-                {g.notes.map((note) => (
-                  <a
-                    key={note.href}
-                    href={note.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="liquid-glass rounded-xl p-4 flex items-start justify-between gap-3 group"
-                  >
-                    <span>
-                      <span className="block font-mono text-[11px] text-fg/40">{note.date}</span>
-                      <span className="mt-1 block text-sm text-fg/80 leading-[1.6]">{note.title[lang]}</span>
-                    </span>
-                    <ArrowUpRight className="w-3.5 h-3.5 flex-none text-fg/30 group-hover:text-gold transition-colors" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Latest updates + insights, consolidated at the top of the Journal */}
-      <Updates />
-      <Insights />
-
       {/* Market thesis timeline */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
         <SectionEyebrow label="Market Thesis" tag={t.thesisTag} />
@@ -350,9 +320,42 @@ export function Research() {
         </div>
       </section>
 
+      {/* Latest note articles */}
+      <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
+        <SectionEyebrow label="Latest" tag={t.latestTag} />
+        <div className="mt-8 grid md:grid-cols-2 gap-8">
+          {LATEST.map((g) => (
+            <div key={g.title.en}>
+              <h3 className="text-sm font-semibold text-fg/70 tracking-wide">{g.title[lang]}</h3>
+              <div className="mt-4 grid gap-3">
+                {g.notes.map((note) => (
+                  <a
+                    key={note.href}
+                    href={note.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="liquid-glass rounded-xl p-4 flex items-start justify-between gap-3 group"
+                  >
+                    <span>
+                      <span className="block font-mono text-[11px] text-fg/40">{note.date}</span>
+                      <span className="mt-1 block text-sm text-fg/80 leading-[1.6]">{note.title[lang]}</span>
+                    </span>
+                    <ArrowUpRight className="w-3.5 h-3.5 flex-none text-fg/30 group-hover:text-gold transition-colors" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Latest updates + insights, Jul–Sep 2026 */}
+      <Updates tag={t.midTag} />
+      <Insights tag={t.midTag} />
+
       {/* Full note library */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
-        <SectionEyebrow label="Library" tag={t.libraryTag} />
+        <SectionEyebrow label="Library" tag={t.earlyTag} />
         <div className="mt-8 grid md:grid-cols-3 gap-8">
           {COLUMNS.map((col) => (
             <div key={col.title}>

@@ -116,7 +116,8 @@ const ITEMS: Item[] = [
   ...FEATURED_ARTICLES.map((a) => ({ title: a.title, href: a.href, tag: a.tag })),
 ]
 
-export function Insights() {
+/* tag: optional label for the eyebrow (the Journal shows the period) */
+export function Insights({ tag }: { tag?: string } = {}) {
   const { lang } = useLang()
   const t = COPY[lang]
   return (
@@ -129,7 +130,7 @@ export function Insights() {
         className="flex flex-wrap items-end justify-between gap-4"
       >
         <div>
-          <SectionEyebrow label="Insights" tag="Research" heading />
+          <SectionEyebrow label="Insights" tag={tag ?? 'Research'} heading />
           <p className="mt-4 text-fg/60 text-base leading-[1.7] max-w-xl">{t.subtext}</p>
         </div>
         <a

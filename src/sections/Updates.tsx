@@ -121,7 +121,8 @@ const UPDATES: Update[] = [
   },
 ]
 
-export function Updates() {
+/* tag: optional label for the eyebrow (the Journal shows the period) */
+export function Updates({ tag }: { tag?: string } = {}) {
   const { lang } = useLang()
   return (
     <section id="updates" className="relative z-10 max-w-6xl mx-auto px-6 py-14 md:py-20">
@@ -131,7 +132,7 @@ export function Updates() {
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <SectionEyebrow label="Update" tag={lang === 'zh' ? '最新动态' : '最新情報'} heading />
+        <SectionEyebrow label="Update" tag={tag ?? (lang === 'zh' ? '最新动态' : '最新情報')} heading />
       </motion.div>
 
       {/* Two-row horizontal-scroll rail; the whole card is the link */}
