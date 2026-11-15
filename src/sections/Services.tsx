@@ -28,12 +28,12 @@ type Card = { name: string; desc: string; scope: string; tools: Tool[]; cases?: 
 
 const VIDEOS: VideoCase[] = [
   {
-    title: { ja: 'ブランドフィルム：HTML 1枚と ffmpeg で52秒', en: 'Brand film: 52 seconds from one HTML file and ffmpeg' },
+    title: { ja: 'ブランドフィルム：HTML 1枚と ffmpeg で52秒', en: 'Brand film: 52 seconds from one HTML file and ffmpeg', zh: '品牌短片：用一个 HTML 文件和 ffmpeg 制作的52秒' },
     youtube: 'https://youtu.be/x9l4dw9ZImE',
     note: 'https://note.com/x402inc/n/n23b844a08d4f',
   },
   {
-    title: { ja: 'Muse：海底に沈んだムー大陸の遺跡（30秒）', en: 'Muse: the sunken ruins of Mu (30 seconds)' },
+    title: { ja: 'Muse：海底に沈んだムー大陸の遺跡（30秒）', en: 'Muse: the sunken ruins of Mu (30 seconds)', zh: 'Muse：沉入海底的姆大陆遗迹（30秒）' },
     youtube: 'https://youtu.be/uKkEAarwPP0',
     note: 'https://note.com/x402inc/n/n10995ab7d1bc',
   },
@@ -106,6 +106,35 @@ const COPY: Localized<{
         name: 'AI agent training',
         desc: 'Training for adopting Claude / Claude Code into your work. Includes designing the permissions, limits, and approval flows for letting agents call external APIs.',
         scope: 'Lectures / Hands-on environment setup / Operational rules',
+        tools: [TOOLS.claude, TOOLS.claudeCode],
+      },
+    ],
+  },
+  zh: {
+    lead: '我们将制作和运营自家网站及各产品的团队体系，同样对外提供。',
+    scopeLabel: '服务范围',
+    toolsLabel: '使用工具',
+    caseLabel: '案例',
+    contact: '联系我们',
+    cards: [
+      {
+        name: '网站制作',
+        desc: '使用 Claude Code 实现网站・落地页・文档站点。自家网站及各产品的前端也由同一团队体系构建和运营。',
+        scope: '设计 / 实现 / 部署 / 上线后的更新',
+        tools: [TOOLS.claudeCode, TOOLS.vercel],
+        cases: CASES,
+      },
+      {
+        name: '视频制作',
+        desc: '使用 Claude Code 与生成式 AI 模型制作短视频。包括由静态图像生成视频，以及添加字幕和音频。',
+        scope: '构思 / 素材生成 / 剪辑 / 按发布平台规格导出',
+        tools: [TOOLS.claudeCode, TOOLS.muse, TOOLS.higgsfield],
+        videos: VIDEOS,
+      },
+      {
+        name: 'AI 智能体培训',
+        desc: '帮助企业将 Claude / Claude Code 引入业务的培训。包括让智能体调用外部 API 时的权限・上限・审批流程设计。',
+        scope: '讲授 / 陪同搭建环境 / 制定运营规则',
         tools: [TOOLS.claude, TOOLS.claudeCode],
       },
     ],

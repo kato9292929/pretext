@@ -10,79 +10,84 @@ type Block = { label: Localized; intro: Localized; cards: Card[] }
 const INTRO: Localized = {
   ja: 'エージェント取引も、単一の方向へ移行するわけではない。Tierは「誰の資金を、誰の名義で動かすか」で分かれ、そこに検証の置き場所（何が執行前に止めるか）が重なる。',
   en: 'Agent trading does not migrate in a single direction either. Tiers split on “whose funds move, under whose name,” and on top of that sits where verification lives (what stops a trade before execution).',
+  zh: '智能体交易同样不会朝单一方向迁移。Tier 按“动用谁的资金、以谁的名义”划分，其上再叠加验证所处的位置（由什么在执行前拦截）。',
 }
 
 const TIERS: Card[] = [
   {
     badge: 'T0',
-    title: { ja: '助言・シミュレーション', en: 'Advice & simulation' },
-    tag: { ja: '自律なし', en: 'No autonomy' },
+    title: { ja: '助言・シミュレーション', en: 'Advice & simulation', zh: '建议与模拟' },
+    tag: { ja: '自律なし', en: 'No autonomy', zh: '无自主' },
     desc: {
       ja: '資金を預からない側。提案と分析までを担い、執行は人間が行う。調査対象10社のうち5社がここに留まる。',
       en: 'The side that holds no funds. It handles proposals and analysis; humans execute. 5 of the 10 companies surveyed stay here.',
+      zh: '不托管资金的一方。负责提出建议与分析，由人执行。调查的10家公司中有5家停留在此。',
     },
     groups: [
-      { sub: { ja: '提案型', en: 'Proposal' }, chips: [{ name: 'AIXBT' }, { name: 'Olas Predict' }] },
+      { sub: { ja: '提案型', en: 'Proposal', zh: '建议型' }, chips: [{ name: 'AIXBT' }, { name: 'Olas Predict' }] },
       {
-        sub: { ja: '提案＋執行の仲介', en: 'Proposal + execution brokering' },
-        chips: [{ name: 'TrueNorth', note: { ja: 'ユーザーウォレット経由', en: 'via user wallet' } }],
+        sub: { ja: '提案＋執行の仲介', en: 'Proposal + execution brokering', zh: '建议＋执行中介' },
+        chips: [{ name: 'TrueNorth', note: { ja: 'ユーザーウォレット経由', en: 'via user wallet', zh: '经由用户钱包' } }],
       },
     ],
   },
   {
     badge: 'T1',
-    title: { ja: '受動的配分', en: 'Passive allocation' },
-    tag: { ja: 'プール資金', en: 'Pooled funds' },
+    title: { ja: '受動的配分', en: 'Passive allocation', zh: '被动配置' },
+    tag: { ja: 'プール資金', en: 'Pooled funds', zh: '资金池' },
     desc: {
       ja: '資金は預かるが、動かすのはvault配分とステーキングのみ。板に対して能動的な注文は出さない。',
       en: 'Holds funds, but only moves them into vault allocations and staking. It places no active orders on the book.',
+      zh: '托管资金，但仅用于 vault 配置与质押，不在订单簿上主动下单。',
     },
     groups: [
-      { sub: { ja: 'vault配分・ステーキング', en: 'Vault allocation & staking' }, chips: [{ name: 'Axal' }, { name: 'Giza' }] },
+      { sub: { ja: 'vault配分・ステーキング', en: 'Vault allocation & staking', zh: 'vault 配置与质押' }, chips: [{ name: 'Axal' }, { name: 'Giza' }] },
       {
-        sub: { ja: '終了', en: 'Ended' },
-        chips: [{ name: 'Giza ARMA', note: { ja: '2026/3 資金返還', en: 'funds returned 2026/3' }, ended: true }],
+        sub: { ja: '終了', en: 'Ended', zh: '已终止' },
+        chips: [{ name: 'Giza ARMA', note: { ja: '2026/3 資金返還', en: 'funds returned 2026/3', zh: '2026/3 退还资金' }, ended: true }],
       },
     ],
   },
   {
     badge: 'T2',
-    title: { ja: 'プール資金で自律執行', en: 'Autonomous execution with pooled funds' },
-    tag: { ja: '3 / 10 社', en: '3 / 10 cos.' },
+    title: { ja: 'プール資金で自律執行', en: 'Autonomous execution with pooled funds', zh: '以资金池自主执行' },
+    tag: { ja: '3 / 10 社', en: '3 / 10 cos.', zh: '3 / 10 家' },
     desc: {
       ja: '集めた資金を自前のトレジャリーで運用し、注文まで自ら出す。第一世代で実際にここに到達したのは3社。',
       en: 'Runs pooled funds from its own treasury and places orders itself. Only 3 first-generation projects actually reached this tier.',
+      zh: '以自有金库运作募集的资金，并自行下单。第一代项目中实际达到这一层的只有3家。',
     },
     groups: [
       {
-        sub: { ja: 'トークン調達型', en: 'Token-funded' },
+        sub: { ja: 'トークン調達型', en: 'Token-funded', zh: '代币募资型' },
         chips: [
-          { name: 'Axelrod', note: { ja: 'Virtuals / Base', en: 'Virtuals / Base' } },
-          { name: 'Eliza', note: { ja: 'ElizaOS / Solana', en: 'ElizaOS / Solana' } },
+          { name: 'Axelrod', note: { ja: 'Virtuals / Base', en: 'Virtuals / Base', zh: 'Virtuals / Base' } },
+          { name: 'Eliza', note: { ja: 'ElizaOS / Solana', en: 'ElizaOS / Solana', zh: 'ElizaOS / Solana' } },
         ],
       },
       {
-        sub: { ja: '自己資金型', en: 'Self-funded' },
-        chips: [{ name: 'Alpha Arena', note: { ja: 'Nof1 / Hyperliquid', en: 'Nof1 / Hyperliquid' } }],
+        sub: { ja: '自己資金型', en: 'Self-funded', zh: '自有资金型' },
+        chips: [{ name: 'Alpha Arena', note: { ja: 'Nof1 / Hyperliquid', en: 'Nof1 / Hyperliquid', zh: 'Nof1 / Hyperliquid' } }],
       },
     ],
   },
   {
     badge: 'T3',
-    title: { ja: '委任枠内で執行', en: 'Execution within a delegated scope' },
-    tag: { ja: 'ユーザー資金', en: 'User funds' },
+    title: { ja: '委任枠内で執行', en: 'Execution within a delegated scope', zh: '在委托范围内执行' },
+    tag: { ja: 'ユーザー資金', en: 'User funds', zh: '用户资金' },
     desc: {
       ja: '名義はユーザーに残し、権限だけをエージェントへ渡す。上限とallowlistの内側で自律的に注文を出す。',
       en: 'The name stays with the user; only authority is handed to the agent. It places orders autonomously inside caps and an allowlist.',
+      zh: '名义仍归用户，只把权限交给智能体。在上限与 allowlist 之内自主下单。',
     },
     groups: [
       {
-        sub: { ja: 'エージェントウォレット', en: 'Agent wallets' },
+        sub: { ja: 'エージェントウォレット', en: 'Agent wallets', zh: '智能体钱包' },
         chips: [{ name: 'MetaMask Agent Wallet' }, { name: 'Coinbase' }, { name: 'Cobo' }],
       },
       {
-        sub: { ja: '資金隔離型', en: 'Fund isolation' },
-        chips: [{ name: 'Almanak', note: { ja: 'Safe / Eulith', en: 'Safe / Eulith' } }],
+        sub: { ja: '資金隔離型', en: 'Fund isolation', zh: '资金隔离型' },
+        chips: [{ name: 'Almanak', note: { ja: 'Safe / Eulith', en: 'Safe / Eulith', zh: 'Safe / Eulith' } }],
       },
     ],
   },
@@ -90,24 +95,26 @@ const TIERS: Card[] = [
 
 const BLOCKS: Block[] = [
   {
-    label: { ja: '検証｜何が執行前に止めるか', en: 'Verification | What stops a trade before execution' },
+    label: { ja: '検証｜何が執行前に止めるか', en: 'Verification | What stops a trade before execution', zh: '验证｜由什么在执行前拦截' },
     intro: {
       ja: 'Tierを横断して、提案された取引を実行前に検証する層がある。置き場所が4つに分かれている。',
       en: 'Across all tiers there is a layer that verifies a proposed trade before it executes. It lives in four places.',
+      zh: '横跨各 Tier，存在一个在执行前验证所提议交易的层。其位置分为四种。',
     },
     cards: [
       {
         badge: '型W',
-        title: { ja: 'ウォレット内・実行時', en: 'In-wallet, at execution' },
-        tag: { ja: '実行時ポリシー', en: 'Runtime policy' },
+        title: { ja: 'ウォレット内・実行時', en: 'In-wallet, at execution', zh: '钱包内・执行时' },
+        tag: { ja: '実行時ポリシー', en: 'Runtime policy', zh: '执行时策略' },
         desc: {
           ja: '署名の直前にウォレットがルールを評価する。柔軟だが、評価する主体を信頼する必要がある。',
           en: 'The wallet evaluates rules right before signing. Flexible, but you must trust whoever does the evaluating.',
+          zh: '钱包在签名前一刻评估规则。灵活，但需要信任执行评估的主体。',
         },
         groups: [
           {
             chips: [
-              { name: 'MetaMask', note: { ja: '3段階・上書き不可', en: '3 levels, non-overridable' } },
+              { name: 'MetaMask', note: { ja: '3段階・上書き不可', en: '3 levels, non-overridable', zh: '3级・不可覆盖' } },
               { name: 'Cobo Rulebooks' },
               { name: 'Coinbase' },
             ],
@@ -116,47 +123,50 @@ const BLOCKS: Block[] = [
       },
       {
         badge: '型S',
-        title: { ja: '署名スコープ・署名時', en: 'Signature scope, at signing' },
-        tag: { ja: '署名時スコープ', en: 'Signing-time scope' },
+        title: { ja: '署名スコープ・署名時', en: 'Signature scope, at signing', zh: '签名范围・签名时' },
+        tag: { ja: '署名時スコープ', en: 'Signing-time scope', zh: '签名时范围' },
         desc: {
           ja: '制約を署名自体に埋め込み、第三者が償還する。検証しやすいが、事前に書ける制約に限界がある。',
           en: 'Constraints are embedded in the signature itself and redeemed by a third party. Easy to verify, but there are limits to what can be written in advance.',
+          zh: '将约束嵌入签名本身，由第三方兑付。易于验证，但能预先写入的约束有限。',
         },
         groups: [
           {
             chips: [
               { name: 'ERC-7710 / 7715' },
-              { name: 'EIP-3009', note: { ja: 'x402 exact', en: 'x402 exact' } },
-              { name: 'RePermit', note: { ja: 'Orbs Spot', en: 'Orbs Spot' } },
+              { name: 'EIP-3009', note: { ja: 'x402 exact', en: 'x402 exact', zh: 'x402 exact' } },
+              { name: 'RePermit', note: { ja: 'Orbs Spot', en: 'Orbs Spot', zh: 'Orbs Spot' } },
             ],
           },
         ],
       },
       {
         badge: '型O',
-        title: { ja: '外部オラクル・執行直前', en: 'External oracle, just before execution' },
-        tag: { ja: '第三者検証', en: 'Third-party check' },
+        title: { ja: '外部オラクル・執行直前', en: 'External oracle, just before execution', zh: '外部预言机・执行前一刻' },
+        tag: { ja: '第三者検証', en: 'Third-party check', zh: '第三方验证' },
         desc: {
           ja: '参照価格・スリッページ・経路を独立した主体が確認し、通ればcosignする。提案と検証を別主体に分ける。',
           en: 'An independent party checks reference price, slippage and route, and cosigns if it passes. Proposal and verification are split between different parties.',
+          zh: '由独立主体核对参考价格、滑点与路径，通过后进行 cosign。将提议与验证分属不同主体。',
         },
         groups: [
-          { chips: [{ name: 'Orbs Agentic', note: { ja: 'cosigned oracle', en: 'cosigned oracle' } }] },
+          { chips: [{ name: 'Orbs Agentic', note: { ja: 'cosigned oracle', en: 'cosigned oracle', zh: 'cosigned oracle' } }] },
         ],
       },
       {
         badge: '型M',
-        title: { ja: '口座・鍵で隔離', en: 'Isolation by account & key' },
-        tag: { ja: '資金隔離', en: 'Fund isolation' },
+        title: { ja: '口座・鍵で隔離', en: 'Isolation by account & key', zh: '以账户・密钥隔离' },
+        tag: { ja: '資金隔離', en: 'Fund isolation', zh: '资金隔离' },
         desc: {
           ja: 'そもそも触れる資金を絞る。検証というより、失敗したときの上限を口座の構造で決める。',
           en: 'Limits which funds can be touched in the first place. Less verification than capping the downside through account structure.',
+          zh: '从源头限制可动用的资金。与其说是验证，不如说是通过账户结构确定失败时的损失上限。',
         },
         groups: [
           {
             chips: [
-              { name: 'Giza', note: { ja: 'セッションキー', en: 'session keys' } },
-              { name: 'Almanak', note: { ja: 'マルチシグ', en: 'multisig' } },
+              { name: 'Giza', note: { ja: 'セッションキー', en: 'session keys', zh: '会话密钥' } },
+              { name: 'Almanak', note: { ja: 'マルチシグ', en: 'multisig', zh: '多签' } },
             ],
           },
         ],
@@ -164,54 +174,58 @@ const BLOCKS: Block[] = [
     ],
   },
   {
-    label: { ja: '接続｜MCP・Agent Skill', en: 'Access | MCP & Agent Skills' },
+    label: { ja: '接続｜MCP・Agent Skill', en: 'Access | MCP & Agent Skills', zh: '接入｜MCP・Agent Skill' },
     intro: {
       ja: 'どのTierも、エージェント側からの入口はMCPサーバーかAgent Skillとして配られる。公式に提供されているものと、コミュニティ実装に分かれる。',
       en: 'In every tier, the agent-side entry point ships as an MCP server or an Agent Skill. These split into official offerings and community implementations.',
+      zh: '无论哪个 Tier，智能体一侧的入口都以 MCP 服务器或 Agent Skill 的形式分发，分为官方提供与社区实现两类。',
     },
     cards: [
       {
         badge: 'C1',
-        title: { ja: '公式提供', en: 'Official' },
-        tag: { ja: 'ベンダー配布', en: 'Vendor-distributed' },
+        title: { ja: '公式提供', en: 'Official', zh: '官方提供' },
+        tag: { ja: 'ベンダー配布', en: 'Vendor-distributed', zh: '厂商分发' },
         desc: {
           ja: 'プロトコル運営者自身がMCPサーバーまたはSKILL.mdを配布しているもの。認証と実行権限が製品側の規約に紐づく。',
           en: 'The protocol operator itself ships the MCP server or SKILL.md. Authentication and execution rights are tied to the product’s own terms.',
+          zh: '由协议运营方自行分发 MCP 服务器或 SKILL.md。认证与执行权限与产品方的条款绑定。',
         },
         groups: [
           {
-            sub: { ja: '1INCH', en: '1INCH' },
+            sub: { ja: '1INCH', en: '1INCH', zh: '1INCH' },
             chips: [
-              { name: '1inch MCP Server', note: { ja: 'Fusion / Orderbook', en: 'Fusion / Orderbook' } },
-              { name: '1inch/1inch-ai', note: { ja: 'Agent Skills', en: 'Agent Skills' } },
+              { name: '1inch MCP Server', note: { ja: 'Fusion / Orderbook', en: 'Fusion / Orderbook', zh: 'Fusion / Orderbook' } },
+              { name: '1inch/1inch-ai', note: { ja: 'Agent Skills', en: 'Agent Skills', zh: 'Agent Skills' } },
               { name: 'Cursor Marketplace' },
             ],
           },
           {
-            sub: { ja: 'ORBS', en: 'ORBS' },
+            sub: { ja: 'ORBS', en: 'ORBS', zh: 'ORBS' },
             chips: [{ name: 'Spot Advanced Swap Orders' }, { name: 'SKILL.md' }],
           },
         ],
       },
       {
         badge: 'C2',
-        title: { ja: 'コミュニティ実装', en: 'Community' },
-        tag: { ja: '第三者配布', en: 'Third-party' },
+        title: { ja: 'コミュニティ実装', en: 'Community', zh: '社区实现' },
+        tag: { ja: '第三者配布', en: 'Third-party', zh: '第三方分发' },
         desc: {
           ja: '運営者ではなく第三者がSDKを包んで公開しているもの。秘密鍵をローカルの環境変数に置く構成が多く、権限の制限は利用者側の責任になる。',
           en: 'Published by third parties wrapping the SDK, not by the operator. Many keep private keys in local environment variables, leaving permission limits to the user.',
+          zh: '并非运营方，而是由第三方封装 SDK 后公开。多数将私钥放在本地环境变量中，权限限制由使用者自行负责。',
         },
         groups: [
           {
-            sub: { ja: 'HYPERLIQUID', en: 'HYPERLIQUID' },
-            chips: [{ name: 'hyperliquid-mcp', note: { ja: 'EIP-712 / agent mode', en: 'EIP-712 / agent mode' } }],
+            sub: { ja: 'HYPERLIQUID', en: 'HYPERLIQUID', zh: 'HYPERLIQUID' },
+            chips: [{ name: 'hyperliquid-mcp', note: { ja: 'EIP-712 / agent mode', en: 'EIP-712 / agent mode', zh: 'EIP-712 / agent mode' } }],
           },
           {
-            sub: { ja: 'DEX 横断', en: 'Cross-DEX' },
+            sub: { ja: 'DEX 横断', en: 'Cross-DEX', zh: '跨 DEX' },
             chips: [{ name: 'awesome-web3-mcp-servers' }],
             foot: {
               ja: 'Uniswapは公式MCPを確認できていない。uniswap-trader-mcp、uniswap-poolspy-mcp などコミュニティ実装が上記の一覧に収録されている。',
               en: 'We could not confirm an official Uniswap MCP. Community implementations such as uniswap-trader-mcp and uniswap-poolspy-mcp are listed above.',
+              zh: '尚未确认 Uniswap 有官方 MCP。uniswap-trader-mcp、uniswap-poolspy-mcp 等社区实现收录于上述列表中。',
             },
           },
         ],
@@ -222,17 +236,19 @@ const BLOCKS: Block[] = [
 
 const GAPS: { label: Localized; text: Localized }[] = [
   {
-    label: { ja: 'T2 ×｜検証可能な自律執行', en: 'T2 × | Verifiable autonomous execution' },
+    label: { ja: 'T2 ×｜検証可能な自律執行', en: 'T2 × | Verifiable autonomous execution', zh: 'T2 ×｜可验证的自主执行' },
     text: {
       ja: '執行が自律だったことを外部から判定する手段',
       en: 'A way to tell from outside that execution was actually autonomous',
+      zh: '从外部判定执行确属自主的手段',
     },
   },
   {
-    label: { ja: '型S ×｜権限記述の標準', en: 'Type S × | A standard for describing permissions' },
+    label: { ja: '型S ×｜権限記述の標準', en: 'Type S × | A standard for describing permissions', zh: 'S型 ×｜权限描述的标准' },
     text: {
       ja: '3フォーマットが並立したまま収束していない層',
       en: 'A layer where three formats coexist without converging',
+      zh: '三种格式并存、尚未收敛的层',
     },
   },
 ]
@@ -261,6 +277,18 @@ const COPY = {
     note: 'Tiers split by whose name the funds are in and who executes. This is a two-axis framing, not a proven taxonomy. Placement is point-in-time, based on each company’s public information.',
     taxPre: 'Classification follows the ',
     taxLink: '4-layer model + permission description layer',
+    taxPost: '',
+  },
+  zh: {
+    gapLabel: '分化的轴线与尚存的空白',
+    tierLabel: 'Tier｜动用谁的资金、以谁的名义',
+    hint: '将光标移至（或点按）各 Tier・类型，即可查看详情与案例',
+    gapIntro: 'Tier 按资金的名义划分，类型按验证的位置划分。实现尚少的空白，也以同样的轴线定位。',
+    closing:
+      '各 Tier 托管的资金、名义与验证强度各不相同。我们将持续把与 AI 进行的深入研究同自身的观测相互对照，分析这种细分。',
+    note: 'Tier 按资金的名义与执行主体划分。这是基于两条轴线的梳理，而非经过验证的分类。归属判定基于各公司的公开信息，反映的是特定时点的情况。',
+    taxPre: '分类基于',
+    taxLink: '四层模型＋权限描述层',
     taxPost: '',
   },
 }

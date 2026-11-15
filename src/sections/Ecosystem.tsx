@@ -48,36 +48,57 @@ const COPY = {
     disclaimer:
       'Classes split by the relationship with the counterparty. This is an organization by four splits, not an empirically validated taxonomy.',
   },
+  zh: {
+    intro:
+      '智能体支付并不会朝单一方向迁移，而是按用途细分为不同的经济形态。Class 按“与支付对象的关系”划分，其上再叠加场景（由谁发起、由谁审批）与经济形态（银行卡网络，还是 per-call 的 A to A）。',
+    closing:
+      '它们的粒度、成熟度与支付形式各不相同。我们将持续把与 AI 进行的深入研究同自身的观测相互对照，分析这种细分。',
+    compositeLabel: '复合｜场景 × 经济形态',
+    gapLabel: '尚存的空白',
+    cols: ['无支付', '银行卡网络', 'per-call 采购', '智能体间市场'],
+    hint: '将光标移至（或点按）各 Class，即可查看详情与案例',
+    compositeIntro:
+      '无法归入单一 Class、场景与经济形态相互交叉的情形。位于边界上的实现收录于此。',
+    axisLabel: '分化的轴线与尚存的空白',
+    axisIntro: '以四级分支划分各 Class。实现尚少的空白，也以同样的轴线定位。',
+    taxNote: '分类基于 Agent Economy Classes',
+    disclaimer:
+      'Class 按与支付对象的关系划分。这是基于四级分支的梳理，并非经过验证的分类。',
+  },
 }
 
 type Link = { label: string; href: string; note?: Localized }
 type Group = { sub: Localized; links: Link[] }
+// The one Japanese word in a class label (境界 = boundary), per language
+const clsLabel = (cls: string, lang: Lang) => cls.replace('境界', { ja: '境界', en: 'boundary', zh: '边界' }[lang])
+
 type Block = { badge: string; cls: string; name: Localized; desc: Localized; groups: Group[] }
 
 const CLASSES: Block[] = [
   {
     badge: 'E0',
     cls: 'Class 1 · 2',
-    name: { ja: '社内エージェント / 決済なし', en: 'Internal agents / no settlement' },
+    name: { ja: '社内エージェント / 決済なし', en: 'Internal agents / no settlement', zh: '内部智能体 / 无支付' },
     desc: {
       ja: '決済が発生しない側。予算の上限管理と、起案と承認の分離で統制する。',
       en: 'The side where no payment occurs: budget caps, and separating proposal from approval.',
+      zh: '不产生支付的一方。通过预算上限管理以及发起与审批的分离进行管控。',
     },
     groups: [
       {
-        sub: { ja: '予算上限型', en: 'Budget-capped' },
+        sub: { ja: '予算上限型', en: 'Budget-capped', zh: '预算上限型' },
         links: [
           { label: 'qm', href: 'https://note.com/x402inc/n/naab6a0b3e1e2' },
           { label: 'Cloudflare OS', href: 'https://note.com/x402inc/n/naab6a0b3e1e2' },
         ],
       },
       {
-        sub: { ja: '起案・承認分離', en: 'Proposal / approval split' },
+        sub: { ja: '起案・承認分離', en: 'Proposal / approval split', zh: '发起・审批分离' },
         links: [
           {
             label: 'Stripe Approvals',
             href: 'https://docs.stripe.com/account/approvals',
-            note: { ja: '社内承認ワークフロー', en: 'internal approval workflow' },
+            note: { ja: '社内承認ワークフロー', en: 'internal approval workflow', zh: '内部审批工作流' },
           },
         ],
       },
@@ -86,26 +107,27 @@ const CLASSES: Block[] = [
   {
     badge: 'E3',
     cls: 'Class 3',
-    name: { ja: 'カード / 承認制チェックアウト', en: 'Cards / approval-based checkout' },
+    name: { ja: 'カード / 承認制チェックアウト', en: 'Cards / approval-based checkout', zh: '银行卡 / 授权制结账' },
     desc: {
       ja: '人間の委任でエージェントが代わりに買う。名義と承認は人間に残り、カード網と決済事業者が受け入れ側を広げている。',
       en: 'An agent buys on a human’s behalf. The name and approval stay with the human; card networks and payment providers are expanding acceptance.',
+      zh: '在人的委托下，由智能体代为购买。名义与授权仍归于人，银行卡网络与支付服务商正在扩大受理范围。',
     },
     groups: [
       {
-        sub: { ja: '3a｜都度承認', en: '3a | per-transaction approval' },
+        sub: { ja: '3a｜都度承認', en: '3a | per-transaction approval', zh: '3a｜逐笔授权' },
         links: [
           { label: 'Crossmint', href: 'https://note.com/x402inc/n/n7c2b66d48d4e' },
           { label: 'Stripe Approvals', href: 'https://docs.stripe.com/account/approvals' },
         ],
       },
       {
-        sub: { ja: '3b｜委任枠内で自律', en: '3b | autonomous within a delegated limit' },
+        sub: { ja: '3b｜委任枠内で自律', en: '3b | autonomous within a delegated limit', zh: '3b｜在委托额度内自主' },
         links: [
           {
             label: 'Visa',
             href: 'https://note.com/x402inc/n/n56e14388db20',
-            note: { ja: 'カード', en: 'card' },
+            note: { ja: 'カード', en: 'card', zh: '银行卡' },
           },
           { label: 'Mastercard', href: 'https://note.com/x402inc/n/n471143ea5674' },
           { label: 'Lobster.cash', href: 'https://note.com/x402inc/n/n471143ea5674' },
@@ -113,18 +135,18 @@ const CLASSES: Block[] = [
         ],
       },
       {
-        sub: { ja: '基盤・信頼', en: 'Infrastructure & trust' },
+        sub: { ja: '基盤・信頼', en: 'Infrastructure & trust', zh: '基础设施・信任' },
         links: [
           {
             label: 'American Express',
             href: 'https://note.com/x402inc/n/n4e44009a2987',
-            note: { ja: '責任の肩代わり', en: 'liability assumption' },
+            note: { ja: '責任の肩代わり', en: 'liability assumption', zh: '代为承担责任' },
           },
           { label: 'Stripe Issuing', href: 'https://note.com/x402inc/n/na798062b2b1a' },
           {
             label: 'Meow',
             href: 'https://note.com/x402inc/n/nd3c05cc59104',
-            note: { ja: '非x402', en: 'non-x402' },
+            note: { ja: '非x402', en: 'non-x402', zh: '非 x402' },
           },
         ],
       },
@@ -133,14 +155,15 @@ const CLASSES: Block[] = [
   {
     badge: 'E4',
     cls: 'Class 4',
-    name: { ja: 'x402 A to A｜per-call調達', en: 'x402 A-to-A | per-call procurement' },
+    name: { ja: 'x402 A to A｜per-call調達', en: 'x402 A-to-A | per-call procurement', zh: 'x402 A to A｜per-call 采购' },
     desc: {
       ja: 'アカウントのない相手から、仕事の単位ごとにper-callで調達する。受け口は実装・設定・配布の三つの形で広がる。',
       en: 'Procuring per-call from parties without accounts, per unit of work. Acceptance spreads in three forms: implemented, configured, distributed.',
+      zh: '以工作单位为粒度，按次调用向没有账户关系的对象采购。受理端以实现、配置、分发三种形式扩展。',
     },
     groups: [
       {
-        sub: { ja: '4a｜実装型', en: '4a | implemented' },
+        sub: { ja: '4a｜実装型', en: '4a | implemented', zh: '4a｜实现型' },
         links: [
           {
             label: 'Glassnode',
@@ -153,7 +176,7 @@ const CLASSES: Block[] = [
         ],
       },
       {
-        sub: { ja: '4b｜設定型', en: '4b | configured' },
+        sub: { ja: '4b｜設定型', en: '4b | configured', zh: '4b｜配置型' },
         links: [
           {
             label: 'Cloudflare Monetization Gateway',
@@ -162,7 +185,7 @@ const CLASSES: Block[] = [
         ],
       },
       {
-        sub: { ja: '4c｜配布型', en: '4c | distributed' },
+        sub: { ja: '4c｜配布型', en: '4c | distributed', zh: '4c｜分发型' },
         links: [
           { label: 'AgentCash', href: 'https://note.com/x402inc/n/nd3c05cc59104' },
           { label: 'Agentic.market', href: 'https://note.com/x402inc/n/n5f1f1c6ae0cf' },
@@ -170,7 +193,7 @@ const CLASSES: Block[] = [
         ],
       },
       {
-        sub: { ja: '買い手側基盤', en: 'Buyer-side infrastructure' },
+        sub: { ja: '買い手側基盤', en: 'Buyer-side infrastructure', zh: '买方侧基础设施' },
         links: [{ label: 'Cloudflare Wallets', href: 'https://blog.cloudflare.com/wallets/' }],
       },
     ],
@@ -178,14 +201,15 @@ const CLASSES: Block[] = [
   {
     badge: 'E5',
     cls: 'Class 5',
-    name: { ja: 'x402 A to A｜エージェント間市場', en: 'x402 A-to-A | agent-to-agent market' },
+    name: { ja: 'x402 A to A｜エージェント間市場', en: 'x402 A-to-A | agent-to-agent market', zh: 'x402 A to A｜智能体间市场' },
     desc: {
       ja: 'エージェントがエージェントに、仕事の単位ごとに支払う。escrowと評価を内蔵する市場と、単一identityへ集約する形がある。',
       en: 'Agents pay other agents per unit of work. Some markets embed escrow and reputation; others consolidate onto a single identity.',
+      zh: '智能体以工作单位为粒度向智能体支付。有内置 escrow 与评价的市场，也有汇聚到单一 identity 的形态。',
     },
     groups: [
       {
-        sub: { ja: '5a｜escrow・評価内蔵', en: '5a | embedded escrow & reputation' },
+        sub: { ja: '5a｜escrow・評価内蔵', en: '5a | embedded escrow & reputation', zh: '5a｜内置 escrow・评价' },
         links: [
           {
             label: 'Virtuals ACP',
@@ -195,7 +219,7 @@ const CLASSES: Block[] = [
         ],
       },
       {
-        sub: { ja: '5b｜単一identityへ集約', en: '5b | consolidated onto one identity' },
+        sub: { ja: '5b｜単一identityへ集約', en: '5b | consolidated onto one identity', zh: '5b｜汇聚到单一 identity' },
         links: [{ label: 'OKX AI', href: 'https://www.okx.com/en-us/learn/okx-ai' }],
       },
     ],
@@ -206,34 +230,37 @@ const COMPOSITE: Block[] = [
   {
     badge: '型α',
     cls: 'Class 1 + 4',
-    name: { ja: '内部起点・外部決済', en: 'Internal origin, external settlement' },
+    name: { ja: '内部起点・外部決済', en: 'Internal origin, external settlement', zh: '内部发起・外部支付' },
     desc: {
       ja: '起案は社内エージェント、決済は外部へper-callで抜ける。',
       en: 'An internal agent originates; settlement leaves externally, per-call.',
+      zh: '由内部智能体发起，支付则以 per-call 方式流向外部。',
     },
-    groups: [{ sub: { ja: '', en: '' }, links: [{ label: 'Hermes Agent', href: 'https://note.com/x402inc/n/nb69d33331327' }] }],
+    groups: [{ sub: { ja: '', en: '', zh: '' }, links: [{ label: 'Hermes Agent', href: 'https://note.com/x402inc/n/nb69d33331327' }] }],
   },
   {
     badge: '型β',
     cls: 'Class 3 / 4 境界',
-    name: { ja: '機械主体・カード', en: 'Machine-led, on a card' },
+    name: { ja: '機械主体・カード', en: 'Machine-led, on a card', zh: '机器主导・银行卡' },
     desc: {
       ja: '機械が主体的に動くが、決済はカード網に載る。3と4の境界。',
       en: 'The machine acts autonomously, but settlement rides card rails — the 3/4 boundary.',
+      zh: '机器自主行动，但支付走银行卡网络。处于3与4的边界。',
     },
-    groups: [{ sub: { ja: '', en: '' }, links: [{ label: 'Oobit', href: 'https://note.com/x402inc/n/na798062b2b1a' }] }],
+    groups: [{ sub: { ja: '', en: '', zh: '' }, links: [{ label: 'Oobit', href: 'https://note.com/x402inc/n/na798062b2b1a' }] }],
   },
   {
     badge: '型P',
     cls: 'Class 3 + 4',
-    name: { ja: '決済オプション併設', en: 'x402 as a payment option' },
+    name: { ja: '決済オプション併設', en: 'x402 as a payment option', zh: '并设支付选项' },
     desc: {
       ja: '既存のcheckoutに、決済オプションの一つとしてx402を併設する。',
       en: 'x402 offered alongside an existing checkout as one payment option.',
+      zh: '在现有 checkout 中，将 x402 作为支付选项之一并行提供。',
     },
     groups: [
       {
-        sub: { ja: '', en: '' },
+        sub: { ja: '', en: '', zh: '' },
         links: [
           { label: 'Stripe Machine Payments', href: 'https://docs.stripe.com/agentic-commerce' },
           {
@@ -250,16 +277,16 @@ const COMPOSITE: Block[] = [
 
 const GAPS: { axis: Localized; gap: Localized }[] = [
   {
-    axis: { ja: '4c｜配布型の反復', en: '4c | distributed, repeated' },
-    gap: { ja: '反復のper-callが継続する受け口', en: 'endpoints where repeated per-call persists' },
+    axis: { ja: '4c｜配布型の反復', en: '4c | distributed, repeated', zh: '4c｜分发型的重复调用' },
+    gap: { ja: '反復のper-callが継続する受け口', en: 'endpoints where repeated per-call persists', zh: '重复 per-call 得以持续的受理端' },
   },
   {
-    axis: { ja: '5b｜単一identity集約', en: '5b | consolidated identity' },
-    gap: { ja: '外部の実需を受発注につなぐ層', en: 'a layer wiring external demand into order flow' },
+    axis: { ja: '5b｜単一identity集約', en: '5b | consolidated identity', zh: '5b｜单一 identity 汇聚' },
+    gap: { ja: '外部の実需を受発注につなぐ層', en: 'a layer wiring external demand into order flow', zh: '将外部实际需求对接到订单收发的层' },
   },
 ]
 
-function Chip({ link, lang }: { link: Link; lang: 'ja' | 'en' }) {
+function Chip({ link, lang }: { link: Link; lang: Lang }) {
   return (
     <a
       href={link.href}
@@ -288,7 +315,7 @@ function BlockDetail({ block, lang }: { block: Block; lang: Lang }) {
           className="text-[11px] font-mono px-2 py-0.5 rounded-full border"
           style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.4)' }}
         >
-          {block.cls}
+          {clsLabel(block.cls, lang)}
         </span>
       </div>
       <h3 className="mt-3 text-base font-semibold text-fg">{block.name[lang]}</h3>
@@ -312,7 +339,7 @@ function BlockFace({ block, lang }: { block: Block; lang: Lang }) {
     <span className="flex h-full flex-col items-center justify-center gap-1">
       <span className="flex items-center gap-1.5">
         <span className="text-[11px] font-mono font-semibold text-gold">{block.badge}</span>
-        <span className="text-[10px] font-mono text-fg/45">{block.cls}</span>
+        <span className="text-[10px] font-mono text-fg/45">{clsLabel(block.cls, lang)}</span>
       </span>
       <span className="text-[13px] font-semibold leading-[1.4] text-fg">{block.name[lang]}</span>
     </span>
