@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
-import { useLang, type Localized } from '../i18n'
+import { useLang, type Lang, type Localized } from '../i18n'
 
 /* Home: x402 docs from Stripe, Cloudflare and the x402 Foundation, side by
    side under the x402 Endpoint lead-in. Images are each page's share image
@@ -12,21 +12,21 @@ const DOCS: Doc[] = [
   {
     img: '/docs-links/stripe-x402.png',
     title: 'Stripe Docs — x402',
-    desc: { ja: 'x402 でエージェントからの支払いを受け付ける', en: 'Use x402 to accept payments from agents' },
+    desc: { ja: 'x402 でエージェントからの支払いを受け付ける', en: 'Use x402 to accept payments from agents', zh: '使用 x402 接收来自智能体的支付' },
     host: 'docs.stripe.com',
     href: 'https://docs.stripe.com/payments/machine/x402',
   },
   {
     img: '/docs-links/cloudflare-x402.png',
     title: 'Cloudflare Agents — x402',
-    desc: { ja: 'Cloudflare の Agents で x402 の支払いを扱う', en: 'Handle x402 payments with Cloudflare Agents' },
+    desc: { ja: 'Cloudflare の Agents で x402 の支払いを扱う', en: 'Handle x402 payments with Cloudflare Agents', zh: '用 Cloudflare 的 Agents 处理 x402 支付' },
     host: 'developers.cloudflare.com',
     href: 'https://developers.cloudflare.com/agents/tools/payments/x402/',
   },
   {
     img: '/docs-links/x402-foundation.jpg',
     title: 'x402 Foundation',
-    desc: { ja: 'x402 の仕様と、Linux Foundation 傘下の x402 Foundation', en: 'The x402 standard and the x402 Foundation under the Linux Foundation' },
+    desc: { ja: 'x402 の仕様と、Linux Foundation 傘下の x402 Foundation', en: 'The x402 standard and the x402 Foundation under the Linux Foundation', zh: 'x402 规范，以及 Linux Foundation 旗下的 x402 Foundation' },
     host: 'x402.org',
     href: 'https://x402.org/',
   },
@@ -36,7 +36,7 @@ export function DocsLinks() {
   const { lang } = useLang()
   return (
     <div className="relative max-w-5xl mx-auto px-6 mt-16 md:mt-20">
-      <p className="text-xs tracking-widest text-gold">{lang === 'ja' ? 'x402 のドキュメント' : 'x402 docs'}</p>
+      <p className="text-xs tracking-widest text-gold">{({ ja: 'x402 のドキュメント', en: 'x402 docs', zh: 'x402 文档' } satisfies Record<Lang, string>)[lang]}</p>
       <div className="mt-5 grid gap-5 md:grid-cols-3">
         {DOCS.map((d, k) => (
           <motion.a

@@ -40,6 +40,14 @@ const COPY = {
     note: '1P is served from the company’s own domain; 3P is resold through a payment gateway.',
     cta: 'See everything on x402 Endpoint',
   },
+  zh: {
+    eyebrow: 'x402 Endpoint',
+    title: '智能体可安全付费的 API，尽在一个目录',
+    lead: '从市场上已在使用的 356 个服务（33,881 个端点）中摘选排名靠前者（2026年11月8日更新）。',
+    endpoints: '个端点',
+    note: '1P 指由公司自有域名提供，3P 指经由支付网关提供。',
+    cta: '在 x402 Endpoint 查看全部',
+  },
 }
 
 function Logo({ r }: { r: Row }) {

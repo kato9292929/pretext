@@ -41,12 +41,31 @@ const COPY = {
     contact: 'Contact',
     rights: '© 2026 x402 Inc.',
   },
+  zh: {
+    company: 'x402株式会社',
+    addressLabel: '地址',
+    address: '日本东京都港区浜松町2丁目2番15号 浜松町Dia大厦2F',
+    ceoLabel: '代表董事',
+    ceo: '加藤雅人',
+    corpLabel: '法人编号',
+    corp: '7010401194879',
+    memberLabel: '加盟团体',
+    members: [
+      '日本加密资产商业协会（JCBA）准会员（2026年9月4日）',
+      '日本区块链协会（JBA）白银会员（2026年9月25日）',
+      '日本金融科技协会（Fintech協会）创业企业会员（2026年10月14日）',
+      '区块链推进协会（BCCC）（2026年10月30日）',
+    ],
+    siteLabel: 'Pages',
+    contact: 'Contact',
+    rights: '© 2026 x402株式会社',
+  },
 }
 
 const LEGAL: { label: Localized; href: string }[] = [
-  { label: { ja: 'プライバシーポリシー', en: 'Privacy Policy' }, href: '/privacy.html' },
-  { label: { ja: '免責事項', en: 'Disclaimer' }, href: '/disclaimer.html' },
-  { label: { ja: '情報セキュリティ基本方針', en: 'Information Security Policy' }, href: '/security.html' },
+  { label: { ja: 'プライバシーポリシー', en: 'Privacy Policy', zh: '隐私政策' }, href: '/privacy.html' },
+  { label: { ja: '免責事項', en: 'Disclaimer', zh: '免责声明' }, href: '/disclaimer.html' },
+  { label: { ja: '情報セキュリティ基本方針', en: 'Information Security Policy', zh: '信息安全基本方针' }, href: '/security.html' },
 ]
 
 export function Footer() {

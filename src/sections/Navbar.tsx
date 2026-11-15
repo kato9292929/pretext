@@ -35,6 +35,7 @@ function LangToggle() {
     <div className="flex items-center gap-0.5 rounded-full border border-fg/15 p-0.5 text-xs font-medium">
       {opt('ja', 'JP')}
       {opt('en', 'EN')}
+      {opt('zh', '中文')}
     </div>
   )
 }
@@ -114,7 +115,7 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               className="flex items-center justify-between px-4 py-3 rounded-xl text-gold text-base font-semibold hover:bg-fg/5 transition-colors"
             >
-              {lang === 'ja' ? 'お問い合わせ' : 'Contact'}
+              {({ ja: 'お問い合わせ', en: 'Contact', zh: '联系我们' } satisfies Record<Lang, string>)[lang]}
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </motion.div>

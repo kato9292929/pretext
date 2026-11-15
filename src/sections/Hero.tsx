@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { CONTACT_EMAIL, Pill, gradientStyle } from '../primitives'
-import { useLang } from '../i18n'
+import { useLang, type Lang } from '../i18n'
 // LogoMarquee is hidden for now; logos will move into Products.
 
 export function Hero() {
@@ -25,7 +25,7 @@ export function Hero() {
         transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="mt-10 flex items-center gap-3"
       >
-        <Pill label={lang === 'ja' ? 'お問い合わせ' : 'Contact'} href={`mailto:${CONTACT_EMAIL}`} gold />
+        <Pill label={({ ja: 'お問い合わせ', en: 'Contact', zh: '联系我们' } satisfies Record<Lang, string>)[lang]} href={`mailto:${CONTACT_EMAIL}`} gold />
       </motion.div>
     </section>
   )

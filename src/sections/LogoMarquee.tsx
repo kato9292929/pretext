@@ -1,4 +1,4 @@
-import { useLang } from '../i18n'
+import { useLang, type Lang } from '../i18n'
 
 /* Chains and payment infrastructure we actually settle on or have implemented.
    Logos are the official files from each brand's page (public/logos/marquee/,
@@ -70,7 +70,11 @@ function Entry({ item }: { item: Item }) {
 
 export function LogoMarquee() {
   const { lang } = useLang()
-  const label = lang === 'ja' ? '対応チェーンと利用中の決済基盤' : 'Supported chains and payment infrastructure in use'
+  const label = ({
+    ja: '対応チェーンと利用中の決済基盤',
+    en: 'Supported chains and payment infrastructure in use',
+    zh: '支持的链与正在使用的支付基础设施',
+  } satisfies Record<Lang, string>)[lang]
   return (
     <div className="mt-14 w-full max-w-5xl">
       <p className="text-[11px] tracking-widest text-fg/45">{label}</p>

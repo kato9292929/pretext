@@ -16,6 +16,11 @@ const COPY = {
     intro: 'Free endpoints can be called directly. Paid ones return 402 on the first request; pay in USDC and re-request the same URL.',
     link: 'See all endpoints',
   },
+  zh: {
+    label: 'How to pay on x402',
+    intro: '免费端点可直接调用。付费端点在首次请求时返回 402，用 USDC 支付后向同一 URL 再次请求即可。',
+    link: '查看端点列表',
+  },
 }
 
 export function HowToPay() {

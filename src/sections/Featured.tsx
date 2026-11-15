@@ -24,22 +24,25 @@ type Product = {
 const INTRO: Localized = {
   ja: 'x402 Inc.は、エージェント決済に関するリサーチと関連インフラ・データの開発提供を行う会社です。x402対応エンドポイントのデータカタログ、自律エージェントによるステーブルコイン決済、オルタナティブデータ生成の3事業を展開。クレジットカードやステーブルコインなど各市場セグメントにおける市場調査を日次で公開し、エージェンティックコマース市場の形成に貢献することを目指しています。',
   en: 'x402 Inc. researches agent payments and develops the related infrastructure and data. We run three businesses: a data catalog of x402-enabled endpoints, stablecoin settlement by autonomous agents, and alternative-data generation. We publish daily market research across segments — credit cards, stablecoins and more — aiming to help form the agentic-commerce market.',
+  zh: 'x402 Inc. 是一家从事智能体支付相关研究、并开发提供相关基础设施与数据的公司。公司开展三项业务：x402 兼容端点的数据目录、由自主智能体进行的稳定币支付，以及另类数据生成。我们每日发布信用卡、稳定币等各市场细分领域的市场调研，致力于推动 Agentic Commerce 市场的形成。',
 }
 
 const LABELS = {
   ja: { visit: 'サイトを見る', soon: '準備中', hint: '各プロダクトにカーソルを合わせると詳細が表示されます' },
   en: { visit: 'Visit site', soon: 'Coming soon', hint: 'Hover a product to see its details' },
+  zh: { visit: '访问网站', soon: '筹备中', hint: '将光标悬停在各产品上即可查看详情' },
 }
 
 const PRODUCTS: Product[] = [
   {
     key: 'rfq',
-    tag: { ja: '04 · MARKET（E5）', en: '04 · MARKET (E5)' },
+    tag: { ja: '04 · MARKET（E5）', en: '04 · MARKET (E5)', zh: '04 · MARKET（E5）' },
     name: 'x402 RFQ Market',
     badge: 'Solana devnet',
     desc: {
       ja: '1つのエージェントが依頼し、複数の売り手が見積もりを返し、最適な1社が選ばれる見積もり依頼（RFQ）市場です。x402 Endpoint の売り手、自社データ商品、x402 Autonomous Agent の間に置き、買い手が売り手を比べて選べるようにします。\n\n買い手は欲しいデータ・上限価格・必要な速さを提示し、売り手が価格を返します。十分に速い中で最も安い売り手が落札し、Solana上のUSDCで支払われます。結果は「配信済み」か「何が失敗したか」としてSolana上に記録され、その記録が売り手を選ぶ基準になります。手数料は落札価格の1%です。現在はSolana devnetで稼働しており、参加者はすべて当社のエージェントです。mainnet 公開は Solana の rent 引き下げ（Agave 4.4）後の2026年11月です。',
       en: 'A request-for-quote (RFQ) market: one agent asks, many sellers answer, and the best one wins. It sits between the sellers in x402 Endpoint, our own data products and x402 Autonomous Agent, so buyers can compare sellers instead of paying whatever price is listed.\n\nThe buyer posts what data it wants, the most it will pay and how fast it needs it; sellers quote a price. The cheapest seller that is fast enough wins and is paid in USDC on Solana. The result — delivered, or what went wrong — is recorded on Solana, and that record is how agents choose who to buy from. The market takes 1% of the winning price. It runs on Solana devnet today, and every buyer and seller is one of our own agents. Mainnet launch is in November 2026, after Solana’s rent reduction (Agave 4.4).',
+      zh: '这是一个询价（RFQ）市场：由一个智能体发出请求，多个卖方返回报价，并从中选出最优的一家。它位于 x402 Endpoint 的卖方、自有数据产品与 x402 Autonomous Agent 之间，使买方能够比较并选择卖方。\n\n买方提出所需数据、价格上限和所需速度，卖方报价。在速度足够快的卖方中报价最低者中标，并以 Solana 上的 USDC 获得支付。结果以“已交付”或“哪里失败”的形式记录在 Solana 上，该记录将成为选择卖方的依据。手续费为中标价格的 1%。目前在 Solana devnet 上运行，参与者均为本公司的智能体。mainnet 将在 Solana 下调 rent（Agave 4.4）之后，于2026年11月上线。',
     },
     image: '/products/rfq.jpg',
     live: 'https://rfq.x402jp.com/',
@@ -47,12 +50,13 @@ const PRODUCTS: Product[] = [
   },
   {
     key: 'endpoint',
-    tag: { ja: '01 · MAP（発見）', en: '01 · MAP (Discovery)' },
+    tag: { ja: '01 · MAP（発見）', en: '01 · MAP (Discovery)', zh: '01 · MAP（发现）' },
     name: 'x402 Endpoint',
     badge: 'HTTP/1.1 402 ✓',
     desc: {
       ja: 'x402 Endpoint は、x402エコシステムに関連した公開カタログを毎日取得し、エンドポイント・ホスト・カテゴリ・価格帯・取引ランキングを日次スナップショットとして保存しています。2026年10月19日時点で161,826エンドポイント・13,701ホストを対象としており、最近ではホスト名が企業の管理ドメイン配下にあるかを判定し、その企業自身の出品と、他社名を掲げた再販・ラッパーを区別しています。\n\n毎週、出品側（カタログ）と利用側（取引・ランキング）の両方から推移を分析し、数値の出所、取得方法、インサイトを発信。2026年6月上旬からの件数、カテゴリ、ホスト構成の推移を時系列で確認できるほか、REST APIとMCPサーバーを通じて配信しており、AIエージェントが直接データを読み取れます。',
       en: 'x402 Endpoint pulls the public catalogs of the x402 ecosystem every day and stores endpoints, hosts, categories, price ranges and transaction rankings as daily snapshots. As of Oct 19, 2026 it covers 161,826 endpoints across 13,701 hosts. Recently it has started checking whether a hostname sits under a company’s own managed domain, separating a company’s own listings from resellers and wrappers that carry another company’s name.\n\nEvery week we analyze the trends from both the supply side (catalog) and the demand side (transactions and rankings), and publish where the numbers come from, how they were collected, and what they show. You can follow counts, categories and host composition as a time series from early June 2026, and the data is served over a REST API and an MCP server so AI agents can read it directly.',
+      zh: 'x402 Endpoint 每天抓取 x402 生态相关的公开目录，并将端点、主机、类别、价格区间和交易排名保存为每日快照。截至2026年10月19日，覆盖 161,826 个端点、13,701 个主机。近期开始判断主机名是否位于企业自有管理域名之下，从而区分企业自身的上架与打着其他公司名义的转售和封装（wrapper）。\n\n我们每周从供给侧（目录）和需求侧（交易与排名）两方面分析变化趋势，并发布数据来源、获取方法和洞察。可按时间序列查看自2026年6月上旬以来的数量、类别和主机构成的变化；数据还通过 REST API 和 MCP 服务器提供，AI 智能体可直接读取。',
     },
     image: '/products/endpoint.jpg',
     live: 'https://endpoint.x402jp.com/',
@@ -63,12 +67,13 @@ const PRODUCTS: Product[] = [
   },
   {
     key: 'aa',
-    tag: { ja: '02 · CONSUME（消費）', en: '02 · CONSUME (Consumption)' },
+    tag: { ja: '02 · CONSUME（消費）', en: '02 · CONSUME (Consumption)', zh: '02 · CONSUME（消费）' },
     name: 'x402 Autonomous Agent',
     badge: 'Railway ✓',
     desc: {
       ja: 'オンチェーンID（ERC-8004 agentId：55560 on Base／845265 on Arc Testnet）を持つ自律エージェントです。毎朝06:00 JSTにデータをper-callで購入し、その日の判断を追記専用の記録として残しています。決済はSolanaおよびBase上のUSDCで1コールごとにオンチェーン完結し、署名は両チェーンともCircle Developer-Controlled Walletsが行います。\n\n自社エンドポイントの日次購入に加え、週次で外部売り手にも実払いしており、現在の支払い先は外部6先です。前者は決済スタックが日次でend-to-endに稼働することの実証であり、後者は境界をまたいで実際に買えることの確認です。いずれも当社が買い手であり、外部需要の観測ではありません。売買執行には接続せず、週次の高額データ購入前にはWorld IDによる人間の承認を必須とするなど、エージェントへの委任範囲を人間が管理する設計も実装しています。Arc Testnetでは、ERC-8004のReputationとValidationも記録済みです。',
       en: 'An autonomous agent with an on-chain identity (ERC-8004 agentId: 55560 on Base / 845265 on Arc Testnet). Every morning at 06:00 JST it buys data per-call and records the day’s decision as an append-only log. Each call settles on-chain in USDC on Solana and Base, and Circle Developer-Controlled Wallets sign on both chains.\n\nOn top of daily purchases from our own endpoints, it also makes real weekly payments to external sellers — currently 6 of them. The former shows the payment stack running end-to-end every day; the latter confirms it can actually buy across the boundary. In both cases we are the buyer, so this is not a measure of external demand. It is not connected to trade execution, and humans control the scope delegated to the agent — for example, a World ID human approval is required before weekly high-value data purchases. On Arc Testnet, ERC-8004 Reputation and Validation have also been recorded.',
+      zh: '这是一个拥有链上身份（ERC-8004 agentId：Base 上为 55560／Arc Testnet 上为 845265）的自主智能体。它每天早上 06:00 JST 以 per-call 方式购买数据，并将当天的判断记录为仅追加的日志。支付以 Solana 和 Base 上的 USDC 逐次在链上完成，两条链上的签名均由 Circle Developer-Controlled Wallets 执行。\n\n除每日从自有端点购买外，它每周还向外部卖方进行真实支付，目前支付对象为 6 家外部卖方。前者验证支付栈每天端到端运行，后者确认其能够跨越边界实际完成购买。两种情况下买方都是本公司，因此并非对外部需求的观测。它不接入交易执行，并实现了由人类管理委托给智能体范围的设计，例如在每周购买高价数据前，必须通过 World ID 获得人类授权。在 Arc Testnet 上，ERC-8004 的 Reputation 与 Validation 也已完成记录。',
     },
     image: '/products/aa.png',
     live: 'https://aa.x402jp.com/',
@@ -79,12 +84,13 @@ const PRODUCTS: Product[] = [
   },
   {
     key: 'osd',
-    tag: { ja: '03 · PRODUCE（データ生成）', en: '03 · PRODUCE (Data production)' },
+    tag: { ja: '03 · PRODUCE（データ生成）', en: '03 · PRODUCE (Data production)', zh: '03 · PRODUCE（数据生成）' },
     name: 'Onchain Stock Data',
     badge: 'HTTP/1.1 402 ✓',
     desc: {
       ja: 'Claudeを用いて毎週、米国株・日本株を10銘柄ずつ選定し、各銘柄に期限を定めた1か月のカタリスト（検証可能な予測条件）を付与しています。期限到来後には、決算・適時開示などの一次情報と突き合わせ、hit / partial / miss を機械的に採点します。現在までに83件の判定が確定しており、内訳は hit 39 / partial 28 / miss 16 です。記録は上書き・削除せずGitに追記し、積み上がるtrack recordそのものが希少性の高いデータとなるよう設計しています。\n\n日本株では、EDINETで開示を行う企業約4,000社を母集団に197社を選定しました。このうち13社には日付と成立条件を確定させたカタリストを付与済みで、per-callで取得できる形で提供しています。MCP経由ではClaudeやChatGPTから自然言語で参照でき、x402のper-call決済ではエージェントが自律的にデータを購入できます。\n\n本サービスはファンドではなく、リサーチおよびセレクションのためのデータサービスです。本データはAIの予測精度を検証する記録であり、投資助言を目的とするものではありません。投資判断は利用者自身の責任で行ってください。',
       en: 'Each week we use Claude to select 10 US and 10 Japanese stocks and attach a one-month, time-boxed catalyst (a verifiable forecast condition) to each. Once the deadline passes, the catalyst is checked against primary sources such as earnings and timely disclosures and mechanically scored hit / partial / miss. 83 verdicts have been finalized so far: hit 39 / partial 28 / miss 16. Records are never overwritten or deleted but appended to Git, so the growing track record itself becomes scarce, high-value data.\n\nFor Japanese stocks, we selected 197 companies from a universe of roughly 4,000 that file on EDINET. 13 of them already carry catalysts with a fixed date and success condition, available per-call. Via MCP, Claude and ChatGPT can query it in natural language, and with x402 per-call payments agents can buy the data autonomously.\n\nThis service is not a fund; it is a data service for research and selection. The data is a record for verifying AI forecast accuracy and is not investment advice. Investment decisions are your own responsibility.',
+      zh: '我们每周使用 Claude 分别选出 10 只美股和 10 只日股，并为每只股票设定一个有明确期限的一个月催化剂（可验证的预测条件）。到期后，将其与财报、适时披露等一手信息进行比对，按 hit / partial / miss 机械评分。迄今已确定 83 项判定，其中 hit 39 / partial 28 / miss 16。记录不覆盖、不删除，而是追加到 Git 中，使不断积累的 track record 本身成为高稀缺性的数据。\n\n日股方面，以在 EDINET 进行披露的约 4,000 家企业为总体，选出 197 家。其中 13 家已设定日期和成立条件均已确定的催化剂，并以可按 per-call 获取的形式提供。通过 MCP 可从 Claude 或 ChatGPT 以自然语言查询，借助 x402 的 per-call 支付，智能体可自主购买数据。\n\n本服务并非基金，而是用于研究和选股的数据服务。本数据是用于验证 AI 预测准确度的记录，并非以投资建议为目的。投资决策请由用户自行负责。',
     },
     image: '/products/osd.png',
     live: 'https://osd.x402jp.com/',
@@ -95,12 +101,13 @@ const PRODUCTS: Product[] = [
   },
   {
     key: 'jin',
-    tag: { ja: '03 · PRODUCE（データ生成）', en: '03 · PRODUCE (Data production)' },
+    tag: { ja: '03 · PRODUCE（データ生成）', en: '03 · PRODUCE (Data production)', zh: '03 · PRODUCE（数据生成）' },
     name: 'Japan Inflation Nowcall',
     badge: 'HTTP/1.1 402 ✓',
     desc: {
       ja: '東京の中堅スーパーマーケット1店舗の店頭価格を定点で記録し、独自の食品物価指数として提供するサービスです。指数は固定基準日（2026-06-04 = 100）に対する同一SKUの価格相対を取り、中分類ごとにJevons幾何平均で基礎集計したうえで、10カテゴリを等加重して上位集計します。価格はパックサイズや単位の違いを吸収した正準単価（¥/100g・¥/100ml・¥/個）に揃えてから比較するため、内容量の変更は値上げとして正しく拾われます。\n\n特売の扱いは2系列に分けており、基調となる excl_promo は基準日または当日に特売フラグの付いたSKUを除外し、incl_promo は特売を含めたまま集計します。配信はx402（Solana / USDC）です。latest は無料で、指数値・matched数・カバレッジ注記・方法論を返します。series は全履歴、movers はその日に動いた品目の内訳で、いずれも per-call で購入できます。価格は series が $0.01、movers が $0.02 です。',
       en: 'A proprietary food price index built from fixed-point records of shelf prices at one mid-sized Tokyo supermarket. The index takes same-SKU price relatives against a fixed base date (2026-06-04 = 100), aggregates them per sub-category with a Jevons geometric mean, then combines 10 categories with equal weights. Prices are first normalized to canonical unit prices (¥/100g, ¥/100ml, ¥/item) that absorb differences in pack size and unit, so shrinkflation is correctly captured as a price increase.\n\nSales are handled as two series: the core excl_promo excludes SKUs flagged as on sale on the base date or the current day, while incl_promo keeps sales in. Delivery is via x402 (Solana / USDC). latest is free and returns the index value, matched count, coverage notes and methodology. series (full history) and movers (the items that moved that day) are purchasable per-call at $0.01 and $0.02 respectively.',
+      zh: '这是一项在东京一家中型超市定点记录货架价格，并作为独有食品物价指数提供的服务。指数以固定基准日（2026-06-04 = 100）为基准，取同一 SKU 的价格比，按中类以 Jevons 几何平均进行基础汇总，再对 10 个类别等权重进行上层汇总。价格先统一为消除包装规格和单位差异的标准单价（¥/100g・¥/100ml・¥/个）再进行比较，因此内容量的减少会被正确识别为涨价。\n\n促销分为两个系列处理：作为基础趋势的 excl_promo 剔除在基准日或当天带有促销标记的 SKU，incl_promo 则包含促销进行汇总。通过 x402（Solana / USDC）提供。latest 免费，返回指数值、matched 数、覆盖说明和方法论。series 为全部历史数据，movers 为当天发生变动的品目明细，二者均可按 per-call 购买。价格为 series $0.01、movers $0.02。',
     },
     image: '/products/jin.png',
     live: 'https://jin.x402jp.com/',
@@ -108,12 +115,13 @@ const PRODUCTS: Product[] = [
   },
   {
     key: 'probe',
-    tag: { ja: '04 · MARKET（E4）', en: '04 · MARKET (E4)' },
+    tag: { ja: '04 · MARKET（E4）', en: '04 · MARKET (E4)', zh: '04 · MARKET（E4）' },
     name: 'x402 Seller Probe',
     badge: 'probe.x402jp.com',
     desc: {
       ja: 'x402 の売り手が本当に動くかを、当社のエージェントが毎日外から測っています。402 の形式から決済、納品まで。結果はホストごとのスコアとして、算出式ごと公開します。スコアは x402 RFQ Market で売り手を比べる材料になります。',
       en: 'Our agents measure, every day and from the outside, whether x402 sellers actually work — from the shape of the 402 to payment and delivery. Results are published as a per-host score, together with the formula. The score feeds into comparing sellers on x402 RFQ Market.',
+      zh: '本公司的智能体每天从外部检测 x402 卖方是否真正可用：从 402 的格式到支付、交付。结果以每个主机的评分形式连同计算公式一并公开。该评分将作为在 x402 RFQ Market 上比较卖方的依据。',
     },
     image: '/products/probe.jpg',
     live: 'https://probe.x402jp.com/',
@@ -123,20 +131,20 @@ const PRODUCTS: Product[] = [
 /* ── Node faces (short lines shown inside the diagram boxes) ─────────────── */
 
 const FACE: Record<Key, { sub: Localized[] }> = {
-  endpoint: { sub: [{ ja: '161,826 エンドポイント・13,701 ホスト', en: '161,826 endpoints · 13,701 hosts' }] },
-  aa: { sub: [{ ja: '毎朝 06:00 JST に per-call で購入する買い手', en: 'A buyer that pays per-call every morning at 06:00 JST' }] },
-  osd: { sub: [{ ja: 'x402 で売る自社データ：カタリスト採点', en: 'Our data on x402: catalyst scoring' }] },
-  jin: { sub: [{ ja: 'x402 で売る自社データ：食品物価指数', en: 'Our data on x402: food price index' }] },
+  endpoint: { sub: [{ ja: '161,826 エンドポイント・13,701 ホスト', en: '161,826 endpoints · 13,701 hosts', zh: '161,826 个端点・13,701 个主机' }] },
+  aa: { sub: [{ ja: '毎朝 06:00 JST に per-call で購入する買い手', en: 'A buyer that pays per-call every morning at 06:00 JST', zh: '每天早上 06:00 JST 以 per-call 方式购买的买方' }] },
+  osd: { sub: [{ ja: 'x402 で売る自社データ：カタリスト採点', en: 'Our data on x402: catalyst scoring', zh: '在 x402 上出售的自有数据：催化剂评分' }] },
+  jin: { sub: [{ ja: 'x402 で売る自社データ：食品物価指数', en: 'Our data on x402: food price index', zh: '在 x402 上出售的自有数据：食品物价指数' }] },
   rfq: {
     sub: [
-      { ja: '買い手が条件を出し売り手が競う市場（E5）', en: 'Buyers post conditions, sellers compete (E5)' },
-      { ja: 'devnet 稼働中・2026 年 11 月 mainnet', en: 'Live on devnet · mainnet Nov 2026' },
+      { ja: '買い手が条件を出し売り手が競う市場（E5）', en: 'Buyers post conditions, sellers compete (E5)', zh: '买方提出条件、卖方竞争的市场（E5）' },
+      { ja: 'devnet 稼働中・2026 年 11 月 mainnet', en: 'Live on devnet · mainnet Nov 2026', zh: 'devnet 运行中・2026年11月上线 mainnet' },
     ],
   },
   probe: {
     sub: [
-      { ja: '売り手の 402・決済・納品を外から測る（E4）', en: 'Measures sellers’ 402, payment and delivery from outside (E4)' },
-      { ja: 'probe.x402jp.com 公開・本番測定開始', en: 'probe.x402jp.com live · production measurement started' },
+      { ja: '売り手の 402・決済・納品を外から測る（E4）', en: 'Measures sellers’ 402, payment and delivery from outside (E4)', zh: '从外部检测卖方的 402・支付・交付（E4）' },
+      { ja: 'probe.x402jp.com 公開・本番測定開始', en: 'probe.x402jp.com live · production measurement started', zh: 'probe.x402jp.com 已公开・正式检测已开始' },
     ],
   },
 }
@@ -156,6 +164,17 @@ const STATUS_EN: Record<Status, string> = {
   整理: 'Mapped',
   導入中: 'Rolling out',
 }
+const STATUS_ZH: Record<Status, string> = {
+  完了: '已完成',
+  稼働中: '运行中',
+  準備完了: '准备就绪',
+  計測準備: '检测准备中',
+  計測設計: '检测设计中',
+  実証案: '试点方案',
+  基準案: '标准草案',
+  整理: '已梳理',
+  導入中: '导入中',
+}
 
 type Poc = {
   id: string
@@ -172,99 +191,99 @@ const gh = (repo: string): ProductLink => ({ label: `GitHub · ${repo}`, href: `
 
 const POCS: PocGroup[] = [
   {
-    title: { ja: 'x402 Autonomous Agent に組み込む実証', en: 'Built into x402 Autonomous Agent' },
+    title: { ja: 'x402 Autonomous Agent に組み込む実証', en: 'Built into x402 Autonomous Agent', zh: '嵌入 x402 Autonomous Agent 的验证试点' },
     align: 'left',
     rows: [
       {
         id: 'sweep',
-        name: { ja: '外部売り手への週次 sweep', en: 'Weekly sweep of external sellers' },
-        sub: { ja: '外部6先・第43週 $0.014', en: '6 external sellers · week 43: $0.014' },
+        name: { ja: '外部売り手への週次 sweep', en: 'Weekly sweep of external sellers', zh: '对外部卖方的每周 sweep' },
+        sub: { ja: '外部6先・第43週 $0.014', en: '6 external sellers · week 43: $0.014', zh: '外部6家・第43周 $0.014' },
         status: '稼働中',
-        note: { ja: '外部6先・第43週 $0.014', en: '6 external sellers · week 43: $0.014' },
+        note: { ja: '外部6先・第43週 $0.014', en: '6 external sellers · week 43: $0.014', zh: '外部6家・第43周 $0.014' },
         links: [note('https://note.com/x402inc/n/n35a9a3fd25de')],
       },
       {
         id: 'hermes',
-        name: { ja: 'Hermes mpp-agent × Exa（MPP）', en: 'Hermes mpp-agent × Exa (MPP)' },
-        sub: { ja: '$0.007 の支払いに4つの上限判定位置', en: 'Four limit-check points on a $0.007 payment' },
+        name: { ja: 'Hermes mpp-agent × Exa（MPP）', en: 'Hermes mpp-agent × Exa (MPP)', zh: 'Hermes mpp-agent × Exa（MPP）' },
+        sub: { ja: '$0.007 の支払いに4つの上限判定位置', en: 'Four limit-check points on a $0.007 payment', zh: '$0.007 的支付设有4个上限判定点' },
         status: '準備完了',
-        note: { ja: '$0.007 の支払いに4つの上限判定', en: 'Four limit checks on a $0.007 payment' },
+        note: { ja: '$0.007 の支払いに4つの上限判定', en: 'Four limit checks on a $0.007 payment', zh: '$0.007 的支付设有4项上限判定' },
         links: [note('https://note.com/x402inc/n/n9bf4a3157b21'), gh('mpp-budget-guard'), gh('Hermes-Agent')],
       },
       {
         id: 'agentcore',
-        name: { ja: 'AWS AgentCore Payments ハーネス', en: 'AWS AgentCore Payments harness' },
-        sub: { ja: 'AC-1〜AC-4・実証案', en: 'AC-1 to AC-4 · proposed' },
+        name: { ja: 'AWS AgentCore Payments ハーネス', en: 'AWS AgentCore Payments harness', zh: 'AWS AgentCore Payments 测试框架' },
+        sub: { ja: 'AC-1〜AC-4・実証案', en: 'AC-1 to AC-4 · proposed', zh: 'AC-1〜AC-4・试点方案' },
         status: '実証案',
-        note: { ja: 'AC-1〜AC-4', en: 'AC-1 to AC-4' },
+        note: { ja: 'AC-1〜AC-4', en: 'AC-1 to AC-4', zh: 'AC-1〜AC-4' },
         links: [note('https://note.com/x402inc/n/n1593a2538d4a')],
       },
       {
         id: 'arcium',
-        name: { ja: 'Arcium MXE 秘匿取引', en: 'Arcium MXE confidential trades' },
-        sub: { ja: '5種類の秘匿取引・計測設計', en: '5 kinds of confidential trades · designing measurement' },
+        name: { ja: 'Arcium MXE 秘匿取引', en: 'Arcium MXE confidential trades', zh: 'Arcium MXE 隐私交易' },
+        sub: { ja: '5種類の秘匿取引・計測設計', en: '5 kinds of confidential trades · designing measurement', zh: '5种隐私交易・检测设计中' },
         status: '計測設計',
-        note: { ja: '5種類の秘匿取引', en: '5 kinds of confidential trades' },
+        note: { ja: '5種類の秘匿取引', en: '5 kinds of confidential trades', zh: '5种隐私交易' },
         links: [note('https://note.com/x402inc/n/na418a03844e9')],
       },
     ],
   },
   {
-    title: { ja: '横断（統制・確認基準・開発体制）', en: 'Cross-cutting (controls, criteria, development)' },
+    title: { ja: '横断（統制・確認基準・開発体制）', en: 'Cross-cutting (controls, criteria, development)', zh: '横向（管控・确认标准・开发体系）' },
     align: 'center',
     rows: [
       {
         id: 'stripe',
-        name: { ja: 'Stripe Approvals デモ', en: 'Stripe Approvals demo' },
-        sub: { ja: '起案と承認の分離（E0）', en: 'Separating proposal and approval (E0)' },
+        name: { ja: 'Stripe Approvals デモ', en: 'Stripe Approvals demo', zh: 'Stripe Approvals 演示' },
+        sub: { ja: '起案と承認の分離（E0）', en: 'Separating proposal and approval (E0)', zh: '发起与审批的分离（E0）' },
         status: '整理',
-        note: { ja: '支出統制9方式の中の位置', en: 'Where it sits among 9 spend-control methods' },
+        note: { ja: '支出統制9方式の中の位置', en: 'Where it sits among 9 spend-control methods', zh: '在9种支出管控方式中的定位' },
         links: [note('https://note.com/x402inc/n/na18368ec5f8c'), gh('ai_backoffice')],
       },
       {
         id: 'wallet',
-        name: { ja: 'ウォレット間決済の確認基準案', en: 'Draft criteria for wallet-to-wallet payments' },
-        sub: { ja: '7製品・8項目', en: '7 products · 8 items' },
+        name: { ja: 'ウォレット間決済の確認基準案', en: 'Draft criteria for wallet-to-wallet payments', zh: '钱包间支付的确认标准草案' },
+        sub: { ja: '7製品・8項目', en: '7 products · 8 items', zh: '7款产品・8个项目' },
         status: '基準案',
-        note: { ja: '7製品・8項目', en: '7 products · 8 items' },
+        note: { ja: '7製品・8項目', en: '7 products · 8 items', zh: '7款产品・8个项目' },
         links: [note('https://note.com/x402inc/n/n07bd1b08bccf')],
       },
       {
         id: 'security',
-        name: { ja: '開発セキュリティ体制', en: 'Development security setup' },
-        sub: { ja: 'Claude Security スキャン〜段階リリース', en: 'Claude Security scans to staged releases' },
+        name: { ja: '開発セキュリティ体制', en: 'Development security setup', zh: '开发安全体系' },
+        sub: { ja: 'Claude Security スキャン〜段階リリース', en: 'Claude Security scans to staged releases', zh: 'Claude Security 扫描〜分阶段发布' },
         status: '導入中',
-        note: { ja: 'Claude Security〜段階リリース', en: 'From Claude Security to staged releases' },
+        note: { ja: 'Claude Security〜段階リリース', en: 'From Claude Security to staged releases', zh: 'Claude Security〜分阶段发布' },
         links: [note('https://note.com/x402inc/n/nfd0e6d606ddf')],
       },
     ],
   },
   {
-    title: { ja: 'OSD・JIN の販売経路の実証', en: 'Sales channels for OSD and JIN' },
+    title: { ja: 'OSD・JIN の販売経路の実証', en: 'Sales channels for OSD and JIN', zh: 'OSD・JIN 销售渠道的验证试点' },
     align: 'right',
     rows: [
       {
         id: 'nevermined',
-        name: { ja: 'Nevermined カード払い 実証1・2', en: 'Nevermined card payments, PoC 1 & 2' },
-        sub: { ja: 'USDC・カードの併売、$0.01 の商品別集計', en: 'USDC and card side by side, $0.01 per-product tally' },
+        name: { ja: 'Nevermined カード払い 実証1・2', en: 'Nevermined card payments, PoC 1 & 2', zh: 'Nevermined 信用卡支付 验证试点1・2' },
+        sub: { ja: 'USDC・カードの併売、$0.01 の商品別集計', en: 'USDC and card side by side, $0.01 per-product tally', zh: 'USDC・信用卡并行销售，$0.01 的按商品统计' },
         status: '計測準備',
-        note: { ja: 'USDC・カードの併売', en: 'Selling with both USDC and card' },
+        note: { ja: 'USDC・カードの併売', en: 'Selling with both USDC and card', zh: 'USDC・信用卡并行销售' },
         links: [note('https://note.com/x402inc/n/n183c24390c12'), gh('poc-dual-checkout'), gh('poc-card-credits')],
       },
       {
         id: 'jpyc',
-        name: { ja: 'JPYC × x402（Polygon）', en: 'JPYC × x402 (Polygon)' },
-        sub: { ja: '円建て per-call 決済', en: 'Yen-denominated per-call payments' },
+        name: { ja: 'JPYC × x402（Polygon）', en: 'JPYC × x402 (Polygon)', zh: 'JPYC × x402（Polygon）' },
+        sub: { ja: '円建て per-call 決済', en: 'Yen-denominated per-call payments', zh: '日元计价的 per-call 支付' },
         status: '完了',
-        note: { ja: '円建て per-call 決済2件（Polygon mainnet）', en: '2 yen-denominated per-call payments (Polygon mainnet)' },
+        note: { ja: '円建て per-call 決済2件（Polygon mainnet）', en: '2 yen-denominated per-call payments (Polygon mainnet)', zh: '日元计价的 per-call 支付2笔（Polygon mainnet）' },
         links: [note('https://note.com/x402inc/n/n6baddc090c6a'), gh('poc-jpyc-x402')],
       },
       {
         id: 'crossmint',
-        name: { ja: 'Crossmint 2経路の購入', en: 'Crossmint purchases via 2 routes' },
-        sub: { ja: 'エージェント用ウォレットとカード・実証案', en: 'Agent wallet and card · proposed' },
+        name: { ja: 'Crossmint 2経路の購入', en: 'Crossmint purchases via 2 routes', zh: 'Crossmint 两种途径的购买' },
+        sub: { ja: 'エージェント用ウォレットとカード・実証案', en: 'Agent wallet and card · proposed', zh: '智能体专用钱包与信用卡・试点方案' },
         status: '実証案',
-        note: { ja: 'ウォレットとカードの2経路', en: 'Wallet and card routes' },
+        note: { ja: 'ウォレットとカードの2経路', en: 'Wallet and card routes', zh: '钱包与信用卡两种途径' },
         links: [note('https://note.com/x402inc/n/n832fe623f599'), gh('poc-crossmint-buyer')],
       },
     ],
@@ -276,48 +295,54 @@ const POCS: PocGroup[] = [
 const STACK_INTRO: Localized = {
   ja: '事業は発見（MAP）・消費（CONSUME）・データ生成（PRODUCE）・市場（MARKET）の4層の instruments で構成されます。いずれも、エコシステムを外から論じるためでなく、内側から観測・検証するために動かしています。',
   en: 'The business is made up of four layers of instruments — discovery (MAP), consumption (CONSUME), data production (PRODUCE) and market (MARKET). We run all of them not to comment on the ecosystem from outside, but to observe and verify it from within.',
+  zh: '业务由发现（MAP）・消费（CONSUME）・数据生成（PRODUCE）・市场（MARKET）四层 instruments 构成。运行它们并非为了从外部评论生态，而是为了从内部观测和验证生态。',
 }
 
 const STACK_CHIPS: Localized<string[]> = {
   ja: ['per-callオンチェーン決済', '検証可能な実績', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
   en: ['Per-call on-chain settlement', 'Verifiable track record', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
+  zh: ['per-call 链上支付', '可验证的业绩记录', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
 }
 
 const STACK: { key: string; label: Localized; title: Localized; items: Localized<string[]> }[] = [
   {
     key: 'MAP',
-    label: { ja: '発見', en: 'Discovery' },
-    title: { ja: 'エンドポイントを日次で収集・正規化', en: 'Collect & normalize endpoints daily' },
+    label: { ja: '発見', en: 'Discovery', zh: '发现' },
+    title: { ja: 'エンドポイントを日次で収集・正規化', en: 'Collect & normalize endpoints daily', zh: '每日收集并规范化端点' },
     items: {
       ja: ['x402対応エンドポイントのカタログ', '何が・いくらで買えるかを観測する'],
       en: ['A catalog of x402-compatible endpoints', 'Observes what can be bought and at what price'],
+      zh: ['x402 兼容端点的目录', '观测能以什么价格买到什么'],
     },
   },
   {
     key: 'CONSUME',
-    label: { ja: '消費', en: 'Consumption' },
-    title: { ja: 'per-callでオンチェーン決済し記録する', en: 'Settle per-call on-chain and record' },
+    label: { ja: '消費', en: 'Consumption', zh: '消费' },
+    title: { ja: 'per-callでオンチェーン決済し記録する', en: 'Settle per-call on-chain and record', zh: '以 per-call 方式链上支付并记录' },
     items: {
       ja: ['ERC-8004 identity を持つエージェント', '取引の形式を検証する instrument'],
       en: ['An agent with an ERC-8004 identity', 'An instrument to verify the form of a transaction'],
+      zh: ['拥有 ERC-8004 identity 的智能体', '验证交易形式的 instrument'],
     },
   },
   {
     key: 'PRODUCE',
-    label: { ja: 'データ生成', en: 'Data production' },
-    title: { ja: '独自データと検証可能な実績を作る', en: 'Produce proprietary data & verifiable records' },
+    label: { ja: 'データ生成', en: 'Data production', zh: '数据生成' },
+    title: { ja: '独自データと検証可能な実績を作る', en: 'Produce proprietary data & verifiable records', zh: '生成独有数据与可验证的业绩记录' },
     items: {
       ja: ['エージェント向けのデータ', '叩かれる側を観測する'],
       en: ['Data built for agents', 'Observes the side being called'],
+      zh: ['面向智能体的数据', '观测被调用的一方'],
     },
   },
   {
     key: 'MARKET',
-    label: { ja: '市場', en: 'Market' },
-    title: { ja: '売り手を比べ、測る場を作る', en: 'Build the place where sellers are compared and measured' },
+    label: { ja: '市場', en: 'Market', zh: '市场' },
+    title: { ja: '売り手を比べ、測る場を作る', en: 'Build the place where sellers are compared and measured', zh: '打造比较和衡量卖方的场所' },
     items: {
       ja: ['買い手が条件を出し、売り手が競う（E5）', '売り手の402・決済・納品を外から測る（E4）'],
       en: ['Buyers post conditions, sellers compete (E5)', 'Measures sellers’ 402, payment and delivery from outside (E4)'],
+      zh: ['买方提出条件，卖方竞争（E5）', '从外部检测卖方的 402・支付・交付（E4）'],
     },
   },
 ]
@@ -336,6 +361,14 @@ const COPY = {
     score: 'score',
     legend: 'Solid lines: live product connections · Dashed boxes: proofs of concept',
     pocs: 'Proofs of concept',
+    stack: 'Agent Stack',
+    stackTag: 'instruments',
+  },
+  zh: {
+    hint: '将光标悬停（或点按）在各产品・验证试点上即可查看详情',
+    score: '评分',
+    legend: '实线：运行中产品的连接　虚线框：验证试点（PoC）',
+    pocs: '验证试点',
     stack: 'Agent Stack',
     stackTag: 'instruments',
   },
@@ -401,7 +434,7 @@ function PocDetail({ poc, lang }: { poc: Poc; lang: Lang }) {
   return (
     <div className="p-5">
       <span className="inline-flex rounded-full border border-gold/40 px-2 py-0.5 text-[11px] text-gold">
-        {lang === 'ja' ? poc.status : STATUS_EN[poc.status]}
+        {lang === 'ja' ? poc.status : lang === 'zh' ? STATUS_ZH[poc.status] : STATUS_EN[poc.status]}
       </span>
       <h3 className="mt-3 text-base font-semibold text-fg">{poc.name[lang]}</h3>
       <p className="mt-2 text-sm text-fg/65 leading-[1.7]">{poc.note[lang]}</p>
@@ -425,10 +458,10 @@ const NODES: { key: Key; x: number; y: number; w: number; h: number; align: 'lef
 ]
 
 const GROUP_LABELS: { before: Key; text: Localized; x: number; y: number; w: number }[] = [
-  { before: 'endpoint', text: { ja: 'MAP（発見）', en: 'MAP (Discovery)' }, x: 0, y: 4, w: 260 },
-  { before: 'aa', text: { ja: 'CONSUME（消費）', en: 'CONSUME (Consumption)' }, x: 280, y: 4, w: 260 },
-  { before: 'osd', text: { ja: 'PRODUCE（データ生成）', en: 'PRODUCE (Data production)' }, x: 560, y: 4, w: 540 },
-  { before: 'rfq', text: { ja: 'MARKET（市場）', en: 'MARKET' }, x: 0, y: 190, w: 105 },
+  { before: 'endpoint', text: { ja: 'MAP（発見）', en: 'MAP (Discovery)', zh: 'MAP（发现）' }, x: 0, y: 4, w: 260 },
+  { before: 'aa', text: { ja: 'CONSUME（消費）', en: 'CONSUME (Consumption)', zh: 'CONSUME（消费）' }, x: 280, y: 4, w: 260 },
+  { before: 'osd', text: { ja: 'PRODUCE（データ生成）', en: 'PRODUCE (Data production)', zh: 'PRODUCE（数据生成）' }, x: 560, y: 4, w: 540 },
+  { before: 'rfq', text: { ja: 'MARKET（市場）', en: 'MARKET', zh: 'MARKET（市场）' }, x: 0, y: 190, w: 105 },
 ]
 
 function Label({ text, style }: { text: string; style?: React.CSSProperties }) {

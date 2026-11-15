@@ -16,6 +16,11 @@ const COPY = {
     body: 'Personal agents such as Muse and Grok have started paying on people’s behalf with Stripe Link. APIs get paid one call at a time over x402. x402 Inc. runs the catalog to find who to pay, and runs the buyer, the sellers and the market itself.',
     cta: 'Read About',
   },
+  zh: {
+    title: 'What’s Agentic Commerce?',
+    body: 'Muse、Grok 等个人智能体已开始通过 Stripe Link 代人完成支付。API 则通过 x402 按次调用付费。x402 Inc. 自行运营用于查找支付对象的目录，以及买方、卖方和市场。',
+    cta: '查看 About',
+  },
 }
 
 export function AgenticIntro() {

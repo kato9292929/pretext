@@ -9,6 +9,9 @@ const COPY = {
   en: {
     body: 'For analysis of the agent-payments ecosystem, implementation and verification inquiries, partnerships, or data access, feel free to reach out.',
   },
+  zh: {
+    body: '如需智能体支付生态的分析、实现与验证方面的咨询，或业务合作、数据提供方面的洽谈，欢迎随时联系我们。',
+  },
 }
 
 export function Contact() {
