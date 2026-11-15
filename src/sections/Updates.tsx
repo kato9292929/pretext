@@ -10,7 +10,7 @@ type Update = {
 }
 
 // Newest first. `tag` is a short topical label; `title` mirrors the headline.
-const UPDATES: Update[] = [
+export const UPDATES: Update[] = [
   {
     href: 'https://prtimes.jp/main/html/rd/p/000000002.000188987.html',
     tag: 'Press',

@@ -110,7 +110,7 @@ const ARCHIVE: Item[] = [
     title: { ja: 'エージェント決済の信頼層：カード網が担保する範囲とx402のA to A領域（サマリー1）', en: 'The trust layer of agent payments: what card networks guarantee and x402’s A-to-A domain (summary 1)', zh: '智能体支付的信任层：卡组织网络所保障的范围与 x402 的 A to A 领域（摘要1）' } },
 ]
 
-const ITEMS: Item[] = [
+export const ITEMS: Item[] = [
   ...RANKED,
   ...ARCHIVE,
   ...FEATURED_ARTICLES.map((a) => ({ title: a.title, href: a.href, tag: a.tag })),

@@ -1,8 +1,8 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { PageHero, SectionEyebrow } from '../primitives'
-import { Updates } from '../sections/Updates'
-import { Insights } from '../sections/Insights'
+import { UPDATES } from '../sections/Updates'
+import { ITEMS as INSIGHTS } from '../sections/Insights'
 import { useLang, type Lang, type Localized } from '../i18n'
 
 const COPY = {
@@ -116,6 +116,12 @@ const LATEST: LatestGroup[] = [
     ],
   },
 ]
+
+/* Jul–Sep 2026: the Update and Insights articles in one list (deduped). */
+const MID: { title: Localized; href: string; tag: string }[] = [
+  ...UPDATES.map((u) => ({ title: u.title, href: u.href, tag: u.tag })),
+  ...INSIGHTS.map((i) => ({ title: i.title, href: i.href, tag: i.tag.en })),
+].filter((x, i, all) => all.findIndex((y) => y.href === x.href) === i)
 
 type Note = { title: Localized; href: string }
 type NoteColumn = { title: string; notes: Note[] }
@@ -322,7 +328,7 @@ export function Research() {
 
       {/* Latest note articles */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
-        <SectionEyebrow label="Latest" tag={t.latestTag} />
+        <SectionEyebrow label={t.latestTag} heading />
         <div className="mt-8 grid md:grid-cols-2 gap-8">
           {LATEST.map((g) => (
             <div key={g.title.en}>
@@ -349,13 +355,31 @@ export function Research() {
         </div>
       </section>
 
-      {/* Latest updates + insights, Jul–Sep 2026 */}
-      <Updates tag={t.midTag} />
-      <Insights tag={t.midTag} />
+      {/* Jul–Sep 2026: Update + Insights articles */}
+      <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
+        <SectionEyebrow label={t.midTag} heading />
+        <div className="mt-8 grid md:grid-cols-2 gap-x-8 gap-y-3">
+          {MID.map((note) => (
+            <a
+              key={note.href}
+              href={note.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="liquid-glass rounded-xl p-4 flex items-start justify-between gap-3 group"
+            >
+              <span>
+                <span className="block font-mono text-[11px] text-fg/40">{note.tag}</span>
+                <span className="mt-1 block text-sm text-fg/80 leading-[1.6]">{note.title[lang]}</span>
+              </span>
+              <ArrowUpRight className="w-3.5 h-3.5 flex-none text-fg/30 group-hover:text-gold transition-colors" />
+            </a>
+          ))}
+        </div>
+      </section>
 
       {/* Full note library */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-10 md:py-16">
-        <SectionEyebrow label="Library" tag={t.earlyTag} />
+        <SectionEyebrow label={t.earlyTag} heading />
         <div className="mt-8 grid md:grid-cols-3 gap-8">
           {COLUMNS.map((col) => (
             <div key={col.title}>
