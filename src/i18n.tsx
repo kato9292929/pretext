@@ -4,14 +4,15 @@ import { createContext, useContext, useEffect, useLayoutEffect, useState, type R
 // hydrated. Saved preferences are applied right after hydration, before paint.
 const useClientLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
-export type Lang = 'ja' | 'en'
+// zh = Simplified Chinese
+export type Lang = 'ja' | 'en' | 'zh'
 
 const KEY = 'x402-lang'
 
 function storedLang(): Lang {
   try {
     const v = localStorage.getItem(KEY)
-    if (v === 'en' || v === 'ja') return v
+    if (v === 'en' || v === 'ja' || v === 'zh') return v
   } catch {
     /* ignore */
   }
@@ -31,7 +32,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    document.documentElement.lang = lang
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang
   }, [lang])
 
   const setLang = (l: Lang) => {
@@ -98,4 +99,4 @@ export function useTheme() {
 }
 
 /** Pick a value by the current language. */
-export type Localized<T = string> = { ja: T; en: T }
+export type Localized<T = string> = { ja: T; en: T; zh: T }
