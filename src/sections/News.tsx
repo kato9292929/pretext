@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
-import { useLang, type Localized } from '../i18n'
+import { useLang, type Lang, type Localized } from '../i18n'
 
 type NewsItem = {
   href: string
@@ -17,20 +17,22 @@ const NEWS: NewsItem[] = [
   {
     href: 'https://prtimes.jp/main/html/rd/p/000000006.000188987.html',
     image: '/news/bccc.jpg',
-    tag: { ja: 'プレスリリース', en: 'Press release' },
+    tag: { ja: 'プレスリリース', en: 'Press release', zh: '新闻稿' },
     title: {
       ja: 'x402株式会社、一般社団法人ブロックチェーン推進協会（BCCC）に入会',
       en: 'x402 Inc. joins the Blockchain Collaborative Consortium (BCCC)',
+      zh: 'x402 Inc. 加入区块链推进协会（BCCC）',
     },
     date: '2026-10-30',
   },
   {
     href: 'https://prtimes.jp/main/html/rd/p/000000005.000188987.html',
     image: '/news/fintech.jpg',
-    tag: { ja: 'プレスリリース', en: 'Press release' },
+    tag: { ja: 'プレスリリース', en: 'Press release', zh: '新闻稿' },
     title: {
       ja: 'x402株式会社、一般社団法人Fintech協会にベンチャー会員として入会',
       en: 'x402 Inc. joins the Fintech Association of Japan as a venture member',
+      zh: 'x402 Inc. 以创业企业会员身份加入日本 Fintech 协会',
     },
     date: '2026-10-14',
   },
@@ -38,20 +40,22 @@ const NEWS: NewsItem[] = [
     href: 'https://prtimes.jp/main/html/rd/p/000000004.000188987.html',
     image: '/news/jba.jpg',
     date: '2026-09-25',
-    tag: { ja: 'プレスリリース', en: 'Press release' },
+    tag: { ja: 'プレスリリース', en: 'Press release', zh: '新闻稿' },
     title: {
       ja: 'x402株式会社、一般社団法人日本ブロックチェーン協会（JBA）にシルバー会員として入会',
       en: 'x402 Inc. joins the Japan Blockchain Association (JBA) as a silver member',
+      zh: 'x402 Inc. 以白银会员身份加入日本区块链协会（JBA）',
     },
   },
   {
     href: 'https://prtimes.jp/main/html/rd/p/000000002.000188987.html',
     image: '/news/jcba.jpg',
     date: '2026-09-04',
-    tag: { ja: 'プレスリリース', en: 'Press release' },
+    tag: { ja: 'プレスリリース', en: 'Press release', zh: '新闻稿' },
     title: {
       ja: 'x402株式会社、一般社団法人日本暗号資産ビジネス協会（JCBA）に準会員として入会',
       en: 'x402 Inc. joins the Japan Cryptoasset Business Association (JCBA) as an associate member',
+      zh: 'x402 Inc. 以准会员身份加入日本加密资产商业协会（JCBA）',
     },
   },
 ]
@@ -66,6 +70,7 @@ const TEXT_ITEMS: TextItem[] = [
     title: {
       ja: 'Stripe Crypto × Link単回利用カード：クリプトカードを通じたエージェント決済におけるステーブルコインの利活用',
       en: 'Stripe Crypto × Link single-use cards: using stablecoins for agent payments through crypto cards',
+      zh: 'Stripe Crypto × Link 一次性卡：通过加密卡在智能体支付中运用稳定币',
     },
   },
   {
@@ -74,6 +79,7 @@ const TEXT_ITEMS: TextItem[] = [
     title: {
       ja: 'AIエージェントは「使う」から「何を買わせるか」へ——2026年の経営論点から見える次の調達市場',
       en: 'AI agents shift from “using them” to “what to let them buy” — the next procurement market seen through 2026 management issues',
+      zh: 'AI 智能体从“使用”转向“让它买什么”——从 2026 年的经营议题看下一个采购市场',
     },
   },
   {
@@ -82,6 +88,7 @@ const TEXT_ITEMS: TextItem[] = [
     title: {
       ja: 'カードはエージェントを自律化しない——委任を安全に設計するClass 3と、x402が入るClass 4の境界',
       en: 'Cards don’t make agents autonomous — the boundary between Class 3 (safe delegation) and Class 4 (where x402 enters)',
+      zh: '银行卡无法让智能体实现自主——安全设计委托的 Class 3 与 x402 进入的 Class 4 之间的边界',
     },
   },
   {
@@ -90,6 +97,7 @@ const TEXT_ITEMS: TextItem[] = [
     title: {
       ja: 'x402の出来高52.7Mの分解：スクリーニング後の商取引25.62Mとエージェント由来0.6〜7.5%（TRM Labs, 2026-09）',
       en: 'Breaking down x402’s 52.7M volume: 25.62M in commerce after screening, 0.6–7.5% agent-originated (TRM Labs, 2026-09)',
+      zh: '拆解 x402 的 52.7M 交易量：筛选后的商业交易 25.62M，源自智能体的占 0.6〜7.5%（TRM Labs, 2026-09）',
     },
   },
   {
@@ -98,6 +106,7 @@ const TEXT_ITEMS: TextItem[] = [
     title: {
       ja: '日本株 Weekly Selection：Q2決算に集中する半導体サプライチェーン10銘柄のdated catalyst',
       en: 'Japan stocks Weekly Selection: dated catalysts for 10 semiconductor supply-chain names reporting Q2',
+      zh: '日本股票 Weekly Selection：集中发布 Q2 财报的 10 只半导体供应链股票的 dated catalyst',
     },
   },
 ]
@@ -117,9 +126,9 @@ function Tag({ label }: { label: string }) {
 }
 
 // Dates are plain calendar dates (JST); format from the string so the viewer's time zone can't shift the day.
-function formatDate(date: string, lang: 'ja' | 'en') {
+function formatDate(date: string, lang: Lang) {
   const [y, m, d] = date.split('-').map(Number)
-  if (lang === 'ja') return `${y}年${m}月${d}日`
+  if (lang === 'ja' || lang === 'zh') return `${y}年${m}月${d}日`
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   return `${months[m - 1]} ${d}, ${y}`
 }
@@ -136,7 +145,7 @@ export function News() {
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease }}
       >
-        <SectionEyebrow label="Update" tag={lang === 'ja' ? '最新情報' : 'Latest'} heading />
+        <SectionEyebrow label="Update" tag={({ ja: '最新情報', en: 'Latest', zh: '最新动态' } satisfies Localized)[lang]} heading />
       </motion.div>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr]">

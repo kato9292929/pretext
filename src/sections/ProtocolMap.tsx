@@ -10,33 +10,33 @@ type Proto = { name: string; gov: Localized; func: Localized; value: Localized }
 
 const UCP: Proto = {
   name: 'UCP',
-  gov: { ja: 'Tech Council（10社）', en: 'Tech Council (10 firms)' },
-  func: { ja: '商品の発見・プロファイル・カート', en: 'Product discovery, profiles, cart' },
-  value: { ja: '出店を許可制でなくす。Shopify 等が対応', en: 'Removes permission gates on listing. Supported by Shopify and others' },
+  gov: { ja: 'Tech Council（10社）', en: 'Tech Council (10 firms)', zh: 'Tech Council（10家企业）' },
+  func: { ja: '商品の発見・プロファイル・カート', en: 'Product discovery, profiles, cart', zh: '商品发现・档案・购物车' },
+  value: { ja: '出店を許可制でなくす。Shopify 等が対応', en: 'Removes permission gates on listing. Supported by Shopify and others', zh: '上架不再需要审批。Shopify 等已支持' },
 }
 const AP2: Proto = {
   name: 'AP2',
-  gov: { ja: 'FIDO Alliance', en: 'FIDO Alliance' },
-  func: { ja: '誰が支払いを許可したかの証明', en: 'Proving who authorized the payment' },
-  value: { ja: 'Intent・Cart・Payment の3つの委任を W3C の形式で残す', en: 'Keeps the Intent, Cart and Payment mandates in W3C format' },
+  gov: { ja: 'FIDO Alliance', en: 'FIDO Alliance', zh: 'FIDO Alliance' },
+  func: { ja: '誰が支払いを許可したかの証明', en: 'Proving who authorized the payment', zh: '证明由谁授权了支付' },
+  value: { ja: 'Intent・Cart・Payment の3つの委任を W3C の形式で残す', en: 'Keeps the Intent, Cart and Payment mandates in W3C format', zh: '以 W3C 格式记录 Intent、Cart、Payment 三项委托' },
 }
 const ACP: Proto = {
   name: 'ACP（OpenAI）',
-  gov: { ja: 'OpenAI / Stripe', en: 'OpenAI / Stripe' },
-  func: { ja: 'チャット内での支払いの実行', en: 'Executing payment inside a chat' },
-  value: { ja: '人の名義で買う取引。既存のカード網を使う', en: 'Purchases under a person’s name. Uses existing card networks' },
+  gov: { ja: 'OpenAI / Stripe', en: 'OpenAI / Stripe', zh: 'OpenAI / Stripe' },
+  func: { ja: 'チャット内での支払いの実行', en: 'Executing payment inside a chat', zh: '在聊天中执行支付' },
+  value: { ja: '人の名義で買う取引。既存のカード網を使う', en: 'Purchases under a person’s name. Uses existing card networks', zh: '以人的名义购买的交易。使用现有银行卡网络' },
 }
 const X402: Proto = {
   name: 'x402',
-  gov: { ja: 'Linux Foundation', en: 'Linux Foundation' },
-  func: { ja: 'HTTP 402 でリクエスト単位に支払う', en: 'Pay per request over HTTP 402' },
-  value: { ja: 'ステーブルコインで送金が確定すれば取り消せない', en: 'Once a stablecoin transfer settles, it cannot be reversed' },
+  gov: { ja: 'Linux Foundation', en: 'Linux Foundation', zh: 'Linux Foundation' },
+  func: { ja: 'HTTP 402 でリクエスト単位に支払う', en: 'Pay per request over HTTP 402', zh: '通过 HTTP 402 按请求支付' },
+  value: { ja: 'ステーブルコインで送金が確定すれば取り消せない', en: 'Once a stablecoin transfer settles, it cannot be reversed', zh: '稳定币转账一旦确认即不可撤销' },
 }
 const ADYEN: Proto = {
   name: 'Adyen Agentic',
-  gov: { ja: 'Adyen（単一企業）', en: 'Adyen (single company)' },
-  func: { ja: 'Feed / Cart / Pay の API', en: 'Feed / Cart / Pay APIs' },
-  value: { ja: '既存のトークン化と不正対策をそのまま AI に適用', en: 'Applies existing tokenization and fraud controls directly to AI' },
+  gov: { ja: 'Adyen（単一企業）', en: 'Adyen (single company)', zh: 'Adyen（单一企业）' },
+  func: { ja: 'Feed / Cart / Pay の API', en: 'Feed / Cart / Pay APIs', zh: 'Feed / Cart / Pay 的 API' },
+  value: { ja: '既存のトークン化と不正対策をそのまま AI に適用', en: 'Applies existing tokenization and fraud controls directly to AI', zh: '将现有的令牌化和反欺诈措施直接应用于 AI' },
 }
 
 const COPY = {
@@ -64,6 +64,19 @@ const COPY = {
     acp: [
       ['Agentic Commerce Protocol (OpenAI × Stripe)', 'Buys under a person’s name. The person keeps approval; settles on existing card networks.'],
       ['Agent Commerce Protocol (Virtuals Protocol)', 'Orders between agents. Built-in escrow and evaluation; settles in stablecoins.'],
+    ],
+  },
+  zh: {
+    eyebrow: '标准地图',
+    title: 'UCP、AP2、ACP、x402 分别负责购物的哪个环节',
+    lead: '连接智能体与电商或 API 的部分，已经过了各公司自行开发的阶段，进入选择标准来使用的阶段。把购物分为“发现 → 授权 → 支付”，各标准负责的环节就一目了然。',
+    steps: ['发现・购物车', '授权', '支付'],
+    rails: ['人的名义・银行卡网络', '按请求・稳定币'],
+    span: '由一家公司统一提供全部 3 个环节',
+    acpTitle: '简称“ACP”的有两个',
+    acp: [
+      ['Agentic Commerce Protocol（OpenAI × Stripe）', '以人的名义购买。授权权留在人手中，通过现有银行卡网络结算。'],
+      ['Agent Commerce Protocol（Virtuals Protocol）', '智能体之间的下单与接单。内置托管与评估环节，以稳定币结算。'],
     ],
   },
 }

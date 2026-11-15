@@ -125,6 +125,56 @@ const COPY = {
     sellList: 'Get listed',
     tickerNote: 'Prices of our endpoints (per call)',
   },
+  zh: {
+    eyebrow: 'Agent payments',
+    title: ['以智能体支付', '构建自主经济'],
+    lead: 'Muse、Grok 等个人智能体已开始通过 Stripe Link 代人完成支付。API 则通过 x402 按次付费。x402 Inc. 自主运营用于查找支付对象的目录，以及买方、卖方和市场。',
+    ctaPrimary: '查找端点',
+    ctaSecondary: '查看产品',
+
+    logLabel: '实际交互记录',
+    waysEyebrow: '两种支付方式',
+    waysTitle: '用银行卡支付，还是按次支付',
+    cardTitle: '银行卡 × Stripe Link',
+    cardWho: 'Muse、Grok 等个人智能体',
+    cardSteps: ['人告知要买的东西和条件', '智能体寻找店铺并创建购物车', '通过 Stripe Link 支付，由人通过一次性卡或逐笔授权进行管控'],
+    cardLink: 'Grok Bot 的 Stripe Link 支付（note）',
+    x402Title: 'x402 × per-call',
+    x402Who: '调用 API 的智能体',
+    x402Steps: ['向 API 发送 GET 请求，返回 402 Payment Required', '按 402 指定的金额和链，对 USDC 支付进行签名', '附上签名向同一 URL 再次请求，收到 200 OK 及数据'],
+    x402Link: '支付步骤（How to pay）',
+    waysBoth: '两种方式都是由智能体代人支付',
+
+    stagesEyebrow: '购买前的 5 个阶段',
+    stagesTitle: '发现、评估、竞价、支付、使用',
+    stages: [
+      ['发现', 'x402 Endpoint', '从每天收集的可支付 API 目录中找到卖方。'],
+      ['评估', 'x402 Seller Probe', '支付前，用评分确认 402、支付和交付是否真正可用。'],
+      ['竞价', 'x402 RFQ Market', '提出条件，让卖方竞相报价（devnet）。'],
+      ['支付', 'x402 Autonomous Agent', '本公司的买方每天早上 06:00 JST 以 per-call 方式实际支付。'],
+      ['使用', 'OSD・JIN・Intelligence', '用购买的数据做判断。本公司的数据也以同样方式出售。'],
+    ],
+
+    catalogEyebrow: '服务',
+    catalogTitle: '现在即可付费使用的 API',
+    filterAll: '全部',
+    filterOwn: '自有数据与市场',
+    filterIntel: 'Intelligence API',
+    from: '起',
+    perCall: '/ 次调用',
+    free: '免费',
+    open: '打开',
+    copy: '复制 URL',
+    copied: '已复制',
+    explore: '在 x402 Endpoint 查看全部',
+
+    sellEyebrow: '面向卖方',
+    sellTitle: '您的 API 也可以直接成为销售渠道',
+    sellLead: '智能体无需结账页面即可为单次 API 调用付费。无需增加注册流程，就能把端点变成一项收入来源。',
+    sellScore: '查看 API 评分',
+    sellList: '收录到目录',
+    tickerNote: '本公司端点的价格（per-call）',
+  },
 }
 
 /* ── Hero: request log ────────────────────────────────────────────────────── */
@@ -137,43 +187,43 @@ const RUNS: Run[] = [
     rail: 'x402',
     agent: 'your agent',
     lines: [
-      { dir: '→', text: { ja: 'GET jin.x402jp.com/api/jin/movers', en: 'GET jin.x402jp.com/api/jin/movers' } },
-      { dir: '←', text: { ja: '402 Payment Required  $0.02 · USDC · solana', en: '402 Payment Required  $0.02 · USDC · solana' }, tone: 'warn' },
-      { dir: '·', text: { ja: '残高から署名（per-call）', en: 'sign from the balance (per call)' }, tone: 'dim' },
-      { dir: '→', text: { ja: 'GET …/api/jin/movers  + X-PAYMENT', en: 'GET …/api/jin/movers  + X-PAYMENT' } },
-      { dir: '←', text: { ja: '200 OK  その日に動いた品目', en: '200 OK  items that moved today' }, tone: 'ok' },
+      { dir: '→', text: { ja: 'GET jin.x402jp.com/api/jin/movers', en: 'GET jin.x402jp.com/api/jin/movers', zh: 'GET jin.x402jp.com/api/jin/movers' } },
+      { dir: '←', text: { ja: '402 Payment Required  $0.02 · USDC · solana', en: '402 Payment Required  $0.02 · USDC · solana', zh: '402 Payment Required  $0.02 · USDC · solana' }, tone: 'warn' },
+      { dir: '·', text: { ja: '残高から署名（per-call）', en: 'sign from the balance (per call)', zh: '从余额签名（per-call）' }, tone: 'dim' },
+      { dir: '→', text: { ja: 'GET …/api/jin/movers  + X-PAYMENT', en: 'GET …/api/jin/movers  + X-PAYMENT', zh: 'GET …/api/jin/movers  + X-PAYMENT' } },
+      { dir: '←', text: { ja: '200 OK  その日に動いた品目', en: '200 OK  items that moved today', zh: '200 OK  当天变动的品类' }, tone: 'ok' },
     ],
   },
   {
     rail: 'Stripe Link',
     agent: 'Grok',
     lines: [
-      { dir: '·', text: { ja: '依頼：イベントのチケットを2枚', en: 'task: two tickets for the event' }, tone: 'dim' },
-      { dir: '→', text: { ja: 'ブラウザで購入ページを開く', en: 'open the checkout in the browser' } },
-      { dir: '←', text: { ja: 'Stripe Link：承認を待っています', en: 'Stripe Link: waiting for approval' }, tone: 'warn' },
-      { dir: '·', text: { ja: '人が承認 → 単回利用カードを発行', en: 'person approves → single-use card issued' }, tone: 'dim' },
-      { dir: '✓', text: { ja: '支払い完了', en: 'payment complete' }, tone: 'ok' },
+      { dir: '·', text: { ja: '依頼：イベントのチケットを2枚', en: 'task: two tickets for the event', zh: '委托：活动门票 2 张' }, tone: 'dim' },
+      { dir: '→', text: { ja: 'ブラウザで購入ページを開く', en: 'open the checkout in the browser', zh: '在浏览器中打开购买页面' } },
+      { dir: '←', text: { ja: 'Stripe Link：承認を待っています', en: 'Stripe Link: waiting for approval', zh: 'Stripe Link：等待授权' }, tone: 'warn' },
+      { dir: '·', text: { ja: '人が承認 → 単回利用カードを発行', en: 'person approves → single-use card issued', zh: '人授权 → 发行一次性卡' }, tone: 'dim' },
+      { dir: '✓', text: { ja: '支払い完了', en: 'payment complete', zh: '支付完成' }, tone: 'ok' },
     ],
   },
   {
     rail: 'x402',
     agent: 'your agent',
     lines: [
-      { dir: '→', text: { ja: 'GET osd.x402jp.com/api/alpha/jp/catalysts', en: 'GET osd.x402jp.com/api/alpha/jp/catalysts' } },
-      { dir: '←', text: { ja: '402 Payment Required  $0.01 · USDC · base | solana', en: '402 Payment Required  $0.01 · USDC · base | solana' }, tone: 'warn' },
-      { dir: '·', text: { ja: '402 が示すチェーンから選んで署名', en: 'pick a chain the 402 offers and sign' }, tone: 'dim' },
-      { dir: '→', text: { ja: 'GET …/jp/catalysts  + X-PAYMENT', en: 'GET …/jp/catalysts  + X-PAYMENT' } },
-      { dir: '←', text: { ja: '200 OK  日本株の dated catalysts', en: '200 OK  dated catalysts for Japanese stocks' }, tone: 'ok' },
+      { dir: '→', text: { ja: 'GET osd.x402jp.com/api/alpha/jp/catalysts', en: 'GET osd.x402jp.com/api/alpha/jp/catalysts', zh: 'GET osd.x402jp.com/api/alpha/jp/catalysts' } },
+      { dir: '←', text: { ja: '402 Payment Required  $0.01 · USDC · base | solana', en: '402 Payment Required  $0.01 · USDC · base | solana', zh: '402 Payment Required  $0.01 · USDC · base | solana' }, tone: 'warn' },
+      { dir: '·', text: { ja: '402 が示すチェーンから選んで署名', en: 'pick a chain the 402 offers and sign', zh: '从 402 提供的链中选择并签名' }, tone: 'dim' },
+      { dir: '→', text: { ja: 'GET …/jp/catalysts  + X-PAYMENT', en: 'GET …/jp/catalysts  + X-PAYMENT', zh: 'GET …/jp/catalysts  + X-PAYMENT' } },
+      { dir: '←', text: { ja: '200 OK  日本株の dated catalysts', en: '200 OK  dated catalysts for Japanese stocks', zh: '200 OK  日本股票的 dated catalysts' }, tone: 'ok' },
     ],
   },
   {
     rail: 'Stripe Link',
     agent: 'Muse',
     lines: [
-      { dir: '·', text: { ja: '依頼：来週分の買い物', en: 'task: next week’s groceries' }, tone: 'dim' },
-      { dir: '→', text: { ja: 'カートを作り、チェックアウトへ', en: 'build the cart, go to checkout' } },
-      { dir: '←', text: { ja: 'Stripe Link：登録したカードで支払い', en: 'Stripe Link: pay with the saved card' }, tone: 'warn' },
-      { dir: '✓', text: { ja: '注文完了', en: 'order placed' }, tone: 'ok' },
+      { dir: '·', text: { ja: '依頼：来週分の買い物', en: 'task: next week’s groceries', zh: '委托：下周的采购' }, tone: 'dim' },
+      { dir: '→', text: { ja: 'カートを作り、チェックアウトへ', en: 'build the cart, go to checkout', zh: '创建购物车，前往结账' } },
+      { dir: '←', text: { ja: 'Stripe Link：登録したカードで支払い', en: 'Stripe Link: pay with the saved card', zh: 'Stripe Link：用已绑定的银行卡支付' }, tone: 'warn' },
+      { dir: '✓', text: { ja: '注文完了', en: 'order placed', zh: '下单完成' }, tone: 'ok' },
     ],
   },
 ]
@@ -246,7 +296,8 @@ function priceText(s: Service, lang: Lang) {
   const t = COPY[lang]
   if (s.price.free) return t.free
   if (s.price.label) return s.price.label[lang]
-  return lang === 'ja' ? `${s.price.from} ${t.from}` : `${t.from} ${s.price.from}`
+  // ja / zh put the word after the price (〜から / 〜起); en puts it before
+  return lang === 'en' ? `${t.from} ${s.price.from}` : `${s.price.from} ${t.from}`
 }
 
 function ServiceCard({ s, lang }: { s: Service; lang: Lang }) {

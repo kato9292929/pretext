@@ -10,7 +10,7 @@ import { DNode, DiagramProvider } from '../components/Diagram'
    diagram in the site's style: hover / tap an issue for its numbers.
    Figures are the report's; nothing here is new. */
 
-const L = (ja: string, en: string): Localized => ({ ja, en })
+const L = (ja: string, en: string, zh: string): Localized => ({ ja, en, zh })
 
 type Layer = 'buyer' | 'seller' | 'facilitator' | 'chain' | 'sdk'
 type Seg = 'E4' | 'E5' | 'P'
@@ -20,77 +20,77 @@ type Kind = 'issue' | 'layer' | 'spec'
 type Issue = { code: string; layer: Layer; step: number; kind: Kind; title: Localized; body: Localized; segs: Seg[] }
 
 const STEPS: { name: Localized; sub: Localized }[] = [
-  { name: L('選ぶ', 'Choose'), sub: L('seller を探す', 'find a seller') },
-  { name: L('402 を受け取る', 'Get the 402'), sub: L('価格・入力を読む', 'read price and input') },
-  { name: L('署名して送る', 'Sign and send'), sub: L('上限・受取先を確かめる', 'check limits and payee') },
-  { name: L('受け取って検証へ', 'Hand to verify'), sub: L('seller が facilitator に渡す', 'seller → facilitator') },
-  { name: L('検証・送信', 'Verify, settle'), sub: L('/verify・/settle', '/verify · /settle') },
-  { name: L('確定', 'Confirm'), sub: L('トークンのコントラクト', 'token contract') },
-  { name: L('本文を返す', 'Return the body'), sub: L('seller → buyer', 'seller → buyer') },
-  { name: L('確かめる', 'Check'), sub: L('中身と送金', 'content and transfer') },
+  { name: L('選ぶ', 'Choose', '选择'), sub: L('seller を探す', 'find a seller', '查找 seller') },
+  { name: L('402 を受け取る', 'Get the 402', '接收 402'), sub: L('価格・入力を読む', 'read price and input', '读取价格和输入') },
+  { name: L('署名して送る', 'Sign and send', '签名并发送'), sub: L('上限・受取先を確かめる', 'check limits and payee', '确认上限和收款方') },
+  { name: L('受け取って検証へ', 'Hand to verify', '接收后转交验证'), sub: L('seller が facilitator に渡す', 'seller → facilitator', 'seller 交给 facilitator') },
+  { name: L('検証・送信', 'Verify, settle', '验证・提交'), sub: L('/verify・/settle', '/verify · /settle', '/verify・/settle') },
+  { name: L('確定', 'Confirm', '确认'), sub: L('トークンのコントラクト', 'token contract', '代币合约') },
+  { name: L('本文を返す', 'Return the body', '返回正文'), sub: L('seller → buyer', 'seller → buyer', 'seller → buyer') },
+  { name: L('確かめる', 'Check', '核实'), sub: L('中身と送金', 'content and transfer', '内容与转账') },
 ]
 
 const LAYERS: { key: Layer; name: string; what: Localized; who: Localized; color: string }[] = [
-  { key: 'buyer', name: 'buyer', what: L('ウォレット・エージェント', 'Wallet, agent'), who: L('書く主体：運用者', 'Written by: the operator'), color: '#9B7BF2' },
-  { key: 'seller', name: 'seller', what: L('API サーバー', 'API server'), who: L('書く主体：seller（HTTPハンドラ・CDN）', 'Written by: the seller (HTTP handler, CDN)'), color: '#F2A65A' },
-  { key: 'facilitator', name: 'facilitator', what: L('検証・送信', 'Verify, settle'), who: L('書く主体：Coinbase・Circle 等', 'Written by: Coinbase, Circle, …'), color: '#F57C8E' },
-  { key: 'chain', name: L('チェーン', 'Chain').ja, what: L('トークンのコントラクト', 'Token contract'), who: L('書く主体：Circle・JPYC 等', 'Written by: Circle, JPYC, …'), color: '#5EC9A0' },
-  { key: 'sdk', name: 'SDK', what: L('④〜⑦の中で動く', 'Runs inside ④–⑦'), who: L('書く主体：x402 Foundation・各社', 'Written by: x402 Foundation, vendors'), color: '#7E8BF0' },
+  { key: 'buyer', name: 'buyer', what: L('ウォレット・エージェント', 'Wallet, agent', '钱包・智能体'), who: L('書く主体：運用者', 'Written by: the operator', '编写方：运营者'), color: '#9B7BF2' },
+  { key: 'seller', name: 'seller', what: L('API サーバー', 'API server', 'API 服务器'), who: L('書く主体：seller（HTTPハンドラ・CDN）', 'Written by: the seller (HTTP handler, CDN)', '编写方：seller（HTTP 处理程序・CDN）'), color: '#F2A65A' },
+  { key: 'facilitator', name: 'facilitator', what: L('検証・送信', 'Verify, settle', '验证・提交'), who: L('書く主体：Coinbase・Circle 等', 'Written by: Coinbase, Circle, …', '编写方：Coinbase、Circle 等'), color: '#F57C8E' },
+  { key: 'chain', name: 'チェーン', what: L('トークンのコントラクト', 'Token contract', '代币合约'), who: L('書く主体：Circle・JPYC 等', 'Written by: Circle, JPYC, …', '编写方：Circle、JPYC 等'), color: '#5EC9A0' },
+  { key: 'sdk', name: 'SDK', what: L('④〜⑦の中で動く', 'Runs inside ④–⑦', '在④〜⑦中运行'), who: L('書く主体：x402 Foundation・各社', 'Written by: x402 Foundation, vendors', '编写方：x402 Foundation 及各公司'), color: '#7E8BF0' },
 ]
 
 // Where the payment passes: layer → step → label
 const FLOW: Partial<Record<Layer, Record<number, Localized>>> = {
-  buyer: { 1: L('seller を選ぶ', 'Choose a seller'), 3: L('署名して送る', 'Sign and send'), 8: L('中身と送金を確かめる', 'Check content and transfer') },
-  seller: { 2: L('402 を返す', 'Return 402'), 4: L('受け取って検証へ', 'Hand to verify'), 7: L('本文を返す', 'Return the body') },
-  facilitator: { 5: L('検証・送信', 'Verify, settle') },
-  chain: { 6: L('確定する', 'Confirm') },
+  buyer: { 1: L('seller を選ぶ', 'Choose a seller', '选择 seller'), 3: L('署名して送る', 'Sign and send', '签名并发送'), 8: L('中身と送金を確かめる', 'Check content and transfer', '核实内容与转账') },
+  seller: { 2: L('402 を返す', 'Return 402', '返回 402'), 4: L('受け取って検証へ', 'Hand to verify', '接收后转交验证'), 7: L('本文を返す', 'Return the body', '返回正文') },
+  facilitator: { 5: L('検証・送信', 'Verify, settle', '验证・提交') },
+  chain: { 6: L('確定する', 'Confirm', '确认') },
 }
 
 const ISSUES: Issue[] = [
-  { code: 'B3', layer: 'buyer', step: 1, kind: 'issue', title: L('取引数の順位が実需を表さない', 'Trade-count rank is not real demand'), body: L('tx 数1位の AX1 は24時間 180,578 tx。中身は報酬を得るためのタスク実行（quests）', 'AX1, #1 by tx count, did 180,578 tx in 24h — tasks run to earn rewards (quests)'), segs: ['E4'] },
-  { code: 'B4', layer: 'buyer', step: 1, kind: 'issue', title: L('buyer 1人だけの取引', 'Trades with a single buyer'), body: L('候補2,703件中 793件（29%）は buyer が1人', '793 of 2,703 candidates (29%) have one buyer'), segs: ['E4'] },
-  { code: 'B5', layer: 'buyer', step: 1, kind: 'issue', title: L('同じ運営・再販の見分けがつかない', 'Same operator or resale is hard to tell'), body: L('1つの payTo に 14ホスト・buyer 2', '14 hosts and 2 buyers on one payTo'), segs: ['E4', 'E5'] },
-  { code: 'B7', layer: 'buyer', step: 1, kind: 'issue', title: L('掲載が動作の保証にならない', 'A listing does not mean it works'), body: L('Circle Agent Marketplace は検証・監視しないと明記', 'Circle Agent Marketplace states it does not verify or monitor'), segs: ['E4'] },
-  { code: 'B6', layer: 'buyer', step: 2, kind: 'issue', title: L('402 から入力が分からない', 'The 402 does not tell you the input'), body: L('払える約2,200ホストの 922（42%）が入力必須。厳選80件で使い方なし 6・公開どおりでも通らない 9', '922 of ~2,200 payable hosts (42%) need input. Of 80 curated: 6 without usage, 9 fail even as documented'), segs: ['E4', 'E5', 'P'] },
-  { code: 'B1', layer: 'buyer', step: 3, kind: 'layer', title: L('上限の置き場所が製品ごとに違う', 'Each product puts limits elsewhere'), body: L('Circle・Coinbase・Cloudflare・AWS で別々。合計の上限を掛けられない', 'Circle, Coinbase, Cloudflare and AWS each differ; no overall cap'), segs: ['E4', 'E5', 'P'] },
-  { code: 'B2', layer: 'buyer', step: 3, kind: 'issue', title: L('受取先を確かめる手順がない', 'No step to check the payee'), body: L('署名前に payTo を確かめる標準の手順がない', 'No standard way to check payTo before signing'), segs: ['E4', 'E5'] },
-  { code: 'S5', layer: 'seller', step: 2, kind: 'issue', title: L('掲載価格と請求額が違う', 'Listed price ≠ charged price'), body: L('カタログと 402 の不一致 57／759ホスト。nohumans で違う請求 97件', 'Catalog vs 402 mismatch on 57/759 hosts; 97 wrong charges on nohumans'), segs: ['E4', 'E5'] },
-  { code: 'S6', layer: 'seller', step: 2, kind: 'issue', title: L('署名に要る情報を載せない', 'Missing what signing needs'), body: L('EIP-712 の name・version がなく Base の USDC で署名できない', 'No EIP-712 name/version, so Base USDC cannot be signed'), segs: ['E4'] },
-  { code: 'S1', layer: 'seller', step: 4, kind: 'issue', title: L('入力を確かめる前に決済する', 'Settles before checking input'), body: L('送金成立後の未納品23件中 14件は、決済のあとで 400／405', '14 of 23 paid-but-undelivered returned 400/405 after settling'), segs: ['E4', 'E5', 'P'] },
-  { code: 'S7', layer: 'seller', step: 4, kind: 'issue', title: L('同じ署名で何度も返す', 'Serves the same signature again'), body: L('再送1,000回に 248回 データを返した', 'Returned data 248 times out of 1,000 replays'), segs: ['E4'] },
-  { code: 'S9', layer: 'seller', step: 4, kind: 'issue', title: L('別の API の支払いで流用', 'A payment reused for another API'), body: L('署名がどのリソースへの支払いかを確かめない', 'Does not check which resource the signature pays for'), segs: ['E4', 'P'] },
-  { code: 'S2', layer: 'seller', step: 7, kind: 'issue', title: L('正しい要求でも届かない', 'Correct requests still not delivered'), body: L('23件中 9件（500・503 等）。nohumans で支払い後エラー 146・再び 402 464', '9 of 23 (500, 503, …); on nohumans 146 errors after paying, 464 repeat 402s'), segs: ['E4', 'E5', 'P'] },
-  { code: 'S3', layer: 'seller', step: 7, kind: 'issue', title: L('動作する API が少ない', 'Few APIs actually work'), body: L('30,600件中 動作確認 5,523件（18%）（Decixa）', '5,523 of 30,600 confirmed working (18%) (Decixa)'), segs: ['E4'] },
-  { code: 'S8', layer: 'seller', step: 7, kind: 'issue', title: L('有料の応答がキャッシュから出る', 'Paid responses leak from cache'), body: L('nginx のキャッシュから 100% 流出', '100% leaked from the nginx cache'), segs: ['E4'] },
-  { code: 'S4', layer: 'seller', step: 8, kind: 'issue', title: L('届いても説明と違う', 'Delivered, but not as described'), body: L('「live」の為替が 10時間前。例の入力で data: []', '“Live” FX was 10 hours old; the sample input returned data: []'), segs: ['E4', 'E5'] },
-  { code: 'F1', layer: 'facilitator', step: 5, kind: 'issue', title: L('決済済みと返すが送金がない', 'Says settled, no transfer'), body: L('settlement_pending と tx を返したが、tx がチェーン上にない 5件', '5 returned settlement_pending and a tx that is not on chain'), segs: ['E4', 'E5'] },
-  { code: 'F3', layer: 'facilitator', step: 5, kind: 'issue', title: L('事業者の規則違反', 'Operators break their own rules'), body: L('主要 15社すべてに違反（計 49件）', 'All 15 major operators had violations (49 in total)'), segs: ['E4', 'E5', 'P'] },
-  { code: 'F4', layer: 'facilitator', step: 5, kind: 'issue', title: L('1社への集中', 'Concentration on one operator'), body: L('seller の 93%超 が1社のみに依存', 'Over 93% of sellers depend on a single operator'), segs: ['E4', 'E5'] },
-  { code: 'F2', layer: 'facilitator', step: 7, kind: 'layer', title: L('決済の応答ヘッダが任意', 'The settlement header is optional'), body: L('tx を buyer に返さなくても取引が成立する', 'A trade completes without returning the tx to the buyer'), segs: ['E4', 'E5'] },
-  { code: 'C1', layer: 'chain', step: 6, kind: 'spec', title: L('仕様が定めていること', 'What the spec defines'), body: L('EIP-3009 の nonce と再利用の拒否・有効期限・署名の検証。Base の revert の 56.2% は再送を弾いたもの', 'EIP-3009 nonce and reuse rejection, expiry and signature checks. 56.2% of Base reverts were blocked replays'), segs: ['E4', 'E5', 'P'] },
-  { code: 'C2', layer: 'chain', step: 8, kind: 'issue', title: L('送金の有無を取り違える', 'Misreading whether money moved'), body: L('ログ検索は RPC のエラーで「送金なし」と誤る。41件が実は送金済み。authorizationState(署名者, nonce) なら確定できる', 'Log searches misread RPC errors as “no transfer”; 41 had actually settled. authorizationState(signer, nonce) is definitive'), segs: ['E4', 'E5'] },
-  { code: 'K2', layer: 'sdk', step: 4, kind: 'issue', title: L('再送対策が既定で無効', 'Replay protection off by default'), body: L('再送の検出・キャッシュ禁止ヘッダを既定で行わない（3系統）→ S7・S8 の原因', 'No replay detection or no-cache headers by default (3 SDKs) → causes S7, S8'), segs: ['E4'] },
-  { code: 'K3', layer: 'sdk', step: 5, kind: 'issue', title: L('Solana の支払い検証の欠陥', 'Flaw in Solana payment checks'), body: L('GHSA-qr2g-p6q7-w82m（2026年3月）。修正版 @x402/svm 2.6.0／PyPI x402 2.3.0／Go 2.5.0', 'GHSA-qr2g-p6q7-w82m (Mar 2026). Fixed in @x402/svm 2.6.0 / PyPI x402 2.3.0 / Go 2.5.0'), segs: ['E4', 'E5'] },
-  { code: 'K1', layer: 'sdk', step: 7, kind: 'issue', title: L('settle の失敗を見ずに返す', 'Returns without checking settle'), body: L('Flask SDK v0.2.1 以前の既定動作', 'Default in Flask SDK v0.2.1 and earlier'), segs: ['E4'] },
+  { code: 'B3', layer: 'buyer', step: 1, kind: 'issue', title: L('取引数の順位が実需を表さない', 'Trade-count rank is not real demand', '交易数排名不代表真实需求'), body: L('tx 数1位の AX1 は24時間 180,578 tx。中身は報酬を得るためのタスク実行（quests）', 'AX1, #1 by tx count, did 180,578 tx in 24h — tasks run to earn rewards (quests)', '按 tx 数排名第 1 的 AX1 在 24 小时内有 180,578 笔 tx，实际内容是为获取奖励而执行的任务（quests）'), segs: ['E4'] },
+  { code: 'B4', layer: 'buyer', step: 1, kind: 'issue', title: L('buyer 1人だけの取引', 'Trades with a single buyer', '只有 1 个买方的交易'), body: L('候補2,703件中 793件（29%）は buyer が1人', '793 of 2,703 candidates (29%) have one buyer', '2,703 个候选中有 793 个（29%）只有 1 个买方'), segs: ['E4'] },
+  { code: 'B5', layer: 'buyer', step: 1, kind: 'issue', title: L('同じ運営・再販の見分けがつかない', 'Same operator or resale is hard to tell', '难以分辨同一运营方或转售'), body: L('1つの payTo に 14ホスト・buyer 2', '14 hosts and 2 buyers on one payTo', '1 个 payTo 对应 14 个主机、2 个买方'), segs: ['E4', 'E5'] },
+  { code: 'B7', layer: 'buyer', step: 1, kind: 'issue', title: L('掲載が動作の保証にならない', 'A listing does not mean it works', '上架不代表能正常运行'), body: L('Circle Agent Marketplace は検証・監視しないと明記', 'Circle Agent Marketplace states it does not verify or monitor', 'Circle Agent Marketplace 明确表示不做验证和监控'), segs: ['E4'] },
+  { code: 'B6', layer: 'buyer', step: 2, kind: 'issue', title: L('402 から入力が分からない', 'The 402 does not tell you the input', '从 402 看不出需要的输入'), body: L('払える約2,200ホストの 922（42%）が入力必須。厳選80件で使い方なし 6・公開どおりでも通らない 9', '922 of ~2,200 payable hosts (42%) need input. Of 80 curated: 6 without usage, 9 fail even as documented', '约 2,200 个可支付主机中 922 个（42%）必须提供输入。精选 80 个中无使用说明 6 个，按公开说明调用仍失败 9 个'), segs: ['E4', 'E5', 'P'] },
+  { code: 'B1', layer: 'buyer', step: 3, kind: 'layer', title: L('上限の置き場所が製品ごとに違う', 'Each product puts limits elsewhere', '上限设置位置因产品而异'), body: L('Circle・Coinbase・Cloudflare・AWS で別々。合計の上限を掛けられない', 'Circle, Coinbase, Cloudflare and AWS each differ; no overall cap', 'Circle、Coinbase、Cloudflare、AWS 各不相同，无法设置总上限'), segs: ['E4', 'E5', 'P'] },
+  { code: 'B2', layer: 'buyer', step: 3, kind: 'issue', title: L('受取先を確かめる手順がない', 'No step to check the payee', '没有确认收款方的步骤'), body: L('署名前に payTo を確かめる標準の手順がない', 'No standard way to check payTo before signing', '签名前没有确认 payTo 的标准步骤'), segs: ['E4', 'E5'] },
+  { code: 'S5', layer: 'seller', step: 2, kind: 'issue', title: L('掲載価格と請求額が違う', 'Listed price ≠ charged price', '标价与实际收费不符'), body: L('カタログと 402 の不一致 57／759ホスト。nohumans で違う請求 97件', 'Catalog vs 402 mismatch on 57/759 hosts; 97 wrong charges on nohumans', '目录与 402 不一致 57／759 个主机。nohumans 上收费错误 97 笔'), segs: ['E4', 'E5'] },
+  { code: 'S6', layer: 'seller', step: 2, kind: 'issue', title: L('署名に要る情報を載せない', 'Missing what signing needs', '未提供签名所需的信息'), body: L('EIP-712 の name・version がなく Base の USDC で署名できない', 'No EIP-712 name/version, so Base USDC cannot be signed', '缺少 EIP-712 的 name・version，无法用 Base 上的 USDC 签名'), segs: ['E4'] },
+  { code: 'S1', layer: 'seller', step: 4, kind: 'issue', title: L('入力を確かめる前に決済する', 'Settles before checking input', '在核对输入之前就完成支付'), body: L('送金成立後の未納品23件中 14件は、決済のあとで 400／405', '14 of 23 paid-but-undelivered returned 400/405 after settling', '转账成功后未交付的 23 笔中，14 笔在支付后返回 400／405'), segs: ['E4', 'E5', 'P'] },
+  { code: 'S7', layer: 'seller', step: 4, kind: 'issue', title: L('同じ署名で何度も返す', 'Serves the same signature again', '同一签名多次返回数据'), body: L('再送1,000回に 248回 データを返した', 'Returned data 248 times out of 1,000 replays', '重放 1,000 次中有 248 次返回了数据'), segs: ['E4'] },
+  { code: 'S9', layer: 'seller', step: 4, kind: 'issue', title: L('別の API の支払いで流用', 'A payment reused for another API', '被挪用为其他 API 的支付'), body: L('署名がどのリソースへの支払いかを確かめない', 'Does not check which resource the signature pays for', '不核对签名是为哪个资源支付的'), segs: ['E4', 'P'] },
+  { code: 'S2', layer: 'seller', step: 7, kind: 'issue', title: L('正しい要求でも届かない', 'Correct requests still not delivered', '请求正确也收不到'), body: L('23件中 9件（500・503 等）。nohumans で支払い後エラー 146・再び 402 464', '9 of 23 (500, 503, …); on nohumans 146 errors after paying, 464 repeat 402s', '23 笔中 9 笔（500、503 等）。nohumans 上支付后报错 146 次、再次返回 402 共 464 次'), segs: ['E4', 'E5', 'P'] },
+  { code: 'S3', layer: 'seller', step: 7, kind: 'issue', title: L('動作する API が少ない', 'Few APIs actually work', '能正常运行的 API 很少'), body: L('30,600件中 動作確認 5,523件（18%）（Decixa）', '5,523 of 30,600 confirmed working (18%) (Decixa)', '30,600 个中确认可运行的 5,523 个（18%）（Decixa）'), segs: ['E4'] },
+  { code: 'S8', layer: 'seller', step: 7, kind: 'issue', title: L('有料の応答がキャッシュから出る', 'Paid responses leak from cache', '付费响应从缓存中泄露'), body: L('nginx のキャッシュから 100% 流出', '100% leaked from the nginx cache', '从 nginx 缓存中 100% 泄露'), segs: ['E4'] },
+  { code: 'S4', layer: 'seller', step: 8, kind: 'issue', title: L('届いても説明と違う', 'Delivered, but not as described', '收到了但与说明不符'), body: L('「live」の為替が 10時間前。例の入力で data: []', '“Live” FX was 10 hours old; the sample input returned data: []', '标称“live”的汇率是 10 小时前的。用示例输入得到 data: []'), segs: ['E4', 'E5'] },
+  { code: 'F1', layer: 'facilitator', step: 5, kind: 'issue', title: L('決済済みと返すが送金がない', 'Says settled, no transfer', '返回已支付但没有转账'), body: L('settlement_pending と tx を返したが、tx がチェーン上にない 5件', '5 returned settlement_pending and a tx that is not on chain', '返回了 settlement_pending 和 tx，但该 tx 不在链上，共 5 笔'), segs: ['E4', 'E5'] },
+  { code: 'F3', layer: 'facilitator', step: 5, kind: 'issue', title: L('事業者の規則違反', 'Operators break their own rules', '运营方违反自身规则'), body: L('主要 15社すべてに違反（計 49件）', 'All 15 major operators had violations (49 in total)', '主要 15 家全部存在违规（共 49 项）'), segs: ['E4', 'E5', 'P'] },
+  { code: 'F4', layer: 'facilitator', step: 5, kind: 'issue', title: L('1社への集中', 'Concentration on one operator', '集中于一家运营方'), body: L('seller の 93%超 が1社のみに依存', 'Over 93% of sellers depend on a single operator', '超过 93% 的卖方只依赖一家'), segs: ['E4', 'E5'] },
+  { code: 'F2', layer: 'facilitator', step: 7, kind: 'layer', title: L('決済の応答ヘッダが任意', 'The settlement header is optional', '支付结果响应头为可选'), body: L('tx を buyer に返さなくても取引が成立する', 'A trade completes without returning the tx to the buyer', '即使不把 tx 返回给买方，交易也能完成'), segs: ['E4', 'E5'] },
+  { code: 'C1', layer: 'chain', step: 6, kind: 'spec', title: L('仕様が定めていること', 'What the spec defines', '规范所规定的内容'), body: L('EIP-3009 の nonce と再利用の拒否・有効期限・署名の検証。Base の revert の 56.2% は再送を弾いたもの', 'EIP-3009 nonce and reuse rejection, expiry and signature checks. 56.2% of Base reverts were blocked replays', 'EIP-3009 的 nonce 及拒绝重复使用、有效期、签名验证。Base 上 56.2% 的 revert 是拦截了重放'), segs: ['E4', 'E5', 'P'] },
+  { code: 'C2', layer: 'chain', step: 8, kind: 'issue', title: L('送金の有無を取り違える', 'Misreading whether money moved', '误判是否已转账'), body: L('ログ検索は RPC のエラーで「送金なし」と誤る。41件が実は送金済み。authorizationState(署名者, nonce) なら確定できる', 'Log searches misread RPC errors as “no transfer”; 41 had actually settled. authorizationState(signer, nonce) is definitive', '日志检索会因 RPC 错误误判为“未转账”，其中 41 笔实际已转账。用 authorizationState(签名者, nonce) 即可确定'), segs: ['E4', 'E5'] },
+  { code: 'K2', layer: 'sdk', step: 4, kind: 'issue', title: L('再送対策が既定で無効', 'Replay protection off by default', '防重放默认关闭'), body: L('再送の検出・キャッシュ禁止ヘッダを既定で行わない（3系統）→ S7・S8 の原因', 'No replay detection or no-cache headers by default (3 SDKs) → causes S7, S8', '默认不进行重放检测、不设置禁止缓存的响应头（3 个 SDK）→ S7・S8 的原因'), segs: ['E4'] },
+  { code: 'K3', layer: 'sdk', step: 5, kind: 'issue', title: L('Solana の支払い検証の欠陥', 'Flaw in Solana payment checks', 'Solana 支付验证的缺陷'), body: L('GHSA-qr2g-p6q7-w82m（2026年3月）。修正版 @x402/svm 2.6.0／PyPI x402 2.3.0／Go 2.5.0', 'GHSA-qr2g-p6q7-w82m (Mar 2026). Fixed in @x402/svm 2.6.0 / PyPI x402 2.3.0 / Go 2.5.0', 'GHSA-qr2g-p6q7-w82m（2026年3月）。修复版本 @x402/svm 2.6.0／PyPI x402 2.3.0／Go 2.5.0'), segs: ['E4', 'E5'] },
+  { code: 'K1', layer: 'sdk', step: 7, kind: 'issue', title: L('settle の失敗を見ずに返す', 'Returns without checking settle', '不检查 settle 是否失败就返回'), body: L('Flask SDK v0.2.1 以前の既定動作', 'Default in Flask SDK v0.2.1 and earlier', 'Flask SDK v0.2.1 及更早版本的默认行为'), segs: ['E4'] },
 ]
 
 const ACTIONS: { when: Localized; title: Localized; body: Localized; refs: string }[] = [
   {
-    when: L('①②の前', 'Before ①②'),
-    title: L('実購入の記録を引く', 'Look up real purchase records'),
-    body: L('Seller Probe は実在の事業者のエンドポイントを使い方どおりに買い、届いたか・説明どおりかをエンドポイントごとに公開する（11/9：払った62件中50件が説明どおり）', 'Seller Probe buys real operators’ endpoints as documented and publishes, per endpoint, whether it arrived and matched the description (Nov 9: 50 of 62 paid matched)'),
+    when: L('①②の前', 'Before ①②', '①②之前'),
+    title: L('実購入の記録を引く', 'Look up real purchase records', '查阅实际购买记录'),
+    body: L('Seller Probe は実在の事業者のエンドポイントを使い方どおりに買い、届いたか・説明どおりかをエンドポイントごとに公開する（11/9：払った62件中50件が説明どおり）', 'Seller Probe buys real operators’ endpoints as documented and publishes, per endpoint, whether it arrived and matched the description (Nov 9: 50 of 62 paid matched)', 'Seller Probe 按使用说明实际购买真实运营方的端点，并按端点公开是否送达、是否与说明一致（11/9：已支付的 62 个中 50 个与说明一致）'),
     refs: 'B3–B7 · S2–S5',
   },
   {
-    when: L('⑧', '⑧'),
-    title: L('送金を nonce で確かめる', 'Check the transfer by nonce'),
-    body: L('決済ヘッダに頼らず、USDC の authorizationState(署名者, nonce) で、自分の署名が使われたかをチェーンから直接確かめる', 'Instead of trusting the settlement header, ask USDC’s authorizationState(signer, nonce) on chain whether your signature was used'),
+    when: L('⑧', '⑧', '⑧'),
+    title: L('送金を nonce で確かめる', 'Check the transfer by nonce', '用 nonce 核实转账'),
+    body: L('決済ヘッダに頼らず、USDC の authorizationState(署名者, nonce) で、自分の署名が使われたかをチェーンから直接確かめる', 'Instead of trusting the settlement header, ask USDC’s authorizationState(signer, nonce) on chain whether your signature was used', '不依赖支付结果响应头，而是通过 USDC 的 authorizationState(签名者, nonce) 直接从链上确认自己的签名是否已被使用'),
     refs: 'F1 · F2 · C2',
   },
   {
-    when: L('⑦で届かなければ', 'If ⑦ fails'),
-    title: L('同じ支払いで取り直す', 'Re-fetch with the same payment'),
-    body: L('Delivery Receipt に対応した seller なら、本文のハッシュに署名したレシートを受け取り、決済し直さずに再取得できる（対応は現在 JIN・OSD）', 'With a seller that supports Delivery Receipt, you get a receipt signed over the body hash and can re-fetch without paying again (JIN and OSD today)'),
+    when: L('⑦で届かなければ', 'If ⑦ fails', '⑦未送达时'),
+    title: L('同じ支払いで取り直す', 'Re-fetch with the same payment', '用同一笔支付重新获取'),
+    body: L('Delivery Receipt に対応した seller なら、本文のハッシュに署名したレシートを受け取り、決済し直さずに再取得できる（対応は現在 JIN・OSD）', 'With a seller that supports Delivery Receipt, you get a receipt signed over the body hash and can re-fetch without paying again (JIN and OSD today)', '如果 seller 支持 Delivery Receipt，可收到对正文哈希签名的收据，无需重新支付即可再次获取（目前支持的有 JIN、OSD）'),
     refs: 'S1 · S2',
   },
 ]
@@ -132,7 +132,27 @@ const COPY = {
       'Sources: x402 Protocol Specification v2, arXiv:2605.11781, arXiv:2605.30998, arXiv:2607.19545, GHSA-qr2g-p6q7-w82m, public materials from each company, x402 Endpoint (fetched Nov 2, 2026), Seller Probe purchase records (Oct 28 – Nov 9, 2026), nohumans.directory public purchase records, Decixa monthly report (dev.to), Circle Agent Marketplace (as of Nov 10, 2026).',
     pdf: 'View as PDF',
   },
+  zh: {
+    eyebrow: 'Market issues',
+    title: '规范只防止签名重放。已支付却未送达的问题存在于规范之外的 4 个层级',
+    lead: 'x402 v2 规范的 Security Considerations 只规定了防重放（nonce、有效期、签名验证）及其与认证的结合。预算管理和会话不在规范范围内，支付在收货之前就已完成，也没有关于退款或重新获取的规定。我们将一次支付（E4 per-call 采购）分为 8 个阶段，把各个问题放在其发生的阶段和层级上。',
+    hint: '点击层级可展开问题。将光标悬停（或点按）在各问题上，可查看数字和对应细分',
+    count: (n: number) => `问题 ${n} 项`,
+    layer: '层级',
+    legend: [
+      ['issue', '已报告的问题・实际购买中观测到的数字'],
+      ['layer', '在规范之外由该层级自行决定的事项'],
+      ['spec', '规范所规定的内容'],
+    ] as [Kind, string][],
+    segs: '对应细分',
+    actionsTitle: '买方现在就能做的事',
+    source:
+      '来源：x402 Protocol Specification v2、arXiv:2605.11781、arXiv:2605.30998、arXiv:2607.19545、GHSA-qr2g-p6q7-w82m、各公司公开资料、x402 Endpoint（2026年11月2日获取）、Seller Probe 实际购买记录（2026年10月28日〜11月9日）、nohumans.directory 公开购买记录、Decixa 月度报告（dev.to）、Circle Agent Marketplace（截至2026年11月10日）。',
+    pdf: '查看 PDF',
+  },
 }
+
+const CHAIN = L('チェーン', 'Chain', '链')
 
 const KIND_DOT: Record<Kind, string> = { issue: 'bg-[#F57C8E]', layer: 'bg-[#F2D57A]', spec: 'bg-[#5EC9A0]' }
 
@@ -141,7 +161,7 @@ function SegTags({ segs, lang }: { segs: Seg[]; lang: Lang }) {
     <span className="inline-flex flex-wrap gap-1">
       {segs.map((s) => (
         <span key={s} className="rounded border border-fg/20 px-1 font-mono text-[9px] leading-[1.5] text-fg/60">
-          {s === 'P' ? (lang === 'ja' ? '型P' : 'Type P') : s}
+          {s === 'P' ? ({ ja: '型P', en: 'Type P', zh: 'P型' } satisfies Localized)[lang] : s}
         </span>
       ))}
     </span>
@@ -202,7 +222,7 @@ export function MarketIssues() {
       else next.add(k)
       return next
     })
-  const layerName = (ly: (typeof LAYERS)[number]) => (lang === 'ja' ? ly.name : ly.key === 'chain' ? 'Chain' : ly.name)
+  const layerName = (ly: (typeof LAYERS)[number]) => (ly.key === 'chain' ? CHAIN[lang] : ly.name)
   return (
     <div className="relative max-w-6xl mx-auto px-6 mt-16 md:mt-20">
       <motion.div

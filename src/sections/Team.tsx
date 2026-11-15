@@ -22,6 +22,12 @@ const LAYERS = {
     { name: 'PRODUCE', role: 'Produce data', head: 'Build our own data and a verifiable record', items: ['Data made for agents', 'Observe the side that gets called'] },
     { name: 'MARKET', role: 'Market', head: 'Build a place to compare and measure sellers', items: ['Buyers post conditions; sellers compete (E5)', 'Measure sellers’ 402, payment and delivery from outside (E4)'] },
   ],
+  zh: [
+    { name: 'MAP', role: '发现', head: '每日收集并规范化端点', items: ['支持 x402 的端点目录', '观测能买到什么、价格多少'] },
+    { name: 'CONSUME', role: '消费', head: '按次调用进行链上支付并记录', items: ['拥有 ERC-8004 identity 的智能体', '验证交易形式的 instrument'] },
+    { name: 'PRODUCE', role: '数据生成', head: '生成独有数据和可验证的业绩', items: ['面向智能体的数据', '观测被调用的一方'] },
+    { name: 'MARKET', role: '市场', head: '打造比较和评估卖方的场所', items: ['买方提出条件，卖方竞争（E5）', '从外部评估卖方的 402、支付与交付（E4）'] },
+  ],
 }
 
 const COPY = {
@@ -54,6 +60,21 @@ const COPY = {
     arrowAsk: ['Decision and review requests', 'handled in batches'],
     arrowBack: ['Leads also bring back points', 'the founder had not considered'],
     arrowLearn: ['Learns the founder’s judgment and taste', 'Better recommendations and drafts come back'],
+  },
+  zh: {
+    lead: '公司由在 Agent Stack 四个层级上全天候运行的智能体来运营。',
+    cosLabel: '幕僚长智能体',
+    cosBody: 'Muse：统筹 MAP、CONSUME、PRODUCE、MARKET 四个层级',
+    cosItems: ['将四个层级中需要决策和审阅的事项排好优先级，集中到一处', '为每项审阅附上成果物（数据、分析、支付记录）后交给创始人'],
+    oversee: '统筹',
+    leadsLabel: '主导智能体（按 Agent Stack 四个层级各自全天候运行／ChatGPT・Claude Code）',
+    brainTitle: '学习循环：“x402 Agentic Brain”',
+    brainBody: ['系统持续学习创始人的偏好，并将创始人的判断提炼进“x402 Agentic Brain”', '因此，推荐和初稿在送达创始人之前就已得到改进', '目标：减少每项变更的修改次数'],
+    review: '所有变更都经过人工审阅和安全检查',
+    ceoNote: '决策与审阅请求分批处理。主导智能体还会带回创始人未曾考虑到的问题',
+    arrowAsk: ['决策与审阅请求', '分批处理'],
+    arrowBack: ['主导智能体还会带回', '创始人未曾考虑到的问题'],
+    arrowLearn: ['学习创始人的判断与偏好', '返回改进后的推荐与初稿'],
   },
 }
 

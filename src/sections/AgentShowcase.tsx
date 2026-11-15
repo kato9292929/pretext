@@ -26,6 +26,16 @@ const COPY = {
       ['Find who to pay on x402 Endpoint', 'Agents find sellers among 161,826 endpoints (as of Oct 19, 2026).'],
     ],
   },
+  zh: {
+    sideLeft: 'Agentic Commerce',
+    sideRight: 'x402',
+    callouts: [
+      ['通过 Stripe Link 代人支付', 'Muse、Grok 等个人智能体在浏览器或聊天中完成购买。'],
+      ['一次性卡与逐笔授权', '每次支付都由人授权，并使用一次性卡支付。'],
+      ['API 按次支付', 'API 返回 402 后，用 USDC 签名并向同一 URL 再次请求。'],
+      ['在 x402 Endpoint 查找支付对象', '智能体从 161,826 个端点中找到卖方（截至2026年10月19日）。'],
+    ],
+  },
 }
 
 type Slide = {
@@ -41,20 +51,20 @@ type Slide = {
 const SLIDES: Slide[] = [
   {
     agent: 'Agentic Commerce',
-    budget: { ja: '単回利用カード・都度承認', en: 'Single-use card · approve each time' },
-    ask: { ja: 'このイベントのチケットを2枚買っておいて', en: 'Buy two tickets for this event' },
-    found: { ja: 'ブラウザで購入ページを開き、Stripe Link で支払います', en: 'Opening the checkout in the browser; paying with Stripe Link' },
-    answer: { ja: '承認をいただいたので、購入を完了しました。', en: 'You approved it, so the purchase is done.' },
-    paid: { ja: 'Stripe Link で支払い（単回利用カード）', en: 'Paid with Stripe Link (single-use card)' },
+    budget: { ja: '単回利用カード・都度承認', en: 'Single-use card · approve each time', zh: '一次性卡・逐笔授权' },
+    ask: { ja: 'このイベントのチケットを2枚買っておいて', en: 'Buy two tickets for this event', zh: '帮我买两张这场活动的门票' },
+    found: { ja: 'ブラウザで購入ページを開き、Stripe Link で支払います', en: 'Opening the checkout in the browser; paying with Stripe Link', zh: '正在浏览器中打开购买页面，将通过 Stripe Link 支付' },
+    answer: { ja: '承認をいただいたので、購入を完了しました。', en: 'You approved it, so the purchase is done.', zh: '已获得您的授权，购买已完成。' },
+    paid: { ja: 'Stripe Link で支払い（単回利用カード）', en: 'Paid with Stripe Link (single-use card)', zh: '已通过 Stripe Link 支付（一次性卡）' },
     rail: 'Link',
   },
   {
     agent: 'x402',
-    budget: { ja: 'USDC 残高から per-call', en: 'Per-call from a USDC balance' },
-    ask: { ja: '今日、東京の食品で値段が動いたのは？', en: 'Which food prices in Tokyo moved today?' },
-    found: { ja: 'x402 Endpoint で Japan Inflation Nowcall を見つけました', en: 'Found Japan Inflation Nowcall on x402 Endpoint' },
-    answer: { ja: 'movers を1コール買い、その日に動いた品目を取得しました。', en: 'Bought one call to movers and got the items that moved today.' },
-    paid: { ja: '$0.02 per call を残高から支払い（Solana・USDC）', en: 'Paid $0.02 per call from the balance (Solana · USDC)' },
+    budget: { ja: 'USDC 残高から per-call', en: 'Per-call from a USDC balance', zh: '从 USDC 余额按 per-call 支付' },
+    ask: { ja: '今日、東京の食品で値段が動いたのは？', en: 'Which food prices in Tokyo moved today?', zh: '今天东京哪些食品价格有变动？' },
+    found: { ja: 'x402 Endpoint で Japan Inflation Nowcall を見つけました', en: 'Found Japan Inflation Nowcall on x402 Endpoint', zh: '在 x402 Endpoint 上找到了 Japan Inflation Nowcall' },
+    answer: { ja: 'movers を1コール買い、その日に動いた品目を取得しました。', en: 'Bought one call to movers and got the items that moved today.', zh: '购买了 1 次 movers 调用，获取了当天变动的品类。' },
+    paid: { ja: '$0.02 per call を残高から支払い（Solana・USDC）', en: 'Paid $0.02 per call from the balance (Solana · USDC)', zh: '从余额支付 $0.02 per call（Solana・USDC）' },
     rail: 'x402',
   },
 ]
@@ -182,6 +192,12 @@ const PAY_MCP = {
     body: 'Connect Coinbase’s Payments MCP (Agentic Wallet MCP) to Claude Desktop, Claude Code, Codex CLI, Gemini CLI and others, and the agent pays over x402 from a wallet created with your email. Fund it with Coinbase Onramp (USDC), set limits per call and per session; Base, Polygon and Solana are supported.',
     docs: 'Docs',
     note: 'External service (by Coinbase)',
+  },
+  zh: {
+    title: 'x402 × 个人智能体',
+    body: '将 Coinbase 的 Payments MCP（Agentic Wallet MCP）接入 Claude Desktop、Claude Code、Codex CLI、Gemini CLI 等，即可从用邮箱创建的钱包通过 x402 支付。通过 Coinbase Onramp（USDC）充值，可按单次和单个会话设置上限，支持 Base、Polygon 和 Solana。',
+    docs: '文档',
+    note: '外部服务（由 Coinbase 提供）',
   },
 }
 
