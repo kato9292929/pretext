@@ -98,7 +98,6 @@ const ACTIONS: { when: Localized; title: Localized; body: Localized; refs: strin
 const COPY = {
   ja: {
     eyebrow: 'Market issues',
-    title: '仕様が守るのは署名の再送防止まで。決済しても届かない問題は外側の4層にある',
     lead: 'x402 v2 仕様の Security Considerations が定めるのは、再送の防止（nonce・有効期限・署名の検証）と認証との組み合わせだけ。予算管理やセッションは仕様の対象外で、受領より先に決済が終わり、返金・再取得の定めもない。1回の支払い（E4 per-call 調達）を8つの段階に分け、課題が起きる段階と層に置いた。',
     hint: '層をクリックすると課題が広がります。各課題にカーソルを合わせる（タップする）と、数字と該当セグメントが表示されます',
     count: (n: number) => `課題 ${n}件`,
@@ -116,7 +115,6 @@ const COPY = {
   },
   en: {
     eyebrow: 'Market issues',
-    title: 'The spec only protects against signature replay. Paid-but-not-delivered problems live in the four layers outside it',
     lead: 'The Security Considerations of the x402 v2 spec cover only replay protection (nonce, expiry, signature checks) and how it combines with authentication. Budgets and sessions are out of scope; payment settles before delivery, and there is no rule for refunds or re-fetching. We split one payment (E4 per-call procurement) into 8 steps and placed each issue at the step and layer where it happens.',
     hint: 'Click a layer to open its issues. Hover (or tap) an issue to see its numbers and segments',
     count: (n: number) => `${n} issues`,
@@ -134,7 +132,6 @@ const COPY = {
   },
   zh: {
     eyebrow: 'Market issues',
-    title: '规范只防止签名重放。已支付却未送达的问题存在于规范之外的 4 个层级',
     lead: 'x402 v2 规范的 Security Considerations 只规定了防重放（nonce、有效期、签名验证）及其与认证的结合。预算管理和会话不在规范范围内，支付在收货之前就已完成，也没有关于退款或重新获取的规定。我们将一次支付（E4 per-call 采购）分为 8 个阶段，把各个问题放在其发生的阶段和层级上。',
     hint: '点击层级可展开问题。将光标悬停（或点按）在各问题上，可查看数字和对应细分',
     count: (n: number) => `问题 ${n} 项`,
@@ -231,8 +228,7 @@ export function MarketIssues() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-xs tracking-widest text-gold">{t.eyebrow}</p>
-        <h3 className="mt-2 max-w-4xl text-xl md:text-2xl font-semibold tracking-tight text-fg leading-[1.4]">{t.title}</h3>
+        <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-fg">{t.eyebrow}</h3>
         <p className="mt-3 max-w-3xl text-sm text-fg/60 leading-[1.8]">{t.lead}</p>
         <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5 text-[11px] text-fg/55">
           {t.legend.map(([k, label]) => (

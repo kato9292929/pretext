@@ -15,17 +15,19 @@ export function Home() {
   return (
     <>
       <Hero />
-      <section className="relative z-10 overflow-hidden py-16 md:py-24">
+      <section className="relative z-10 overflow-hidden pt-16 md:pt-24">
         <AgenticIntro />
         <AgentShowcase showPayMcp />
+      </section>
+      <Featured />
+      <Ecosystem />
+      <section className="relative z-10 overflow-hidden pb-16 md:pb-24">
         <MarketIssues />
         <EndpointTeaser />
         <HowToPay />
         <DocsLinks />
       </section>
       <News />
-      <Featured />
-      <Ecosystem />
       <Team />
       <Services />
     </>
