@@ -41,7 +41,7 @@ export function DiagramProvider({ children, className = '' }: { children: ReactN
   }, [])
   const scheduleClose = useCallback((id: string) => {
     clearTimeout(timer.current)
-    timer.current = setTimeout(() => setActive((cur) => (cur === id ? null : cur)), 160)
+    timer.current = setTimeout(() => setActive((cur) => (cur === id ? null : cur)), 350)
   }, [])
   const close = useCallback(() => {
     clearTimeout(timer.current)
@@ -109,7 +109,8 @@ export function DNode({
       className={`relative ${on ? 'z-40' : 'z-10'} ${className}`}
       style={style}
       onPointerMove={(e) => {
-        if (e.pointerType === 'mouse' && !on) open(id)
+        // also while already open: moving onto the popover cancels a pending close
+        if (e.pointerType === 'mouse') open(id)
       }}
       onPointerLeave={(e) => {
         if (e.pointerType === 'mouse') scheduleClose(id)
@@ -161,7 +162,7 @@ export function DNode({
         role="region"
         aria-label={label}
         hidden={!on}
-        className={`mt-2 w-full text-left lg:absolute lg:top-full lg:w-[420px] ${ALIGN[align]}`}
+        className={`pt-2 w-full text-left lg:absolute lg:top-full lg:w-[420px] ${ALIGN[align]}`}
       >
         <div className="max-h-[70vh] overflow-y-auto rounded-2xl border border-fg/15 bg-bg/95 shadow-2xl backdrop-blur-md">
           {detail}
