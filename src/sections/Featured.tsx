@@ -3,7 +3,7 @@ import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
 import { useLang, type Lang, type Localized } from '../i18n'
-import { DNode, DiagramProvider, PLACED, place } from '../components/Diagram'
+import { DNode, DiagramProvider } from '../components/Diagram'
 
 type ProductLink = { label: string; href: string }
 
@@ -22,9 +22,9 @@ type Product = {
 }
 
 const INTRO: Localized = {
-  ja: 'x402 Inc.は、エージェント決済に関するリサーチと関連インフラ・データの開発提供を行う会社です。x402対応エンドポイントのデータカタログ、自律エージェントによるステーブルコイン決済、オルタナティブデータ生成の3事業を展開。クレジットカードやステーブルコインなど各市場セグメントにおける市場調査を日次で公開し、エージェンティックコマース市場の形成に貢献することを目指しています。',
-  en: 'x402 Inc. researches agent payments and develops the related infrastructure and data. We run three businesses: a data catalog of x402-enabled endpoints, stablecoin settlement by autonomous agents, and alternative-data generation. We publish daily market research across segments — credit cards, stablecoins and more — aiming to help form the agentic-commerce market.',
-  zh: 'x402 Inc. 是一家从事智能体支付相关研究、并开发提供相关基础设施与数据的公司。公司开展三项业务：x402 兼容端点的数据目录、由自主智能体进行的稳定币支付，以及另类数据生成。我们每日发布信用卡、稳定币等各市场细分领域的市场调研，致力于推动 Agentic Commerce 市场的形成。',
+  ja: 'AI エージェントが払う瞬間の安全性のためのプロダクト。買い手のお金は守られるか、払った後に売り手は届けるか。',
+  en: 'Products for the moment an AI agent pays: is the buyer’s money safe, and does the seller deliver after being paid?',
+  zh: '为 AI 智能体付款那一刻的安全而做的产品：买方的钱是否安全，卖方收款后是否交付。',
 }
 
 const LABELS = {
@@ -349,26 +349,23 @@ const STACK: { key: string; label: Localized; title: Localized; items: Localized
 
 const COPY = {
   ja: {
-    hint: '各プロダクト・実証にカーソルを合わせる（タップする）と詳細が表示されます',
-    score: 'スコア',
-    legend: '実線：稼働中のプロダクトの接続　点線枠：実証（PoC）',
+    hint: '各実証にカーソルを合わせる（タップする）と詳細が表示されます',
     pocs: '実証',
+    pocIntro: 'これまでの実証は続けています。自社データ（PRODUCE）、市場（MARKET）、自律エージェント（CONSUME）も、ここで実証として動かしています。',
     stack: 'Agent Stack',
     stackTag: 'instruments',
   },
   en: {
-    hint: 'Hover (or tap) a product or proof of concept to see its details',
-    score: 'score',
-    legend: 'Solid lines: live product connections · Dashed boxes: proofs of concept',
+    hint: 'Hover (or tap) a proof of concept to see its details',
     pocs: 'Proofs of concept',
+    pocIntro: 'Our proofs of concept continue. Our own data (PRODUCE), the market (MARKET) and the autonomous agent (CONSUME) run here as proofs of concept.',
     stack: 'Agent Stack',
     stackTag: 'instruments',
   },
   zh: {
-    hint: '将光标悬停（或点按）在各产品・验证试点上即可查看详情',
-    score: '评分',
-    legend: '实线：运行中产品的连接　虚线框：验证试点（PoC）',
+    hint: '将光标悬停（或点按）在各验证试点上即可查看详情',
     pocs: '验证试点',
+    pocIntro: '此前的验证试点仍在继续。自有数据（PRODUCE）、市场（MARKET）与自主智能体（CONSUME）也在这里作为验证试点运行。',
     stack: 'Agent Stack',
     stackTag: 'instruments',
   },
@@ -445,63 +442,119 @@ function PocDetail({ poc, lang }: { poc: Poc; lang: Lang }) {
 
 /* ── Product map (lg+: positioned like the ecosystem map; below lg: stacked) ── */
 
-const W = 1100
-const H = 330
+/* ── Main products: four image cards ─────────────────────────────────────── */
 
-const NODES: { key: Key; x: number; y: number; w: number; h: number; align: 'left' | 'right' }[] = [
-  { key: 'endpoint', x: 0, y: 30, w: 260, h: 86, align: 'left' },
-  { key: 'aa', x: 280, y: 30, w: 260, h: 86, align: 'left' },
-  { key: 'osd', x: 560, y: 30, w: 260, h: 86, align: 'left' },
-  { key: 'jin', x: 840, y: 30, w: 260, h: 86, align: 'right' },
-  { key: 'rfq', x: 110, y: 226, w: 400, h: 96, align: 'left' },
-  { key: 'probe', x: 590, y: 226, w: 400, h: 96, align: 'right' },
+type Main = {
+  name: string
+  line: Localized
+  status: Localized
+  href: string
+  cta: Localized
+  image?: string // screenshot of a live site
+  art?: { bg: string; lines: string[] } // drawn visual while there is no site yet
+}
+
+const SITE = { ja: 'サイトを見る', en: 'Visit site', zh: '访问网站' }
+const GITHUB = { ja: 'GitHub', en: 'GitHub', zh: 'GitHub' }
+
+const MAIN: Main[] = [
+  {
+    name: 'x402 Endpoint',
+    line: { ja: 'x402 エンドポイントの日次カタログ', en: 'A daily catalog of x402 endpoints', zh: 'x402 端点的每日目录' },
+    status: { ja: '稼働中', en: 'Live', zh: '运行中' },
+    href: 'https://endpoint.x402jp.com/',
+    cta: SITE,
+    art: {
+      bg: 'linear-gradient(150deg, #141f5c 0%, #4b5bd6 50%, #a98bf2 100%)',
+      lines: ['QuickNode     $0.001', 'Messari       Free', 'Exa           Free', 'Nansen        $0.01'],
+    },
+  },
+  {
+    name: 'x402 Seller Probe',
+    line: { ja: '毎週実際に買って、届くかを測る', en: 'Buys every week and measures what gets delivered', zh: '每周实际购买，检测是否交付' },
+    status: { ja: '稼働中', en: 'Live', zh: '运行中' },
+    href: 'https://probe.x402jp.com/',
+    cta: SITE,
+    art: {
+      bg: 'linear-gradient(150deg, #3b1230 0%, #a8406e 50%, #f2a65a 100%)',
+      lines: ['curated.json', 'verdict: delivered', 'verdict: not_delivered', 'every Monday'],
+    },
+  },
+  {
+    name: 'AgentPay402 MCP',
+    line: { ja: '払う前に売り手を確かめ、払った後に届いたかを確かめる', en: 'Checks the seller before paying, and the delivery after', zh: '付款前核查卖方，付款后确认交付' },
+    status: { ja: 'Claude Code プラグイン', en: 'Claude Code plugin', zh: 'Claude Code 插件' },
+    href: 'https://github.com/kato9292929/x402-wallet-mcp',
+    cta: GITHUB,
+    art: {
+      bg: 'linear-gradient(150deg, #2a1660 0%, #7a2c9e 45%, #e0569f 100%)',
+      lines: ['> check_seller', '  probe: delivered', '> make_x402_request', '  status: fulfilled'],
+    },
+  },
+  {
+    name: 'x402 Security Check',
+    line: { ja: 'seller の x402 決済コードを11項目で点検', en: 'Reviews a seller’s x402 payment code on 11 items', zh: '从 11 项检查卖方的 x402 支付代码' },
+    status: { ja: '開発中', en: 'In development', zh: '开发中' },
+    href: 'https://github.com/kato9292929/x402-security-check',
+    cta: GITHUB,
+    art: {
+      bg: 'linear-gradient(150deg, #0d3b4f 0%, #1f7f8c 50%, #6fd6a8 100%)',
+      lines: ['11 checks', 'S1  K1  S7  K2  S9  S8', 'F1  F3  F2  K3', 'severity · file · line'],
+    },
+  },
 ]
 
-const GROUP_LABELS: { before: Key; text: Localized; x: number; y: number; w: number }[] = [
-  { before: 'endpoint', text: { ja: 'MAP（発見）', en: 'MAP (Discovery)', zh: 'MAP（发现）' }, x: 0, y: 4, w: 260 },
-  { before: 'aa', text: { ja: 'CONSUME（消費）', en: 'CONSUME (Consumption)', zh: 'CONSUME（消费）' }, x: 280, y: 4, w: 260 },
-  { before: 'osd', text: { ja: 'PRODUCE（データ生成）', en: 'PRODUCE (Data production)', zh: 'PRODUCE（数据生成）' }, x: 560, y: 4, w: 540 },
-  { before: 'rfq', text: { ja: 'MARKET（市場）', en: 'MARKET', zh: 'MARKET（市场）' }, x: 0, y: 190, w: 105 },
-]
-
-function Label({ text, style }: { text: string; style?: React.CSSProperties }) {
+function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
   return (
-    <p
-      className={`mt-4 first:mt-0 lg:mt-0 text-[11px] font-mono tracking-widest text-gold lg:flex lg:items-center lg:justify-center ${PLACED}`}
-      style={style}
+    <motion.a
+      href={m.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: k * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-fg/10"
     >
-      {text}
-    </p>
+      {/* visual */}
+      {m.image ? (
+        <img src={m.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.04]" />
+      ) : (
+        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.04]" style={{ background: m.art!.bg }}>
+          <div className="absolute left-6 right-6 top-24 space-y-1.5 font-mono text-[13px] text-white/75">
+            {m.art!.lines.map((l) => (
+              <p key={l} className="whitespace-pre">{l}</p>
+            ))}
+          </div>
+        </div>
+      )}
+      {/* readable overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/85" />
+
+      <div className="relative flex h-full flex-col justify-between p-6 text-white">
+        <div>
+          <p className="text-xl font-semibold tracking-tight">{m.name}</p>
+          <span className="mt-2 inline-block rounded-full border border-white/30 px-2.5 py-0.5 text-[11px] text-white/85">{m.status[lang]}</span>
+        </div>
+        <div>
+          <p className="text-[15px] font-medium leading-[1.55]">{m.line[lang]}</p>
+          <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-white/85 group-hover:text-white">
+            {m.cta[lang]}
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </p>
+        </div>
+      </div>
+    </motion.a>
   )
 }
 
-function Lines({ score }: { score: string }) {
-  return (
-    <svg
-      viewBox={`0 0 ${W} ${H}`}
-      className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-      aria-hidden="true"
-    >
-      <defs>
-        <marker id="pm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0 0 L10 5 L0 10 z" fill="rgb(var(--gold) / 0.8)" />
-        </marker>
-      </defs>
-      <g fill="none" stroke="rgb(var(--gold) / 0.55)" strokeWidth={1.25}>
-        <path d="M100 116 L230 224" markerEnd="url(#pm-arrow)" />
-        <path d="M170 116 L680 224" markerEnd="url(#pm-arrow)" />
-        <path d="M410 116 L380 224" markerEnd="url(#pm-arrow)" />
-        <path d="M690 116 L830 158 M970 116 L830 158" />
-        <path d="M830 158 L470 224" markerEnd="url(#pm-arrow)" />
-        <path d="M830 158 L800 224" markerEnd="url(#pm-arrow)" />
-        <path d="M588 274 L514 274" markerEnd="url(#pm-arrow)" />
-      </g>
-      <text x={551} y={264} textAnchor="middle" fontSize={12} fill="rgb(var(--gold))">
-        {score}
-      </text>
-    </svg>
-  )
-}
+/* PoC products, shown as diagram nodes above the other PoCs */
+const POC_PRODUCTS: { key: Key; group: Localized }[] = [
+  { key: 'osd', group: { ja: 'PRODUCE（データ生成）', en: 'PRODUCE (data)', zh: 'PRODUCE（数据生成）' } },
+  { key: 'jin', group: { ja: 'PRODUCE（データ生成）', en: 'PRODUCE (data)', zh: 'PRODUCE（数据生成）' } },
+  { key: 'rfq', group: { ja: 'MARKET（市場）', en: 'MARKET', zh: 'MARKET（市场）' } },
+  { key: 'aa', group: { ja: 'CONSUME（消費）', en: 'CONSUME', zh: 'CONSUME（消费）' } },
+]
 
 export function Featured() {
   const { lang } = useLang()
@@ -515,77 +568,88 @@ export function Featured() {
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <SectionEyebrow label="Products" tag="Automatic" heading />
+        <SectionEyebrow label="Products" tag="Security for Agent Payments" heading />
         <p className="mt-6 text-fg/60 text-base leading-[1.7] max-w-3xl">{INTRO[lang]}</p>
       </motion.div>
 
-      <DiagramProvider className="mt-10">
-        {/* Products */}
-        <div className="relative flex flex-col gap-2 lg:block lg:aspect-[1100/330]">
-          <Lines score={t.score} />
-          {NODES.map((n) => {
-            const p = byKey[n.key]
-            const label = GROUP_LABELS.find((g) => g.before === n.key)
-            return (
-              <div key={n.key} className="contents">
-                {label && <Label text={label.text[lang]} style={place(label.x, label.y, label.w, 22, W, H)} />}
-                <DNode
-                  id={n.key}
-                  label={p.name}
-                  align={n.align}
-                  strong={n.key === 'rfq' || n.key === 'probe'}
-                  className={PLACED}
-                  style={place(n.x, n.y, n.w, n.h, W, H)}
-                  face={
-                    <span className="flex h-full flex-col items-center justify-center gap-1">
-                      <span className="text-sm md:text-base font-semibold text-fg">{p.name}</span>
-                      {FACE[n.key].sub.map((s) => (
-                        <span key={s.ja} className="text-[11px] leading-[1.45] text-fg/55">
-                          {s[lang]}
-                        </span>
-                      ))}
-                    </span>
-                  }
-                  detail={<ProductDetail product={p} lang={lang} />}
-                />
-              </div>
-            )
-          })}
-        </div>
+      {/* Main products */}
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {MAIN.map((m, k) => (
+          <MainCard key={m.name} m={m} lang={lang} k={k} />
+        ))}
+      </div>
 
-        {/* Proofs of concept */}
-        <h3 className="mt-12 text-xs uppercase tracking-widest text-gold lg:sr-only">{t.pocs}</h3>
-        <div className="mt-4 lg:mt-10 grid gap-8 lg:grid-cols-3 lg:gap-5">
-          {POCS.map((g) => (
-            <div key={g.title.ja}>
-              <p className="mb-3 text-center text-[11px] font-mono tracking-wider text-gold">{g.title[lang]}</p>
-              <div className="flex flex-col gap-2">
-                {g.rows.map((poc) => (
+      {/* PoC: continuing proofs of concept, kept separate from the products */}
+      <div id="poc" className="mt-16 pt-10 border-t border-fg/10">
+        <div className="flex items-center gap-3">
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-fg">PoC</h3>
+          <span
+            className="text-xs px-2.5 py-1 rounded-full border"
+            style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.45)', backgroundColor: 'rgb(var(--gold) / 0.08)' }}
+          >
+            {t.pocs}
+          </span>
+        </div>
+        <p className="mt-4 text-fg/60 text-sm md:text-base leading-[1.7] max-w-3xl">{t.pocIntro}</p>
+
+        <DiagramProvider className="mt-8">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {POC_PRODUCTS.map(({ key, group }, i) => {
+              const p = byKey[key]
+              return (
+                <div key={key}>
+                  <p className="mb-2 text-center text-[11px] font-mono tracking-wider text-gold">{group[lang]}</p>
                   <DNode
-                    key={poc.id}
-                    id={poc.id}
-                    label={poc.name[lang]}
-                    align={g.align}
+                    id={key}
+                    label={p.name}
+                    align={i < 2 ? 'left' : 'right'}
                     dashed
                     face={
-                      <span className="flex flex-col items-center gap-0.5">
-                        <span className="text-[13px] font-semibold text-fg">{poc.name[lang]}</span>
-                        <span className="text-[11px] leading-[1.45] text-fg/55">{poc.sub[lang]}</span>
+                      <span className="flex flex-col items-center gap-0.5 py-1">
+                        <span className="text-sm font-semibold text-fg">{p.name}</span>
+                        {FACE[key].sub.map((s) => (
+                          <span key={s.ja} className="text-[11px] leading-[1.45] text-fg/55">
+                            {s[lang]}
+                          </span>
+                        ))}
                       </span>
                     }
-                    detail={<PocDetail poc={poc} lang={lang} />}
+                    detail={<ProductDetail product={p} lang={lang} />}
                   />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+                </div>
+              )
+            })}
+          </div>
 
-        <div className="mt-6 flex flex-col items-center gap-1 text-center text-[11px] text-fg/40 lg:flex-row lg:justify-between lg:text-left">
-          <span>{t.hint}</span>
-          <span>{t.legend}</span>
-        </div>
-      </DiagramProvider>
+          <div className="mt-10 grid gap-8 lg:grid-cols-3 lg:gap-5">
+            {POCS.map((g) => (
+              <div key={g.title.ja}>
+                <p className="mb-3 text-center text-[11px] font-mono tracking-wider text-gold">{g.title[lang]}</p>
+                <div className="flex flex-col gap-2">
+                  {g.rows.map((poc) => (
+                    <DNode
+                      key={poc.id}
+                      id={poc.id}
+                      label={poc.name[lang]}
+                      align={g.align}
+                      dashed
+                      face={
+                        <span className="flex flex-col items-center gap-0.5">
+                          <span className="text-[13px] font-semibold text-fg">{poc.name[lang]}</span>
+                          <span className="text-[11px] leading-[1.45] text-fg/55">{poc.sub[lang]}</span>
+                        </span>
+                      }
+                      detail={<PocDetail poc={poc} lang={lang} />}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-6 text-center text-[11px] text-fg/40 lg:text-left">{t.hint}</p>
+        </DiagramProvider>
+      </div>
 
       {/* Agent Stack (formerly Architecture) */}
       <div id="architecture" className="mt-16 pt-10 border-t border-fg/10">
