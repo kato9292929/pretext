@@ -442,16 +442,64 @@ function PocDetail({ poc, lang }: { poc: Poc; lang: Lang }) {
 
 /* ── Product map (lg+: positioned like the ecosystem map; below lg: stacked) ── */
 
+/* ── Tech stack logos (official marks, public/logos/stack/) ──────────────── */
+
+const LOGO = {
+  'Claude Code': '/logos/claude-mark.svg',
+  Claude: '/logos/claude-mark.svg',
+  Railway: '/logos/stack/railway.png',
+  'Circle Wallets': '/logos/stack/circle.svg',
+  'Coinbase CDP': '/logos/stack/coinbase.png',
+  Privy: '/logos/stack/privy.png',
+  Crossmint: '/logos/stack/crossmint.png',
+  'World ID': '/logos/stack/world.png',
+  Base: '/logos/stack/base.png',
+  Solana: '/logos/stack/solana.svg',
+  Arc: '/logos/stack/arc.png',
+  USDC: '/logos/stack/usdc.svg',
+} as const
+type Tech = keyof typeof LOGO
+
+// What each product runs on / pays with, as stated in our product pages and notes
+const TECH: Record<string, Tech[]> = {
+  probe: ['Base', 'Solana', 'USDC'],
+  mcp: ['Claude Code', 'Coinbase CDP', 'Privy', 'Crossmint', 'Base', 'Solana', 'USDC'],
+  security: ['Claude Code'],
+  aa: ['Railway', 'Circle Wallets', 'Base', 'Solana', 'USDC', 'World ID', 'Arc'],
+  osd: ['Claude', 'Base', 'Solana', 'USDC'],
+  jin: ['Solana', 'USDC'],
+  rfq: ['Solana', 'USDC'],
+}
+
+/* Logos on a dark tile so white marks (USDC) read on both themes */
+function TechIcons({ items, size = 'sm', names = false }: { items?: Tech[]; size?: 'sm' | 'md'; names?: boolean }) {
+  if (!items?.length) return null
+  const box = size === 'md' ? 'h-6 w-6' : 'h-5 w-5'
+  return (
+    <span className="flex flex-wrap items-center justify-center gap-1.5">
+      {items.map((n) => (
+        <span key={n} title={n} className={`inline-flex items-center gap-1.5 ${names ? 'rounded-full bg-black/45 py-0.5 pl-0.5 pr-2 text-[11px] text-white/85' : ''}`}>
+          <span className={`inline-flex ${box} shrink-0 items-center justify-center overflow-hidden rounded-md p-[3px] ring-1 ring-white/10 ${n === 'World ID' ? 'bg-white' : 'bg-[#0b0b0f]'}`}>
+            <img src={LOGO[n]} alt={n} className="h-full w-full object-contain" loading="lazy" />
+          </span>
+          {names && n}
+        </span>
+      ))}
+    </span>
+  )
+}
+
 /* ── Main products: four image cards ─────────────────────────────────────── */
 
 type Main = {
+  key: string
   name: string
   line: Localized
   status: Localized
   href: string
   cta: Localized
   image?: string // screenshot of a live site
-  art?: { bg: string; lines: string[] } // drawn visual while there is no site yet
+  art?: { bg: string; lines: string[] } // gradient while the product images are being made (lines unused for now)
 }
 
 const SITE = { ja: 'サイトを見る', en: 'Visit site', zh: '访问网站' }
@@ -459,6 +507,7 @@ const GITHUB = { ja: 'GitHub', en: 'GitHub', zh: 'GitHub' }
 
 const MAIN: Main[] = [
   {
+    key: 'endpoint',
     name: 'x402 Endpoint',
     line: { ja: 'x402 エンドポイントの日次カタログ', en: 'A daily catalog of x402 endpoints', zh: 'x402 端点的每日目录' },
     status: { ja: '稼働中', en: 'Live', zh: '运行中' },
@@ -470,6 +519,7 @@ const MAIN: Main[] = [
     },
   },
   {
+    key: 'probe',
     name: 'x402 Seller Probe',
     line: { ja: '毎週実際に買って、届くかを測る', en: 'Buys every week and measures what gets delivered', zh: '每周实际购买，检测是否交付' },
     status: { ja: '稼働中', en: 'Live', zh: '运行中' },
@@ -481,6 +531,7 @@ const MAIN: Main[] = [
     },
   },
   {
+    key: 'mcp',
     name: 'AgentPay402 MCP',
     line: { ja: '払う前に売り手を確かめ、払った後に届いたかを確かめる', en: 'Checks the seller before paying, and the delivery after', zh: '付款前核查卖方，付款后确认交付' },
     status: { ja: 'Claude Code プラグイン', en: 'Claude Code plugin', zh: 'Claude Code 插件' },
@@ -492,6 +543,7 @@ const MAIN: Main[] = [
     },
   },
   {
+    key: 'security',
     name: 'x402 Security Check',
     line: { ja: 'seller の x402 決済コードを11項目で点検', en: 'Reviews a seller’s x402 payment code on 11 items', zh: '从 11 项检查卖方的 x402 支付代码' },
     status: { ja: '開発中', en: 'In development', zh: '开发中' },
@@ -514,18 +566,13 @@ function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: k * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-fg/10"
+      className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-fg/10 sm:aspect-[4/5]"
     >
       {/* visual */}
       {m.image ? (
         <img src={m.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.04]" />
       ) : (
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.04]" style={{ background: m.art!.bg }}>
-          <div className="absolute left-6 right-6 top-24 space-y-1.5 font-mono text-[13px] text-white/75">
-            {m.art!.lines.map((l) => (
-              <p key={l} className="whitespace-pre">{l}</p>
-            ))}
-          </div>
         </div>
       )}
       {/* readable overlay */}
@@ -538,6 +585,11 @@ function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
         </div>
         <div>
           <p className="text-[15px] font-medium leading-[1.55]">{m.line[lang]}</p>
+          {TECH[m.key] && (
+            <div className="mt-3 [&>span]:justify-start">
+              <TechIcons items={TECH[m.key]} names />
+            </div>
+          )}
           <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-white/85 group-hover:text-white">
             {m.cta[lang]}
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -612,6 +664,9 @@ export function Featured() {
                             {s[lang]}
                           </span>
                         ))}
+                        <span className="mt-2">
+                          <TechIcons items={TECH[key]} names />
+                        </span>
                       </span>
                     }
                     detail={<ProductDetail product={p} lang={lang} />}
