@@ -1,9 +1,9 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { useLang } from '../i18n'
-import { ENDPOINT } from '../data/services'
+const PROBE = 'https://probe.x402jp.com/'
 
-/* Home: a lead-in to x402 Endpoint, below the phone showcase. A snapshot of
+/* Home: the API list (links to x402 Seller Probe). A snapshot of
    the top of its "Services the market already uses" list (catalog updated
    2026-11-08); logos are the ones the Endpoint site serves (public/endpoint-logos/).
    1P = the company's own domain, 3P = resold through a payment gateway. */
@@ -25,28 +25,25 @@ const ROWS: Row[] = [
 
 const COPY = {
   ja: {
-    eyebrow: 'x402 Endpoint',
     title: 'エージェントが安全に払える API を、ひとつのカタログで',
     lead: '市場ですでに使われている 356 サービス（33,881 エンドポイント）から、上位を抜粋（2026年11月8日更新）。',
     endpoints: 'エンドポイント',
     note: '1P は自社ドメインでの提供、3P は決済ゲートウェイ経由の提供です。',
-    cta: 'x402 Endpoint で全部見る',
+    cta: 'すべて見る',
   },
   en: {
-    eyebrow: 'x402 Endpoint',
     title: 'APIs your agent can pay for safely, in one catalog',
     lead: 'The top of 356 services (33,881 endpoints) the market already uses (updated Nov 8, 2026).',
     endpoints: 'endpoints',
     note: '1P is served from the company’s own domain; 3P is resold through a payment gateway.',
-    cta: 'See everything on x402 Endpoint',
+    cta: 'See all',
   },
   zh: {
-    eyebrow: 'x402 Endpoint',
     title: '智能体可安全付费的 API，尽在一个目录',
     lead: '从市场上已在使用的 356 个服务（33,881 个端点）中摘选排名靠前者（2026年11月8日更新）。',
     endpoints: '个端点',
     note: '1P 指由公司自有域名提供，3P 指经由支付网关提供。',
-    cta: '在 x402 Endpoint 查看全部',
+    cta: '查看全部',
   },
 }
 
@@ -70,18 +67,17 @@ export function EndpointTeaser() {
     >
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-widest text-gold">{t.eyebrow}</p>
-          <h3 className="mt-2 text-xl md:text-2xl font-semibold tracking-tight text-fg">{t.title}</h3>
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-fg">{t.title}</h3>
           <p className="mt-2 text-sm text-fg/55">{t.lead}</p>
         </div>
-        <a href={ENDPOINT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-fg/80 hover:text-gold transition-colors">
+        <a href={PROBE} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-fg/80 hover:text-gold transition-colors">
           {t.cta}
           <ArrowUpRight className="h-4 w-4" />
         </a>
       </div>
 
       <a
-        href={ENDPOINT}
+        href={PROBE}
         target="_blank"
         rel="noopener noreferrer"
         className="liquid-glass mt-6 grid overflow-hidden rounded-2xl md:grid-cols-2 md:divide-x md:divide-fg/10"

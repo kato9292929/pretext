@@ -545,8 +545,8 @@ export function Featured() {
         </div>
 
         <DiagramProvider className="mt-8">
-          {/* PoC products as one list: layer · name and line · stack */}
-          <div className="liquid-glass divide-y divide-fg/10 overflow-hidden rounded-2xl">
+          {/* PoC products: cards, three on top and two below */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {POC_PRODUCTS.map(({ key, group }) => {
               const p = byKey[key]
               const href = p.live ?? p.links[0]?.href
@@ -556,19 +556,19 @@ export function Featured() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group grid gap-3 px-5 py-4 transition-colors hover:bg-fg/[0.04] md:grid-cols-[11rem_minmax(0,1fr)_auto] md:items-center md:gap-6"
+                  className="liquid-glass group flex flex-col rounded-2xl border border-fg/10 p-5"
                 >
                   <span className="font-mono text-[11px] tracking-wider text-gold">{group[lang]}</span>
-                  <span className="min-w-0">
-                    <span className="flex items-center gap-1.5 text-[15px] font-semibold text-fg">
-                      {p.name}
-                      <ArrowUpRight className="h-3.5 w-3.5 text-fg/35 transition-colors group-hover:text-fg" />
+                  <span className="mt-2 flex items-center gap-1.5 text-base font-semibold text-fg">
+                    {p.name}
+                    <ArrowUpRight className="h-3.5 w-3.5 text-fg/35 transition-colors group-hover:text-fg" />
+                  </span>
+                  <span className="mt-1 text-xs text-fg/55">{FACE[key].sub[0][lang]}</span>
+                  {TECH[key] && (
+                    <span className="mt-4 [&>span]:justify-start">
+                      <TechIcons items={TECH[key]} names />
                     </span>
-                    <span className="mt-0.5 block text-xs text-fg/55">{FACE[key].sub[0][lang]}</span>
-                  </span>
-                  <span className="md:[&>span]:justify-end [&>span]:justify-start">
-                    <TechIcons items={TECH[key]} names />
-                  </span>
+                  )}
                 </a>
               )
             })}
