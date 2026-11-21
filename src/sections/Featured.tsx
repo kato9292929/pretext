@@ -292,82 +292,21 @@ const POCS: PocGroup[] = [
 
 /* ── Agent Stack (formerly the Architecture section) ──────────────────────── */
 
-const STACK_INTRO: Localized = {
-  ja: '事業は発見（MAP）・消費（CONSUME）・データ生成（PRODUCE）・市場（MARKET）の4層の instruments で構成されます。いずれも、エコシステムを外から論じるためでなく、内側から観測・検証するために動かしています。',
-  en: 'The business is made up of four layers of instruments — discovery (MAP), consumption (CONSUME), data production (PRODUCE) and market (MARKET). We run all of them not to comment on the ecosystem from outside, but to observe and verify it from within.',
-  zh: '业务由发现（MAP）・消费（CONSUME）・数据生成（PRODUCE）・市场（MARKET）四层 instruments 构成。运行它们并非为了从外部评论生态，而是为了从内部观测和验证生态。',
-}
-
-const STACK_CHIPS: Localized<string[]> = {
-  ja: ['per-callオンチェーン決済', '検証可能な実績', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
-  en: ['Per-call on-chain settlement', 'Verifiable track record', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
-  zh: ['per-call 链上支付', '可验证的业绩记录', 'HTTP 402', 'Solana / Base / Arc', 'ERC-8004 identity', 'REST + MCP'],
-}
-
-const STACK: { key: string; label: Localized; title: Localized; items: Localized<string[]> }[] = [
-  {
-    key: 'MAP',
-    label: { ja: '発見', en: 'Discovery', zh: '发现' },
-    title: { ja: 'エンドポイントを日次で収集・正規化', en: 'Collect & normalize endpoints daily', zh: '每日收集并规范化端点' },
-    items: {
-      ja: ['x402対応エンドポイントのカタログ', '何が・いくらで買えるかを観測する'],
-      en: ['A catalog of x402-compatible endpoints', 'Observes what can be bought and at what price'],
-      zh: ['x402 兼容端点的目录', '观测能以什么价格买到什么'],
-    },
-  },
-  {
-    key: 'CONSUME',
-    label: { ja: '消費', en: 'Consumption', zh: '消费' },
-    title: { ja: 'per-callでオンチェーン決済し記録する', en: 'Settle per-call on-chain and record', zh: '以 per-call 方式链上支付并记录' },
-    items: {
-      ja: ['ERC-8004 identity を持つエージェント', '取引の形式を検証する instrument'],
-      en: ['An agent with an ERC-8004 identity', 'An instrument to verify the form of a transaction'],
-      zh: ['拥有 ERC-8004 identity 的智能体', '验证交易形式的 instrument'],
-    },
-  },
-  {
-    key: 'PRODUCE',
-    label: { ja: 'データ生成', en: 'Data production', zh: '数据生成' },
-    title: { ja: '独自データと検証可能な実績を作る', en: 'Produce proprietary data & verifiable records', zh: '生成独有数据与可验证的业绩记录' },
-    items: {
-      ja: ['エージェント向けのデータ', '叩かれる側を観測する'],
-      en: ['Data built for agents', 'Observes the side being called'],
-      zh: ['面向智能体的数据', '观测被调用的一方'],
-    },
-  },
-  {
-    key: 'MARKET',
-    label: { ja: '市場', en: 'Market', zh: '市场' },
-    title: { ja: '売り手を比べ、測る場を作る', en: 'Build the place where sellers are compared and measured', zh: '打造比较和衡量卖方的场所' },
-    items: {
-      ja: ['買い手が条件を出し、売り手が競う（E5）', '売り手の402・決済・納品を外から測る（E4）'],
-      en: ['Buyers post conditions, sellers compete (E5)', 'Measures sellers’ 402, payment and delivery from outside (E4)'],
-      zh: ['买方提出条件，卖方竞争（E5）', '从外部检测卖方的 402・支付・交付（E4）'],
-    },
-  },
-]
-
 const COPY = {
   ja: {
     hint: '各実証にカーソルを合わせる（タップする）と詳細が表示されます',
     pocs: '実証',
     pocIntro: 'これまでの実証は続けています。エンドポイントのカタログ（MAP）、自社データ（PRODUCE）、市場（MARKET）、自律エージェント（CONSUME）も、ここで実証として動かしています。',
-    stack: 'Agent Stack',
-    stackTag: 'instruments',
   },
   en: {
     hint: 'Hover (or tap) a proof of concept to see its details',
     pocs: 'Proofs of concept',
     pocIntro: 'Our proofs of concept continue. The endpoint catalog (MAP), our own data (PRODUCE), the market (MARKET) and the autonomous agent (CONSUME) run here as proofs of concept.',
-    stack: 'Agent Stack',
-    stackTag: 'instruments',
   },
   zh: {
     hint: '将光标悬停（或点按）在各验证试点上即可查看详情',
     pocs: '验证试点',
     pocIntro: '此前的验证试点仍在继续。端点目录（MAP）、自有数据（PRODUCE）、市场（MARKET）与自主智能体（CONSUME）也在这里作为验证试点运行。',
-    stack: 'Agent Stack',
-    stackTag: 'instruments',
   },
 }
 
@@ -457,6 +396,13 @@ const LOGO = {
   Solana: '/logos/stack/solana.svg',
   Arc: '/logos/stack/arc.png',
   USDC: '/logos/stack/usdc.svg',
+  AWS: '/logos/stack/aws.png',
+  Arcium: '/logos/stack/arcium.png',
+  Stripe: '/logos/stack/stripe.png',
+  Nevermined: '/logos/stack/nevermined.png',
+  Polygon: '/logos/stack/polygon.png',
+  JPYC: '/logos/stack/jpyc.png',
+  Exa: '/logos/stack/exa.png',
 } as const
 type Tech = keyof typeof LOGO
 
@@ -469,6 +415,14 @@ const TECH: Record<string, Tech[]> = {
   osd: ['Claude', 'Base', 'Solana', 'USDC'],
   jin: ['Solana', 'USDC'],
   rfq: ['Solana', 'USDC'],
+  // PoCs (by PoC id)
+  hermes: ['Exa'],
+  agentcore: ['AWS'],
+  arcium: ['Arcium'],
+  stripe: ['Stripe'],
+  nevermined: ['Nevermined', 'USDC'],
+  jpyc: ['JPYC', 'Polygon'],
+  crossmint: ['Crossmint'],
 }
 
 /* Logos on a dark tile so white marks (USDC) read on both themes */
@@ -638,15 +592,17 @@ export function Featured() {
             {POC_PRODUCTS.map(({ key, group }, i) => {
               const p = byKey[key]
               return (
-                <div key={key}>
+                // equal-height boxes: the column stretches and the node fills it
+                <div key={key} className="flex flex-col">
                   <p className="mb-2 text-center text-[11px] font-mono tracking-wider text-gold">{group[lang]}</p>
                   <DNode
+                    className="flex-1"
                     id={key}
                     label={p.name}
                     align={i < 3 ? 'left' : 'right'}
                     dashed
                     face={
-                      <span className="flex flex-col items-center gap-0.5 py-1">
+                      <span className="flex h-full flex-col items-center justify-start gap-0.5 py-1">
                         <span className="text-sm font-semibold text-fg">{p.name}</span>
                         {FACE[key].sub.map((s) => (
                           <span key={s.ja} className="text-[11px] leading-[1.45] text-fg/55">
@@ -681,6 +637,11 @@ export function Featured() {
                         <span className="flex flex-col items-center gap-0.5">
                           <span className="text-[13px] font-semibold text-fg">{poc.name[lang]}</span>
                           <span className="text-[11px] leading-[1.45] text-fg/55">{poc.sub[lang]}</span>
+                          {TECH[poc.id] && (
+                            <span className="mt-1.5">
+                              <TechIcons items={TECH[poc.id]} names />
+                            </span>
+                          )}
                         </span>
                       }
                       detail={<PocDetail poc={poc} lang={lang} />}
@@ -695,45 +656,6 @@ export function Featured() {
         </DiagramProvider>
       </div>
 
-      {/* Agent Stack (formerly Architecture) */}
-      <div id="architecture" className="mt-16 pt-10 border-t border-fg/10">
-        <div className="flex items-center gap-3">
-          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-fg">{t.stack}</h3>
-          <span
-            className="text-xs px-2.5 py-1 rounded-full border"
-            style={{ color: 'rgb(var(--gold))', borderColor: 'rgb(var(--gold) / 0.45)', backgroundColor: 'rgb(var(--gold) / 0.08)' }}
-          >
-            {t.stackTag}
-          </span>
-        </div>
-        <p className="mt-4 text-fg/60 text-sm md:text-base leading-[1.7] max-w-3xl">{STACK_INTRO[lang]}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {STACK_CHIPS[lang].map((chip) => (
-            <span key={chip} className="text-xs text-fg/70 px-3 py-1.5 rounded-full border border-fg/10 bg-fg/[0.03]">
-              {chip}
-            </span>
-          ))}
-        </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {STACK.map((layer) => (
-            <div key={layer.key} className="liquid-glass rounded-xl p-4">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-gold" />
-                <span className="text-sm font-semibold text-fg">{layer.key}</span>
-                <span className="text-xs text-fg/40">（{layer.label[lang]}）</span>
-              </div>
-              <p className="mt-2 text-sm text-fg/80">{layer.title[lang]}</p>
-              <div className="mt-2 space-y-1">
-                {layer.items[lang].map((item) => (
-                  <p key={item} className="text-xs text-fg/50">
-                    {item}
-                  </p>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   )
 }

@@ -1,17 +1,18 @@
 import { Fragment, useEffect, useState } from 'react'
 import { motion } from 'motion/react'
-import { ArrowRight, ArrowUpRight, Check, Copy, CreditCard, Gauge, Gavel, Search, Wallet, Zap } from 'lucide-react'
+import { ArrowUpRight, CreditCard, Gauge, Gavel, Search, Wallet, Zap } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
 import { AgentShowcase } from '../sections/AgentShowcase'
-import { ENDPOINT, SERVICES, type Service } from '../data/services'
+import { ENDPOINT } from '../data/services'
 import { ProtocolMap } from '../sections/ProtocolMap'
+import { AgentStack } from '../sections/AgentStack'
 
 /* about.html — agent payments.
    1. Hero: catchphrase, phone with side callouts, lead and CTAs
    2. Two ways agents pay: card × Stripe Link, and x402 per-call
       + standards map (UCP / AP2 / ACP / x402 / Adyen) as a diagram
    3. Five stages before an agent buys, mapped to our products
-   4. Service catalog (filterable cards, real prices and URLs)
+   4. Agent Stack (the four layers of instruments)
    5. For sellers: score / listing links and a ticker of paid calls
    Prices and URLs are the real ones from the products page; nothing here is
    an estimate. */
@@ -292,54 +293,7 @@ function RequestLog({ lang }: { lang: Lang }) {
 /* ── Services ─────────────────────────────────────────────────────────────── */
 
 
-function priceText(s: Service, lang: Lang) {
-  const t = COPY[lang]
-  if (s.price.free) return t.free
-  if (s.price.label) return s.price.label[lang]
-  // ja / zh put the word after the price (〜から / 〜起); en puts it before
-  return lang === 'en' ? `${t.from} ${s.price.from}` : `${s.price.from} ${t.from}`
-}
 
-function ServiceCard({ s, lang }: { s: Service; lang: Lang }) {
-  const t = COPY[lang]
-  const [copied, setCopied] = useState(false)
-  return (
-    <motion.div layout className="liquid-glass rounded-2xl p-5 flex flex-col">
-      <div className="flex items-start gap-3">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg font-bold text-white" style={{ background: s.color }} aria-hidden="true">
-          {s.mark}
-        </span>
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-fg">{s.name}</p>
-          <p className="mt-0.5 text-xs text-gold">
-            {priceText(s, lang)}
-            {s.price.from && <span className="ml-1 text-fg/40">{t.perCall}</span>}
-          </p>
-        </div>
-      </div>
-      <p className="mt-3 flex-1 text-sm text-fg/60 leading-[1.6]">{s.desc[lang]}</p>
-      <div className="mt-4 flex items-center gap-2 border-t border-fg/10 pt-3">
-        <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-fg/75 hover:text-gold transition-colors">
-          {t.open}
-          <ArrowUpRight className="h-3 w-3" />
-        </a>
-        <button
-          type="button"
-          onClick={() => {
-            navigator.clipboard?.writeText(s.url).then(() => {
-              setCopied(true)
-              setTimeout(() => setCopied(false), 1400)
-            })
-          }}
-          className="ml-auto inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-fg/50 hover:bg-fg/5 hover:text-fg transition-colors"
-        >
-          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-          {copied ? t.copied : t.copy}
-        </button>
-      </div>
-    </motion.div>
-  )
-}
 
 /* ── Stage links (same order as COPY.stages) ──────────────────────────────── */
 
@@ -356,8 +310,6 @@ const STAGE_META = [
 export function About() {
   const { lang } = useLang()
   const t = COPY[lang]
-  const [filter, setFilter] = useState<'all' | 'own' | 'intel'>('all')
-  const shown = SERVICES.filter((s) => filter === 'all' || s.group === filter)
   const ticker = [
     ['jin.x402jp.com', '/api/jin/series', '$0.01'],
     ['jin.x402jp.com', '/api/jin/movers', '$0.02'],
@@ -481,40 +433,8 @@ export function About() {
         </ol>
       </section>
 
-      {/* 4. Catalog */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <motion.div {...fadeUp}>
-            <p className="text-xs uppercase tracking-widest text-gold">{t.catalogEyebrow}</p>
-            <h2 className="mt-3 text-2xl md:text-4xl font-semibold tracking-tight text-fg">{t.catalogTitle}</h2>
-          </motion.div>
-          <div className="flex rounded-full border border-fg/15 p-1 text-xs" role="tablist">
-            {([['all', t.filterAll], ['own', t.filterOwn], ['intel', t.filterIntel]] as const).map(([k, label]) => (
-              <button
-                key={k}
-                type="button"
-                role="tab"
-                aria-selected={filter === k}
-                onClick={() => setFilter(k)}
-                className={`rounded-full px-3 py-1.5 transition-colors ${filter === k ? 'bg-fg text-bg' : 'text-fg/60 hover:text-fg'}`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {shown.map((s) => (
-            <ServiceCard key={s.name} s={s} lang={lang} />
-          ))}
-        </div>
-        <div className="mt-8">
-          <a href={ENDPOINT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-fg/75 hover:text-gold transition-colors">
-            {t.explore}
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-      </section>
+      {/* 4. Agent Stack */}
+      <AgentStack />
 
       {/* 5. For sellers */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 pb-20 md:pb-28">
