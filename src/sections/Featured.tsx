@@ -354,9 +354,8 @@ function ProductDetail({ product, lang }: { product: Product; lang: Lang }) {
     <div>
       <Preview src={product.image} name={product.name} />
       <div className="p-5">
-        <span className="text-xs font-medium tracking-wide text-gold">{product.tag[lang]}</span>
-        <h3 className="mt-2 text-lg font-semibold text-fg">{product.name}</h3>
-        <p className="mt-2 text-sm text-fg/65 leading-[1.75] whitespace-pre-line">{product.desc[lang]}</p>
+        {/* name and links only — no long description */}
+        <h3 className="text-lg font-semibold text-fg">{product.name}</h3>
         <LinkRow links={product.links} live={product.live} lang={lang} />
       </div>
     </div>
