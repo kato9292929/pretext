@@ -296,17 +296,14 @@ const COPY = {
   ja: {
     hint: '各実証にカーソルを合わせる（タップする）と詳細が表示されます',
     pocs: '実証',
-    pocIntro: 'これまでの実証は続けています。エンドポイントのカタログ（MAP）、自社データ（PRODUCE）、市場（MARKET）、自律エージェント（CONSUME）も、ここで実証として動かしています。',
   },
   en: {
     hint: 'Hover (or tap) a proof of concept to see its details',
     pocs: 'Proofs of concept',
-    pocIntro: 'Our proofs of concept continue. The endpoint catalog (MAP), our own data (PRODUCE), the market (MARKET) and the autonomous agent (CONSUME) run here as proofs of concept.',
   },
   zh: {
     hint: '将光标悬停（或点按）在各验证试点上即可查看详情',
     pocs: '验证试点',
-    pocIntro: '此前的验证试点仍在继续。端点目录（MAP）、自有数据（PRODUCE）、市场（MARKET）与自主智能体（CONSUME）也在这里作为验证试点运行。',
   },
 }
 
@@ -569,7 +566,6 @@ export function Featured() {
             {t.pocs}
           </span>
         </div>
-        <p className="mt-4 text-fg/60 text-sm md:text-base leading-[1.7] max-w-3xl">{t.pocIntro}</p>
 
         <DiagramProvider className="mt-8">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
