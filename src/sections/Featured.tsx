@@ -351,21 +351,21 @@ const COPY = {
   ja: {
     hint: '各実証にカーソルを合わせる（タップする）と詳細が表示されます',
     pocs: '実証',
-    pocIntro: 'これまでの実証は続けています。自社データ（PRODUCE）、市場（MARKET）、自律エージェント（CONSUME）も、ここで実証として動かしています。',
+    pocIntro: 'これまでの実証は続けています。エンドポイントのカタログ（MAP）、自社データ（PRODUCE）、市場（MARKET）、自律エージェント（CONSUME）も、ここで実証として動かしています。',
     stack: 'Agent Stack',
     stackTag: 'instruments',
   },
   en: {
     hint: 'Hover (or tap) a proof of concept to see its details',
     pocs: 'Proofs of concept',
-    pocIntro: 'Our proofs of concept continue. Our own data (PRODUCE), the market (MARKET) and the autonomous agent (CONSUME) run here as proofs of concept.',
+    pocIntro: 'Our proofs of concept continue. The endpoint catalog (MAP), our own data (PRODUCE), the market (MARKET) and the autonomous agent (CONSUME) run here as proofs of concept.',
     stack: 'Agent Stack',
     stackTag: 'instruments',
   },
   zh: {
     hint: '将光标悬停（或点按）在各验证试点上即可查看详情',
     pocs: '验证试点',
-    pocIntro: '此前的验证试点仍在继续。自有数据（PRODUCE）、市场（MARKET）与自主智能体（CONSUME）也在这里作为验证试点运行。',
+    pocIntro: '此前的验证试点仍在继续。端点目录（MAP）、自有数据（PRODUCE）、市场（MARKET）与自主智能体（CONSUME）也在这里作为验证试点运行。',
     stack: 'Agent Stack',
     stackTag: 'instruments',
   },
@@ -507,18 +507,6 @@ const GITHUB = { ja: 'GitHub', en: 'GitHub', zh: 'GitHub' }
 
 const MAIN: Main[] = [
   {
-    key: 'endpoint',
-    name: 'x402 Endpoint',
-    line: { ja: 'x402 エンドポイントの日次カタログ', en: 'A daily catalog of x402 endpoints', zh: 'x402 端点的每日目录' },
-    status: { ja: '稼働中', en: 'Live', zh: '运行中' },
-    href: 'https://endpoint.x402jp.com/',
-    cta: SITE,
-    art: {
-      bg: 'linear-gradient(150deg, #141f5c 0%, #4b5bd6 50%, #a98bf2 100%)',
-      lines: ['QuickNode     $0.001', 'Messari       Free', 'Exa           Free', 'Nansen        $0.01'],
-    },
-  },
-  {
     key: 'probe',
     name: 'x402 Seller Probe',
     line: { ja: '毎週実際に買って、届くかを測る', en: 'Buys every week and measures what gets delivered', zh: '每周实际购买，检测是否交付' },
@@ -566,7 +554,7 @@ function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: k * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-fg/10 sm:aspect-[4/5]"
+      className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-fg/10 sm:aspect-[4/5] lg:aspect-[1/1]"
     >
       {/* visual */}
       {m.image ? (
@@ -602,6 +590,7 @@ function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
 
 /* PoC products, shown as diagram nodes above the other PoCs */
 const POC_PRODUCTS: { key: Key; group: Localized }[] = [
+  { key: 'endpoint', group: { ja: 'MAP（発見）', en: 'MAP', zh: 'MAP（发现）' } },
   { key: 'osd', group: { ja: 'PRODUCE（データ生成）', en: 'PRODUCE (data)', zh: 'PRODUCE（数据生成）' } },
   { key: 'jin', group: { ja: 'PRODUCE（データ生成）', en: 'PRODUCE (data)', zh: 'PRODUCE（数据生成）' } },
   { key: 'rfq', group: { ja: 'MARKET（市場）', en: 'MARKET', zh: 'MARKET（市场）' } },
@@ -625,7 +614,7 @@ export function Featured() {
       </motion.div>
 
       {/* Main products */}
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {MAIN.map((m, k) => (
           <MainCard key={m.name} m={m} lang={lang} k={k} />
         ))}
@@ -645,7 +634,7 @@ export function Featured() {
         <p className="mt-4 text-fg/60 text-sm md:text-base leading-[1.7] max-w-3xl">{t.pocIntro}</p>
 
         <DiagramProvider className="mt-8">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {POC_PRODUCTS.map(({ key, group }, i) => {
               const p = byKey[key]
               return (
@@ -654,7 +643,7 @@ export function Featured() {
                   <DNode
                     id={key}
                     label={p.name}
-                    align={i < 2 ? 'left' : 'right'}
+                    align={i < 3 ? 'left' : 'right'}
                     dashed
                     face={
                       <span className="flex flex-col items-center gap-0.5 py-1">
