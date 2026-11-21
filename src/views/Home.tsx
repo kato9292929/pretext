@@ -1,5 +1,4 @@
 import { Hero } from '../sections/Hero'
-import { Ecosystem } from '../sections/Ecosystem'
 import { Featured } from '../sections/Featured'
 import { News } from '../sections/News'
 import { AgentShowcase } from '../sections/AgentShowcase'
@@ -20,7 +19,6 @@ export function Home() {
         <AgentShowcase showPayMcp />
       </section>
       <Featured />
-      <Ecosystem />
       <section className="relative z-10 overflow-hidden pb-16 md:pb-24">
         <MarketIssues />
         <EndpointTeaser />

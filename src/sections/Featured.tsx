@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
@@ -309,15 +308,6 @@ const COPY = {
 
 /* ── Detail cards ─────────────────────────────────────────────────────────── */
 
-function Preview({ src, name }: { src?: string; name: string }) {
-  const [failed, setFailed] = useState(false)
-  if (!src || failed) return null
-  return (
-    <div className="aspect-[16/10] w-full overflow-hidden border-b border-fg/10 bg-fg/[0.03]">
-      <img src={src} alt={name} loading="lazy" onError={() => setFailed(true)} className="h-full w-full object-cover" />
-    </div>
-  )
-}
 
 function LinkRow({ links, live, lang }: { links: ProductLink[]; live?: string; lang: Lang }) {
   return (
@@ -349,18 +339,6 @@ function LinkRow({ links, live, lang }: { links: ProductLink[]; live?: string; l
   )
 }
 
-function ProductDetail({ product, lang }: { product: Product; lang: Lang }) {
-  return (
-    <div>
-      <Preview src={product.image} name={product.name} />
-      <div className="p-5">
-        {/* name and links only — no long description */}
-        <h3 className="text-lg font-semibold text-fg">{product.name}</h3>
-        <LinkRow links={product.links} live={product.live} lang={lang} />
-      </div>
-    </div>
-  )
-}
 
 function PocDetail({ poc, lang }: { poc: Poc; lang: Lang }) {
   return (
@@ -567,35 +545,31 @@ export function Featured() {
         </div>
 
         <DiagramProvider className="mt-8">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {POC_PRODUCTS.map(({ key, group }, i) => {
+          {/* PoC products as one list: layer · name and line · stack */}
+          <div className="liquid-glass divide-y divide-fg/10 overflow-hidden rounded-2xl">
+            {POC_PRODUCTS.map(({ key, group }) => {
               const p = byKey[key]
+              const href = p.live ?? p.links[0]?.href
               return (
-                // equal-height boxes: the column stretches and the node fills it
-                <div key={key} className="flex flex-col">
-                  <p className="mb-2 text-center text-[11px] font-mono tracking-wider text-gold">{group[lang]}</p>
-                  <DNode
-                    className="flex-1"
-                    id={key}
-                    label={p.name}
-                    align={i < 3 ? 'left' : 'right'}
-                    dashed
-                    face={
-                      <span className="flex h-full flex-col items-center justify-start gap-0.5 py-1">
-                        <span className="text-sm font-semibold text-fg">{p.name}</span>
-                        {FACE[key].sub.map((s) => (
-                          <span key={s.ja} className="text-[11px] leading-[1.45] text-fg/55">
-                            {s[lang]}
-                          </span>
-                        ))}
-                        <span className="mt-2">
-                          <TechIcons items={TECH[key]} names />
-                        </span>
-                      </span>
-                    }
-                    detail={<ProductDetail product={p} lang={lang} />}
-                  />
-                </div>
+                <a
+                  key={key}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group grid gap-3 px-5 py-4 transition-colors hover:bg-fg/[0.04] md:grid-cols-[11rem_minmax(0,1fr)_auto] md:items-center md:gap-6"
+                >
+                  <span className="font-mono text-[11px] tracking-wider text-gold">{group[lang]}</span>
+                  <span className="min-w-0">
+                    <span className="flex items-center gap-1.5 text-[15px] font-semibold text-fg">
+                      {p.name}
+                      <ArrowUpRight className="h-3.5 w-3.5 text-fg/35 transition-colors group-hover:text-fg" />
+                    </span>
+                    <span className="mt-0.5 block text-xs text-fg/55">{FACE[key].sub[0][lang]}</span>
+                  </span>
+                  <span className="md:[&>span]:justify-end [&>span]:justify-start">
+                    <TechIcons items={TECH[key]} names />
+                  </span>
+                </a>
               )
             })}
           </div>

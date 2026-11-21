@@ -6,6 +6,7 @@ import { AgentShowcase } from '../sections/AgentShowcase'
 import { ENDPOINT } from '../data/services'
 import { ProtocolMap } from '../sections/ProtocolMap'
 import { AgentStack } from '../sections/AgentStack'
+import { Ecosystem } from '../sections/Ecosystem'
 
 /* about.html — agent payments.
    1. Hero: catchphrase, phone with side callouts, lead and CTAs
@@ -435,6 +436,9 @@ export function About() {
 
       {/* 4. Agent Stack */}
       <AgentStack />
+
+      {/* 4b. Ecosystem segmentation */}
+      <Ecosystem />
 
       {/* 5. For sellers */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 pb-20 md:pb-28">
