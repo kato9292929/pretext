@@ -453,7 +453,6 @@ type Main = {
   href: string
   cta: Localized
   image?: string // screenshot of a live site
-  art?: { bg: string; lines: string[] } // gradient while the product images are being made (lines unused for now)
 }
 
 const SITE = { ja: 'サイトを見る', en: 'Visit site', zh: '访问网站' }
@@ -467,10 +466,6 @@ const MAIN: Main[] = [
     status: { ja: '稼働中', en: 'Live', zh: '运行中' },
     href: 'https://probe.x402jp.com/',
     cta: SITE,
-    art: {
-      bg: 'linear-gradient(150deg, #3b1230 0%, #a8406e 50%, #f2a65a 100%)',
-      lines: ['curated.json', 'verdict: delivered', 'verdict: not_delivered', 'every Monday'],
-    },
   },
   {
     key: 'mcp',
@@ -479,10 +474,6 @@ const MAIN: Main[] = [
     status: { ja: 'Claude Code プラグイン', en: 'Claude Code plugin', zh: 'Claude Code 插件' },
     href: 'https://github.com/kato9292929/x402-wallet-mcp',
     cta: GITHUB,
-    art: {
-      bg: 'linear-gradient(150deg, #2a1660 0%, #7a2c9e 45%, #e0569f 100%)',
-      lines: ['> check_seller', '  probe: delivered', '> make_x402_request', '  status: fulfilled'],
-    },
   },
   {
     key: 'security',
@@ -491,14 +482,13 @@ const MAIN: Main[] = [
     status: { ja: '開発中', en: 'In development', zh: '开发中' },
     href: 'https://github.com/kato9292929/x402-security-check',
     cta: GITHUB,
-    art: {
-      bg: 'linear-gradient(150deg, #0d3b4f 0%, #1f7f8c 50%, #6fd6a8 100%)',
-      lines: ['11 checks', 'S1  K1  S7  K2  S9  S8', 'F1  F3  F2  K3', 'severity · file · line'],
-    },
   },
 ]
 
+/* With an image: text over the image. Without one (until the product images
+   are ready): a plain glass card in the site's colours, no tint. */
 function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
+  const img = Boolean(m.image)
   return (
     <motion.a
       href={m.href}
@@ -508,35 +498,29 @@ function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: k * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-fg/10 sm:aspect-[4/5] lg:aspect-[1/1]"
+      className={`group relative block overflow-hidden rounded-2xl border border-fg/10 ${img ? 'aspect-[4/3] sm:aspect-[4/5] lg:aspect-[1/1]' : 'liquid-glass'}`}
     >
-      {/* visual */}
-      {m.image ? (
-        <img src={m.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.04]" />
-      ) : (
-        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.04]" style={{ background: m.art!.bg }}>
-        </div>
+      {img && (
+        <>
+          <img src={m.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.04]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/85" />
+        </>
       )}
-      {/* readable overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/85" />
 
-      <div className="relative flex h-full flex-col justify-between p-6 text-white">
-        <div>
-          <p className="text-xl font-semibold tracking-tight">{m.name}</p>
-          <span className="mt-2 inline-block rounded-full border border-white/30 px-2.5 py-0.5 text-[11px] text-white/85">{m.status[lang]}</span>
-        </div>
-        <div>
-          <p className="text-[15px] font-medium leading-[1.55]">{m.line[lang]}</p>
-          {TECH[m.key] && (
-            <div className="mt-3 [&>span]:justify-start">
-              <TechIcons items={TECH[m.key]} names />
-            </div>
-          )}
-          <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-white/85 group-hover:text-white">
-            {m.cta[lang]}
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </p>
-        </div>
+      {/* everything top-aligned so the three cards line up; the link sits at the bottom */}
+      <div className={`relative flex h-full flex-col p-6 ${img ? 'text-white' : 'text-fg'}`}>
+        <span className={`self-start rounded-full border px-2.5 py-0.5 text-[11px] ${img ? 'border-white/30 text-white/85' : 'border-fg/20 text-fg/60'}`}>{m.status[lang]}</span>
+        <p className="mt-3 text-xl font-semibold tracking-tight">{m.name}</p>
+        <p className={`mt-3 text-sm leading-[1.7] ${img ? 'text-white/85' : 'text-fg/65'}`}>{m.line[lang]}</p>
+        {TECH[m.key] && (
+          <div className="mt-5 [&>span]:justify-start">
+            <TechIcons items={TECH[m.key]} names />
+          </div>
+        )}
+        <p className={`mt-auto inline-flex items-center gap-1.5 pt-6 text-sm ${img ? 'text-white/85 group-hover:text-white' : 'text-fg/70 group-hover:text-fg'}`}>
+          {m.cta[lang]}
+          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </p>
       </div>
     </motion.a>
   )
