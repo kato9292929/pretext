@@ -81,7 +81,7 @@ function useSlides() {
 
 function Phone({ lang, i, setI }: { lang: Lang } & ReturnType<typeof useSlides>) {
   return (
-    <div className="relative mx-auto w-full max-w-[360px]">
+    <div className="relative mx-auto w-full max-w-[300px]">
       {/* frame: translucent glass tinted with the background palette, with a gradient rim */}
       <div
         className="relative rounded-[44px] p-[1.5px] shadow-2xl"
@@ -91,7 +91,7 @@ function Phone({ lang, i, setI }: { lang: Lang } & ReturnType<typeof useSlides>)
         className="relative rounded-[42.5px] p-3 backdrop-blur-md"
         style={{ background: 'linear-gradient(135deg, rgba(126,139,240,0.32), rgba(155,123,242,0.26) 22%, rgba(245,124,230,0.28) 42%, rgba(94,227,236,0.24) 64%, rgba(126,240,168,0.22) 80%, rgba(242,213,122,0.24) 92%, rgba(245,169,142,0.28))' }}
       >
-        <div className="relative overflow-hidden rounded-[34px] bg-[#f4f5f8] text-[#0b1a33]" style={{ height: 560 }}>
+        <div className="relative overflow-hidden rounded-[34px] bg-[#f4f5f8] text-[#0b1a33]" style={{ height: 470 }}>
           {/* status bar */}
           <div className="flex items-center justify-between px-6 pt-4 text-[12px] font-semibold">
             <span>4:02</span>
@@ -108,19 +108,19 @@ function Phone({ lang, i, setI }: { lang: Lang } & ReturnType<typeof useSlides>)
               }`}
             >
               <div className="mt-3 flex flex-col items-center">
-                <img src="/about/agent-avatar.jpg" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover" />
+                <img src="/about/agent-avatar.jpg" alt="" width={40} height={40} className="h-10 w-10 rounded-2xl object-cover" />
                 <div className="mt-2 rounded-2xl bg-white px-4 py-2 text-center shadow-sm">
                   <p className="text-sm font-semibold">{s.agent}</p>
                   <p className="text-[11px] text-[#5b6b85]">{s.budget[lang]}</p>
                 </div>
               </div>
-              <div className="mt-5 ml-8 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-4 py-3 text-[14px] leading-[1.5] text-white">
+              <div className="mt-4 ml-6 rounded-2xl rounded-tr-md bg-[#0b2a5c] px-3.5 py-2.5 text-[13px] leading-[1.5] text-white">
                 {s.ask[lang]}
               </div>
-              <div className="mt-3 mr-8 rounded-2xl rounded-tl-md bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">
+              <div className="mt-3 mr-6 rounded-2xl rounded-tl-md bg-white px-3.5 py-2.5 text-[12px] leading-[1.55] shadow-sm">
                 {s.found[lang]}
               </div>
-              <div className="mt-2 mr-8 rounded-2xl bg-white px-4 py-3 text-[13px] leading-[1.55] shadow-sm">
+              <div className="mt-2 mr-6 rounded-2xl bg-white px-3.5 py-2.5 text-[12px] leading-[1.55] shadow-sm">
                 {s.answer[lang]}
               </div>
               <p className="mt-3 flex items-center gap-1.5 px-1 text-[12px] text-[#5b6b85]">
@@ -232,7 +232,7 @@ export function AgentShowcase({ showPayMcp = false }: { showPayMcp?: boolean }) 
     <div className="relative">
       <div className="relative max-w-6xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-12">
         <Callouts side="left" label={t.sideLeft} items={t.callouts.slice(0, 2)} active={rail === 'Link'} />
-        <div className="order-first w-full max-w-[340px] mx-auto lg:order-none lg:w-[320px]">
+        <div className="order-first w-full max-w-[290px] mx-auto lg:order-none lg:w-[280px]">
           <Phone lang={lang} {...slides} />
         </div>
         <Callouts side="right" label={t.sideRight} items={t.callouts.slice(2, 4)} active={rail === 'x402'} extra={showPayMcp ? <PayMcpNote lang={lang} /> : undefined} />
