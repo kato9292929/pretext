@@ -63,7 +63,7 @@ export function EndpointTeaser() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative max-w-5xl mx-auto px-6 mt-16 md:mt-20"
+      className="relative max-w-6xl mx-auto px-6 mt-16 md:mt-20"
     >
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>

@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { useLang, type Lang, type Localized } from '../i18n'
 
-/* Home: x402 docs from Stripe, Cloudflare and the x402 Foundation, side by
+/* Endpoint page: x402 docs from Stripe, Cloudflare and the x402 Foundation, side by
    side under the x402 Endpoint lead-in. Images are each page's share image
    (public/docs-links/). */
 
@@ -32,10 +32,11 @@ const DOCS: Doc[] = [
   },
 ]
 
-export function DocsLinks() {
+/* width: container width class and top margin (the Endpoint page uses its narrower column) */
+export function DocsLinks({ width = 'max-w-5xl mt-16 md:mt-20' }: { width?: string } = {}) {
   const { lang } = useLang()
   return (
-    <div className="relative max-w-5xl mx-auto px-6 mt-16 md:mt-20">
+    <div className={`relative ${width} mx-auto px-6`}>
       <p className="text-xs tracking-widest text-gold">{({ ja: 'x402 のドキュメント', en: 'x402 docs', zh: 'x402 文档' } satisfies Record<Lang, string>)[lang]}</p>
       <div className="mt-5 grid gap-5 md:grid-cols-3">
         {DOCS.map((d, k) => (

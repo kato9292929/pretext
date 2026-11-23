@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { SectionEyebrow } from '../primitives'
 import { useLang, type Lang, type Localized } from '../i18n'
+import { DocsLinks } from '../sections/DocsLinks'
 
 type Ep = { method: string; path: string; free?: boolean; price?: string; desc: Localized }
 type Group = { name: string; host?: string; note: Localized; eps: Ep[] }
@@ -743,6 +744,9 @@ export function Products() {
         </ol>
         <p className="mt-6 text-xs text-fg/50 leading-[1.7]">{t.payNote}</p>
       </section>
+
+      {/* x402 docs (Stripe, Cloudflare, x402 Foundation) */}
+      <DocsLinks width="max-w-4xl mt-2 pb-6" />
 
       {/* Endpoints */}
       <section className="relative z-10 max-w-4xl mx-auto px-6 py-6 md:py-10">
