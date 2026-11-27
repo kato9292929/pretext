@@ -360,6 +360,9 @@ function PocDetail({ poc, lang }: { poc: Poc; lang: Lang }) {
 const LOGO = {
   'Claude Code': '/logos/claude-mark.svg',
   Claude: '/logos/claude-mark.svg',
+  'Claude.ai': '/logos/claude-mark.svg',
+  Phantom: '/logos/stack/phantom.svg',
+  Rabby: '/logos/stack/rabby.png',
   Railway: '/logos/stack/railway.png',
   'Circle Wallets': '/logos/stack/circle.svg',
   'Coinbase CDP': '/logos/stack/coinbase.svg',
@@ -383,7 +386,7 @@ type Tech = keyof typeof LOGO
 // What each product runs on / pays with, as stated in our product pages and notes
 const TECH: Record<string, Tech[]> = {
   probe: ['Base', 'Solana', 'USDC'],
-  mcp: ['Claude Code', 'Coinbase CDP', 'Privy', 'Crossmint', 'Base', 'Solana', 'USDC'],
+  mcp: ['Claude.ai', 'Phantom', 'Rabby', 'Base', 'Solana', 'USDC'],
   security: ['Claude Code'],
   aa: ['Railway', 'Circle Wallets', 'Base', 'Solana', 'USDC', 'World ID', 'Arc'],
   osd: ['Claude', 'Base', 'Solana', 'USDC'],
@@ -407,7 +410,7 @@ function TechIcons({ items, size = 'sm', names = false }: { items?: Tech[]; size
     <span className="flex flex-wrap items-center justify-center gap-1.5">
       {items.map((n) => (
         <span key={n} title={n} className={`inline-flex items-center gap-1.5 ${names ? 'rounded-full bg-black/45 py-0.5 pl-0.5 pr-2 text-[11px] text-white/85' : ''}`}>
-          <span className={`inline-flex ${box} shrink-0 items-center justify-center overflow-hidden rounded-md ring-1 ring-white/10 ${n === 'Coinbase CDP' ? '' : 'p-[3px]'} ${n === 'World ID' ? 'bg-white' : 'bg-[#0b0b0f]'}`}>
+          <span className={`inline-flex ${box} shrink-0 items-center justify-center overflow-hidden rounded-md ring-1 ring-white/10 ${n === 'Coinbase CDP' || n === 'Phantom' || n === 'Rabby' ? '' : 'p-[3px]'} ${n === 'World ID' ? 'bg-white' : 'bg-[#0b0b0f]'}`}>
             <img src={LOGO[n]} alt={n} className="h-full w-full object-contain" loading="lazy" />
           </span>
           {names && n}
