@@ -13,7 +13,7 @@ const COPY = {
       ['人の代わりに Stripe Link で払う', 'Muse・Grok などのパーソナルエージェントが、ブラウザやチャットから購入を済ませる。'],
       ['単回利用カードと都度承認', '支払いのたびに人が承認し、使い捨てのカードで払う。'],
       ['API には1コールずつ払う', 'API が 402 を返したら、USDC で署名して同じ URL に再リクエストする。'],
-      ['払える先は x402 Endpoint で探す', '161,826 のエンドポイントから、エージェントが売り手を見つける（2026年10月19日時点）。'],
+      ['Seller Probe から厳選されたエンドポイントを探す', 'Seller Probe が実際に買って確かめたエンドポイントから、エージェントが売り手を選ぶ。'],
     ],
   },
   en: {
@@ -23,7 +23,7 @@ const COPY = {
       ['Pays with Stripe Link for you', 'Personal agents such as Muse and Grok finish purchases from a browser or a chat.'],
       ['Single-use cards, approve each time', 'A person approves every payment, and a disposable card pays.'],
       ['Pays APIs one call at a time', 'When an API returns 402, sign in USDC and re-request the same URL.'],
-      ['Find who to pay on x402 Endpoint', 'Agents find sellers among 161,826 endpoints (as of Oct 19, 2026).'],
+      ['Find curated endpoints on Seller Probe', 'Agents pick sellers from endpoints Seller Probe has actually bought from and checked.'],
     ],
   },
   zh: {
@@ -33,7 +33,7 @@ const COPY = {
       ['通过 Stripe Link 代人支付', 'Muse、Grok 等个人智能体在浏览器或聊天中完成购买。'],
       ['一次性卡与逐笔授权', '每次支付都由人授权，并使用一次性卡支付。'],
       ['API 按次支付', 'API 返回 402 后，用 USDC 签名并向同一 URL 再次请求。'],
-      ['在 x402 Endpoint 查找支付对象', '智能体从 161,826 个端点中找到卖方（截至2026年10月19日）。'],
+      ['从 Seller Probe 精选的端点中查找', '智能体从 Seller Probe 实际购买并验证过的端点中选择卖方。'],
     ],
   },
 }
