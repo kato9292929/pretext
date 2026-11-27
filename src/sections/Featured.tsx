@@ -430,7 +430,6 @@ type Main = {
 }
 
 const SITE = { ja: 'サイトを見る', en: 'Visit site', zh: '访问网站' }
-const GITHUB = { ja: 'GitHub', en: 'GitHub', zh: 'GitHub' }
 
 const MAIN: Main[] = [
   {
@@ -445,17 +444,17 @@ const MAIN: Main[] = [
     key: 'mcp',
     name: 'AgentPay402 MCP',
     line: { ja: '払う前に売り手を確かめ、払った後に届いたかを確かめる', en: 'Checks the seller before paying, and the delivery after', zh: '付款前核查卖方，付款后确认交付' },
-    status: { ja: 'Claude Code プラグイン', en: 'Claude Code plugin', zh: 'Claude Code 插件' },
-    href: 'https://github.com/kato9292929/x402-wallet-mcp',
-    cta: GITHUB,
+    status: { ja: 'アルファ', en: 'Alpha', zh: 'Alpha' },
+    href: 'https://agentpay.x402jp.com/',
+    cta: SITE,
   },
   {
     key: 'security',
     name: 'x402 Security Check',
     line: { ja: 'seller の x402 決済コードを11項目で点検', en: 'Reviews a seller’s x402 payment code on 11 items', zh: '从 11 项检查卖方的 x402 支付代码' },
-    status: { ja: '開発中', en: 'In development', zh: '开发中' },
-    href: 'https://github.com/kato9292929/x402-security-check',
-    cta: GITHUB,
+    status: { ja: '稼働中', en: 'Live', zh: '运行中' },
+    href: 'https://securitycheck.x402jp.com/',
+    cta: SITE,
   },
 ]
 

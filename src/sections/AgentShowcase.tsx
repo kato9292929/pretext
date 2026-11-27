@@ -60,11 +60,11 @@ const SLIDES: Slide[] = [
   },
   {
     agent: 'x402',
-    budget: { ja: 'USDC 残高から per-call', en: 'Per-call from a USDC balance', zh: '从 USDC 余额按 per-call 支付' },
-    ask: { ja: '今日、東京の食品で値段が動いたのは？', en: 'Which food prices in Tokyo moved today?', zh: '今天东京哪些食品价格有变动？' },
-    found: { ja: 'x402 Endpoint で Japan Inflation Nowcall を見つけました', en: 'Found Japan Inflation Nowcall on x402 Endpoint', zh: '在 x402 Endpoint 上找到了 Japan Inflation Nowcall' },
-    answer: { ja: 'movers を1コール買い、その日に動いた品目を取得しました。', en: 'Bought one call to movers and got the items that moved today.', zh: '购买了 1 次 movers 调用，获取了当天变动的品类。' },
-    paid: { ja: '$0.02 per call を残高から支払い（Solana・USDC）', en: 'Paid $0.02 per call from the balance (Solana · USDC)', zh: '从余额支付 $0.02 per call（Solana・USDC）' },
+    budget: { ja: 'AgentPay402・Phantom で承認', en: 'AgentPay402 · approve in Phantom', zh: 'AgentPay402・在 Phantom 中授权' },
+    ask: { ja: 'AgentPay402で、Nansen の smart money netflow を買って', en: 'With AgentPay402, buy Nansen’s smart money netflow', zh: '用 AgentPay402 购买 Nansen 的 smart money netflow' },
+    found: { ja: 'Seller Probe：delivered（スコア 97.1）', en: 'Seller Probe: delivered (score 97.1)', zh: 'Seller Probe：delivered（评分 97.1）' },
+    answer: { ja: '承認リンクを用意しました。承認するまで支払われません。', en: 'Approval link ready. Nothing is paid until you approve.', zh: '已准备好授权链接。授权前不会支付。' },
+    paid: { ja: '$0.05・Solana（USDC）・承認後に支払い', en: '$0.05 · Solana (USDC) · paid on approval', zh: '$0.05・Solana（USDC）・授权后支付' },
     rail: 'x402',
   },
 ]
