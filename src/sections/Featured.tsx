@@ -435,6 +435,7 @@ const MAIN: Main[] = [
   {
     key: 'probe',
     name: 'x402 Seller Probe',
+    image: '/products/seller-probe.webp',
     line: { ja: '毎週実際に買って、届くかを測る', en: 'Buys every week and measures what gets delivered', zh: '每周实际购买，检测是否交付' },
     status: { ja: '稼働中', en: 'Live', zh: '运行中' },
     href: 'https://probe.x402jp.com/',
@@ -443,6 +444,7 @@ const MAIN: Main[] = [
   {
     key: 'mcp',
     name: 'AgentPay402 MCP',
+    image: '/products/agentpay.webp',
     line: { ja: '払う前に売り手を確かめ、払った後に届いたかを確かめる', en: 'Checks the seller before paying, and the delivery after', zh: '付款前核查卖方，付款后确认交付' },
     status: { ja: 'アルファ', en: 'Alpha', zh: 'Alpha' },
     href: 'https://agentpay.x402jp.com/',
@@ -451,6 +453,7 @@ const MAIN: Main[] = [
   {
     key: 'security',
     name: 'x402 Security Check',
+    image: '/products/security-check.webp',
     line: { ja: 'seller の x402 決済コードを11項目で点検', en: 'Reviews a seller’s x402 payment code on 11 items', zh: '从 11 项检查卖方的 x402 支付代码' },
     status: { ja: '稼働中', en: 'Live', zh: '运行中' },
     href: 'https://securitycheck.x402jp.com/',
@@ -458,10 +461,8 @@ const MAIN: Main[] = [
   },
 ]
 
-/* With an image: text over the image. Without one (until the product images
-   are ready): a plain glass card in the site's colours, no tint. */
+/* Glass card: the product's site image on top, then name, line, stack and link */
 function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
-  const img = Boolean(m.image)
   return (
     <motion.a
       href={m.href}
@@ -471,26 +472,23 @@ function MainCard({ m, lang, k }: { m: Main; lang: Lang; k: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: k * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      className={`group relative block overflow-hidden rounded-2xl border border-fg/10 ${img ? 'aspect-[4/3] sm:aspect-[4/5] lg:aspect-[1/1]' : 'liquid-glass'}`}
+      className="liquid-glass group flex flex-col overflow-hidden rounded-2xl border border-fg/10"
     >
-      {img && (
-        <>
-          <img src={m.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.04]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/85" />
-        </>
+      {m.image && (
+        <div className="aspect-[16/9] overflow-hidden border-b border-fg/10">
+          <img src={m.image} alt={m.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+        </div>
       )}
-
-      {/* everything top-aligned so the three cards line up; the link sits at the bottom */}
-      <div className={`relative flex h-full flex-col p-6 ${img ? 'text-white' : 'text-fg'}`}>
-        <span className={`self-start rounded-full border px-2.5 py-0.5 text-[11px] ${img ? 'border-white/30 text-white/85' : 'border-fg/20 text-fg/60'}`}>{m.status[lang]}</span>
+      <div className="flex flex-1 flex-col p-6 text-fg">
+        <span className="self-start rounded-full border border-fg/20 px-2.5 py-0.5 text-[11px] text-fg/60">{m.status[lang]}</span>
         <p className="mt-3 text-xl font-semibold tracking-tight">{m.name}</p>
-        <p className={`mt-3 text-sm leading-[1.7] ${img ? 'text-white/85' : 'text-fg/65'}`}>{m.line[lang]}</p>
+        <p className="mt-3 text-sm leading-[1.7] text-fg/65">{m.line[lang]}</p>
         {TECH[m.key] && (
           <div className="mt-5 [&>span]:justify-start">
             <TechIcons items={TECH[m.key]} names />
           </div>
         )}
-        <p className={`mt-auto inline-flex items-center gap-1.5 pt-6 text-sm ${img ? 'text-white/85 group-hover:text-white' : 'text-fg/70 group-hover:text-fg'}`}>
+        <p className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm text-fg/70 group-hover:text-fg">
           {m.cta[lang]}
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </p>
