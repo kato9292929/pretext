@@ -362,7 +362,7 @@ const LOGO = {
   Claude: '/logos/claude-mark.svg',
   Railway: '/logos/stack/railway.png',
   'Circle Wallets': '/logos/stack/circle.svg',
-  'Coinbase CDP': '/logos/stack/coinbase.png',
+  'Coinbase CDP': '/logos/stack/coinbase.svg',
   Privy: '/logos/stack/privy.png',
   Crossmint: '/logos/stack/crossmint.png',
   'World ID': '/logos/stack/world.png',
@@ -407,7 +407,7 @@ function TechIcons({ items, size = 'sm', names = false }: { items?: Tech[]; size
     <span className="flex flex-wrap items-center justify-center gap-1.5">
       {items.map((n) => (
         <span key={n} title={n} className={`inline-flex items-center gap-1.5 ${names ? 'rounded-full bg-black/45 py-0.5 pl-0.5 pr-2 text-[11px] text-white/85' : ''}`}>
-          <span className={`inline-flex ${box} shrink-0 items-center justify-center overflow-hidden rounded-md p-[3px] ring-1 ring-white/10 ${n === 'World ID' ? 'bg-white' : 'bg-[#0b0b0f]'}`}>
+          <span className={`inline-flex ${box} shrink-0 items-center justify-center overflow-hidden rounded-md ring-1 ring-white/10 ${n === 'Coinbase CDP' ? '' : 'p-[3px]'} ${n === 'World ID' ? 'bg-white' : 'bg-[#0b0b0f]'}`}>
             <img src={LOGO[n]} alt={n} className="h-full w-full object-contain" loading="lazy" />
           </span>
           {names && n}
