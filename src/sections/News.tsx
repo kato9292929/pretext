@@ -15,6 +15,17 @@ type NewsItem = {
 // Newest first. The first item is the large lead; the rest (up to 4) list on the right.
 const NEWS: NewsItem[] = [
   {
+    href: 'https://prtimes.jp/main/html/rd/p/000000007.000188987.html',
+    image: '/news/agentpay402.jpg',
+    tag: { ja: 'プレスリリース', en: 'Press release', zh: '新闻稿' },
+    title: {
+      ja: 'x402株式会社、Claudeの会話からx402に対応した有料APIを1回ごとに購入できる「AgentPay402 MCP on Solana/Base」α版を公開',
+      en: 'x402 Inc. launches the alpha of “AgentPay402 MCP on Solana/Base”, buying x402 paid APIs one request at a time from a Claude conversation',
+      zh: 'x402 Inc. 发布 “AgentPay402 MCP on Solana/Base” Alpha 版，可在 Claude 对话中按次购买支持 x402 的付费 API',
+    },
+    date: '2026-11-27',
+  },
+  {
     href: 'https://prtimes.jp/main/html/rd/p/000000006.000188987.html',
     image: '/news/bccc.jpg',
     tag: { ja: 'プレスリリース', en: 'Press release', zh: '新闻稿' },
